@@ -1,5 +1,5 @@
 <?php
-class clsDatabase
+class Database
 {
     public $conn;
     public $pdo_stm;
