@@ -22,9 +22,9 @@ class Database
     function SQLexec($sql, $param = NULL)
     {
         $result = FALSE;
-        if ($this->conn == NULL) {
-            return FALSE;
-        }
+        // if ($this->conn == NULL) {
+        //     return FALSE;
+        // }
         $this->pdo_stm = $this->conn->prepare($sql);
         if ($param == NULL) {
             $result = $this->pdo_stm->execute();
