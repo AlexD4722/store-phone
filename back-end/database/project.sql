@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 15, 2023 lúc 08:26 PM
+-- Thời gian đã tạo: Th7 17, 2023 lúc 11:16 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -20,19 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `project`
 --
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `order`
---
-
-CREATE TABLE `order` (
-  `id` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `customer_id` int(11) NOT NULL,
-  `status` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -79,6 +66,19 @@ CREATE TABLE `product_line` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `receipt`
+--
+
+CREATE TABLE `receipt` (
+  `id` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `customer_id` int(11) NOT NULL,
+  `status` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `user`
 --
 
@@ -92,13 +92,6 @@ CREATE TABLE `user` (
 --
 -- Chỉ mục cho các bảng đã đổ
 --
-
---
--- Chỉ mục cho bảng `order`
---
-ALTER TABLE `order`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `customer_id` (`customer_id`);
 
 --
 -- Chỉ mục cho bảng `order_line`
@@ -122,6 +115,13 @@ ALTER TABLE `product_line`
   ADD PRIMARY KEY (`name`);
 
 --
+-- Chỉ mục cho bảng `receipt`
+--
+ALTER TABLE `receipt`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
 -- Chỉ mục cho bảng `user`
 --
 ALTER TABLE `user`
@@ -130,12 +130,6 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
-
---
--- AUTO_INCREMENT cho bảng `order`
---
-ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `order_line`
@@ -150,6 +144,12 @@ ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `receipt`
+--
+ALTER TABLE `receipt`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
@@ -160,23 +160,23 @@ ALTER TABLE `user`
 --
 
 --
--- Các ràng buộc cho bảng `order`
---
-ALTER TABLE `order`
-  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `user` (`id`);
-
---
 -- Các ràng buộc cho bảng `order_line`
 --
 ALTER TABLE `order_line`
   ADD CONSTRAINT `order_line_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  ADD CONSTRAINT `order_line_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`);
+  ADD CONSTRAINT `order_line_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `receipt` (`id`);
 
 --
 -- Các ràng buộc cho bảng `product_line`
 --
 ALTER TABLE `product_line`
   ADD CONSTRAINT `product_line_ibfk_1` FOREIGN KEY (`name`) REFERENCES `product` (`product_line`);
+
+--
+-- Các ràng buộc cho bảng `receipt`
+--
+ALTER TABLE `receipt`
+  ADD CONSTRAINT `receipt_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

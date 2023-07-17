@@ -1,16 +1,16 @@
 <?php
 $params = [];
 foreach ($_GET as $param) {
-    if ($param == "Send" || $param=="") {
+    if ($param == "Send" || $param == "") {
         continue;
     }
     array_push($params, $param);
 }
 
-echo count($params);
-
-require_once("../class/database.php");
-require_once("../class/constants.php");
-
-$database = new Database($DatabaseServerName, "project", $Username, $Password);
+require_once("order.php");
+$obj = new Receipt();
+$obj->getReceipt('','', '','finished');
+foreach ($obj->data as $row) {
+    echo $row["customer_id"] . $row["date"] . $row["status"] . "<br>";
+}
 ?>
