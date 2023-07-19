@@ -1,94 +1,62 @@
 <?php
-$username = "";
-$password = "";
-$user_type = "";
-if(isset($_REQUEST["submit"]))
+require_once("../class/database.php");
+require_once("../class/constants.php");
+class User extends Database
 {
-    $username = $_REQUEST["username"];
-    $password = $_REQUEST["password"];
-    $user_type = $_REQUEST["user_type"];
+    public $data = NULL;
+    public function __construct()
+    {
+        parent::__construct($GLOBALS['DatabaseServerName'], $GLOBALS["Database"], $GLOBALS['Username'], $GLOBALS['Password']);
+    }
+    //hàm __construct dùng để kết nối với CSDL
 
-    if ($username == "") {
-        echo '<h2>Chưa nhập username</h2>';
-    } else if (checkUser($username) == true) {
-        echo '<h2> Username đã tồn tại, vui lòng nhập username khác </h2>';
-        return;
+    public function insertUser($username, $password, $user_type)
+    {
+        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?),?)";
+        $params = [$username, $password, $user_type];
+        $result = $this->SQLexec($sql, $params);
+        return $result;
     }
-    if($password == ""){
-        echo '<h2>Chưa nhập password</h2>';
-    }
-    if($user_type == ""){
-        echo '<h2>Chưa nhập user_type</h2>';
-    }
-    if ($username != "" && $password != "" && $user_type != "") {
-        $ketqua = insertUser($username, $password , $user_type);
-        if ($ketqua == TRUE)
-            echo  '<div style="color:#090">Thêm thành công !</div>';
-        else
-            echo "<h3>Chưa thêm được user </h3>";
-    }
-}
+    //hàm insertUser để thêm user mới
 
-function ConnectDB()
-{
-    $conn = NULL;
-    try {
-        $conn = new PDO("mysql:host=localhost:3306;dbname=project", "root", "");
-        $conn->query("SET NAMES UTF8");
-    } catch (PDOException $ex) {
-        echo "<p>" . $ex->getMessage() . "</p>";
-        die('<h3>LỖI KÊT NỐI CSDL</h3>');
-    }
-    return $conn;
-}
-//hàm ConnectDB dùng để kết nối với CSDL
-
-function insertUser($username, $password, $user_type)
-{
-    $conn = ConnectDB();
-    $sql = "INSERT INTO user VALUES(NULL,?,MD5(?),?)";
-    $pdo_stm = $conn->prepare($sql);
-    $data = [$username, $password, $user_type];
-    $ketqua = $pdo_stm->execute($data);
-    return $ketqua;
-}
-//hàm insertUser để thêm người dùng vào CSDL, và có dùng mã hóa MD5 cho mật khẩu người dùng khi thêm mới .
-
-function checkUser($username)
-{
-    $conn = ConnectDB();
-    $sql = "SELECT * FROM user WHERE username=?";
-    $pdo_stm = $conn->prepare($sql);
-    $data = [$username];
-    $ketqua = $pdo_stm->execute($data);
-    if ($ketqua == TRUE) {
-        $n = $pdo_stm->rowCount();
-        if ($n > 0)
+    public function checkUser($username)
+    {
+        $sql = "SELECT * FROM user WHERE username=?";
+        $params = [$username];
+        $result = $this->SQLexec($sql, $params);
+        if (($result->rowCount()) > 0 ) {
             return TRUE;
-        else
+        }else{
             return FALSE;
-    } else {
-        return FALSE;
+        }
     }
-}
-//hàm checkUser để kiểm tra hoặc tìm kiếm người dùng có tồn tại trong CSDL hay không ?
+    //hàm kiểm tra người dùng có trong csdl hoặc tìm kiếm người dùng bằng username
 
-function checkLogin($username, $password)
-{
-    $conn = ConnectDB();
-    $sql = "SELECT * FROM user WHERE username=? AND password=MD5(?)";
-    $pdo_stm = $conn->prepare($sql);
-    $data = [$username, $password];
-    $ketqua = $pdo_stm->execute($data);
-    if ($ketqua == TRUE) {
-        $n = $pdo_stm->rowCount();
-        if ($n > 0)
-            return $pdo_stm->fetch();
-        else
-            return NULL;
-    } else {
-        return FALSE;
+    public function deleteUser($id)
+    {
+        $sql = "DELETE FROM user WHERE id=?";
+        $params = [$id];
+        $result = $this->SQLexec($sql, $params);
+        return $result;
     }
+    //hàm xóa user theo id
+
+    public function editUser($id, $username, $user_type)
+    {
+        $sql = "UPDATE user SET $username AND $user_type WHERE id=?";
+        $params = [$id];
+        $result = $this->SQLexec($sql, $params);
+        return $result;
+    }
+    //hàm edit user theo id
+
+    public function checkLogin($username, $password)
+    {
+        $sql = "SELECT * FROM user WHERE username=? AND password=MD5(?)";
+        $params = [$username, $password];
+        $result = $this->SQLexec($sql, $params);
+        return $result;
+    }
+    //hàm checkLogin để kiểm tra xem người dùng có nhập đúng tk và mk ?
+
 }
-//hàm checkLogin để kiểm tra khi người dùng đăng nhập có đúng tài khoản hay chưa mới cho vào trang khác để thực hiện chức năng khác , và có dùng MD5 để mã hóa ngược lại trước khi đăng nhập .
-?>
