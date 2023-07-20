@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './views/App';
 import Menu from './views/menu'
 import reportWebVitals from './reportWebVitals';
-
+import './styles/color.scss';
+import './styles/font.scss';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

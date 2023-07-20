@@ -1,9 +1,8 @@
-
-import Home from '../styles/App.module.scss';
+import '../styles/App.scss'
 import React from 'react';
 function App() {
   return (
-    <div className={Home.text}>
+    <div className='text'>
       <h1>loremaaaaaaaaaaaa</h1>
     </div>
   );
