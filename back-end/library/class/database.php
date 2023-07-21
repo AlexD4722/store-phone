@@ -22,18 +22,29 @@ class Database
     function SQLexec($sql, $param = NULL)
     {
         $result = FALSE;
-        // if ($this->conn == NULL) {
-        //     return FALSE;
-        // }
+        if ($this->conn == NULL) {
+            return FALSE;
+        }
         $this->pdo_stm = $this->conn->prepare($sql);
         if ($param == NULL) {
             $result = $this->pdo_stm->execute();
         } else {
+            foreach ($param as $data){
+                $data = $this->test_input($data);
+            }
             $result = $this->pdo_stm->execute($param);
         }
         return $result;
     }
     // Hàm thực thi câu lệnh sql trên kết nối $conn. Nếu thất bại hoặc không có kết nối trả về false
     // Tham số là câu lệnh sql và mảng các tham số
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    //Hàm kiểm tra dữ liệu nhập vào. Trả về dữ liệu an toàn.
 }
 ?>
