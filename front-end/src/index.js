@@ -10,6 +10,7 @@ import '../src/boostrap/css/bootstrap.css';
 import SearchForm from './components/form-search';
 import Logo from './components/logo';
 import './assets/imgs/logo-dark.png';
+import '../node_modules/bootstrap-icons/font/bootstrap-icons.css'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -41,6 +42,7 @@ root.render(
         </div>
       </div>
     </div>
+    <i class="bi bi-1-square-fill"></i>
   </React.StrictMode>
 );
 
