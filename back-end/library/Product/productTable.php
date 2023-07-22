@@ -33,7 +33,7 @@ class ProductTable extends Database
         if (count($params) > 0) {
             $result = $this->SQLexec($sql, $params);
         } else {
-            $result = $this->SQLexec($sql, $params);
+            $result = $this->SQLexec($sql);
         }
         $data = $this->pdo_stm->fetchAll();
         if (count($data) > 0) {
@@ -167,4 +167,68 @@ class ProductTable extends Database
     // function editProductLine() is used to update a data from the list Product 
     // parameters: $old_name, $pl
     // return: boolean
+
+    function filter(
+        $product_type = '',
+        $brand = '',
+        $startPrice = '',
+        $endPrice = '',
+        $keyWord = '',
+        $upDown = ''
+    ) {
+        $sql = "SELECT * FROM product JOIN  product_line on product.product_line = product_line.name WHERE TRUE";
+        if ($product_type) {
+            $sql .= " AND `product_type` = ?";
+            array_push($params, $product_type);
+        }
+        if ($brand) {
+            $sql .= " AND `brand` = ?";
+            array_push($params, $brand);
+        }
+        if ($startPrice) {
+            $sql .= " AND `selling_price` >= ?";
+            array_push($params, $startPrice);
+        }
+        if ($endPrice) {
+            $sql .= " AND `selling_price` <= ?";
+            array_push($params, $endPrice);
+        }
+        if ($keyWord) {
+            $sql .= " AND `description` like '% $keyWord %' ";
+            array_push($params, $keyWord);
+        }
+        if ($upDown) {
+            switch ($upDown) {
+                case "priceDesc":
+                    $sql .= " AND ORDER BY `selling_price` DESC ";
+                    break;
+                case "priceAsc":
+                    $sql .= " AND ORDER BY `selling_price` ASC ";
+                    break;
+                case "nameDesc":
+                    $sql .= " AND ORDER BY `name` DESC ";
+                    break;
+                case "nameAsc":
+                    $sql .= " AND ORDER BY `name` ASC ";
+                    break;
+            }
+        }
+        if (count($params) > 0) {
+            $result = $this->SQLexec($sql, $params);
+        } else {
+            $result = $this->SQLexec($sql);
+        }
+        $data = $this->pdo_stm->fetchAll();
+        if (count($data) > 0) {
+            $this->data = [];
+            foreach ($data as $row) {
+                array_push($this->data, new Product($row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images']));
+            }
+        }
+        return $result;
+    }
+    // // function filter() is used to get all data list of product 
+    // // parameters: 
+    // // return: boolean
+
 }
