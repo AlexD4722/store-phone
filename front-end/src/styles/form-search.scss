@@ -1,0 +1,52 @@
+@import "./color.scss";
+@import "./font.scss";
+.form-search {
+  display: flex;
+  border-radius: 5px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+}
+.form-search__box-input {
+  width: 100%;
+  input {
+    height: 3.125rem;
+    border: 1px solid $color-form-border;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: $font-secondary;
+    &:focus {
+      outline: none;
+    }
+    border-radius: 6px 0 0 6px;
+    width: 500px;
+    @media all and (max-width: 75rem) {
+        height: 2.75rem;
+    }
+  }
+}
+.form-search__button {
+  button {
+    height: 3.125rem;
+    padding-left: 1.5625rem;
+    padding-right: 1.5625rem;
+    font-family: $font-primary;
+    border: none;
+    text-transform: capitalize;
+    font-size: 0.875rem;
+    letter-spacing: -0.03px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    background-color: $color-primary;
+    border-color: $color-primary;
+    border-radius: 0 5px 5px 0;
+    @media all and (max-width: 75rem) {
+        height: 2.75rem;
+    }
+  }
+}
