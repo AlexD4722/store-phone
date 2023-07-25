@@ -4,5 +4,10 @@
         width: 100%;
         height: auto;
     }
+    cursor: pointer;
+    @media all and (max-width: 900px) {
+        max-width: 135px;
+    }
+    
 }
 

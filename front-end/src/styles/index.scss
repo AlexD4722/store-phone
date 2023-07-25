@@ -1,0 +1,21 @@
+@import './color.scss';
+@import './font.scss';
+.xo-container{
+    position: relative;
+    max-width: 1400px;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    margin: 0 auto;
+}   
+body{
+    font-family: $font-primary;
+    font-weight: 400;
+    letter-spacing: -0.03px;
+    color: $color-main-text;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4, h5, span, p, strong{
+    margin: 0;
+}

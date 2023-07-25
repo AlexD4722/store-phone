@@ -1,0 +1,50 @@
+@import "./font.scss";
+@import "./color.scss";
+.wrapper-menu{
+    // border-bottom: 1px solid $color-bs-secondary;
+    @media all and (max-width: 90rem) {
+     display: none;
+    }
+}
+.site-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover{
+    color: $color-bs-blue;
+    .site-menu__name-item > span{
+        color: $color-bs-blue;
+    }
+  }
+}
+.site-menu__name-item {
+}
+.site-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+.site-menu__icon-item {
+  i {
+    font-size: 20px;
+  }
+}
+.site-menu__name-item {
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  span {
+    color: rgb(2, 21, 35);
+    font-family: $font-primary;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.03px;
+    line-height: 22.5px;
+    text-transform: capitalize;
+    transition: 0.3s;
+  }
+}

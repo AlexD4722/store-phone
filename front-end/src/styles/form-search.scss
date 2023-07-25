@@ -1,13 +1,16 @@
 @import "./color.scss";
 @import "./font.scss";
 .form-search {
-  display: flex;
   border-radius: 5px;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
   background-color: #fff;
   background-clip: padding-box;
+  width: 100%;
+}
+.form-search__wrapper-search{
+  display: flex;
 }
 .form-search__box-input {
   width: 100%;
@@ -19,11 +22,12 @@
     -ms-flex-align: center;
     align-items: center;
     font-family: $font-secondary;
+    border-radius: 6px 0 0 6px;
+    width: 100%;
+    padding-left: 1.5rem;
     &:focus {
       outline: none;
     }
-    border-radius: 6px 0 0 6px;
-    width: 500px;
     @media all and (max-width: 75rem) {
         height: 2.75rem;
     }

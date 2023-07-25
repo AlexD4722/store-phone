@@ -1,7 +1,7 @@
 import '../styles/logo.scss'
 import '../styles/form-search.scss'
 import React from 'react';
-function App() {
+function FormSearch() {
     return (
         <form className='form-search'>
             <div className='form-search__wrapper-search'>
@@ -13,10 +13,9 @@ function App() {
                         <span>search</span>
                     </button>
                 </div>
-                
             </div>
         </form>
     );
 }
 
-export default App;
+export default FormSearch;
