@@ -17,6 +17,8 @@ import Product from './components/product-card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import NavBottom from './components/mobile-bottom-menu';
+import PaginationPage from './components/pagination';
+import Footer from './section/footer-page';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -70,7 +72,9 @@ root.render(
         <Product />
       </Col>
     </Row>
+    <PaginationPage/>
     </section>
+    <Footer/>
   </React.StrictMode>
 );
 

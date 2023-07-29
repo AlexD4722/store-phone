@@ -34,7 +34,7 @@
   }
 }
 .form-search__button {
-  button {
+  .form-search__button-detail {
     height: 3.125rem;
     padding-left: 1.5625rem;
     padding-right: 1.5625rem;
@@ -52,5 +52,9 @@
     @media all and (max-width: 75rem) {
         height: 2.75rem;
     }
+  }
+  .form-search__button-detail--yellow{
+    background-color: $color-bs-yellow;
+    color: $color-main-text;
   }
 }
