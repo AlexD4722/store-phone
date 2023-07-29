@@ -16,6 +16,7 @@ import Widget from './section/widget';
 import Product from './components/product-card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import NavBottom from './components/mobile-bottom-menu';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ root.render(
     <SiteMenu />
     <SlideShow />
     <Widget />
+    <NavBottom/>
     <section className='xo-container'>
     <Row  xs={2} sm={3} md={4} lg={5}>
       <Col>

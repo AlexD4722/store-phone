@@ -10,20 +10,35 @@ class SiteMenu extends React.Component {
                 <div className='xo-container'>
                     <ul className='site-menu'>
                         <li className='site-menu__item'>
+                            <div className='site-menu__name-item'>
+                                <span>Home</span>
+                            </div>
+                        </li>
+                        <li className='site-menu__item'>
                             <div className='site-menu__icon-item'>
                                 <i className="bi bi-phone"></i>
                             </div>
                             <div className='site-menu__name-item'>
                                 <span>cell phone</span>
                             </div>
+                            <ul className='site-menu__menu-sub'>
+                                <li>iphone</li>
+                                <li>samsung</li>
+                                <li>xiaomi</li>
+                            </ul>
                         </li>
                         <li className='site-menu__item'>
-                            <div className='site-menu__icon-item'>
+                            {/* <div className='site-menu__icon-item'>
                                 <i className="bi bi-file-spreadsheet"></i>
-                            </div>
+                            </div> */}
                             <div className='site-menu__name-item'>
                                 <span>tablet</span>
                             </div>
+                            <ul className='site-menu__menu-sub'>
+                                <li>iphone</li>
+                                <li>samsung</li>
+                                <li>xiaomi</li>
+                            </ul>
                         </li>
                         <li className='site-menu__item'>
                             <div className='site-menu__icon-item'>
