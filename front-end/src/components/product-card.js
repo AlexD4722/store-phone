@@ -1,7 +1,7 @@
 import '../styles/product-card.scss';
 import React from 'react';
 import P1dot1 from '../assets/imgs/product1.1.jpg';
-// import P1dot2 from '../assets/imgs/product1.2.jpg';
+import P1dot2 from '../assets/imgs/product1.2.jpg';
 function Product() {
     return (
         <div className='product-card'>
@@ -9,9 +9,9 @@ function Product() {
                 <div className='product-card__img-default'>
                     <img src={P1dot1} alt="" />
                 </div>
-                {/* <div className='product-card__img-default'>
+                <div className='product-card__img-sub'>
                     <img src={P1dot2} alt="" />
-                </div> */}
+                </div>
             </div>
             <div className='product-card__main'>
                 <div className='product-card__content-wrapper'>

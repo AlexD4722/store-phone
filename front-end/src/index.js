@@ -19,6 +19,7 @@ import Col from 'react-bootstrap/Col';
 import NavBottom from './components/mobile-bottom-menu';
 import PaginationPage from './components/pagination';
 import Footer from './section/footer-page';
+import SortProduct from './section/sort-product';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -28,6 +29,7 @@ root.render(
     <Widget />
     <NavBottom/>
     <section className='xo-container'>
+    <SortProduct/>
     <Row  xs={2} sm={3} md={4} lg={5}>
       <Col>
         <Product />
