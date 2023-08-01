@@ -58,8 +58,7 @@ function Footer() {
                             </ul>
                         </Col>
                         <Col className='footer-widgets__item'>
-                            <h4 className="footer-widgets__widget-title">Let Us Help You
-</h4>
+                            <h4 className="footer-widgets__widget-title">Let Us Help You</h4>
                             <ul className='footer-widgets__widget-list'>
                                 <li>Your Account</li>
                                 <li>Your Orders</li>
