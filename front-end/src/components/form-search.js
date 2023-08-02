@@ -7,14 +7,17 @@ function FormSearch() {
     const [hint, setHint] = useState([]);
 
     const handleSearch = useCallback((e) => {
+        setHint([]);
         const data = { search: e.target.value };
         const action = API.SEARCH_PRODUCTS_BY_NAME;
-        APIrequest(action, data).then((response) => {
-            if (response.result === "Success"){
-                setHint(response.data.productArray);
-            }
-        });
-    },[]);
+        if (data.search !== "") {
+            APIrequest(action, data).then((response) => {
+                if (response.result === "Success") {
+                    setHint(response.data.productArray);
+                }
+            });
+        }
+    }, []);
 
     return (
         <form className="form-search">
@@ -25,7 +28,17 @@ function FormSearch() {
                         placeholder="Search your favorite product..."
                         onKeyUp={(event) => handleSearch(event)}
                     />
+                    {hint.map((value, index) => {
+                        return (
+                            <div key={index} style={{top: (3.125 + 3.125 * index) +'rem'}}>
+                                <img src={value.images} alt="" />
+                                <span>{value.name}</span>
+                                <span className="form-search__box-input-lastspan">{value.selling_price}$</span>
+                            </div>
+                        );
+                    })}
                 </div>
+
                 <div className="form-search__button">
                     <button
                         className="form-search__button-detail"
