@@ -7,13 +7,19 @@ import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 import "../bootstrap/css/bootstrap.css";
 import "react-bootstrap";
 import Layout from "./Layout";
-import Home from "../routes/Home.js";
-import Cellphone from "../routes/Cellphone.js";
-import Tablet from "../routes/Tablet.js";
-import Accessory from "../routes/Accessory.js";
-import SmartWatch from "../routes/SmartWatch.js";
-import Blog from "../routes/Blog.js";
-import Contact from "../routes/Cellphone.js";
+import {
+    Home,
+    Cellphone,
+    Tablet,
+    Accessory,
+    SmartWatch,
+    Blog,
+    Contact,
+    Account,
+    WishList,
+    Cart,
+    NotFound,
+} from "../routes/";
 
 function App() {
     return (
@@ -28,6 +34,10 @@ function App() {
                         <Route path="smartwatches" element={<SmartWatch />} />
                         <Route path="blogs" element={<Blog />} />
                         <Route path="contact" element={<Contact />} />
+                        <Route path="account" element={<Account />} />
+                        <Route path="wish-list" element={<WishList />} />
+                        <Route path="cart" element={<Cart />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Layout>
             </Router>

@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 
 function Dashboard() {
     const [data, setData] = useState([]);
-    const getData = useCallback(() => {
+    const getData = () => {
         APIrequest(action.GET_RECEIPTS_BY_CID, { customer_id: 1 })
             .then((obj) => {
                 if (obj.result === "Success") {
@@ -12,7 +12,7 @@ function Dashboard() {
                 }
             })
             .catch((err) => console.log(err));
-    }, []);
+    }
 
     return (
         <>

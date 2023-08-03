@@ -5,8 +5,8 @@ import SlideShow01 from '../assets/imgs/slider-banner-4b.jpg';
 import SlideShow02 from '../assets/imgs/slider-banner-4c.jpg';
 import SlideShow03 from '../assets/imgs/slider-banner-4c.jpg';
 import '../styles/carousel-item.scss'
-// import { Carousel } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
+
 function SlideShow() {
     return (
         <Carousel data-bs-theme="dark" pause={"hover"}>
@@ -16,16 +16,16 @@ function SlideShow() {
                 </div>
 
                 <div className='carousel-item__content'>
-                    <div class="banner-content xo-container">
-                        <div class="banner-content__wrapper">
-                            <h6 class="banner-content__entry-subtitle style-3">Weekend Discount</h6>
-                            <h3 class="banner-content__entry-title">
+                    <div className="banner-content xo-container">
+                        <div className="banner-content__wrapper">
+                            <h6 className="banner-content__entry-subtitle style-3">Weekend Discount</h6>
+                            <h3 className="banner-content__entry-title">
                                 Feel-good shopping <strong>Shop what you desire</strong>
                             </h3>
-                            <div class="banner-content__entry-description">
+                            <div className="banner-content__entry-description">
                                 <p>Big screens in incredibly slim designs in your hand.</p>
                             </div>
-                            <div class="banner-content__entry-button">
+                            <div className="banner-content__entry-button">
                                 <button type="button">
                                     Shop Now
                                 </button>
@@ -40,16 +40,16 @@ function SlideShow() {
                 </div>
 
                 <div className='carousel-item__content'>
-                    <div class="banner-content xo-container">
-                        <div class="banner-content__wrapper">
-                            <h6 class="banner-content__entry-subtitle style-3">Weekend Discount</h6>
-                            <h3 class="banner-content__entry-title">
+                    <div className="banner-content xo-container">
+                        <div className="banner-content__wrapper">
+                            <h6 className="banner-content__entry-subtitle style-3">Weekend Discount</h6>
+                            <h3 className="banner-content__entry-title">
                                 Feel-good shopping <strong>Shop what you desire</strong>
                             </h3>
-                            <div class="banner-content__entry-description">
+                            <div className="banner-content__entry-description">
                                 <p>Big screens in incredibly slim designs in your hand.</p>
                             </div>
-                            <div class="banner-content__entry-button">
+                            <div className="banner-content__entry-button">
                                 <button type="button">
                                     Shop Now
                                 </button>
@@ -64,16 +64,16 @@ function SlideShow() {
                 </div>
 
                 <div className='carousel-item__content'>
-                    <div class="banner-content xo-container">
-                        <div class="banner-content__wrapper">
-                            <h6 class="banner-content__entry-subtitle style-3">Weekend Discount</h6>
-                            <h3 class="banner-content__entry-title">
+                    <div className="banner-content xo-container">
+                        <div className="banner-content__wrapper">
+                            <h6 className="banner-content__entry-subtitle style-3">Weekend Discount</h6>
+                            <h3 className="banner-content__entry-title">
                                 Feel-good shopping <strong>Shop what you desire</strong>
                             </h3>
-                            <div class="banner-content__entry-description">
+                            <div className="banner-content__entry-description">
                                 <p>Big screens in incredibly slim designs in your hand.</p>
                             </div>
-                            <div class="banner-content__entry-button">
+                            <div className="banner-content__entry-button">
                                 <button type="button">
                                     Shop Now
                                 </button>

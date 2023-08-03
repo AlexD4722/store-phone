@@ -79,13 +79,13 @@ function Widget(){
                                             <p>Maecenas non erat</p>
                                         </div>
                                         <h3>Computers</h3>
-                                        <div class="section-widget__banner-price-content">
+                                        <div className="section-widget__banner-price-content">
                                             <p>Weekend Discount</p>
-                                            <span class="section-widget__price-box">
-                                                <span class="section-widget__price-new">
+                                            <span className="section-widget__price-box">
+                                                <span className="section-widget__price-new">
                                                     <span>$549.00</span>
                                                 </span>
-                                                <span class="section-widget__price-old">
+                                                <span className="section-widget__price-old">
                                                     <span>$589.00</span>
                                                 </span>
                                             </span>
@@ -107,13 +107,13 @@ function Widget(){
                                             <p>Maecenas non erat</p>
                                         </div>
                                         <h3>Computers</h3>
-                                        <div class="section-widget__banner-price-content">
+                                        <div className="section-widget__banner-price-content">
                                             <p>Weekend Discount</p>
-                                            <span class="section-widget__price-box">
-                                                <span class="section-widget__price-new">
+                                            <span className="section-widget__price-box">
+                                                <span className="section-widget__price-new">
                                                     <span>$549.00</span>
                                                 </span>
-                                                <span class="section-widget__price-old">
+                                                <span className="section-widget__price-old">
                                                     <span>$589.00</span>
                                                 </span>
                                             </span>
@@ -135,13 +135,13 @@ function Widget(){
                                             <p>Maecenas non erat</p>
                                         </div>
                                         <h3>Computers</h3>
-                                        <div class="section-widget__banner-price-content">
+                                        <div className="section-widget__banner-price-content">
                                             <p>Weekend Discount</p>
-                                            <span class="section-widget__price-box">
-                                                <span class="section-widget__price-new">
+                                            <span className="section-widget__price-box">
+                                                <span className="section-widget__price-new">
                                                     <span>$549.00</span>
                                                 </span>
-                                                <span class="section-widget__price-old">
+                                                <span className="section-widget__price-old">
                                                     <span>$589.00</span>
                                                 </span>
                                             </span>
