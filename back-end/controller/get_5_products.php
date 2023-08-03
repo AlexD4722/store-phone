@@ -7,12 +7,12 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")){
 }
 $PT = new ProductTable();
 $data = json_decode($_POST["data"]);
-$search = $data->search_string;
+$search = $data->search;
 
 $result = $PT->getProductList($search, "", "", 5);
 if ($result){
     $return = new APIresponse("Success");
-    $return->data->receiptArray = $PT->data;
+    $return->data->productArray = $PT->data;
 } else {
     $return = new APIresponse("Failure(Database error)");
 }
