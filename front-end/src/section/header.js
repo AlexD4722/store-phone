@@ -132,7 +132,7 @@ function Header() {
                             <li className='wrapper-header-menu-extend__item-menu'>
                                 <div className='wrapper-header-menu-extend__btn-item'>
                                     <span className='wrapper-header-menu-extend__name-item'>home</span>
-                                    <i class="bi bi-chevron-down"></i>
+                                    <i className="bi bi-chevron-down"></i>
                                 </div>
                                 <ul className='wrapper-header-menu-extend__menu-sub'>
                                     <li>iphone</li>
@@ -143,7 +143,7 @@ function Header() {
                             <li className='wrapper-header-menu-extend__item-menu'>
                                 <div className='wrapper-header-menu-extend__btn-item'>
                                     <span className='wrapper-header-menu-extend__name-item'>home</span>
-                                    <i class="bi bi-chevron-down"></i>
+                                    <i className="bi bi-chevron-down"></i>
                                 </div>
                                 <ul className='wrapper-header-menu-extend__menu-sub'>
                                     <li>iphone</li>
@@ -154,7 +154,7 @@ function Header() {
                             <li className='wrapper-header-menu-extend__item-menu'>
                                 <div className='wrapper-header-menu-extend__btn-item'>
                                     <span className='wrapper-header-menu-extend__name-item'>home</span>
-                                    <i class="bi bi-chevron-down"></i>
+                                    <i className="bi bi-chevron-down"></i>
                                 </div>
                                 <ul className='wrapper-header-menu-extend__menu-sub'>
                                     <li>iphone</li>

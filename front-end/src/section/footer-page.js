@@ -17,8 +17,8 @@ function Footer() {
                 <div className='xo-container'>
                     <div className="section-footer__pattern-wrapper">
                         <div className='section-footer__site-newsletter-text'>
-                            <h3 class="section-footer__entry-title">Sign Up For Newsletters</h3>
-                            <div class="section-footer__entry-description">
+                            <h3 className="section-footer__entry-title">Sign Up For Newsletters</h3>
+                            <div className="section-footer__entry-description">
                                 <p>Get E-mail updates about our latest shop and <strong>special offers</strong>.</p>
                             </div>
                         </div>
