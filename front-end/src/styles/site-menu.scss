@@ -15,7 +15,7 @@
   cursor: pointer;
   &:hover {
     color: $color-bs-blue;
-    .site-menu__name-item > span {
+    .site-menu__name-item > a {
       color: $color-bs-blue;
     }
   }
