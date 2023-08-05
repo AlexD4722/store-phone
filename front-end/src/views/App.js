@@ -23,25 +23,23 @@ import {
 
 function App() {
     return (
-        <div className="xo-container">
-            <Router>
-                <Layout>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="cellphones" element={<Cellphone />} />
-                        <Route path="tablets" element={<Tablet />} />
-                        <Route path="accessories" element={<Accessory />} />
-                        <Route path="smartwatches" element={<SmartWatch />} />
-                        <Route path="blogs" element={<Blog />} />
-                        <Route path="contact" element={<Contact />} />
-                        <Route path="account" element={<Account />} />
-                        <Route path="wish-list" element={<WishList />} />
-                        <Route path="cart" element={<Cart />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </Layout>
-            </Router>
-        </div>
+        <Router>
+        <Layout>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="cellphones" element={<Cellphone />} />
+                <Route path="tablets" element={<Tablet />} />
+                <Route path="accessories" element={<Accessory />} />
+                <Route path="smartwatches" element={<SmartWatch />} />
+                <Route path="blogs" element={<Blog />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="account" element={<Account />} />
+                <Route path="wish-list" element={<WishList />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </Layout>
+    </Router>
     );
 }
 
