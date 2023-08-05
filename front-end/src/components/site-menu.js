@@ -18,7 +18,7 @@ function SiteMenu(){
                             <i className="bi bi-phone"></i>
                         </div>
                         <div className="site-menu__name-item">
-                            <Link to="cellphones">cell phone</Link>
+                            <Link to="search/cellphone">cell phone</Link>
                         </div>
                         <ul className="site-menu__menu-sub">
                             <li>iphone</li>
@@ -31,7 +31,7 @@ function SiteMenu(){
                             <i className="bi bi-file-spreadsheet"></i>
                         </div> */}
                         <div className="site-menu__name-item">
-                            <Link to="tablets">Tablet</Link>
+                            <Link to="search/tablet">Tablet</Link>
                         </div>
                         <ul className="site-menu__menu-sub">
                             <li>iphone</li>
@@ -44,7 +44,7 @@ function SiteMenu(){
                             <i className="bi bi-headphones"></i>
                         </div>
                         <div className="site-menu__name-item">
-                            <Link to="accessories">Accessories</Link>
+                            <Link to="search/accessory">Accessories</Link>
                         </div>
                     </li>
                     <li className="site-menu__item">
@@ -52,12 +52,12 @@ function SiteMenu(){
                             <i className="bi bi-smartwatch"></i>
                         </div>
                         <div className="site-menu__name-item">
-                            <Link to="smartwatches">Smart Watches</Link>
+                            <Link to="search/smartwatch">Smart Watches</Link>
                         </div>
                     </li>
                     <li className="site-menu__item">
                         <div className="site-menu__name-item">
-                            <Link to="blogs">Blog</Link>
+                            <Link to="blog">Blog</Link>
                         </div>
                     </li>
                     <li className="site-menu__item">
