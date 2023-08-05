@@ -1,6 +1,6 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import "../styles/account.scss";
+// import "../styles/account.scss";
 import APIrequest, { USER_LOGIN } from "../API/callAPI.js";
 import { useRef } from "react";
 
