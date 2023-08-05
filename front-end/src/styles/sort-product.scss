@@ -127,6 +127,7 @@
     gap: 10px;
     align-items: center;
     position: relative;
+    cursor: pointer;
   }
 }
 .filter-item__name {
@@ -168,6 +169,7 @@
   position: relative;
   max-width: 100%;
   input {
+    border: 1px solid $color-theme-border;
     text-align: center;
     width: 100%;
     padding: 0 15px;
@@ -195,6 +197,7 @@ input[type="number"] {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin: 5px 0;
 }
 .side-part-filter__price-slider {
   height: 5px;
@@ -235,4 +238,71 @@ input[type="range"]::-webkit-slider-thumb {
   background: $color-bs-green;
   cursor: pointer;
   pointer-events: auto;
+}
+.side-part-filter__btn-filter{
+  border: none;
+  border-radius: 3px;
+}
+.side-part-filter__btn-filter-content{
+  font-size: .6875rem;
+  text-transform: uppercase;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  height: 2.125rem;
+  background-color: #f2f3f5;
+  border-color: transparent;
+  color: $color-main-text;
+  font-weight: 600;
+}
+
+
+.filter-mobile{
+  background-color: $color-background;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 11;
+  transition: 0.3s;
+  transform: translateX(-100%);
+  overflow-y: scroll;
+  padding-inline-start: 1.5rem;
+  padding-inline-end: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 7rem;
+  @media (min-width: 350px) {
+    max-width: 320px;
+  }
+}
+.filter-mobile-layout{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+  will-change: opacity;
+  display: none;
+}
+.filter-mobile__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h3{
+    text-transform: uppercase;
+    font-size: .875rem;
+    margin-bottom: 0;
+  }
+}
+.filter-mobile__icon-close{
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  i{
+    font-size: 23px;
+  }
 }
