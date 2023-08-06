@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Addons from '../components/addons';
 import LogoShop from '../components/logo';
@@ -6,6 +5,7 @@ import LogoShopLight from '../components/logo-light';
 import FormSearch from '../components/form-search';
 import '../styles/wrap-header.scss'
 import '../styles/index.scss';
+
 function Header() {
     function handleOpenMenuExtend() {
         const layout = document.querySelector(".wrapper-header-layout");

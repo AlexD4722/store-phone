@@ -1,15 +1,14 @@
 import Context from "./Context";
-import { useReducer } from "react";
-import changeMemory from "./reducer";
+import { useState } from "react";
 
 function Provider({ children }) {
-    const [tempMemory, memoryDispatch] = useReducer(changeMemory, []);
+    const [keyword, setKeyword] = useState("");
 
-    return (
-        <Context.Provider value={[tempMemory, memoryDispatch]}>
-            {children}
-        </Context.Provider>
-    );
+    const store = {
+        search: [keyword, setKeyword],
+    };
+
+    return <Context.Provider value={store}>{children}</Context.Provider>;
 }
 
 export default Provider;

@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import "../styles/site-menu.scss";
 import "../styles/wrap-header.scss";
 import "../styles/index.scss";
-function SiteMenu(){
+
+function SiteMenu() {
     return (
         <nav className="wrapper-menu">
             <div className="xo-container">

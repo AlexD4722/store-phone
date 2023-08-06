@@ -2,9 +2,11 @@ import "../styles/logo.scss";
 import "../styles/form-search.scss";
 import React, { useCallback, useState } from "react";
 import APIrequest, * as API from "../API/callAPI";
+import { useStore } from "../store/hooks";
 
 function FormSearch() {
     const [hint, setHint] = useState([]);
+    const keyword = useStore().search[0];
 
     const handleSearch = useCallback((e) => {
         setHint([]);
@@ -24,16 +26,22 @@ function FormSearch() {
             <div className="form-search__wrapper-search">
                 <div className="form-search__box-input">
                     <input
+                        value={keyword}
                         type="text"
                         placeholder="Search your favorite product..."
-                        onKeyUp={(event) => handleSearch(event)}
+                        onChange={(event) => handleSearch(event)}
                     />
                     {hint.map((value, index) => {
                         return (
-                            <div key={index} style={{top: (3.125 + 3.125 * index) +'rem'}}>
+                            <div
+                                key={index}
+                                style={{ top: 3.125 + 3.125 * index + "rem" }}
+                            >
                                 <img src={value.images} alt="" />
                                 <span>{value.name}</span>
-                                <span className="form-search__box-input-lastspan">{value.selling_price}$</span>
+                                <span className="form-search__box-input-lastspan">
+                                    {value.selling_price}$
+                                </span>
                             </div>
                         );
                     })}

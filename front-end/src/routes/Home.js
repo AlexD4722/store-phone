@@ -3,9 +3,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SlideShow from "../section/banner-show";
 import Widget from "../section/widget";
-import NavBottom from "../components/mobile-bottom-menu";
-import SortProduct from "../section/sort-product";
-import PaginationPage from "../components/pagination";
 import BannerSidebar1 from '../assets/imgs/banner-30.jpg'
 import "../styles/product-module.scss";
 import "../styles/banner-sidebar.scss";
