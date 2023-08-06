@@ -58,7 +58,7 @@ function Contact() {
                 </div>
                 <div className='contactus mt-5 mb-5'>
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <div className='contactus'>
                                 <p className='contactus__country'>United States</p>
                                 <h4 className='contactus__country-office'>United States Office</h4>
@@ -67,7 +67,7 @@ function Contact() {
                                 <a className='contactus__link' href="#">info@example.com</a>
                             </div>
                         </div>
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <div className='contactus'>
                                 <p className='contactus__country'>United Kingdom</p>
                                 <h4 className='contactus__country-office'>United Kingdom Office</h4>
@@ -76,7 +76,7 @@ function Contact() {
                                 <a className='contactus__link' href="#">contact@example.com</a>
                             </div>
                         </div>
-                        <div className="col-4">
+                        <div className="col-sm-4">
                             <div className='contactus'>
                                 <p className='contactus__country'>Germany</p>
                                 <h4 className='contactus__country-office'>Germany Office</h4>
@@ -89,7 +89,7 @@ function Contact() {
                 </div>
 
                 <div className="row">
-                    <div className="col-6 p-3">
+                    <div className="col-sm-6 p-3">
                         <div className="contact-form p-5">
                             <h3 className="contact_form_title">Get in Touch</h3>
                             <p className="contact_form_dec">Quisque mattis tortor eu tristique sodales. Aenean sit amet justo nec sem vestibulum.</p>
@@ -142,7 +142,7 @@ function Contact() {
                         </div>
                     </div>
 
-                    <div className="col-6 p-5">
+                    <div className="col-sm-6 p-5">
                         <div className="heading-title mb-5">
                             <p className="heading-title__description">Nam maximus nunc a augue pulvinar, non euismod mauris tempus. Cras non elit vel magna molestie pellentesque in eu dui. Donec laoreet quis erat vitae finibus. Vestibulum enim eros, porta eget quam et, euismod dictum elit.</p>
                         </div>
