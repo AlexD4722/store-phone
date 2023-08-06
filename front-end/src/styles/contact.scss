@@ -1,0 +1,84 @@
+// contactForm.scss
+.questions-and-contact span {
+    font-size: 18px;
+    font-weight: 500;
+    color: gray;
+}
+
+.questions-and-contact p {
+    margin-top: 30px;
+    font-size: 49px;
+    line-height: 50px;
+}
+
+.contact_form_dec {
+    font-size: 13px;
+    margin: 10px 0 10px 0;
+    color: gray;
+}
+
+.contactus {
+    line-height: 30px;
+}
+
+.contactus__address {
+    opacity: 0.6;
+    color: grey;
+}
+
+.contact-form {
+    width: 100%;
+    background-color: #e0e5ea;
+    margin-top: 30px;
+    height: 685px;
+    border-radius: 20px;
+
+    h5 {
+        margin-bottom: 16px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+    }
+
+    button {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+    }
+}
+
+.heading-title .heading-title__description {
+    font-weight: 500;
+    margin-left: 36px;
+}
+
+.img_contact img {
+    width: 100%;
+    border-radius: 20%;
+    margin-left: 36px;
+}
