@@ -1,5 +1,6 @@
 @import "./color.scss";
 @import "./font.scss";
+@import "./breadcrumb-item.scss";
 .xo-container {
   position: relative;
   max-width: 1400px;
@@ -38,6 +39,7 @@ button {
 a{
   text-decoration: none;
   color: $color-bs-dark;
+  cursor: pointer;
 }
 h1{
   font-size: 2.8rem;
@@ -80,4 +82,7 @@ h6{
   @media all  and (max-width: 48rem){
     font-size: 0.8rem;
   }
+}
+.breadcrumb-item{
+  cursor: pointer;
 }

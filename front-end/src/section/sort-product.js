@@ -3,6 +3,8 @@ import '../styles/sort-product.scss';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Product from '../components/product-card'
+import PaginationPage from '../components/pagination';
 
 function SortProduct() {
     const [minPrice, setMinPrice] = useState(0);
@@ -73,9 +75,8 @@ function SortProduct() {
             })
         })
     }, []);
-    // const [inputValue, setInputValue] = useState('');
     return (
-        <div className='xo-container'>
+        <>
             <div className='header-sort'>
                 <Row>
                     <Col md={3} lg={3} className='header-sort__result-count-wrapper'>
@@ -241,6 +242,30 @@ function SortProduct() {
                     </form>
                 </Col>
                 <Col xs={12} sm={12} md={9} lg={9} className='product-filter'>
+                    <Row xs={1} sm={2} md={3} lg={4}>
+                        <Col>
+                            <Product />
+                        </Col>
+                        <Col>
+                            <Product />
+                        </Col>
+                        <Col>
+                            <Product />
+                        </Col>
+                        <Col>
+                            <Product />
+                        </Col>
+                        <Col>
+                            <Product />
+                        </Col>
+                        <Col>
+                            <Product />
+                        </Col>
+                        <Col>
+                            <Product />
+                        </Col>
+                    </Row>
+                    <PaginationPage/>
                 </Col>
             </Row>
             <div className='filter-mobile'>
@@ -379,7 +404,7 @@ function SortProduct() {
             </div>
             <div onClick={() => handleCloseFilterMobile()} className='filter-mobile-layout'>
             </div>
-        </div>
+        </>
     );
 }
 

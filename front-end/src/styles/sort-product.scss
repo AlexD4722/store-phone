@@ -232,8 +232,8 @@ input[type="number"] {
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   background: $color-bs-green;
   cursor: pointer;
