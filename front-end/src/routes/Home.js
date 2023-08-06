@@ -3,12 +3,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SlideShow from "../section/banner-show";
 import Widget from "../section/widget";
+import NavBottom from "../components/mobile-bottom-menu";
+import SortProduct from "../section/sort-product";
+import PaginationPage from "../components/pagination";
 import BannerSidebar1 from '../assets/imgs/banner-30.jpg'
 import "../styles/product-module.scss";
 import "../styles/banner-sidebar.scss";
 import "../styles/section.scss";
 import ProductFlex from "../components/product-card2";
-import { Link } from 'react-router-dom';
 
 function Home() {
     return (
@@ -20,10 +22,10 @@ function Home() {
                     <div className="products-module">
                         <div className="products-module__header">
                             <h2 className="products-module__title">Best Sellers</h2>
-                            <Link className="products-module__link-more" to="#">
+                            <a className="products-module__link-more" href="#">
                                 <span>View All </span>
                                 <i class="bi bi-arrow-right"></i>
-                            </Link>
+                            </a>
                         </div>
                         <div className="products-module__main-wrapper">
                             <Row xs={2} sm={3} md={4} lg={6}>
@@ -71,10 +73,10 @@ function Home() {
                     <div className="products-module">
                         <div className="products-module__header">
                             <h2 className="products-module__title">Trending Products</h2>
-                            <Link className="products-module__link-more" to="#">
+                            <a className="products-module__link-more" href="#">
                                 <span>View All </span>
                                 <i class="bi bi-arrow-right"></i>
-                            </Link>
+                            </a>
                         </div>
                         <div className="products-module__main-wrapper">
                             <Row>
@@ -87,15 +89,15 @@ function Home() {
                                                 <div className="banner-sidebar__description">
                                                     <p>Pellentesque habitant morbi tristique senectus.</p>
                                                 </div>
-                                                <Link to="" className="banner-sidebar__btn-link">
+                                                <a href="" className="banner-sidebar__btn-link">
                                                     <span className="banner-sidebar__btn-content">Shop Now</span>
-                                                </Link>
+                                                </a>
                                             </div>
                                         </div>
                                         <div className="banner-sidebar__img">
                                             <img src={BannerSidebar1} alt="Banner Sidebar" />
                                         </div>
-                                        <Link to="" className="overlay-link"></Link>
+                                        <a href="" className="overlay-link"></a>
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={12} md={9}>

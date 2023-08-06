@@ -1,11 +1,9 @@
 export {default as Home} from "./Home.js";
-export {default as Cellphone} from "./Cellphone.js";
-export {default as Tablet} from "./Tablet.js";
-export {default as Accessory} from "./Accessory.js";
-export {default as SmartWatch} from "./SmartWatch.js";
 export {default as Blog} from "./Blog.js";
 export {default as Contact} from "./Contact.js";
 export {default as Account} from "./Account.js";
 export {default as WishList} from "./WishList.js";
 export {default as Cart} from "./Cart.js";
-export {default as NotFound} from "./NotFound";
+export {default as Signup} from "./Signup.js";
+export {default as Search} from "./Search.js";
+export {default as NotFound} from "./NotFound.js";
