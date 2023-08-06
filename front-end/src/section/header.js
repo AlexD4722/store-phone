@@ -45,7 +45,7 @@ function Header() {
                     <Addons />
                 </div>
                 <div className='wrapper-header-mobile'>
-                    <div onClick={(event) => handleOpenMenuExtend()} className='wrapper-header-mobile__btn-toggle-open'>
+                    <div onClick={handleOpenMenuExtend} className='wrapper-header-mobile__btn-toggle-open'>
                         <i className="bi bi-list"></i>
                     </div>
                     <LogoShop />
@@ -58,13 +58,13 @@ function Header() {
                         </span>
                     </div>
                 </div>
-                <div onClick={(event) => handleCloseMenuExtend()} className='wrapper-header-layout'>
+                <div onClick={handleCloseMenuExtend} className='wrapper-header-layout'>
                 </div>
                 <div className='wrapper-header-menu-extend'>
                     <div className='wrapper-header-menu-extend__row wrapper-header-menu-extend__row--header'>
                         <LogoShopLight />
 
-                        <div onClick={(event) => handleCloseMenuExtend()} className='wrapper-header-menu-extend__btn-close-menu'>
+                        <div onClick={handleCloseMenuExtend} className='wrapper-header-menu-extend__btn-close-menu'>
                             <i className="bi bi-x"></i>
                         </div>
                     </div>

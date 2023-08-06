@@ -8,7 +8,7 @@ function Addons() {
     return (
         <div className="header-addons">
 
-            <Link to="account" className="header-addons__btn header-addons__btn--login">
+            <Link to="signin" className="header-addons__btn header-addons__btn--login">
                 <div className="header-addons__icon">
                     <i className="bi bi-person"></i>
                 </div>

@@ -11,7 +11,7 @@ import {
     Home,
     Blog,
     Contact,
-    Account,
+    Signin,
     WishList,
     Cart,
     NotFound,
@@ -25,42 +25,42 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
             {
-                path:"/",
-                element: <Home />
+                path: "/",
+                element: <Home />,
             },
             {
                 path: "/search/:keyword",
                 element: <Search />,
             },
             {
-                path: "/blog/*",
+                path: "/blog",
                 element: <Blog />,
             },
             {
-                path: "/contact/*",
+                path: "/contact",
                 element: <Contact />,
             },
             {
-                path: "/account/*",
-                element: <Account />,
+                path: "/signin",
+                element: <Signin />,
             },
             {
-                path: "/wish-list/*",
+                path: "/wish-list",
                 element: <WishList />,
             },
             {
-                path: "/cart/*",
+                path: "/cart",
                 element: <Cart />,
             },
             {
-                path: "/signup/*",
+                path: "/signup",
                 element: <Signup />,
             },
+            {
+                path: "*",
+                element: <NotFound />,
+            },
         ],
-    },
-    {
-        path: "*",
-        element: <NotFound />,
     },
 ]);
 

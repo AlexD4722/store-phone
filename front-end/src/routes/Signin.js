@@ -1,7 +1,34 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+// import "../styles/account.scss";
+import APIrequest, { USER_LOGIN } from "../API/callAPI.js";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 
-function Signup(){
+
+function Signin() {
+
+    const ref1 = useRef();
+
+    const handleSubmit = () => {
+        const username = document.querySelector("#formBasicUsername").value;
+        const password = document.querySelector("#formBasicPassword").value;
+        const remember = document.querySelector("#formBasicCheckbox").checked;
+        const data = { username, password };
+        APIrequest(USER_LOGIN, data)
+        .then(response => {
+            if (response.result === "Success"){
+                if (remember){
+                    localStorage.setItem("userID", response.data.user);
+                } else {
+                    sessionStorage.setItem("userID", response.data.user);
+                }
+            } else {
+                ref1.current.innerText = "Username and password doesn't match";
+            }
+        })
+    };
+
     return (
         <div className="section-account">
             <Container>
@@ -49,9 +76,11 @@ function Signup(){
                                 <Button
                                     variant="primary"
                                     className="ma"
+                                    onClick={handleSubmit}
                                 >
                                     Sign In
                                 </Button>
+                                or <Link to="../signup">Sign up</Link>
                             </Form>
                         </div>
                     </Col>
@@ -59,7 +88,7 @@ function Signup(){
                 </Row>
             </Container>
         </div>
-    )
+    );
 }
 
-export default Signup;
+export default Signin;
