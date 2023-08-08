@@ -7,6 +7,7 @@ import FormSearch from '../components/form-search';
 import '../styles/footer-page.scss'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import SearchEmail from '../components/search-email';
 function Footer() {
     return (
         <section className="section-footer">
@@ -23,7 +24,7 @@ function Footer() {
                             </div>
                         </div>
                         <div className='section-footer__site-newsletter-form'>
-                            <FormSearch />
+                            <SearchEmail />
                         </div>
                     </div>
                 </div>

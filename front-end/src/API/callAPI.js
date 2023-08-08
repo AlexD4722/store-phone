@@ -15,7 +15,7 @@ async function APIrequest(action, data) {
     sendData.append("data", jsonString);
 
     let result = await fetch(
-        "http://localhost:2203/learning/store-phone/back-end/API/API.php",
+        "http://localhost:2203/phpProject/api/API.php",
         {
             method: "post",
             body: sendData,

@@ -10,6 +10,22 @@ import "../styles/section.scss";
 import ProductFlex from "../components/product-card2";
 
 function Home() {
+    const Phones = [
+        {
+            title: "onplus",
+            imgDefault: "http://localhost:2203/phpProject/img/OnePlus%208T/oneplus1.jpg",
+            imgHover: "http://localhost:2203/phpProject/img/OnePlus%208T/oneplus2-1024x1024.jpg",
+            priceOld: "1000",
+            priceNew: "999"
+        },
+        {
+            title: "iphone12",
+            imgDefault: "http://localhost:2203/phpProject/img/IPhone%2012/newapple1.jpg",
+            imgHover: "http://localhost:2203/phpProject/img/IPhone%2012/newapple2.jpg",
+            priceOld: "1300",
+            priceNew: "1200"
+        },
+    ]
     return (
         <>
             <SlideShow />
@@ -26,46 +42,70 @@ function Home() {
                         </div>
                         <div className="products-module__main-wrapper">
                             <Row xs={2} sm={3} md={4} lg={6}>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
-                                <Col>
-                                    <Product />
-                                </Col>
+                                {
+                                    Phones.map((phone, index) => {
+                                        return (
+                                            <Col>
+                                                <Product
+                                                    title={phone.title}
+                                                    imgDefault={phone.imgDefault}
+                                                    imgHover={phone.imgHover}
+                                                    priceOld={phone.priceOld}
+                                                    priceNew={phone.priceNew}
+                                                />
+                                            </Col>
+                                        );
+                                    })
+                                }
+                                {
+                                    Phones.map((phone, index) => {
+                                        return (
+                                            <Col>
+                                                <Product
+                                                    title={phone.title}
+                                                    imgDefault={phone.imgDefault}
+                                                    imgHover={phone.imgHover}
+                                                    priceOld={phone.priceOld}
+                                                    priceNew={phone.priceNew}
+                                                />
+                                            </Col>
+                                        );
+                                    })
+                                }
+                                {
+                                    Phones.map((phone, index) => {
+                                        return (
+                                            <Col>
+                                                <Product
+                                                    title={phone.title}
+                                                    imgDefault={phone.imgDefault}
+                                                    imgHover={phone.imgHover}
+                                                    priceOld={phone.priceOld}
+                                                    priceNew={phone.priceNew}
+                                                />
+                                            </Col>
+                                        );
+                                    })
+                                }
+                                {
+                                    Phones.map((phone, index) => {
+                                        return (
+                                            <Col>
+                                                <Product
+                                                    title={phone.title}
+                                                    imgDefault={phone.imgDefault}
+                                                    imgHover={phone.imgHover}
+                                                    priceOld={phone.priceOld}
+                                                    priceNew={phone.priceNew}
+                                                />
+                                            </Col>
+                                        );
+                                    })
+                                }
                             </Row>
                         </div>
                     </div>
-                </section>
+                </section >
                 <section className="page-section">
                     <div className="products-module">
                         <div className="products-module__header">
@@ -117,7 +157,7 @@ function Home() {
                         </div>
                     </div>
                 </section>
-            </div>
+            </div >
 
             {/* <SortProduct /> */}
             {/* <PaginationPage /> */}

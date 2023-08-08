@@ -2,20 +2,20 @@ import '../styles/product-card.scss';
 import React from 'react';
 import P1dot1 from '../assets/imgs/product1.1.jpg';
 import P1dot2 from '../assets/imgs/product1.2.jpg';
-function Product() {
+function Product(props) {
     return (
         <div className='product-card'>
             <div className='product-card__img-wrap'>
                 <div className='product-card__img-default'>
-                    <img src={P1dot1} alt="" />
+                    <img src={props.imgDefault} alt="" />
                 </div>
                 <div className='product-card__img-sub'>
-                    <img src={P1dot2} alt="" />
+                    <img src={props.imgHover} alt="" />
                 </div>
             </div>
             <div className='product-card__main'>
                 <div className='product-card__content-wrapper'>
-                    <h3 class="product-card__product-title">Apple 10.9-inch iPad Air Wi-Fi Cellular 64GB</h3>
+                    <h3 class="product-card__product-title"> {props.title}</h3>
                     <div className='product-card__product-rating'>
                         <div className='product-card__box-start-rating'>
                             <i class="bi bi-star-fill"></i>
@@ -25,16 +25,16 @@ function Product() {
                             <i class="bi bi-star-fill"></i>
                         </div>
                         <span className='product-card__count-rating'>
-                            1
+                            {1}
                         </span>
                     </div>
                     <div className='product-card__product-price-cart'>
                         <div className='product-card__price'>
                             <span className='product-card__price-old'>
-                                $699.99
+                                ${props.priceOld}
                             </span>
                             <span className='product-card__price-new'>
-                                $629.99
+                                ${props.priceNew}
                             </span>
                         </div>
                         <div className='product-card__box-btn-add'>
