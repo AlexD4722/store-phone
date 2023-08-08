@@ -6,10 +6,11 @@ import { useStore } from "../store/hooks";
 
 function FormSearch() {
     const [hint, setHint] = useState([]);
-    const keyword = useStore().search[0];
+    const [keyword, setKey] = useStore();
 
     const handleSearch = useCallback((e) => {
         setHint([]);
+        setKey(e.target.value);
         const data = { search: e.target.value };
         const action = API.SEARCH_PRODUCTS_BY_NAME;
         if (data.search !== "") {
@@ -19,7 +20,17 @@ function FormSearch() {
                 }
             });
         }
-    }, []);
+    }, [setKey]);
+
+    const handleButton = () => {
+        window.location.href = "/search/" + keyword;
+    }
+
+    const handleEnter = e => {
+        if (e.key === "Enter"){
+            handleButton();
+        }
+    }
 
     return (
         <form className="form-search">
@@ -30,6 +41,7 @@ function FormSearch() {
                         type="text"
                         placeholder="Search your favorite product..."
                         onChange={(event) => handleSearch(event)}
+                        onKeyUp={event => handleEnter(event)}
                     />
                     {hint.map((value, index) => {
                         return (
@@ -51,6 +63,7 @@ function FormSearch() {
                     <button
                         className="form-search__button-detail"
                         type="button"
+                        onClick={handleButton}
                     >
                         <span>search</span>
                     </button>
