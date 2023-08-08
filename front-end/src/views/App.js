@@ -19,6 +19,7 @@ import {
     Search,
 } from "../routes";
 
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/search/:keyword",
-                element: <Search />,
+                element: <Search />
             },
             {
                 path: "/blog",

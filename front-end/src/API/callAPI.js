@@ -1,10 +1,11 @@
 export const USER_LOGIN = 101;
 export const USER_LOGOUT = 102;
+export const USER_SIGNUP = 103;
 export const INSERT_RECEIPT = 201;
 export const DONE_RECEIPT = 202;
 export const GET_ALL_PRODUCTS = 301;
 export const GET_RECEIPTS_BY_CID = 302;
-export const GET_5_PRODUCTS = 303;
+export const GET_5_PRODUCTS_BY_NAME = 303;
 export const SEARCH_PRODUCTS_BY_NAME = 304;
 
 async function APIrequest(action, data) {

@@ -18,8 +18,11 @@ switch ($action){
     case GET_ALL_PRODUCTS:
         require("../controller/get_all_products.php");
         break;
-    case SEARCH_PRODUCTS_BY_NAME:
+    case GET_5_PRODUCTS_BY_NAME:
         require("../controller/get_5_products.php");
+        break;
+    case SEARCH_PRODUCTS_BY_NAME:
+        require("../controller/search_products_by_name.php");
         break;
     case GET_RECEIPTS_BY_CID:
         require("../controller/get_receipts_by_cid.php");
