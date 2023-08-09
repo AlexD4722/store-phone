@@ -39,6 +39,9 @@ switch ($action){
     case USER_LOGOUT:
         require("../controller/user_logout.php");
         break;
+    case USER_SIGNUP:
+        require("../controller/signup.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

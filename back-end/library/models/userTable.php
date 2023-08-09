@@ -33,7 +33,7 @@ class UserTable extends Database
             $data = $this->pdo_stm->fetchAll();
             $arr = [];
             foreach ($data as $row) {
-                $one = new User($row["username"], $row["password"], $row["user_type"]);
+                $one = new User($row["username"], $row["password"], $row["email"], $row["user_type"]);
                 array_push($arr, $one);
             }
             $this->data = $arr;
@@ -44,8 +44,8 @@ class UserTable extends Database
     //Dữ liệu trả về dạng mảng các object User.
     public function insertUser(User $user)
     {
-        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?),?)";
-        $params = [$user->username, $user->password, $user->user_type];
+        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?)";
+        $params = [$user->username, $user->password, $user->email, $user->user_type];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
@@ -68,4 +68,13 @@ class UserTable extends Database
         return $result;
     }
     //hàm edit user theo id
+
+    public function checkUser($username)
+    {
+        $sql = "SELECT * FROM user WHERE username = ?";
+        $params = [$username];
+        $result = $this->SQLexec($sql, $params);
+        $this->data = $this->pdo_stm->fetchAll();
+        return $result;
+    }
 }

@@ -13,15 +13,15 @@ function Home() {
     const Phones = [
         {
             title: "onplus",
-            imgDefault: "http://localhost:2203/phpProject/img/OnePlus%208T/oneplus1.jpg",
-            imgHover: "http://localhost:2203/phpProject/img/OnePlus%208T/oneplus2-1024x1024.jpg",
+            imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus1.jpg",
+            imgHover: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus2-1024x1024.jpg",
             priceOld: "1000",
             priceNew: "999"
         },
         {
             title: "iphone12",
-            imgDefault: "http://localhost:2203/phpProject/img/IPhone%2012/newapple1.jpg",
-            imgHover: "http://localhost:2203/phpProject/img/IPhone%2012/newapple2.jpg",
+            imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple1.jpg",
+            imgHover: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple2.jpg",
             priceOld: "1300",
             priceNew: "1200"
         },

@@ -29,9 +29,6 @@ class Database
         if ($param == NULL) {
             $result = $this->pdo_stm->execute();
         } else {
-            foreach ($param as $data){
-                $data = $this->test_input($data);
-            }
             $result = $this->pdo_stm->execute($param);
         }
         return $result;

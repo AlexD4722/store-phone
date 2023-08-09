@@ -3,7 +3,6 @@ import '../styles/wrap-header.scss'
 import '../styles/index.scss';
 import Pattern from '../assets/imgs/pattern-2.png';
 import '../styles/carousel-item.scss'
-import FormSearch from '../components/form-search';
 import '../styles/footer-page.scss'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

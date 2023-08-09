@@ -15,12 +15,15 @@ async function APIrequest(action, data) {
     sendData.append("data", jsonString);
 
     let result = await fetch(
-        "http://localhost:2203/phpProject/api/API.php",
+        "http://localhost:2203/learning/store-phone/back-end/api/API.php",
         {
             method: "post",
             body: sendData,
         }
-    ).then(response => response.json());
+    ).then((response) => {
+        // console.log(response.text());
+        return response.json();
+    });
 
     return result;
 }
