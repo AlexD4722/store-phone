@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 17, 2023 lúc 11:16 AM
+-- Thời gian đã tạo: Th8 10, 2023 lúc 05:09 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -24,19 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `order_line`
---
-
-CREATE TABLE `order_line` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `product`
 --
 
@@ -48,7 +35,9 @@ CREATE TABLE `product` (
   `selling_price` int(11) NOT NULL,
   `product_line` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `images` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  `color` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `capacity` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -79,6 +68,19 @@ CREATE TABLE `receipt` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `receipt_line`
+--
+
+CREATE TABLE `receipt_line` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `receipt_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `user`
 --
 
@@ -86,20 +88,15 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `user_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+  `user_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `wishlist` varchar(255) NOT NULL,
+  `cart` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
-
---
--- Chỉ mục cho bảng `order_line`
---
-ALTER TABLE `order_line`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_id` (`product_id`),
-  ADD KEY `order_id` (`order_id`);
 
 --
 -- Chỉ mục cho bảng `product`
@@ -122,6 +119,14 @@ ALTER TABLE `receipt`
   ADD KEY `customer_id` (`customer_id`);
 
 --
+-- Chỉ mục cho bảng `receipt_line`
+--
+ALTER TABLE `receipt_line`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `order_id` (`receipt_id`);
+
+--
 -- Chỉ mục cho bảng `user`
 --
 ALTER TABLE `user`
@@ -132,51 +137,51 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT cho bảng `order_line`
---
-ALTER TABLE `order_line`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `receipt`
 --
 ALTER TABLE `receipt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `receipt_line`
+--
+ALTER TABLE `receipt_line`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Các ràng buộc cho bảng `order_line`
+-- Các ràng buộc cho bảng `product`
 --
-ALTER TABLE `order_line`
-  ADD CONSTRAINT `order_line_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  ADD CONSTRAINT `order_line_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `receipt` (`id`);
-
---
--- Các ràng buộc cho bảng `product_line`
---
-ALTER TABLE `product_line`
-  ADD CONSTRAINT `product_line_ibfk_1` FOREIGN KEY (`name`) REFERENCES `product` (`product_line`);
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`product_line`) REFERENCES `product_line` (`name`);
 
 --
 -- Các ràng buộc cho bảng `receipt`
 --
 ALTER TABLE `receipt`
   ADD CONSTRAINT `receipt_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `user` (`id`);
+
+--
+-- Các ràng buộc cho bảng `receipt_line`
+--
+ALTER TABLE `receipt_line`
+  ADD CONSTRAINT `receipt_line_ibfk_1` FOREIGN KEY (`receipt_id`) REFERENCES `receipt` (`id`),
+  ADD CONSTRAINT `receipt_line_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
