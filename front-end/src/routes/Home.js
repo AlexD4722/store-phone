@@ -8,6 +8,7 @@ import "../styles/product-module.scss";
 import "../styles/banner-sidebar.scss";
 import "../styles/section.scss";
 import ProductFlex from "../components/product-card2";
+import DetailProduct from "./DetailProduct";
 
 function Home() {
     const Phones = [
@@ -159,6 +160,7 @@ function Home() {
                 </section>
             </div >
 
+            <DetailProduct />
             {/* <SortProduct /> */}
             {/* <PaginationPage /> */}
         </>
