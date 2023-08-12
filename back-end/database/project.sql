@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 10, 2023 lúc 05:09 PM
+-- Thời gian đã tạo: Th8 12, 2023 lúc 03:33 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -37,7 +37,8 @@ CREATE TABLE `product` (
   `images` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `quantity` int(11) NOT NULL,
   `color` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `capacity` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+  `capacity` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -140,7 +141,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `receipt`
