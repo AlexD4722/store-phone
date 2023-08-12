@@ -1,7 +1,5 @@
 import '../styles/product-card.scss';
 import React from 'react';
-import P1dot1 from '../assets/imgs/product1.1.jpg';
-import P1dot2 from '../assets/imgs/product1.2.jpg';
 function Product(props) {
     return (
         <div className='product-card'>

@@ -36,7 +36,7 @@ function Home() {
                     <div className="products-module">
                         <div className="products-module__header">
                             <h2 className="products-module__title">Best Sellers</h2>
-                            <a className="products-module__link-more" href="#">
+                            <a className="products-module__link-more" href="/#">
                                 <span>View All </span>
                                 <i class="bi bi-arrow-right"></i>
                             </a>
@@ -111,7 +111,7 @@ function Home() {
                     <div className="products-module">
                         <div className="products-module__header">
                             <h2 className="products-module__title">Trending Products</h2>
-                            <a className="products-module__link-more" href="#">
+                            <a className="products-module__link-more" href="/#">
                                 <span>View All </span>
                                 <i class="bi bi-arrow-right"></i>
                             </a>
@@ -127,7 +127,7 @@ function Home() {
                                                 <div className="banner-sidebar__description">
                                                     <p>Pellentesque habitant morbi tristique senectus.</p>
                                                 </div>
-                                                <a href="" className="banner-sidebar__btn-link">
+                                                <a href="/#" className="banner-sidebar__btn-link">
                                                     <span className="banner-sidebar__btn-content">Shop Now</span>
                                                 </a>
                                             </div>
@@ -135,7 +135,7 @@ function Home() {
                                         <div className="banner-sidebar__img">
                                             <img src={BannerSidebar1} alt="Banner Sidebar" />
                                         </div>
-                                        <a href="" className="overlay-link"></a>
+                                        {/* <a href="/#" className="overlay-link">ádasd</a> */}
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={12} md={9}>

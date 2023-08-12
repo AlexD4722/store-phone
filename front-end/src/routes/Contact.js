@@ -71,7 +71,7 @@ function Contact() {
                             <h4 className='contactus__country-office'>United States Office</h4>
                             <p className='contactus__address'>205 Middle Road, 2nd Floor, New York</p>
                             <p className='contactus__phone'>+1 1234 567 88</p>
-                            <a className='contactus__link' href="#">info@example.com</a>
+                            <a className='contactus__link' href="/#">info@example.com</a>
                         </div>
                     </Col>
                     <Col>
@@ -80,7 +80,7 @@ function Contact() {
                             <h4 className='contactus__country-office'>United States Office</h4>
                             <p className='contactus__address'>205 Middle Road, 2nd Floor, New York</p>
                             <p className='contactus__phone'>+1 1234 567 88</p>
-                            <a className='contactus__link' href="#">info@example.com</a>
+                            <a className='contactus__link' href="/#">info@example.com</a>
                         </div>
                     </Col>
                     <Col>
@@ -89,7 +89,7 @@ function Contact() {
                             <h4 className='contactus__country-office'>United States Office</h4>
                             <p className='contactus__address'>205 Middle Road, 2nd Floor, New York</p>
                             <p className='contactus__phone'>+1 1234 567 88</p>
-                            <a className='contactus__link' href="#">info@example.com</a>
+                            <a className='contactus__link' href="/#">info@example.com</a>
                         </div>
                     </Col>
                 </Row>
