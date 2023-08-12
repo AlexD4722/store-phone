@@ -18,6 +18,8 @@ import {
     Signup,
     Search,
 } from "../routes";
+import AddNewProductForm from "../routes/AddNewProduct.js";
+import AddNewProductLineForm from "../routes/AddNewProductLine.js";
 
 
 const router = createBrowserRouter([
@@ -47,7 +49,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/wish-list",
-                element: <WishList />,
+                element: <AddNewProductForm />,
+            },
+            {
+                path: "/wish-list/product-line",
+                element: <AddNewProductLineForm />,
             },
             {
                 path: "/cart",

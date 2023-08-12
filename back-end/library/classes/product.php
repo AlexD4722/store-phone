@@ -9,8 +9,11 @@ class Product
     public ProductLine $product_line;
     public $quantity;
     public $images;
+    public $color;
+    public $capacity;
+    public $status;
 
-    public function __construct($name, $desc, $init, $sell, $qty, $dir)
+    public function __construct($name, $desc, $init, $sell, $qty, $dir, $color, $capacity, $status)
     {
         $this->name = $name;
         $this->description = $desc;
@@ -18,6 +21,9 @@ class Product
         $this->selling_price = $sell;
         $this->quantity = $qty;
         $this->images = $dir;
+        $this->color = $color;
+        $this->capacity = $capacity;
+        $this->status = $status;
     }
 }
 

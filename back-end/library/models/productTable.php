@@ -38,7 +38,7 @@ class ProductTable extends Database
         $this->data = [];
         if (count($data) > 0) {
             foreach ($data as $row) {
-                array_push($this->data, new Product($row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images']));
+                array_push($this->data, new Product($row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images'], $row['color'], $row['capacity'], 1));
             }
         }
         return $result;
@@ -49,7 +49,7 @@ class ProductTable extends Database
 
     function addProduct(Product $p)
     {
-        $sql = "INSERT INTO `product`(`id`, `name`, `description`, `inital_price`, `selling_price`, `product_line`, `images`, `quantity`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `product`(`id`, `name`, `description`, `inital_price`, `selling_price`, `product_line`, `images`, `quantity`, `color`, `capacity`, `status`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $data = [
             $p->id,
             $p->name,
@@ -58,7 +58,10 @@ class ProductTable extends Database
             $p->selling_price,
             $p->product_line->name,
             $p->images,
-            $p->quantity
+            $p->quantity,
+            $p->color,
+            $p->capacity,
+            $p->status
         ];
         $result = $this->SQLexec($sql, $data);
         return $result;
@@ -222,7 +225,7 @@ class ProductTable extends Database
         if (count($data) > 0) {
             $this->data = [];
             foreach ($data as $row) {
-                array_push($this->data, new Product($row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images']));
+                array_push($this->data, new Product($row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images'], $row['color'], $row['capacity'], 1));
             }
         }
         return $result;

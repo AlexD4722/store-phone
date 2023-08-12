@@ -7,6 +7,9 @@ export const GET_ALL_PRODUCTS = 301;
 export const GET_RECEIPTS_BY_CID = 302;
 export const GET_5_PRODUCTS_BY_NAME = 303;
 export const SEARCH_PRODUCTS_BY_NAME = 304;
+export const ADD_NEW_PRODUCT = 305;
+export const ADD_NEW_PRODUCT_LINE = 306;
+export const GET_ALL_PRODUCT_LINE = 307;
 
 async function APIrequest(action, data) {
     let sendData = new FormData();

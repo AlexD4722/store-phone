@@ -8,7 +8,11 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")) {
 }
 $PT = new ProductTable();
 $data = json_decode($_POST["data"]);
-$product = new Product($data->name, $data->description, $data->initalPrice, $data->sellingPrice, $data->quantity, $data->images, $data->color, $data->capacity, 1);
+$product_line_name = $data->productLine;
+$PT->getProductLineList($product_line_name);
+$product_line_name = $PT->data[0];
+$product = new Product($data->name, $data->description, $data->initalPrice, $data->sellingPrice, $data->quantity, $data->images, json_encode($data->color), json_encode($data->capacity), 1);
+$product->product_line = $product_line_name;
 $result = $PT->addProduct($product);
 if ($result) {
     $return = new APIresponse("Success");

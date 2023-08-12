@@ -126,10 +126,7 @@ function AddNewProductForm() {
                             <option>Choose product line</option>
                             {productLines.map((value, index) => {
                                 return (
-                                    <option
-                                        value={value.name}
-                                        key={index}
-                                    >
+                                    <option value={value.name} key={index}>
                                         {value.name}
                                     </option>
                                 );

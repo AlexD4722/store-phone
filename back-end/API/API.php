@@ -1,8 +1,9 @@
 <?php
 session_start();
+error_reporting(E_ERROR | E_PARSE);
 header("Access-Control-Allow-Origin: http://localhost:3000");
 require_once("../library/classes/api_response.php");
-if (!isset($_POST["action"])){
+if (!isset($_POST["action"])) {
     $return = new APIresponse("No action received");
     echo json_encode($return);
     die;
@@ -14,7 +15,7 @@ require_once("../library/models/database.php");
 $action = $_POST["action"];
 $auth = "TRESPASSING NOT ALLOWED";
 
-switch ($action){
+switch ($action) {
     case GET_ALL_PRODUCTS:
         require("../controller/get_all_products.php");
         break;
@@ -41,6 +42,15 @@ switch ($action){
         break;
     case USER_SIGNUP:
         require("../controller/signup.php");
+        break;
+    case ADD_NEW_PRODUCT:
+        require("../controller/add_new_product.php");
+        break;
+    case ADD_NEW_PRODUCT_LINE:
+        require("../controller/add_new_product_line.php");
+        break;
+    case GET_ALL_PRODUCT_LINE:
+        require("../controller/get_all_product_line.php");
         break;
     default:
         $return = new APIresponse("Action invalid");
