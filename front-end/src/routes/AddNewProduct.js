@@ -36,7 +36,7 @@ function AddNewProductForm() {
             sellingPrice,
             images,
             quantity,
-            productLine: "iPhone",
+            productLine,
             description,
             color,
             capacity,
