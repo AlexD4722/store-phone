@@ -105,7 +105,7 @@ class ProductTable extends Database
         $sql = "SELECT * FROM product_line WHERE TRUE";
         $params = [];
         if ($name) {
-            $sql .= " AND `name` like '% $name %' ";
+            $sql .= " AND `name` like '%$name%' ";
             array_push($params, $name);
         }
         $this->data = [];

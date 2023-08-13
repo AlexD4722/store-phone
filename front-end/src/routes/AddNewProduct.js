@@ -36,11 +36,12 @@ function AddNewProductForm() {
             sellingPrice,
             images,
             quantity,
-            productLine,
+            productLine: "iPhone",
             description,
             color,
             capacity,
         };
+        console.log(data);
         APIrequest(ADD_NEW_PRODUCT, data).then((obj) => {
             if (obj.result === "Failed") {
                 setResult("Database error");
@@ -122,7 +123,9 @@ function AddNewProductForm() {
                                 </Link>
                             </Button>
                         </Form.Label>
-                        <Form.Select>
+                        <Form.Select
+                            onChange={(e) => setProductLine(e.target.value)}
+                        >
                             <option>Choose product line</option>
                             {productLines.map((value, index) => {
                                 return (
@@ -137,7 +140,6 @@ function AddNewProductForm() {
                             {color.map((value, index) => {
                                 return (
                                     <Form.Control
-                                        required
                                         type="text"
                                         placeholder="Enter color"
                                         value={value}
@@ -167,7 +169,6 @@ function AddNewProductForm() {
                             {capacity.map((value, index) => {
                                 return (
                                     <Form.Control
-                                        required
                                         type="text"
                                         placeholder="Enter capacity"
                                         value={value}
