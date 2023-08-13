@@ -21,7 +21,6 @@ function FormSearch() {
             });
         }
     }, [setKey]);
-
     const handleButton = () => {
         window.location.href = "/search/" + keyword;
     }

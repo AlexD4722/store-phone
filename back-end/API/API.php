@@ -52,6 +52,9 @@ switch ($action) {
     case GET_ALL_PRODUCT_LINE:
         require("../controller/get_all_product_line.php");
         break;
+    case FIlTER_PRODUCT:
+        require("../controller/filter_product.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

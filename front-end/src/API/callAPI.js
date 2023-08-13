@@ -10,6 +10,7 @@ export const SEARCH_PRODUCTS_BY_NAME = 304;
 export const ADD_NEW_PRODUCT = 305;
 export const ADD_NEW_PRODUCT_LINE = 306;
 export const GET_ALL_PRODUCT_LINE = 307;
+export const FIlTER_PRODUCT = 308;
 
 async function APIrequest(action, data) {
     let sendData = new FormData();
@@ -18,7 +19,7 @@ async function APIrequest(action, data) {
     sendData.append("data", jsonString);
 
     let result = await fetch(
-        "http://localhost:2203/learning/store-phone/back-end/api/API.php",
+        "http://localhost:2203/learning/store-phone/back-end/API/API.php",
         {
             method: "post",
             body: sendData,
