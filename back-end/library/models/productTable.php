@@ -128,7 +128,7 @@ class ProductTable extends Database
 
     function addProductLine(ProductLine $pl)
     {
-        $sql = "INSERT INTO `product_line`(`name`, `brand`, `product_type`) VALUES ( ?, ?, ?)";
+        $sql = "INSERT INTO `product_line`(`name`, `brand`, `product_type`, `status`) VALUES ( ?, ?, ?, 1)";
         $data = [
             $pl->name,
             $pl->brand,
