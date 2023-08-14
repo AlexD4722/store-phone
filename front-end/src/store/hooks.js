@@ -1,8 +1,31 @@
 import { useContext } from "react";
-import Context from "./Context";
+import {
+    SearchContext,
+    AccountContext,
+    CartContext,
+    WishListContext,
+} from "./Context";
 
-export function useStore() {
-    const store = useContext(Context);
+export function useSearchContext() {
+    const store = useContext(SearchContext);
+
+    return store;
+}
+
+export function useAccountContext() {
+    const store = useContext(AccountContext);
+
+    return store;
+}
+
+export function useWishlistContext() {
+    const store = useContext(WishListContext);
+
+    return store;
+}
+
+export function useCartContext() {
+    const store = useContext(CartContext);
 
     return store;
 }

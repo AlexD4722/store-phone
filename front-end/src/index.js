@@ -3,14 +3,25 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import App from "./views/App";
 import "./styles/index.scss";
-import { StoreProvider } from "./store/";
+import {
+    SearchProvider,
+    AccountProvider,
+    WishlistProvider,
+    CartProvider,
+} from "./store/";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <StoreProvider>
-            <App />
-        </StoreProvider>
+        <AccountProvider>
+            <CartProvider>
+                <WishlistProvider>
+                    <SearchProvider>
+                        <App />
+                    </SearchProvider>
+                </WishlistProvider>
+            </CartProvider>
+        </AccountProvider>
     </React.StrictMode>
 );
 

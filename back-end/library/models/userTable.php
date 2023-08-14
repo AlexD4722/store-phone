@@ -34,6 +34,7 @@ class UserTable extends Database
             $arr = [];
             foreach ($data as $row) {
                 $one = new User($row["username"], $row["password"], $row["email"], $row["user_type"]);
+                $one->id = $row["id"];
                 array_push($arr, $one);
             }
             $this->data = $arr;
@@ -44,8 +45,8 @@ class UserTable extends Database
     //Dữ liệu trả về dạng mảng các object User.
     public function insertUser(User $user)
     {
-        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?)";
-        $params = [$user->username, $user->password, $user->email, $user->user_type];
+        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?, 'NULL', NULL)";
+        $params = [$user->username, $user->password, $user->user_type, $user->email];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }

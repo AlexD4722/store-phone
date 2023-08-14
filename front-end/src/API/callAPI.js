@@ -32,6 +32,26 @@ async function APIrequest(action, data) {
     return result;
 }
 
+async function testAPI(action, data) {
+    let sendData = new FormData();
+    sendData.append("action", action);
+    let jsonString = JSON.stringify(data);
+    sendData.append("data", jsonString);
+
+    let result = await fetch(
+        "http://localhost:2203/learning/store-phone/back-end/API/API.php",
+        {
+            method: "post",
+            body: sendData,
+        }
+    ).then((response) => {
+        return console.log(response.text());
+    });
+
+    return result;
+}
+
+export { testAPI };
 export default APIrequest;
 
 //Example : callAPI({data object}).then(obj => document.getElementById("...").innerText = obj.data)

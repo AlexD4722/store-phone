@@ -1,10 +1,50 @@
-import Context from "./Context";
-import { useState } from "react";
+import {
+    SearchContext,
+    AccountContext,
+    WishListContext,
+    CartContext,
+} from "./Context";
+import { useReducer, useState } from "react";
+import reducer from "./reducer";
 
-function Provider({ children }) {
+function SearchProvider({ children }) {
     const [keyword, setKeyword] = useState("");
 
-    return <Context.Provider value={[keyword, setKeyword]}>{children}</Context.Provider>;
+    return (
+        <SearchContext.Provider value={[keyword, setKeyword]}>
+            {children}
+        </SearchContext.Provider>
+    );
 }
 
-export default Provider;
+function AccountProvider({ children }) {
+    const [account, setAccount] = useState({});
+
+    return (
+        <AccountContext.Provider value={[account, setAccount]}>
+            {children}
+        </AccountContext.Provider>
+    );
+}
+
+function WishlistProvider({ children }) {
+    const [wishlist, setWishlist] = useState({});
+
+    return (
+        <WishListContext.Provider value={[wishlist, setWishlist]}>
+            {children}
+        </WishListContext.Provider>
+    );
+}
+
+function CartProvider({ children }) {
+    const [state, dispatch] = useReducer(reducer, {});
+
+    return (
+        <CartContext.Provider value={[state, dispatch]}>
+            {children}
+        </CartContext.Provider>
+    );
+}
+
+export { SearchProvider, AccountProvider, WishlistProvider, CartProvider };

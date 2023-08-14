@@ -1,32 +1,41 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-// import "../styles/account.scss";
 import APIrequest, { USER_LOGIN } from "../API/callAPI.js";
-import { useRef } from "react";
 import { Link } from "react-router-dom";
-
+import { useAccountContext } from "../store";
+import { useState } from "react";
 
 function Signin() {
-
-    const ref1 = useRef();
+    const [account, setAccount] = useAccountContext();
+    const [report, setReport] = useState("");
 
     const handleSubmit = () => {
         const username = document.querySelector("#formBasicUsername").value;
         const password = document.querySelector("#formBasicPassword").value;
         const remember = document.querySelector("#formBasicCheckbox").checked;
         const data = { username, password };
-        APIrequest(USER_LOGIN, data)
-        .then(response => {
-            if (response.result === "Success"){
-                if (remember){
-                    localStorage.setItem("userID", response.data.user);
+        APIrequest(USER_LOGIN, data).then((response) => {
+            setReport("");
+            if (response.result === "Success") {
+                if (response.data.result == "Success") {
+                    if (remember) {
+                        localStorage.setItem("userID", response.data.userID);
+                    } else {
+                        sessionStorage.setItem("userID", response.data.userID);
+                    }
+                    setAccount({
+                        userID: response.data.userID,
+                        username: response.data.username,
+                        email: response.data.email,
+                        userType: response.data.user_type,
+                    });
                 } else {
-                    sessionStorage.setItem("userID", response.data.user);
+                    setReport("Username or Password is wrong");
                 }
             } else {
-                ref1.current.innerText = "Username and password doesn't match";
+                setReport("Failed to connect database");
             }
-        })
+        });
     };
 
     return (
@@ -53,7 +62,6 @@ function Signin() {
                                         placeholder="Enter Username"
                                     />
                                 </Form.Group>
-
                                 <Form.Group
                                     className="mb-3"
                                     controlId="formBasicPassword"
@@ -81,6 +89,7 @@ function Signin() {
                                     Sign In
                                 </Button>
                                 or <Link to="../signup">Sign up</Link>
+                                <div>{report}</div>
                             </Form>
                         </div>
                     </Col>

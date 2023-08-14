@@ -11,13 +11,20 @@ $data = json_decode($_POST["data"]);
 $user = $data->username;
 $pass = $data->password;
 $result = $UT->getUser($user, $pass);
-if (count($UT->data) == 1){
+if ($result && count($UT->data) == 1){
     $return = new APIresponse("Success");
-    $return->data->userID = $UT->data[0]->user;
+    $return->data->result = "Success";
+    $return->data->userID = $UT->data[0]->id;
+    $return->data->username = $UT->data[0]->username;
+    $return->data->email = $UT->data[0]->email;
+    $return->data->user_type = $UT->data[0]->user_type;
     $_SESSION["login_status"] = "OK";
-    $_SESSION["userLogin"] = $user;
+    $_SESSION["user"] = $UT->data[0]->username;
+} else if (!$result) {
+    $return = new APIresponse("Failed");
 } else {
-    $return = new APIresponse("Failure");
+    $return = new APIresponse("Success");
+    $return->data->result = "Failed";
 }
 
 echo json_encode($return);

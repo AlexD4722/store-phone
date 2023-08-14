@@ -3,20 +3,27 @@ import "../styles/form-search.scss";
 import "../styles/color.scss";
 import "../styles/addons.scss";
 import { Link } from "react-router-dom";
+import { useAccountContext } from "../store";
 
 function Addons() {
+    const [account, setAccount] = useAccountContext();
+
     return (
         <div className="header-addons">
-
-            <Link to="signin" className="header-addons__btn header-addons__btn--login">
+            <Link
+                to="signin"
+                className="header-addons__btn header-addons__btn--login"
+            >
                 <div className="header-addons__icon">
                     <i className="bi bi-person"></i>
                 </div>
 
                 <div className="header-addons__text">
-                    <div className="header-addons__sub-text">Sign In</div>
+                    <div className="header-addons__sub-text">
+                        {account.username ? "Hello" : "Sign In"}
+                    </div>
                     <div className="header-addons__primary-text">
-                        Account
+                        {account.username || "Account"}
                     </div>
                 </div>
             </Link>
@@ -30,14 +37,17 @@ function Addons() {
                     </span>
                 </div>
             </Link>
-            <Link to="cart" className="header-addons__btn header-addons__btn--cart">
+            <Link
+                to="cart"
+                className="header-addons__btn header-addons__btn--cart"
+            >
                 <div className="header-addons__icon">
                     <i className="bi bi-cart"></i>
-                        <span className="header-addons__icon-quantity">
-                            <span className="header-addons__icon-quantity-detail header-addons__icon-quantity-detail--cart">
-                                0
-                            </span>
+                    <span className="header-addons__icon-quantity">
+                        <span className="header-addons__icon-quantity-detail header-addons__icon-quantity-detail--cart">
+                            0
                         </span>
+                    </span>
                 </div>
                 <div className="header-addons__text">
                     <div className="header-addons__sub-text">total</div>

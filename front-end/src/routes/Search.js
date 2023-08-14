@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useStore } from "../store";
+import { useSearchContext } from "../store";
 import { useEffect, useState } from "react";
 import APIrequest, { FIlTER_PRODUCT } from "../API/callAPI";
 
@@ -14,7 +14,7 @@ import PaginationPage from '../components/pagination';
 
 function Search() {
     const params = useParams();
-    const setSearch = useStore()[1];
+    const setSearch = useSearchContext()[1];
     const [data, setData] = useState(["abc"]);
     let check = null;
 

@@ -1,5 +1,8 @@
 import { createContext } from "react";
 
-const Context = createContext();
+const SearchContext = createContext();
+const AccountContext = createContext();
+const WishListContext = createContext();
+const CartContext = createContext();
 
-export default Context;
+export { AccountContext, WishListContext, CartContext, SearchContext };

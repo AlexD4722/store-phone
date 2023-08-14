@@ -6,6 +6,9 @@ class User
     public $password;
     public $email;
     public $user_type;
+    public $wishlist;
+    public $cart;
+    
     public function __construct($username, $password, $email, $user_type)
     {
         $this->username = $username;

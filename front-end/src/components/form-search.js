@@ -2,11 +2,11 @@ import "../styles/logo.scss";
 import "../styles/form-search.scss";
 import React, { useCallback, useState } from "react";
 import APIrequest, * as API from "../API/callAPI";
-import { useStore } from "../store/hooks";
+import { useSearchContext } from "../store/hooks";
 
 function FormSearch() {
     const [hint, setHint] = useState([]);
-    const [keyword, setKey] = useStore();
+    const [keyword, setKey] = useSearchContext();
 
     const handleSearch = useCallback((e) => {
         setHint([]);
