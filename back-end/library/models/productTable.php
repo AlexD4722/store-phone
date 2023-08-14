@@ -38,7 +38,7 @@ class ProductTable extends Database
         $this->data = [];
         if (count($data) > 0) {
             foreach ($data as $row) {
-                array_push($this->data, new Product($row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images'], $row['color'], $row['capacity'], 1));
+                array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images'], $row['color'], $row['capacity'], 1));
             }
         }
         return $result;
@@ -233,5 +233,5 @@ class ProductTable extends Database
     // // function filter() is used to get all data list of product 
     // // parameters: 
     // // return: boolean
-
+    
 }

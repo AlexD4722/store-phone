@@ -13,8 +13,9 @@ class Product
     public $capacity;
     public $status;
 
-    public function __construct($name, $desc, $init, $sell, $qty, $dir, $color, $capacity, $status)
+    public function __construct($id, $name, $desc, $init, $sell, $qty, $dir, $color, $capacity, $status)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->description = $desc;
         $this->inital_price = $init;
