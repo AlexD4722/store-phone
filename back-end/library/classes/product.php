@@ -33,6 +33,7 @@ class ProductLine
     public $name;
     public $brand;
     public $product_type;
+    public $status = 1;
     public function __construct($name, $brand, $type)
     {
         $this->name = $name;

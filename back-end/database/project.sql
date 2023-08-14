@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 12, 2023 lúc 03:33 PM
+-- Thời gian đã tạo: Th8 14, 2023 lúc 12:40 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -50,7 +50,8 @@ CREATE TABLE `product` (
 CREATE TABLE `product_line` (
   `name` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `brand` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `product_type` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+  `product_type` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -141,7 +142,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `receipt`
@@ -159,7 +160,7 @@ ALTER TABLE `receipt_line`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
