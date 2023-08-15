@@ -174,11 +174,7 @@ function AddNewProductForm() {
                                         value={value}
                                         key={index}
                                         onChange={(e) =>
-                                            setCapacity((prev) => {
-                                                let now = [...prev];
-                                                now[index] = e.target.value;
-                                                return now;
-                                            })
+                                            setCapacity(e.target.value)
                                         }
                                     />
                                 );
