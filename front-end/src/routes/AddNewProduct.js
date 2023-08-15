@@ -16,7 +16,7 @@ function AddNewProductForm() {
     const [productLine, setProductLine] = useState("");
     const [description, setDescription] = useState(["..."]);
     const [color, setColor] = useState(["Red"]);
-    const [capacity, setCapacity] = useState(["64GB"]);
+    const [capacity, setCapacity] = useState("");
     const [productLines, setProductLines] = useState([]);
     const [result, setResult] = useState("");
 
