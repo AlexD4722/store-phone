@@ -10,9 +10,9 @@ function Product(props) {
                 <div className='product-card__img-sub'>
                     <img src={props.imgHover} alt="" />
                 </div>
-                <div className="product-card__box-wishlist">
+                <button type="button" className="product-card__box-wishlist">
                     <i class="bi bi-heart"></i>
-                </div>
+                </button>
             </div>
             <div className='product-card__main'>
                 <div className='product-card__content-wrapper'>
