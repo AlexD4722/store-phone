@@ -10,6 +10,9 @@ function Product(props) {
                 <div className='product-card__img-sub'>
                     <img src={props.imgHover} alt="" />
                 </div>
+                <div className="product-card__box-wishlist">
+                    <i class="bi bi-heart"></i>
+                </div>
             </div>
             <div className='product-card__main'>
                 <div className='product-card__content-wrapper'>
@@ -50,7 +53,7 @@ function Product(props) {
                     <li>Product Length 9.74 in</li>
                 </ul>
             </div>
-        </div>
+        </div >
     );
 }
 export default Product
