@@ -1,7 +1,7 @@
 <?php
 class ProductTable extends Database
 {
-    public $LinkServer = "../../imgProduct/Iphone14Plus/";
+    public $LinkServer = "../../../../";
     public $data;
     function __construct()
     {
@@ -65,10 +65,12 @@ class ProductTable extends Database
         if (count($data) > 0) {
             foreach ($data as $row) {
                 // $folderImg = "$this->LinkServer . "" . $row['images']" ;
-                $files = scandir($this->LinkServer);
-                
-                if ($row['status'] === "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $files[1], $row['color'], $row['capacity'], $row['status']));
+                $files = scandir($this->LinkServer . $row["images"]);
+                for ($i = 0; $i < count($files); $i++) {
+                    $files[$i] = "http://localhost:2203/" . $row["images"] . "/" . $files[$i];
+                }
+                if ($row['status'] == "1") {
+                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $files[2], $row['color'], $row['capacity'], $row['status']));
                 }
             }
         }
