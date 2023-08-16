@@ -48,10 +48,13 @@ class ProductTable extends Database
     // parameters: $name, $desc, $product_line
     // return: boolean
 
-    function getInfoProduct($limit = 1)
+    function getInfoProduct($limit = 1, $random = "false")
     {
         $params = [];
         $sql = "SELECT * FROM product WHERE TRUE";
+        if($random){
+            $sql .= " ORDER BY RAND()";
+        }
         if ($limit > 0) {
             $sql .= " LIMIT $limit";
         }

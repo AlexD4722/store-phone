@@ -1,23 +1,21 @@
 import '../styles/product-flex.scss';
 import React from 'react';
-import product01 from '../assets/imgs/newapple2-400x400.jpg';
-import product02 from '../assets/imgs/newapple3-400x400.jpg';
-function ProductFlex() {
+function ProductFlex(props) {
     return (
         <div>
             <div className='product-flex'>
                 <div className='product-flex__wrapper'>
                     <div className='product-flex__img-wrapper'>
                         <div className='product-flex__img-default'>
-                            <img src={product02} alt="" />
+                            <img src={props.imgDefault} alt="" />
                         </div>
                         <div className='product-flex__img-sub'>
-                            <img src={product01} alt="" />
+                            <img src={props.imgHover} alt="" />
                         </div>
                     </div>
                     <div className='product-flex__content'>
                         <h3 className='product-flex__product-title'>
-                            New Apple iPhone 12 (128GB – 4GB RAM) – White
+                            {props.title}
                         </h3>
                         <div className='product-flex__product-rating'>
                             <div className='product-flex__box-start-rating'>
@@ -32,8 +30,8 @@ function ProductFlex() {
                             </span>
                         </div>
                         <div class="product-flex__price">
-                            <span class="product-flex__price-new">$629.99</span>
-                            <span class="product-flex__price-old">$699.99</span>
+                            <span class="product-flex__price-new">{props.priceNew}</span>
+                            <span class="product-flex__price-old">{props.priceOld}</span>
                         </div>
                         <ul>
                             <li>Unlocked for All Carriers</li>

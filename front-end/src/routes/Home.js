@@ -14,7 +14,7 @@ import APIrequest, * as API from "../API/callAPI";
 
 function Home() {
     const [Phones, setPhones] = useState([]);
-    const data = { quantity: 10 };
+    const data = { quantity: 10 , random: true};
     useEffect(() => {
         const action = API.GET_QUANTITY_PRODUCT;
         if (data.quantity) {
@@ -25,7 +25,19 @@ function Home() {
             });
         }
     }, []);
-    console.log(Phones);
+    const [PhonesFlex, setPhonesFlex] = useState([]);
+    const dataFlex = { quantity: 4, random: true };
+    useEffect(() => {
+        const action = API.GET_QUANTITY_PRODUCT;
+        if (dataFlex.quantity) {
+            APIrequest(action, dataFlex).then((response) => {
+                if (response.result === "Success") {
+                    setPhonesFlex(response.data.productArray);
+                }
+            });
+        }
+    }, []);
+    console.log(PhonesFlex);
 
     // const Phones = [
     //     {
@@ -112,24 +124,28 @@ function Home() {
                                 </Col>
                                 <Col xs={12} sm={12} md={9}>
                                     <Row xs={1} sm={1} md={2} lg={2}>
-                                        <Col>
-                                            <ProductFlex />
-                                        </Col>
-                                        <Col>
-                                            <ProductFlex />
-                                        </Col>
-                                        <Col>
-                                            <ProductFlex />
-                                        </Col>
-                                        <Col>
-                                            <ProductFlex />
-                                        </Col>
+                                        {
+                                            PhonesFlex.map((phoneflex, index) => {
+                                                return (
+                                                    <Col>
+                                                        <ProductFlex
+                                                            id={phoneflex.id}
+                                                            title={phoneflex.name}
+                                                            imgDefault={phoneflex.images[0]}
+                                                            imgHover={phoneflex.images[3]}
+                                                            priceOld={phoneflex.inital_price}
+                                                            priceNew={phoneflex.selling_price}
+                                                        />
+                                                    </Col>
+                                                );
+                                            })
+                                        }
                                     </Row>
                                 </Col>
                             </Row>
                         </div>
-                    </div>
-                </section>
+                    </div >
+                </section >
             </div >
 
             <DetailProduct />

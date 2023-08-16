@@ -8,7 +8,8 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")){
 $PT = new ProductTable();
 $data = json_decode($_POST["data"]);
 $quantity = $data->quantity;
-$result = $PT->getInfoProduct($quantity);
+$random = $data->random;
+$result = $PT->getInfoProduct($quantity, $random);
 if ($result){
     $return = new APIresponse("Success");
     $return->data->productArray = $PT->data;
