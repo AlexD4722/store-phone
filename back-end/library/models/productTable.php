@@ -65,12 +65,16 @@ class ProductTable extends Database
         if (count($data) > 0) {
             foreach ($data as $row) {
                 // $folderImg = "$this->LinkServer . "" . $row['images']" ;
+                $arrayFiles= [];
                 $files = scandir($this->LinkServer . $row["images"]);
                 for ($i = 0; $i < count($files); $i++) {
-                    $files[$i] = "http://localhost:2203/" . $row["images"] . "/" . $files[$i];
+                    if($files[$i] != "." && $files[$i] != ".."){
+                        $files[$i] = "http://localhost:2203/" . $row["images"] . "/" . $files[$i];
+                        array_push($arrayFiles, $files[$i]);
+                    }
                 }
                 if ($row['status'] == "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $files[2], $row['color'], $row['capacity'], $row['status']));
+                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, $row['color'], $row['capacity'], $row['status']));
                 }
             }
         }

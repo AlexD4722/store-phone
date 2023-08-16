@@ -58,7 +58,7 @@ function Home() {
                             </a>
                         </div>
                         <div className="products-module__main-wrapper">
-                            <Row xs={2} sm={3} md={4} lg={6}>
+                            <Row xs={2} sm={3} md={4} lg={5}>
                                 {
                                     Phones.map((phone, index) => {
                                         return (
@@ -66,8 +66,8 @@ function Home() {
                                                 <Product
                                                     id={phone.id}
                                                     title={phone.name}
-                                                    imgDefault={phone.imgDefault}
-                                                    imgHover={phone.imgHover}
+                                                    imgDefault={phone.images[0]}
+                                                    imgHover={phone.images[3]}
                                                     priceOld={phone.inital_price}
                                                     priceNew={phone.selling_price}
                                                 />
