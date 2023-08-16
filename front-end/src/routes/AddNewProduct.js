@@ -166,28 +166,12 @@ function AddNewProductForm() {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Capacity</Form.Label>
-                            {capacity.map((value, index) => {
-                                return (
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Enter capacity"
-                                        value={value}
-                                        key={index}
-                                        onChange={(e) =>
-                                            setCapacity(e.target.value)
-                                        }
-                                    />
-                                );
-                            })}
-                            <Button
-                                onClick={() => {
-                                    setCapacity((prev) => {
-                                        return [...prev, "64GB"];
-                                    });
-                                }}
-                            >
-                                Add
-                            </Button>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter capacity"
+                                value={capacity}
+                                onChange={(e) => setCapacity(e.target.value)}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Key feature</Form.Label>
