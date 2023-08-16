@@ -15,7 +15,7 @@ import PaginationPage from '../components/pagination';
 function Search() {
     const params = useParams();
     const setSearch = useSearchContext()[1];
-    const [data, setData] = useState(["abc"]);
+    const [data, setData] = useState([""]);
     let check = null;
 
 
@@ -98,16 +98,47 @@ function Search() {
         }
         );
     }, [params.keyword]);
-    // console.log("this is data", check);
+    const checka = document.querySelector(".filter-item__checkbox");
+    // if(checka.checked){
+    //     console.log("yes oke");
+    // }else{
+    //     console.log("no OK");
+    // }
+    // console.log(document.querySelector(".filter-item__checkbox"));
+    // const [dataOption, setDataOption] = useState([]);
     // useEffect(() => {
-    //     setSearch(params.keyword);
-    //     console.log("data", data);
-    // }, [params.keyword, setSearch]);
+    //     const data = { name_product: params.keyword };
+    //     APIrequest(FIlTER_PRODUCT, data).then((obj) => {
+    //         setData(obj.data.productArray);
+    //         console.log("this is data", obj.data.productArray);
+    //     }
+    //     );
+    // }, [params.keyword]);
+    const inputCheckBox = document.querySelectorAll(".filter-item");
+    for (let index = 0; index < inputCheckBox.length; index++) {
+        // console.log(inputCheckBox[index]);
+        inputCheckBox[index].onClick = function () {
+            console.log("runnnnnnnnn");
+        };
+    }
+    const [isChecked, setIsChecked] = useState(false);
+    const handleCheckboxChange = (event) => {
+        setIsChecked(event.target.checked);
+    };
+    useEffect(() => {
+        if (isChecked === true) {
+            console.log("have checked");
+        }
+        else {
+            console.log("haven't checked");
+        }
+    }, [isChecked]);
+
     return (
         <>
             Search result for {params.keyword}
             {
-               console.log(data)
+                console.log(data)
             }
             <div className='header-sort'>
                 <Row>
@@ -153,7 +184,8 @@ function Search() {
                                 <ul>
                                     <li className='filter-item'>
                                         <label>
-                                            <input className='filter-item__checkbox' type="checkbox" />
+                                            <input className='filter-item__checkbox' checked={isChecked}
+                                                onChange={handleCheckboxChange} type="checkbox" />
                                             <span className='filter-item__name'>phone</span>
                                             <span className='filter-item__custom-checkbox'>
                                                 <i class="bi bi-check"></i>
@@ -182,15 +214,6 @@ function Search() {
                                         <label>
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>headphone</span>
-                                            <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
-                                            </span>
-                                        </label>
-                                    </li>
-                                    <li className='filter-item'>
-                                        <label>
-                                            <input className='filter-item__checkbox' type="checkbox" />
-                                            <span className='filter-item__name'>tv</span>
                                             <span className='filter-item__custom-checkbox'>
                                                 <i class="bi bi-check"></i>
                                             </span>

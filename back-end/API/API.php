@@ -55,6 +55,9 @@ switch ($action) {
     case FIlTER_PRODUCT:
         require("../controller/filter_product.php");
         break;
+    case GET_QUANTITY_PRODUCT:
+        require("../controller/get_quantity_product.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

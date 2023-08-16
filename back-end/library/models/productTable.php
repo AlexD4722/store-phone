@@ -1,6 +1,7 @@
 <?php
 class ProductTable extends Database
 {
+    public $LinkServer = "../../imgProduct/Iphone14Plus/";
     public $data;
     function __construct()
     {
@@ -46,6 +47,33 @@ class ProductTable extends Database
     // function getProductList() is used to get all suitable products 
     // parameters: $name, $desc, $product_line
     // return: boolean
+
+    function getInfoProduct($limit = 1)
+    {
+        $params = [];
+        $sql = "SELECT * FROM product WHERE TRUE";
+        if ($limit > 0) {
+            $sql .= " LIMIT $limit";
+        }
+        if (count($params) > 0) {
+            $result = $this->SQLexec($sql, $params);
+        } else {
+            $result = $this->SQLexec($sql);
+        }
+        $data = $this->pdo_stm->fetchAll();
+        $this->data = [];
+        if (count($data) > 0) {
+            foreach ($data as $row) {
+                // $folderImg = "$this->LinkServer . "" . $row['images']" ;
+                $files = scandir($this->LinkServer);
+                
+                if ($row['status'] === "1") {
+                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $files[1], $row['color'], $row['capacity'], $row['status']));
+                }
+            }
+        }
+        return $result;
+    }
 
     function addProduct(Product $p)
     {

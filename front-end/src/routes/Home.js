@@ -9,24 +9,40 @@ import "../styles/banner-sidebar.scss";
 import "../styles/section.scss";
 import ProductFlex from "../components/product-card2";
 import DetailProduct from "./DetailProduct";
+import React, { useState, useEffect } from 'react';
+import APIrequest, * as API from "../API/callAPI";
 
 function Home() {
-    const Phones = [
-        {
-            title: "onplus",
-            imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus1.jpg",
-            imgHover: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus2-1024x1024.jpg",
-            priceOld: "1000",
-            priceNew: "999"
-        },
-        {
-            title: "iphone12",
-            imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple1.jpg",
-            imgHover: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple2.jpg",
-            priceOld: "1300",
-            priceNew: "1200"
-        },
-    ]
+    const [Phones, setPhones] = useState([]);
+    const data = { quantity: 10 };
+    useEffect(() => {
+        const action = API.GET_QUANTITY_PRODUCT;
+        if (data.quantity) {
+            APIrequest(action, data).then((response) => {
+                if (response.result === "Success") {
+                    setPhones(response.data.productArray);
+                }
+            });
+        }
+    }, []);
+    console.log(Phones);
+
+    // const Phones = [
+    //     {
+    //         title: "onplus",
+    //         imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus1.jpg",
+    //         imgHover: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus2-1024x1024.jpg",
+    //         priceOld: "1000",
+    //         priceNew: "999"
+    //     },
+    //     {
+    //         title: "iphone12",
+    //         imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple1.jpg",
+    //         imgHover: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple2.jpg",
+    //         priceOld: "1300",
+    //         priceNew: "1200"
+    //     },
+    // ]
     return (
         <>
             <SlideShow />
@@ -48,56 +64,12 @@ function Home() {
                                         return (
                                             <Col>
                                                 <Product
-                                                    title={phone.title}
+                                                    id={phone.id}
+                                                    title={phone.name}
                                                     imgDefault={phone.imgDefault}
                                                     imgHover={phone.imgHover}
-                                                    priceOld={phone.priceOld}
-                                                    priceNew={phone.priceNew}
-                                                />
-                                            </Col>
-                                        );
-                                    })
-                                }
-                                {
-                                    Phones.map((phone, index) => {
-                                        return (
-                                            <Col>
-                                                <Product
-                                                    title={phone.title}
-                                                    imgDefault={phone.imgDefault}
-                                                    imgHover={phone.imgHover}
-                                                    priceOld={phone.priceOld}
-                                                    priceNew={phone.priceNew}
-                                                />
-                                            </Col>
-                                        );
-                                    })
-                                }
-                                {
-                                    Phones.map((phone, index) => {
-                                        return (
-                                            <Col>
-                                                <Product
-                                                    title={phone.title}
-                                                    imgDefault={phone.imgDefault}
-                                                    imgHover={phone.imgHover}
-                                                    priceOld={phone.priceOld}
-                                                    priceNew={phone.priceNew}
-                                                />
-                                            </Col>
-                                        );
-                                    })
-                                }
-                                {
-                                    Phones.map((phone, index) => {
-                                        return (
-                                            <Col>
-                                                <Product
-                                                    title={phone.title}
-                                                    imgDefault={phone.imgDefault}
-                                                    imgHover={phone.imgHover}
-                                                    priceOld={phone.priceOld}
-                                                    priceNew={phone.priceNew}
+                                                    priceOld={phone.inital_price}
+                                                    priceNew={phone.selling_price}
                                                 />
                                             </Col>
                                         );
