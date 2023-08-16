@@ -37,24 +37,6 @@ function Home() {
             });
         }
     }, []);
-    console.log(PhonesFlex);
-
-    // const Phones = [
-    //     {
-    //         title: "onplus",
-    //         imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus1.jpg",
-    //         imgHover: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus2-1024x1024.jpg",
-    //         priceOld: "1000",
-    //         priceNew: "999"
-    //     },
-    //     {
-    //         title: "iphone12",
-    //         imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple1.jpg",
-    //         imgHover: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple2.jpg",
-    //         priceOld: "1300",
-    //         priceNew: "1200"
-    //     },
-    // ]
     return (
         <>
             <SlideShow />
@@ -66,7 +48,7 @@ function Home() {
                             <h2 className="products-module__title">Best Sellers</h2>
                             <a className="products-module__link-more" href="/#">
                                 <span>View All </span>
-                                <i class="bi bi-arrow-right"></i>
+                                <i  className="bi bi-arrow-right"></i>
                             </a>
                         </div>
                         <div className="products-module__main-wrapper">
@@ -76,7 +58,7 @@ function Home() {
                                         return (
                                             <Col>
                                                 <Product
-                                                    id={phone.id}
+                                                    key={phone.id}
                                                     title={phone.name}
                                                     imgDefault={phone.images[0]}
                                                     imgHover={phone.images[3]}
@@ -97,7 +79,7 @@ function Home() {
                             <h2 className="products-module__title">Trending Products</h2>
                             <a className="products-module__link-more" href="/#">
                                 <span>View All </span>
-                                <i class="bi bi-arrow-right"></i>
+                                <i  className="bi bi-arrow-right"></i>
                             </a>
                         </div>
                         <div className="products-module__main-wrapper">
@@ -129,7 +111,7 @@ function Home() {
                                                 return (
                                                     <Col>
                                                         <ProductFlex
-                                                            id={phoneflex.id}
+                                                            key={phoneflex.id}
                                                             title={phoneflex.name}
                                                             imgDefault={phoneflex.images[0]}
                                                             imgHover={phoneflex.images[3]}

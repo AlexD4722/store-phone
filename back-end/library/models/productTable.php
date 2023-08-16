@@ -52,7 +52,7 @@ class ProductTable extends Database
     {
         $params = [];
         $sql = "SELECT * FROM product WHERE TRUE";
-        if($random){
+        if ($random) {
             $sql .= " ORDER BY RAND()";
         }
         if ($limit > 0) {
@@ -68,10 +68,10 @@ class ProductTable extends Database
         if (count($data) > 0) {
             foreach ($data as $row) {
                 // $folderImg = "$this->LinkServer . "" . $row['images']" ;
-                $arrayFiles= [];
+                $arrayFiles = [];
                 $files = scandir($this->LinkServer . $row["images"]);
                 for ($i = 0; $i < count($files); $i++) {
-                    if($files[$i] != "." && $files[$i] != ".."){
+                    if ($files[$i] != "." && $files[$i] != "..") {
                         $files[$i] = "http://localhost:2203/" . $row["images"] . "/" . $files[$i];
                         array_push($arrayFiles, $files[$i]);
                     }
@@ -216,43 +216,44 @@ class ProductTable extends Database
         $keyWord = '',
         $upDown = ''
     ) {
+        $params = [];
         $sql = "SELECT * FROM product JOIN product_line on product.product_line = product_line.name WHERE TRUE";
         if ($product_type) {
-            $sql .= " AND `product_type` = ?";
+            $sql .= " AND `product_type` like ?";
             array_push($params, $product_type);
         }
-        if ($brand) {
-            $sql .= " AND `brand` = ?";
-            array_push($params, $brand);
-        }
-        if ($startPrice) {
-            $sql .= " AND `selling_price` >= ?";
-            array_push($params, $startPrice);
-        }
-        if ($endPrice) {
-            $sql .= " AND `selling_price` <= ?";
-            array_push($params, $endPrice);
-        }
-        if ($keyWord) {
-            $sql .= " AND `description` like '% $keyWord %' ";
-            array_push($params, $keyWord);
-        }
-        if ($upDown) {
-            switch ($upDown) {
-                case "priceDesc":
-                    $sql .= " AND ORDER BY `selling_price` DESC ";
-                    break;
-                case "priceAsc":
-                    $sql .= " AND ORDER BY `selling_price` ASC ";
-                    break;
-                case "nameDesc":
-                    $sql .= " AND ORDER BY `name` DESC ";
-                    break;
-                case "nameAsc":
-                    $sql .= " AND ORDER BY `name` ASC ";
-                    break;
-            }
-        }
+        // if ($brand) {
+        //     $sql .= " OR `brand` = ?";
+        //     array_push($params, $brand);
+        // }
+        // if ($startPrice) {
+        //     $sql .= " AND `selling_price` >= ?";
+        //     array_push($params, $startPrice);
+        // }
+        // if ($endPrice) {
+        //     $sql .= " AND `selling_price` <= ?";
+        //     array_push($params, $endPrice);
+        // }
+        // if ($keyWord) {
+        //     $sql .= " AND `description` like '% $keyWord %' ";
+        //     array_push($params, $keyWord);
+        // }
+        // if ($upDown) {
+        //     switch ($upDown) {
+        //         case "priceDesc":
+        //             $sql .= " AND ORDER BY `selling_price` DESC ";
+        //             break;
+        //         case "priceAsc":
+        //             $sql .= " AND ORDER BY `selling_price` ASC ";
+        //             break;
+        //         case "nameDesc":
+        //             $sql .= " AND ORDER BY `name` DESC ";
+        //             break;
+        //         case "nameAsc":
+        //             $sql .= " AND ORDER BY `name` ASC ";
+        //             break;
+        //     }
+        // }
         if (count($params) > 0) {
             $result = $this->SQLexec($sql, $params);
         } else {
@@ -262,7 +263,9 @@ class ProductTable extends Database
         if (count($data) > 0) {
             $this->data = [];
             foreach ($data as $row) {
-                array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images'], $row['color'], $row['capacity'], 1));
+                if ($row['status'] === "1") {
+                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images'], $row['color'], $row['capacity'], $row['status']));
+                }
             }
         }
         return $result;

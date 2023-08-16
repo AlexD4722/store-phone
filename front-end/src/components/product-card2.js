@@ -19,19 +19,19 @@ function ProductFlex(props) {
                         </h3>
                         <div className='product-flex__product-rating'>
                             <div className='product-flex__box-start-rating'>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
+                                <i  className="bi bi-star-fill"></i>
+                                <i  className="bi bi-star-fill"></i>
+                                <i  className="bi bi-star-fill"></i>
+                                <i  className="bi bi-star-fill"></i>
+                                <i  className="bi bi-star-fill"></i>
                             </div>
                             <span className='product-flex__count-rating'>
                                 1
                             </span>
                         </div>
-                        <div class="product-flex__price">
-                            <span class="product-flex__price-new">{props.priceNew}</span>
-                            <span class="product-flex__price-old">{props.priceOld}</span>
+                        <div  className="product-flex__price">
+                            <span  className="product-flex__price-new">{props.priceNew}</span>
+                            <span  className="product-flex__price-old">{props.priceOld}</span>
                         </div>
                         <ul>
                             <li>Unlocked for All Carriers</li>
