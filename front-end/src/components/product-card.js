@@ -27,10 +27,10 @@ function Product(props) {
         <div className="product-card">
             <div className="product-card__img-wrap">
                 <div className="product-card__img-default">
-                    <img src={props.product.images[0]} alt="" />
+                    <img src={props.product && props.product.images[0]} alt="" />
                 </div>
                 <div className="product-card__img-sub">
-                    <img src={props.product.images[1]} alt="" />
+                    <img src={props.product && props.product.images[1]} alt="" />
                 </div>
                 <button
                     type="button"

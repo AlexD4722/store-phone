@@ -199,8 +199,6 @@ function Search() {
             }
         }
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
-            console.log(data);
-            console.log(newData);
             setPhones(obj.data.productArray);
         });
     }, [isChecked, params.keyword]);
@@ -463,17 +461,17 @@ function Search() {
                 </Col>
                 <Col xs={12} sm={12} md={9} lg={9} className="product-filter">
                     <Row xs={1} sm={2} md={3} lg={4}>
-                        {/* {
+                        {
                             Phones.map((phone) => {
                                 return (
-                                    <Col>
+                                    <Col key={phone.id}>
                                         <Product
                                             product={phone}
                                         />
                                     </Col>
                                 )
                             })
-                        } */}
+                        }
                     </Row>
                     <PaginationPage />
                 </Col>
