@@ -49,7 +49,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/wish-list",
-                element: <AddNewProductForm />,
+                element: <WishList />,
             },
             {
                 path: "/wish-list/product-line",

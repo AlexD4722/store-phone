@@ -28,7 +28,7 @@ function AccountProvider({ children }) {
 }
 
 function WishlistProvider({ children }) {
-    const [wishlist, setWishlist] = useState({});
+    const [wishlist, setWishlist] = useState([]);
 
     return (
         <WishListContext.Provider value={[wishlist, setWishlist]}>

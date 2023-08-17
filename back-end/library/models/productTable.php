@@ -69,6 +69,7 @@ class ProductTable extends Database
             foreach ($data as $row) {
                 // $folderImg = "$this->LinkServer . "" . $row['images']" ;
                 $arrayFiles = [];
+                echo $row["id"];
                 $files = scandir($this->LinkServer . $row["images"]);
                 for ($i = 0; $i < count($files); $i++) {
                     if ($files[$i] != "." && $files[$i] != "..") {

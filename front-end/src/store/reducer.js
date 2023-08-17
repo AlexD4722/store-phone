@@ -10,10 +10,12 @@ function reducer(state, action) {
                 }
             });
             if (found) {
-                return newState;
+                sessionStorage.setItem("cart", JSON.stringify(newState))
             } else {
-                return [...state, action.payload];
+                newState = [...state, action.payload];
+                sessionStorage.setItem("cart", JSON.stringify(newState));
             }
+            return newState;
         default:
             return state;
     }
