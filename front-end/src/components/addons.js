@@ -3,11 +3,16 @@ import "../styles/form-search.scss";
 import "../styles/color.scss";
 import "../styles/addons.scss";
 import { Link } from "react-router-dom";
-import { useAccountContext, useCartContext } from "../store";
+import {
+    useAccountContext,
+    useCartContext,
+    useWishlistContext,
+} from "../store";
 
 function Addons() {
-    const [account, setAccount] = useAccountContext();
+    const account = useAccountContext()[0];
     const cart = useCartContext()[0];
+    const wishlist = useWishlistContext()[0];
 
     return (
         <div className="header-addons">
@@ -33,7 +38,7 @@ function Addons() {
                     <i className="bi bi-heart"></i>
                     <span className="header-addons__icon-quantity">
                         <span className="header-addons__icon-quantity-detail header-addons__icon-quantity-detail--heart">
-                            0
+                            {wishlist.length}
                         </span>
                     </span>
                 </div>

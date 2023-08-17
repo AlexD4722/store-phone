@@ -1,14 +1,26 @@
-import { useCartContext } from "../store/hooks";
+import { useCartContext, useWishlistContext } from "../store/hooks";
 import "../styles/product-card.scss";
 import React from "react";
 
 function Product(props) {
     const dispatchCart = useCartContext()[1];
+    const setWishlist = useWishlistContext()[1];
 
     const handleCart = () => {
         const payload = { product: props.product, quantity: 1 };
-        const action = {type:"add", payload}
+        const action = { type: "add", payload };
         dispatchCart(action);
+    };
+
+    const handleWishlist = () => {
+        setWishlist((prev) => {
+            if (!prev.includes(props.product)) {
+                let wishlist = [...prev, props.product];
+                sessionStorage.setItem("wishlist", JSON.stringify(wishlist));
+                return wishlist;
+            }
+            return prev;
+        });
     };
 
     return (
@@ -20,7 +32,11 @@ function Product(props) {
                 <div className="product-card__img-sub">
                     <img src={props.product.images[1]} alt="" />
                 </div>
-                <button type="button" className="product-card__box-wishlist">
+                <button
+                    type="button"
+                    className="product-card__box-wishlist"
+                    onClick={handleWishlist}
+                >
                     <i className="bi bi-heart"></i>
                 </button>
             </div>
