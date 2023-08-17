@@ -16,6 +16,8 @@ define("SEARCH_PRODUCTS_BY_NAME", 304);
 define("ADD_NEW_PRODUCT", 305);
 define("ADD_NEW_PRODUCT_LINE", 306);
 define("GET_ALL_PRODUCT_LINE", 307);
-define("FIlTER_PRODUCT", 308)
+define("FIlTER_PRODUCT", 308);
+define("GET_QUANTITY_PRODUCT", 309)
+
 
 ?>

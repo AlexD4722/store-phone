@@ -9,24 +9,34 @@ import "../styles/banner-sidebar.scss";
 import "../styles/section.scss";
 import ProductFlex from "../components/product-card2";
 import DetailProduct from "./DetailProduct";
+import React, { useState, useEffect } from 'react';
+import APIrequest, * as API from "../API/callAPI";
 
 function Home() {
-    const Phones = [
-        {
-            title: "onplus",
-            imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus1.jpg",
-            imgHover: "http://localhost:2203/learning/store-phone/back-end/img/OnePlus%208T/oneplus2-1024x1024.jpg",
-            priceOld: "1000",
-            priceNew: "999"
-        },
-        {
-            title: "iphone12",
-            imgDefault: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple1.jpg",
-            imgHover: "http://localhost:2203/learning/store-phone/back-end/img/IPhone%2012/newapple2.jpg",
-            priceOld: "1300",
-            priceNew: "1200"
-        },
-    ]
+    const [Phones, setPhones] = useState([]);
+    const data = { quantity: 10 , random: true};
+    useEffect(() => {
+        const action = API.GET_QUANTITY_PRODUCT;
+        if (data.quantity) {
+            APIrequest(action, data).then((response) => {
+                if (response.result === "Success") {
+                    setPhones(response.data.productArray);
+                }
+            });
+        }
+    }, []);
+    const [PhonesFlex, setPhonesFlex] = useState([]);
+    const dataFlex = { quantity: 4, random: true };
+    useEffect(() => {
+        const action = API.GET_QUANTITY_PRODUCT;
+        if (dataFlex.quantity) {
+            APIrequest(action, dataFlex).then((response) => {
+                if (response.result === "Success") {
+                    setPhonesFlex(response.data.productArray);
+                }
+            });
+        }
+    }, []);
     return (
         <>
             <SlideShow />
@@ -38,66 +48,22 @@ function Home() {
                             <h2 className="products-module__title">Best Sellers</h2>
                             <a className="products-module__link-more" href="/#">
                                 <span>View All </span>
-                                <i class="bi bi-arrow-right"></i>
+                                <i  className="bi bi-arrow-right"></i>
                             </a>
                         </div>
                         <div className="products-module__main-wrapper">
-                            <Row xs={2} sm={3} md={4} lg={6}>
+                            <Row xs={2} sm={3} md={4} lg={5}>
                                 {
                                     Phones.map((phone, index) => {
                                         return (
                                             <Col>
                                                 <Product
-                                                    title={phone.title}
-                                                    imgDefault={phone.imgDefault}
-                                                    imgHover={phone.imgHover}
-                                                    priceOld={phone.priceOld}
-                                                    priceNew={phone.priceNew}
-                                                />
-                                            </Col>
-                                        );
-                                    })
-                                }
-                                {
-                                    Phones.map((phone, index) => {
-                                        return (
-                                            <Col>
-                                                <Product
-                                                    title={phone.title}
-                                                    imgDefault={phone.imgDefault}
-                                                    imgHover={phone.imgHover}
-                                                    priceOld={phone.priceOld}
-                                                    priceNew={phone.priceNew}
-                                                />
-                                            </Col>
-                                        );
-                                    })
-                                }
-                                {
-                                    Phones.map((phone, index) => {
-                                        return (
-                                            <Col>
-                                                <Product
-                                                    title={phone.title}
-                                                    imgDefault={phone.imgDefault}
-                                                    imgHover={phone.imgHover}
-                                                    priceOld={phone.priceOld}
-                                                    priceNew={phone.priceNew}
-                                                />
-                                            </Col>
-                                        );
-                                    })
-                                }
-                                {
-                                    Phones.map((phone, index) => {
-                                        return (
-                                            <Col>
-                                                <Product
-                                                    title={phone.title}
-                                                    imgDefault={phone.imgDefault}
-                                                    imgHover={phone.imgHover}
-                                                    priceOld={phone.priceOld}
-                                                    priceNew={phone.priceNew}
+                                                    key={phone.id}
+                                                    title={phone.name}
+                                                    imgDefault={phone.images[0]}
+                                                    imgHover={phone.images[3]}
+                                                    priceOld={phone.inital_price}
+                                                    priceNew={phone.selling_price}
                                                 />
                                             </Col>
                                         );
@@ -113,7 +79,7 @@ function Home() {
                             <h2 className="products-module__title">Trending Products</h2>
                             <a className="products-module__link-more" href="/#">
                                 <span>View All </span>
-                                <i class="bi bi-arrow-right"></i>
+                                <i  className="bi bi-arrow-right"></i>
                             </a>
                         </div>
                         <div className="products-module__main-wrapper">
@@ -140,24 +106,28 @@ function Home() {
                                 </Col>
                                 <Col xs={12} sm={12} md={9}>
                                     <Row xs={1} sm={1} md={2} lg={2}>
-                                        <Col>
-                                            <ProductFlex />
-                                        </Col>
-                                        <Col>
-                                            <ProductFlex />
-                                        </Col>
-                                        <Col>
-                                            <ProductFlex />
-                                        </Col>
-                                        <Col>
-                                            <ProductFlex />
-                                        </Col>
+                                        {
+                                            PhonesFlex.map((phoneflex, index) => {
+                                                return (
+                                                    <Col>
+                                                        <ProductFlex
+                                                            key={phoneflex.id}
+                                                            title={phoneflex.name}
+                                                            imgDefault={phoneflex.images[0]}
+                                                            imgHover={phoneflex.images[3]}
+                                                            priceOld={phoneflex.inital_price}
+                                                            priceNew={phoneflex.selling_price}
+                                                        />
+                                                    </Col>
+                                                );
+                                            })
+                                        }
                                     </Row>
                                 </Col>
                             </Row>
                         </div>
-                    </div>
-                </section>
+                    </div >
+                </section >
             </div >
 
             <DetailProduct />

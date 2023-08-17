@@ -88,7 +88,7 @@ function SortProduct() {
                         <div className='header-sort__wrapper-selector'>
                             <div onClick={(e) => handleOpenFilterMobile()} className='header-sort__btn-filter'>
                                 <button type="button">
-                                    <i class="bi bi-funnel"></i>
+                                    <i  className="bi bi-funnel"></i>
                                     <span>filter product</span>
                                 </button>
                             </div>
@@ -124,7 +124,7 @@ function SortProduct() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>phone</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i  className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -133,7 +133,7 @@ function SortProduct() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>laptop</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i  className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -142,7 +142,7 @@ function SortProduct() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>tablet</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i  className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -151,7 +151,7 @@ function SortProduct() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>headphone</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i  className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -160,7 +160,7 @@ function SortProduct() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>tv</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i  className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -176,7 +176,7 @@ function SortProduct() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>Apple</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i  className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -185,7 +185,7 @@ function SortProduct() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>samsung</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i  className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -194,7 +194,7 @@ function SortProduct() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>xiaomi</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i  className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -272,7 +272,7 @@ function SortProduct() {
                 <div className='filter-mobile__header'>
                     <h3>filter product</h3>
                     <div onClick={() => handleCloseFilterMobile()} className='filter-mobile__icon-close'>
-                        <i class="bi bi-x"></i>
+                        <i  className="bi bi-x"></i>
                     </div>
                 </div>
                 <form>
@@ -285,7 +285,7 @@ function SortProduct() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>phone</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i  className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -294,7 +294,7 @@ function SortProduct() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>laptop</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i  className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -303,7 +303,7 @@ function SortProduct() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>tablet</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i  className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -312,7 +312,7 @@ function SortProduct() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>headphone</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i  className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -321,7 +321,7 @@ function SortProduct() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>tv</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i  className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -337,7 +337,7 @@ function SortProduct() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>Apple</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i  className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -346,7 +346,7 @@ function SortProduct() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>samsung</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i  className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -355,7 +355,7 @@ function SortProduct() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>xiaomi</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i  className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>

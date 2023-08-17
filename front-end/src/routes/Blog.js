@@ -24,19 +24,19 @@ function Blog() {
                                 </div>
                                 <div className='blog-posts__footer-entry'>
                                     <div className='blog-posts__meta-item blog-posts__meta-item--time'>
-                                        <i class="bi bi-clock"></i>
+                                        <i  className="bi bi-clock"></i>
                                         <span>
                                             October 9, 2021
                                         </span>
                                     </div>
                                     <div className='blog-posts__meta-item blog-posts__meta-item--category'>
-                                        <i class="bi bi-bookmark"></i>
+                                        <i  className="bi bi-bookmark"></i>
                                         <span>
                                             Watches
                                         </span>
                                     </div>
                                     <div className='blog-posts__meta-item blog-posts__meta-item--entry-tags'>
-                                        <i class="bi bi-ticket-perforated"></i>
+                                        <i  className="bi bi-ticket-perforated"></i>
                                         <span>
                                             klbtheme,themeforest
                                         </span>
@@ -66,19 +66,19 @@ function Blog() {
                                 </div>
                                 <div className='blog-posts__footer-entry'>
                                     <div to className='blog-posts__meta-item blog-posts__meta-item--time'>
-                                        <i class="bi bi-clock"></i>
+                                        <i  className="bi bi-clock"></i>
                                         <span>
                                             October 9, 2021
                                         </span>
                                     </div>
                                     <div className='blog-posts__meta-item blog-posts__meta-item--category'>
-                                        <i class="bi bi-bookmark"></i>
+                                        <i  className="bi bi-bookmark"></i>
                                         <span>
                                             Watches
                                         </span>
                                     </div>
                                     <div className='blog-posts__meta-item blog-posts__meta-item--entry-tags'>
-                                        <i class="bi bi-ticket-perforated"></i>
+                                        <i  className="bi bi-ticket-perforated"></i>
                                         <span>
                                             klbtheme,themeforest
                                         </span>
@@ -108,19 +108,19 @@ function Blog() {
                                 </div>
                                 <div className='blog-posts__footer-entry'>
                                     <div className='blog-posts__meta-item blog-posts__meta-item--time'>
-                                        <i class="bi bi-clock"></i>
+                                        <i  className="bi bi-clock"></i>
                                         <span>
                                             October 9, 2021
                                         </span>
                                     </div>
                                     <div className='blog-posts__meta-item blog-posts__meta-item--category'>
-                                        <i class="bi bi-bookmark"></i>
+                                        <i  className="bi bi-bookmark"></i>
                                         <span>
                                             Watches
                                         </span>
                                     </div>
                                     <div className='blog-posts__meta-item blog-posts__meta-item--entry-tags'>
-                                        <i class="bi bi-ticket-perforated"></i>
+                                        <i  className="bi bi-ticket-perforated"></i>
                                         <span>
                                             klbtheme,themeforest
                                         </span>
@@ -150,37 +150,37 @@ function Blog() {
                             <form className='sidebar-blog__form-search'>
                                 <input type="text" placeholder='Search...' />
                                 <button type="submit" className='sidebar-blog__btn-search'>
-                                    <i class="bi bi-search"></i>
+                                    <i  className="bi bi-search"></i>
                                 </button>
                             </form>
                         </div>
                         <div className='sidebar-blog__comp'>
                             <div className='sidebar-blog__title'>
-                                <h4 class="widget-title">Categories</h4>
+                                <h4  className="widget-title">Categories</h4>
                             </div>
                             <div className='sidebar-blog__main'>
                                 <ul className='sidebar-blog__list-item'>
                                     <li>
                                         <Link to="">
-                                            <span><i class="bi bi-chevron-right"></i></span>
+                                            <span><i  className="bi bi-chevron-right"></i></span>
                                             <p>cell phone</p>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="">
-                                            <span><i class="bi bi-chevron-right"></i></span>
+                                            <span><i  className="bi bi-chevron-right"></i></span>
                                             <p>Tablet</p>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="">
-                                            <span><i class="bi bi-chevron-right"></i></span>
+                                            <span><i  className="bi bi-chevron-right"></i></span>
                                             <p>Accessories</p>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link to="">
-                                            <span><i class="bi bi-chevron-right"></i></span>
+                                            <span><i  className="bi bi-chevron-right"></i></span>
                                             <p>Smart Watches</p>
                                         </Link>
                                     </li>
@@ -189,7 +189,7 @@ function Blog() {
                         </div>
                         <div className='sidebar-blog__comp'>
                             <div className='sidebar-blog__title'>
-                                <h4 class="widget-title">Tags</h4>
+                                <h4  className="widget-title">Tags</h4>
                             </div>
                             <div className='sidebar-blog__main'>
                                 <div className='sidebar-blog__item-link'>
@@ -205,7 +205,7 @@ function Blog() {
                         </div>
                         <div className='sidebar-blog__comp'>
                             <div className='sidebar-blog__title'>
-                                <h4 class="widget-title">Popular Posts</h4>
+                                <h4  className="widget-title">Popular Posts</h4>
                             </div>
                             <div className='sidebar-blog__main'>
                                 <ul className='sidebar-blog__list-post'>

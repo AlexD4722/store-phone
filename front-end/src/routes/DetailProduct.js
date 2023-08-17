@@ -36,11 +36,11 @@ function DetailProduct() {
                                 </div>
                                 <div className='detail-product__box-review'>
                                     <div className='detail-product__list-start'>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
+                                        <i  className="bi bi-star-fill"></i>
+                                        <i  className="bi bi-star-fill"></i>
+                                        <i  className="bi bi-star-fill"></i>
+                                        <i  className="bi bi-star-fill"></i>
+                                        <i  className="bi bi-star-fill"></i>
                                     </div>
                                     <div className='detail-product__quantity-review'>
                                         <span className='detail-product__quantity-review-detail'>1</span>
@@ -49,7 +49,7 @@ function DetailProduct() {
                                 </div>
                                 <div className='detail-product__status-stock'>
                                     <div className='detail-product__status-icon-check'>
-                                        <i class="bi bi-check-circle"></i>
+                                        <i  className="bi bi-check-circle"></i>
                                     </div>
                                     <div className='detail-product__status-stock-running'>
                                         <p>in stock</p>
@@ -121,14 +121,14 @@ function DetailProduct() {
                                         </div>
                                         <div className='detail-product__btn-add-wishlist'>
                                             <button type="button">
-                                                <span className='detail-product__btn-add-wishlist-icon'><i class="bi bi-heart"></i></span>
+                                                <span className='detail-product__btn-add-wishlist-icon'><i  className="bi bi-heart"></i></span>
                                                 <span className='detail-product__btn-add-wishlist-content'>Add to wishlist</span>
                                             </button>
                                         </div>
                                     </div>
                                     <div className='detail-product__info-bottom'>
                                         <div className='detail-product__info-delivery'>
-                                            <i class="bi bi-box-seam"></i>
+                                            <i  className="bi bi-box-seam"></i>
                                             <strong> 2-day Delivery</strong>
                                         </div>
                                         <div className='detail-product__info-delivery-slogan'>

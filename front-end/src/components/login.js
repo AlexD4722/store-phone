@@ -26,12 +26,12 @@ function LoginPage() {
                     <h1 className="form-heading">LOGIN</h1>
                     <div className="form-group">
                         <i className="fa-regular fa-user icon"></i>
-                        <input value={username} onChange={handleUsernameChange} type="text" class="form-input" id="username" name="username" placeholder="Username"/>
+                        <input value={username} onChange={handleUsernameChange} type="text"  className="form-input" id="username" name="username" placeholder="Username"/>
                     </div>
                     <div className="form-group">
                         <i className="fa-solid fa-key icon"></i>
-                        <input value={password} onChange={handlePasswordChange} id="password" name="password" type="password" class="form-input" placeholder="Password"/>
-                            <i id="eye_toggle" class="fa-solid fa-eye-slash icon"></i>
+                        <input value={password} onChange={handlePasswordChange} id="password" name="password" type="password"  className="form-input" placeholder="Password"/>
+                            <i id="eye_toggle"  className="fa-solid fa-eye-slash icon"></i>
                              <i className="fa-solid fa-eye-slash icon"></i> 
                     </div>
                     <input type="submit" value="Login" className="form-submit"/>

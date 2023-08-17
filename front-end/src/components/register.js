@@ -27,22 +27,22 @@ function RegisterPage() {
         <div id="login">
             <div id="wapper">
                 <form method="get" action="" id="form-login">
-                    <h1 class="form-heading">REGISTER</h1>
-                    <div class="form-group">
-                        <i class="fa-regular fa-user icon"></i>
-                        <input value={username} onChange={handleUsernameChange} type="text" class="form-input" id="username" name="username" placeholder="Username" />
+                    <h1  className="form-heading">REGISTER</h1>
+                    <div  className="form-group">
+                        <i  className="fa-regular fa-user icon"></i>
+                        <input value={username} onChange={handleUsernameChange} type="text"  className="form-input" id="username" name="username" placeholder="Username" />
                     </div>
-                    <div class="form-group">
-                        <i class="fa-regular fa-user icon"></i>
-                        <input value={email} onChange={handleEmailChange} type="text" class="form-input" id="username" name="username" placeholder="Username" />
+                    <div  className="form-group">
+                        <i  className="fa-regular fa-user icon"></i>
+                        <input value={email} onChange={handleEmailChange} type="text"  className="form-input" id="username" name="username" placeholder="Username" />
                     </div>
-                    <div class="form-group">
-                        <i class="fa-solid fa-key icon"></i>
-                        <input value={password} onChange={handlePasswordChange} id="password" name="password" type="password" class="form-input" placeholder="Password" />
-                        <i id="eye_toggle" class="fa-solid fa-eye-slash icon"></i>
-                        <i class="fa-solid fa-eye-slash icon"></i>
+                    <div  className="form-group">
+                        <i  className="fa-solid fa-key icon"></i>
+                        <input value={password} onChange={handlePasswordChange} id="password" name="password" type="password"  className="form-input" placeholder="Password" />
+                        <i id="eye_toggle"  className="fa-solid fa-eye-slash icon"></i>
+                        <i  className="fa-solid fa-eye-slash icon"></i>
                     </div>
-                    <input type="submit" value="Register" class="form-submit" />
+                    <input type="submit" value="Register"  className="form-submit" />
                     <a id="register" href="login.php">LOGIN</a>
                 </form>
             </div>

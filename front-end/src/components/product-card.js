@@ -10,17 +10,20 @@ function Product(props) {
                 <div className='product-card__img-sub'>
                     <img src={props.imgHover} alt="" />
                 </div>
+                <button type="button" className="product-card__box-wishlist">
+                    <i  className="bi bi-heart"></i>
+                </button>
             </div>
             <div className='product-card__main'>
                 <div className='product-card__content-wrapper'>
-                    <h3 class="product-card__product-title"> {props.title}</h3>
+                    <h3  className="product-card__product-title"> {props.title}</h3>
                     <div className='product-card__product-rating'>
                         <div className='product-card__box-start-rating'>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
+                            <i  className="bi bi-star-fill"></i>
+                            <i  className="bi bi-star-fill"></i>
+                            <i  className="bi bi-star-fill"></i>
+                            <i  className="bi bi-star-fill"></i>
+                            <i  className="bi bi-star-fill"></i>
                         </div>
                         <span className='product-card__count-rating'>
                             {1}
@@ -50,7 +53,7 @@ function Product(props) {
                     <li>Product Length 9.74 in</li>
                 </ul>
             </div>
-        </div>
+        </div >
     );
 }
 export default Product

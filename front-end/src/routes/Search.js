@@ -15,11 +15,8 @@ import PaginationPage from '../components/pagination';
 function Search() {
     const params = useParams();
     const setSearch = useSearchContext()[1];
-    const [data, setData] = useState(["abc"]);
-    let check = null;
-
-
-
+    const [data, setData] = useState([""]);
+    const [Phones, setPhones] = useState([""]);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(10000);
 
@@ -90,24 +87,63 @@ function Search() {
     }, []);
 
 
-    useEffect(() => {
-        const data = { name_product: params.keyword };
-        APIrequest(FIlTER_PRODUCT, data).then((obj) => {
-            setData(obj.data.productArray);
-            console.log("this is data", obj.data.productArray);
-        }
-        );
-    }, [params.keyword]);
-    // console.log("this is data", check);
     // useEffect(() => {
-    //     setSearch(params.keyword);
-    //     console.log("data", data);
-    // }, [params.keyword, setSearch]);
+    //     const data = { name_product: params.keyword };
+    //     APIrequest(FIlTER_PRODUCT, data).then((obj) => {
+    //         setData(obj.data.productArray);
+    //         console.log("this is data", obj.data.productArray);
+    //     }
+    //     );
+    // }, [params.keyword]);
+    // const inputCheckBox = document.querySelectorAll(".filter-item");
+    // for (let index = 0; index < inputCheckBox.length; index++) {
+    //     // console.log(inputCheckBox[index]);
+    //     inputCheckBox[index].onClick = function () {
+    //         console.log("runnnnnnnnn");
+    //     };
+    // }
+    const [isChecked, setIsChecked] = useState({
+        inputPhone: false,
+        inputLaptop: false,
+        inputTablet: false,
+        inputHeadphone: false,
+        inputApple: false,
+        inputSamSung: false,
+        inputXiaomi: false,
+    });
+    const handleCheckboxChange = (event) => {
+        setIsChecked((prev) => {
+            return {
+                ...prev,
+                [event.target.id]: event.target.checked
+            }
+            // prev[event.target.id] = event.target.checked;
+            // return prev
+        });
+        // console.log("check------------------",isChecked);
+        // if(isChecked[event.target.id]){
+        //     console.log("hahahahhaha------");
+        // }
+    };
+    const dataRequest = {};
+    useEffect(() => {
+        const arrayinput = Object.keys(isChecked);
+        arrayinput.map((input) =>{
+            if (isChecked[input] && input === "inputPhone") {
+                dataRequest["type_product"] = "Phone";
+                APIrequest(FIlTER_PRODUCT, dataRequest).then((obj) => {
+                    setPhones(obj.data.productArray);
+                    console.log("this is data", obj.data.productArray);
+                })
+            }
+        })
+    }, [isChecked]);
+
     return (
         <>
             Search result for {params.keyword}
             {
-               console.log(data)
+                console.log(data)
             }
             <div className='header-sort'>
                 <Row>
@@ -120,7 +156,7 @@ function Search() {
                         <div className='header-sort__wrapper-selector'>
                             <div onClick={(e) => handleOpenFilterMobile()} className='header-sort__btn-filter'>
                                 <button type="button">
-                                    <i class="bi bi-funnel"></i>
+                                    <i className="bi bi-funnel"></i>
                                     <span>filter product</span>
                                 </button>
                             </div>
@@ -153,19 +189,21 @@ function Search() {
                                 <ul>
                                     <li className='filter-item'>
                                         <label>
-                                            <input className='filter-item__checkbox' type="checkbox" />
+                                            <input id="inputPhone" className='filter-item__checkbox' checked={isChecked.inputPhone}
+                                                onChange={handleCheckboxChange} type="checkbox" />
                                             <span className='filter-item__name'>phone</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
                                     <li className='filter-item'>
                                         <label>
-                                            <input className='filter-item__checkbox' type="checkbox" />
+                                            <input id="inputLaptop" className='filter-item__checkbox' checked={isChecked.inputLaptop}
+                                                onChange={handleCheckboxChange} type="checkbox" />
                                             <span className='filter-item__name'>laptop</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -174,7 +212,7 @@ function Search() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>tablet</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -183,16 +221,7 @@ function Search() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>headphone</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
-                                            </span>
-                                        </label>
-                                    </li>
-                                    <li className='filter-item'>
-                                        <label>
-                                            <input className='filter-item__checkbox' type="checkbox" />
-                                            <span className='filter-item__name'>tv</span>
-                                            <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -208,7 +237,7 @@ function Search() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>Apple</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -217,7 +246,7 @@ function Search() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>samsung</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -226,7 +255,7 @@ function Search() {
                                             <input className='filter-item__checkbox' type="checkbox" />
                                             <span className='filter-item__name'>xiaomi</span>
                                             <span className='filter-item__custom-checkbox'>
-                                                <i class="bi bi-check"></i>
+                                                <i className="bi bi-check"></i>
                                             </span>
                                         </label>
                                     </li>
@@ -287,7 +316,7 @@ function Search() {
                 <div className='filter-mobile__header'>
                     <h3>filter product</h3>
                     <div onClick={() => handleCloseFilterMobile()} className='filter-mobile__icon-close'>
-                        <i class="bi bi-x"></i>
+                        <i className="bi bi-x"></i>
                     </div>
                 </div>
                 <form>
@@ -300,7 +329,7 @@ function Search() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>phone</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -309,7 +338,7 @@ function Search() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>laptop</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -318,7 +347,7 @@ function Search() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>tablet</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -327,7 +356,7 @@ function Search() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>headphone</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -336,7 +365,7 @@ function Search() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>tv</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -352,7 +381,7 @@ function Search() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>Apple</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -361,7 +390,7 @@ function Search() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>samsung</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
@@ -370,7 +399,7 @@ function Search() {
                                         <input className='filter-item__checkbox' type="checkbox" />
                                         <span className='filter-item__name'>xiaomi</span>
                                         <span className='filter-item__custom-checkbox'>
-                                            <i class="bi bi-check"></i>
+                                            <i className="bi bi-check"></i>
                                         </span>
                                     </label>
                                 </li>
