@@ -210,7 +210,7 @@ class ProductTable extends Database
     // return: boolean
 
     function filter(
-        $product_type = '',
+        $product_type = [],
         $brand = '',
         $startPrice = '',
         $endPrice = '',
@@ -219,10 +219,27 @@ class ProductTable extends Database
     ) {
         $params = [];
         $sql = "SELECT * FROM product JOIN product_line on product.product_line = product_line.name WHERE TRUE";
-        if ($product_type) {
-            $sql .= " AND `product_type` like ?";
-            array_push($params, $product_type);
+        $n = count($product_type);
+        if ($product_type[0]) {
+            $sql .= " AND`product_type` like ?";
+            array_push($params, $product_type[0]);
         }
+        for ($i = 1; $i < $n; $i++) {
+            if ($product_type[1]) {
+                $sql .= " OR `product_type` like ?";
+                array_push($params, $product_type[$i]);
+            }
+        }
+        // foreach ($product_type as $item) {
+        //     if ($item) {
+        //         $sql .= " AND`product_type` like ?";
+        //         array_push($params, $item);
+        //     }
+        // }
+        // if ($product_type) {
+        //     $sql .= " AND `product_type` like ?";
+        //     array_push($params, $product_type);
+        // }
         // if ($brand) {
         //     $sql .= " OR `brand` = ?";
         //     array_push($params, $brand);
@@ -260,12 +277,22 @@ class ProductTable extends Database
         } else {
             $result = $this->SQLexec($sql);
         }
+        $this->data = [];
         $data = $this->pdo_stm->fetchAll();
         if (count($data) > 0) {
-            $this->data = [];
             foreach ($data as $row) {
-                if ($row['status'] === "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $row['images'], $row['color'], $row['capacity'], $row['status']));
+                // $folderImg = "$this->LinkServer . "" . $row['images']" ;
+                $arrayFiles = [];
+                echo $row["id"];
+                $files = scandir($this->LinkServer . $row["images"]);
+                for ($i = 0; $i < count($files); $i++) {
+                    if ($files[$i] != "." && $files[$i] != "..") {
+                        $files[$i] = "http://localhost:2203/" . $row["images"] . "/" . $files[$i];
+                        array_push($arrayFiles, $files[$i]);
+                    }
+                }
+                if ($row['status'] == "1") {
+                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, $row['color'], $row['capacity'], $row['status']));
                 }
             }
         }

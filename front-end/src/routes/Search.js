@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { useSearchContext } from "../store";
 import { useEffect, useState } from "react";
-import APIrequest, { FIlTER_PRODUCT } from "../API/callAPI";
+import APIrequest, { FIlTER_PRODUCT, testAPI } from "../API/callAPI";
 
 // import React, { useEffect, useState } from 'react';
 import "../styles/sort-product.scss";
@@ -453,9 +453,8 @@ function Search() {
                 </Col>
                 <Col xs={12} sm={12} md={9} lg={9} className="product-filter">
                     <Row xs={1} sm={2} md={3} lg={4}>
-                        {/* {
+                        {
                             Phones.map((phone) => {
-                                console.log("data-------", phone);
                                 return (
                                     <Col>
                                         <Product
@@ -464,7 +463,7 @@ function Search() {
                                     </Col>
                                 )
                             })
-                        } */}
+                        }
                     </Row>
                     <PaginationPage />
                 </Col>
