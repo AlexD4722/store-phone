@@ -15,10 +15,19 @@ import PaginationPage from '../components/pagination';
 function Search() {
     const params = useParams();
     const setSearch = useSearchContext()[1];
-    const [data, setData] = useState([""]);
+    const [data, setData] = useState([]);
     const [Phones, setPhones] = useState([""]);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(10000);
+    const [isChecked, setIsChecked] = useState({
+        inputPhone: false,
+        inputLaptop: false,
+        inputTablet: false,
+        inputHeadphone: false,
+        inputApple: false,
+        inputSamSung: false,
+        inputXiaomi: false,
+    });
 
     const handleInputChangeMinPrice = (event) => {
         setMinPrice(event.target.value);
@@ -86,31 +95,43 @@ function Search() {
         })
     }, []);
 
+    useEffect(() => {
+        let newData = [
+            ...data,
+            params.keyword
+        ]
+        setData(
+            newData
+        );
+        APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
+            setPhones(obj.data.productArray);
+        }
+        );
+        console.log(params.keyword, "search----");
+        switch (params.keyword) {
+            case "phone":
+                setIsChecked((prev) => {
+                    return {
+                        ...prev,
+                        inputPhone: true,
+                    }
+                });
+                break;
+            case "tablet":
+                setIsChecked((prev) => {
+                    return {
+                        ...prev,
+                        input: true,
+                    }
+                });
+                break;
 
-    // useEffect(() => {
-    //     const data = { name_product: params.keyword };
-    //     APIrequest(FIlTER_PRODUCT, data).then((obj) => {
-    //         setData(obj.data.productArray);
-    //         console.log("this is data", obj.data.productArray);
-    //     }
-    //     );
-    // }, [params.keyword]);
-    // const inputCheckBox = document.querySelectorAll(".filter-item");
-    // for (let index = 0; index < inputCheckBox.length; index++) {
-    //     // console.log(inputCheckBox[index]);
-    //     inputCheckBox[index].onClick = function () {
-    //         console.log("runnnnnnnnn");
-    //     };
-    // }
-    const [isChecked, setIsChecked] = useState({
-        inputPhone: false,
-        inputLaptop: false,
-        inputTablet: false,
-        inputHeadphone: false,
-        inputApple: false,
-        inputSamSung: false,
-        inputXiaomi: false,
-    });
+            default:
+                break;
+        }
+    }, [params.keyword]);
+
+    console.log("parameter: ", data);
     const handleCheckboxChange = (event) => {
         setIsChecked((prev) => {
             return {
@@ -125,20 +146,51 @@ function Search() {
         //     console.log("hahahahhaha------");
         // }
     };
-    const dataRequest = {};
     useEffect(() => {
         const arrayinput = Object.keys(isChecked);
-        arrayinput.map((input) =>{
-            if (isChecked[input] && input === "inputPhone") {
-                dataRequest["type_product"] = "Phone";
-                APIrequest(FIlTER_PRODUCT, dataRequest).then((obj) => {
-                    setPhones(obj.data.productArray);
-                    console.log("this is data", obj.data.productArray);
-                })
+        let newData = [...data];
+        for (let index = 0; index < arrayinput.length; index++) {
+
+            if (isChecked[arrayinput[index]] && arrayinput[index] === "inputPhone") {
+                if (!data.includes("phone")) {
+                    newData = [
+                        ...data,
+                        "phone"
+                    ]
+                    setData(newData);
+                }
+            } else if (!isChecked[arrayinput[index]] && arrayinput[index] === "inputPhone") {
+                newData = [...data];
+                newData.splice(index, 1);
+                setData(newData);
             }
+
+            //////////////////////////////////////////////
+
+            if (isChecked[arrayinput[index]] && arrayinput[index] === "inputTablet") {
+                if (!data.includes("tablet")) {
+                    newData = [
+                        ...data,
+                        "tablet"
+                    ]
+                    setData(newData);
+                }
+            } else if (!isChecked[arrayinput[index]] && arrayinput[index] === "inputTablet") {
+                newData = [...data];
+                newData.splice(index, 1);
+                setData(newData);
+            }
+
+            //////////////////////////////////////////////
+
+        }
+        APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
+            console.log(data.type_product);
+            setPhones(obj.data.productArray);
         })
     }, [isChecked]);
-
+    // console.log("parameter: ", data);
+    console.log("this is data PHONE:---------------------", Phones);
     return (
         <>
             Search result for {params.keyword}
@@ -209,7 +261,8 @@ function Search() {
                                     </li>
                                     <li className='filter-item'>
                                         <label>
-                                            <input className='filter-item__checkbox' type="checkbox" />
+                                            <input id="inputTablet" className='filter-item__checkbox' checked={isChecked.inputTablet}
+                                                onChange={handleCheckboxChange} type="checkbox" />
                                             <span className='filter-item__name'>tablet</span>
                                             <span className='filter-item__custom-checkbox'>
                                                 <i className="bi bi-check"></i>
@@ -304,10 +357,18 @@ function Search() {
                 </Col>
                 <Col xs={12} sm={12} md={9} lg={9} className='product-filter'>
                     <Row xs={1} sm={2} md={3} lg={4}>
-
-                        <Col>
-                            <Product />
-                        </Col>
+                        {/* {
+                            Phones.map((phone) => {
+                                console.log("data-------", phone);
+                                return (
+                                    <Col>
+                                        <Product
+                                            product={phone}
+                                        />
+                                    </Col>
+                                )
+                            })
+                        } */}
                     </Row>
                     <PaginationPage />
                 </Col>

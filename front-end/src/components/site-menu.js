@@ -19,7 +19,7 @@ function SiteMenu() {
                             <i className="bi bi-phone"></i>
                         </div>
                         <div className="site-menu__name-item">
-                            <Link to="search/cellphone">cell phone</Link>
+                            <Link to="search/phone">cell phone</Link>
                         </div>
                         <ul className="site-menu__menu-sub">
                             <li>iphone</li>

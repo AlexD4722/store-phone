@@ -6,9 +6,10 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")) {
     die("<h1>404 not found</h1>");
 }
 $data = json_decode($_POST["data"]);
-$type_product = $data->type_product;
+// $list_type_product = [];
+// array_push($list_type_product, $data->type_product);
 $PT = new ProductTable();
-$result = $PT->filter($type_product);
+$result = $PT->filter($data);
 
 if ($result) {
     $return = new APIresponse("Success");
