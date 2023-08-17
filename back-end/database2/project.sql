@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 17, 2023 lúc 03:35 PM
+-- Thời gian đã tạo: Th8 17, 2023 lúc 04:17 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -68,9 +68,9 @@ INSERT INTO `product` (`id`, `name`, `description`, `inital_price`, `selling_pri
 (48, 'IPad Gen 9', '[\"- Screen : 10.2 inch, IPS LCD, Liquid Retina HD, 2160 x 1620 Pixels\",\"- Rear camera : 8.0 MP\",\"Camera Selfie : 12.0 MP\",\"CPU : Apple A13 Bionic\",\"Internal memory : 256GB\"]', 477, 468, 'IPadGen9', 'iPadGen9', 2, '[\"Grey\",\"White\"]', '[\"256GB\"]', 1),
 (49, 'IPad Gen 10', '[\"- Screen : 10.9 inch, Liquid Retina HD, 2360 x 1640 Pixels\",\"- Rear camera : 12.0 MP\",\"Camera Selfie : 12.0 MP\",\"CPU : Apple A14 Bionic\",\"Internal memory : 64GB\"]', 477, 468, 'IPad Gen 10', 'iPadGen10', 4, '[\"Pink\",\"Blue\",\"White\",\"Gold\"]', '[\"64GB\"]', 1),
 (50, 'IPad Gen 10', '[\"- Screen : 10.9 inch, Liquid Retina HD, 2360 x 1640 Pixels\",\"- Rear camera : 12.0 MP\",\"Camera Selfie : 12.0 MP\",\"CPU : Apple A14 Bionic\",\"Internal memory : 256GB\"]', 651, 641, 'IPad Gen 10', 'iPadGen10', 4, '[\"Pink\",\"Blue\",\"White\",\"Gold\"]', '[\"256GB\"]', 1),
-(51, 'Apple Watch Series 8', '[\"- Screen : 1.9 inch, Retina, 484 x 396 Pixels\",\"Connect : GPS + Cellular\",- Material : aluminum \",\"Size : 41mm\",\"Product weight : 42.3g\",\"Battery life : 18h\"]', 516, 502, 'Apple Watch Series 8', 'AppleWatchSeries8', 3, '[\"White\",\"Gold\",\"Black\"]', '', 1),
-(52, 'Apple Watch Series 8', '[\"- Screen : 1.9 inch, Retina, 484 x 396 Pixels\",\"Connect : GPS + Cellular\",- Material : aluminum \",\"Size : 45mm\",\"Product weight : 42.3g\",\"Battery life : 18h\"]', 825, 815, 'Apple Watch Series 8', 'AppleWatchSeries8', 3, '[\"White\",\"Gold\",\"Black\"]', '', 1),
-(53, 'Apple Watch Ultra', '[\"- Creen : 1.92 inch,LTPO OLED\",\"- Resolution 502 x 410 Pixels\",\"Battery life : 36h\",\"Type of SIM used : 1 eSIM\",\"Connect :GPS+Cellular\",\"material :Titanium\"]', 847, 839, 'Apple Watch Ultra', 'AppleWatchUltra', 3, '[\"Moss green\",\"White\",\"Orange\"]', '', 1),
+(51, 'Apple Watch Series 8', '[\"- Screen : 1.9 inch, Retina, 484 x 396 Pixels\",\"Connect : GPS + Cellular\",- Material : aluminum \",\"Size : 41mm\",\"Product weight : 42.3g\",\"Battery life : 18h\"]', 516, 502, 'Apple Watch Series 8', 'AppleWatchSeries8', 3, '[\"White\",\"Gold\",\"Black\"]', '[\"32GB\"]', 1),
+(52, 'Apple Watch Series 8', '[\"- Screen : 1.9 inch, Retina, 484 x 396 Pixels\",\"Connect : GPS + Cellular\",- Material : aluminum \",\"Size : 45mm\",\"Product weight : 42.3g\",\"Battery life : 18h\"]', 825, 815, 'Apple Watch Series 8', 'AppleWatchSeries8', 3, '[\"White\",\"Gold\",\"Black\"]', '[\"32GB\"]', 1),
+(53, 'Apple Watch Ultra', '[\"- Creen : 1.92 inch,LTPO OLED\",\"- Resolution 502 x 410 Pixels\",\"Battery life : 36h\",\"Type of SIM used : 1 eSIM\",\"Connect :GPS+Cellular\",\"material :Titanium\"]', 847, 839, 'Apple Watch Ultra', 'AppleWatchUltra', 3, '[\"Moss green\",\"White\",\"Orange\"]', '[\"32GB\"]', 1),
 (54, 'Samsung Z Flip 4', '[\"- Main: 6.7 inch, extra: 1.9 inch, Dynamic AMOLED 2X, FHD+, 1080 x 2636 Pixels\",\"- Rear camera :12.0 MP + 12.0 MP\",\"- Camera Selfie : 10.0 MP\",\"- CPU : \r\nSnapdragon 8+ Gen 1\",\"- Internal memory : 128GB\"]', 651, 640, 'Samsung Z Flip 4', 'SamsungZFlip4', 4, '[\"Violet\",\"Gold\",\"Blue\",\"Grey\"]', '[\"128GB\"]', 1),
 (55, 'Samsung Z Flip 4', '[\"- Main: 6.7 inch, extra: 1.9 inch, Dynamic AMOLED 2X, FHD+, 1080 x 2636 Pixels\",\"- Rear camera :12.0 MP + 12.0 MP\",\"- Camera Selfie : 10.0 MP\",\"- CPU : \r\nSnapdragon 8+ Gen 1\",\"- Internal memory : 256GB\"]', 782, 775, 'Samsung Z Flip 4', 'SamsungZFlip4', 3, '[\"Blue\",\"Gold\",\"Violet\"]', '[\"256GB\"]', 1),
 (56, 'Xiaomi Not 12 Pro', '[\"- Screen: 6.7 inch, extra: 1.9 inch, Dynamic AMOLED 2X, FHD+, 1080 x 2636 Pixels\",\"- Rear camera :12.0 MP + 12.0 MP\",\"- Camera Selfie : 10.0 MP\",\"- CPU : \r\nSnapdragon 8+ Gen 1\",\"- Internal memory : 128GB\"]', 190, 180, 'Xiaomi Not 12 Pro', 'learning/store-phone/back-end/ImgProduct/XiaomiNot12Pro', 3, '[\"White\",\"Black\",\"Blue\"]', '[\"128GB\"]', 1),
@@ -86,6 +86,84 @@ INSERT INTO `product` (`id`, `name`, `description`, `inital_price`, `selling_pri
 (67, 'Iphone 13 Mini', '[\"- Screen : 5.4 inch, OLED, Super Retina XDR, 1080 x 2240 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\" - Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"- Internal memory : 256GB\"]', 869, 859, 'Iphone 13 Mini', 'Iphone13Mini', 6, '[\"Red\",\"White\",\"Green\",\"Blue\",\"Black\",\"Pink\"]', '\"256 GB\"', 1),
 (68, 'Iphone 13 Mini', '[\"- Screen : 5.4 inch, OLED, Super Retina XDR, 1080 x 2240 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\" - Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"- Internal memory : 512GB\"]', 1130, 1120, 'Iphone 13 Mini', 'Iphone13Mini', 2, '[\"Black\",\"Green\"]', '\"512GB\"', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `product_line`
+--
+
+CREATE TABLE `product_line` (
+  `name` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `brand` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `product_type` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_line`
+--
+
+INSERT INTO `product_line` (`name`, `brand`, `product_type`, `status`) VALUES
+('Apple Watch Series 7', 'Apple', 'SmartWatch', 1),
+('Apple Watch Series 8', 'Apple', 'SmartWatch', 1),
+('Apple Watch Ultra', 'Apple', 'SmartWatch', 1),
+('IPad Gen 10', 'Apple', 'Tablet', 1),
+('iPad Pro 11', 'Apple', 'Tablet', 1),
+('IPadGen9', 'Apple', 'Tablet', 1),
+('Iphone 13', 'Apple', 'Phone', 1),
+('Iphone 13 Mini', 'Apple', 'Phone', 1),
+('Iphone 14', 'Apple', 'Phone', 1),
+('Iphone 14 Plus', 'Apple', 'Phone', 1),
+('Iphone 14 Pro', 'Apple', 'Phone', 1),
+('Iphone 14 Pro Max', 'Apple', 'Phone', 1),
+('Samsung Z Flip 4', 'Samsung', 'Phone', 1),
+('SamSungUtra22', 'Samsung', 'Phone', 1),
+('SamsungUtra23', 'Samsung', 'Phone', 1),
+('Xiaomi Not 12 Pro', 'Xiaomi', 'Phone', 1),
+('Xiaomi Redmi Not 12 Pro', 'Xiaomi', 'Phone', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `receipt`
+--
+
+CREATE TABLE `receipt` (
+  `id` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `customer_id` int(11) NOT NULL,
+  `status` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `receipt_line`
+--
+
+CREATE TABLE `receipt_line` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `receipt_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `user_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `wishlist` varchar(255) NOT NULL,
+  `cart` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -98,6 +176,33 @@ ALTER TABLE `product`
   ADD KEY `idx_product_line` (`product_line`);
 
 --
+-- Chỉ mục cho bảng `product_line`
+--
+ALTER TABLE `product_line`
+  ADD PRIMARY KEY (`name`);
+
+--
+-- Chỉ mục cho bảng `receipt`
+--
+ALTER TABLE `receipt`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Chỉ mục cho bảng `receipt_line`
+--
+ALTER TABLE `receipt_line`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `order_id` (`receipt_id`);
+
+--
+-- Chỉ mục cho bảng `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -108,6 +213,24 @@ ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
+-- AUTO_INCREMENT cho bảng `receipt`
+--
+ALTER TABLE `receipt`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `receipt_line`
+--
+ALTER TABLE `receipt_line`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Các ràng buộc cho các bảng đã đổ
 --
 
@@ -116,6 +239,19 @@ ALTER TABLE `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`product_line`) REFERENCES `product_line` (`name`);
+
+--
+-- Các ràng buộc cho bảng `receipt`
+--
+ALTER TABLE `receipt`
+  ADD CONSTRAINT `receipt_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `user` (`id`);
+
+--
+-- Các ràng buộc cho bảng `receipt_line`
+--
+ALTER TABLE `receipt_line`
+  ADD CONSTRAINT `receipt_line_ibfk_1` FOREIGN KEY (`receipt_id`) REFERENCES `receipt` (`id`),
+  ADD CONSTRAINT `receipt_line_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
