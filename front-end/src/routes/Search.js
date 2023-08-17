@@ -131,9 +131,9 @@ function Search() {
             case "tablet":
                 setIsChecked((prev) => {
                     return {
-                        inputTablet: true,
                         inputPhone: false,
                         inputLaptop: false,
+                        inputTablet: true,
                         inputHeadphone: false,
                         inputApple: false,
                         inputSamSung: false,
@@ -159,8 +159,8 @@ function Search() {
         // if(isChecked[event.target.id]){
         // }
     };
+    const arrayinput = Object.keys(isChecked);
     useEffect(() => {
-        const arrayinput = Object.keys(isChecked);
         let newData = [...data];
         for (let index = 0; index < arrayinput.length; index++) {
             switch (arrayinput[index]) {
@@ -203,8 +203,8 @@ function Search() {
             console.log(newData);
             setPhones(obj.data.productArray);
         });
-    }, [isChecked]);
-
+    }, [isChecked, params.keyword]);
+    console.log(Phones);    
     return (
         <>
             Search result for {params.keyword}
