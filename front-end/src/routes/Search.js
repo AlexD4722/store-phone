@@ -118,16 +118,26 @@ function Search() {
             case "phone":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
                         inputPhone: true,
+                        inputLaptop: false,
+                        inputTablet: false,
+                        inputHeadphone: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                     };
                 });
                 break;
             case "tablet":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
                         inputTablet: true,
+                        inputPhone: false,
+                        inputLaptop: false,
+                        inputHeadphone: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                     };
                 });
                 break;
@@ -453,7 +463,7 @@ function Search() {
                 </Col>
                 <Col xs={12} sm={12} md={9} lg={9} className="product-filter">
                     <Row xs={1} sm={2} md={3} lg={4}>
-                        {
+                        {/* {
                             Phones.map((phone) => {
                                 return (
                                     <Col>
@@ -463,7 +473,7 @@ function Search() {
                                     </Col>
                                 )
                             })
-                        }
+                        } */}
                     </Row>
                     <PaginationPage />
                 </Col>
