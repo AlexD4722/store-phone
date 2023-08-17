@@ -12,17 +12,15 @@ import {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <AccountProvider>
-            <CartProvider>
-                <WishlistProvider>
-                    <SearchProvider>
-                        <App />
-                    </SearchProvider>
-                </WishlistProvider>
-            </CartProvider>
-        </AccountProvider>
-    </React.StrictMode>
+    <AccountProvider>
+        <CartProvider>
+            <WishlistProvider>
+                <SearchProvider>
+                    <App />
+                </SearchProvider>
+            </WishlistProvider>
+        </CartProvider>
+    </AccountProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

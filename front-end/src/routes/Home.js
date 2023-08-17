@@ -58,12 +58,7 @@ function Home() {
                                         return (
                                             <Col>
                                                 <Product
-                                                    key={phone.id}
-                                                    title={phone.name}
-                                                    imgDefault={phone.images[0]}
-                                                    imgHover={phone.images[3]}
-                                                    priceOld={phone.inital_price}
-                                                    priceNew={phone.selling_price}
+                                                    product={phone}
                                                 />
                                             </Col>
                                         );

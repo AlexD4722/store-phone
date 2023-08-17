@@ -3,10 +3,11 @@ import "../styles/form-search.scss";
 import "../styles/color.scss";
 import "../styles/addons.scss";
 import { Link } from "react-router-dom";
-import { useAccountContext } from "../store";
+import { useAccountContext, useCartContext } from "../store";
 
 function Addons() {
     const [account, setAccount] = useAccountContext();
+    const cart = useCartContext()[0];
 
     return (
         <div className="header-addons">
@@ -45,13 +46,23 @@ function Addons() {
                     <i className="bi bi-cart"></i>
                     <span className="header-addons__icon-quantity">
                         <span className="header-addons__icon-quantity-detail header-addons__icon-quantity-detail--cart">
-                            0
+                            {cart.reduce((total, rLine) => {
+                                return total + rLine.quantity;
+                            }, 0) || 0}
                         </span>
                     </span>
                 </div>
                 <div className="header-addons__text">
                     <div className="header-addons__sub-text">total</div>
-                    <div className="header-addons__primary-text">$0.00</div>
+                    <div className="header-addons__primary-text">
+                        $
+                        {cart.reduce((total, rLine) => {
+                            return (
+                                total +
+                                rLine.product.selling_price * rLine.quantity
+                            );
+                        }, 0) || 0}
+                    </div>
                 </div>
             </Link>
         </div>
