@@ -53,7 +53,7 @@ function SiteMenu() {
                             <i className="bi bi-smart watch"></i>
                         </div>
                         <div className="site-menu__name-item">
-                            <Link to="search/smart watch">Smart Watches</Link>
+                            <Link to="search/SmartWatch">Smart Watch</Link>
                         </div>
                     </li>
                     <li className="site-menu__item">

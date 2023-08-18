@@ -111,7 +111,7 @@ function Search() {
     useEffect(() => {
         let newData = [...data, params.keyword];
         setData(newData);
-        testAPI(FIlTER_PRODUCT, newData).then((obj) => {
+        APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
         });
         switch (params.keyword) {
@@ -141,7 +141,7 @@ function Search() {
                     };
                 });
                 break;
-            case "smart watch":
+            case "SmartWatch":
                 setIsChecked((prev) => {
                     return {
                         inputPhone: false,
@@ -206,15 +206,15 @@ function Search() {
                 case "inputSmartWatch":
                     if (
                         isChecked[arrayinput[index]] &&
-                        !newData.includes("smart Watch")
+                        !newData.includes("SmartWatch")
                     ) {
-                        newData.push("smart Watch");
+                        newData.push("SmartWatch");
                         setData(newData);
                     } else if (
                         !isChecked[arrayinput[index]] &&
-                        newData.includes("smart Watch")
+                        newData.includes("SmartWatch")
                     ) {
-                        newData.splice(newData.indexOf("smart Watch"), 1);
+                        newData.splice(newData.indexOf("SmartWatch"), 1);
                         setData(newData);
                     }
                     break;
@@ -222,7 +222,7 @@ function Search() {
                     break;
             }
         }
-        testAPI(FIlTER_PRODUCT, newData).then((obj) => {
+        APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
         });
     }, [isChecked, params.keyword]);
@@ -360,7 +360,7 @@ function Search() {
                                                 type="checkbox"
                                             />
                                             <span className="filter-item__name">
-                                                smart Watch
+                                                SmartWatch
                                             </span>
                                             <span className="filter-item__custom-checkbox">
                                                 <i className="bi bi-check"></i>
