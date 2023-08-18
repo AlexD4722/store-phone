@@ -22,7 +22,7 @@ function Search() {
         inputPhone: false,
         inputLaptop: false,
         inputTablet: false,
-        inputHeadphone: false,
+        inputSmartWatch: false,
         inputApple: false,
         inputSamSung: false,
         inputXiaomi: false,
@@ -111,7 +111,7 @@ function Search() {
     useEffect(() => {
         let newData = [...data, params.keyword];
         setData(newData);
-        APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
+        testAPI(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
         });
         switch (params.keyword) {
@@ -121,7 +121,7 @@ function Search() {
                         inputPhone: true,
                         inputLaptop: false,
                         inputTablet: false,
-                        inputHeadphone: false,
+                        inputSmartWatchvvvv: false,
                         inputApple: false,
                         inputSamSung: false,
                         inputXiaomi: false,
@@ -134,7 +134,20 @@ function Search() {
                         inputPhone: false,
                         inputLaptop: false,
                         inputTablet: true,
-                        inputHeadphone: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
+                    };
+                });
+                break;
+            case "smart watch":
+                setIsChecked((prev) => {
+                    return {
+                        inputPhone: false,
+                        inputLaptop: false,
+                        inputTablet: false,
+                        inputSmartWatch: true,
                         inputApple: false,
                         inputSamSung: false,
                         inputXiaomi: false,
@@ -153,11 +166,7 @@ function Search() {
                 ...prev,
                 [event.target.id]: event.target.checked,
             };
-            // prev[event.target.id] = event.target.checked;
-            // return prev
         });
-        // if(isChecked[event.target.id]){
-        // }
     };
     const arrayinput = Object.keys(isChecked);
     useEffect(() => {
@@ -194,15 +203,30 @@ function Search() {
                         setData(newData);
                     }
                     break;
+                case "inputSmartWatch":
+                    if (
+                        isChecked[arrayinput[index]] &&
+                        !newData.includes("smart Watch")
+                    ) {
+                        newData.push("smart Watch");
+                        setData(newData);
+                    } else if (
+                        !isChecked[arrayinput[index]] &&
+                        newData.includes("smart Watch")
+                    ) {
+                        newData.splice(newData.indexOf("smart Watch"), 1);
+                        setData(newData);
+                    }
+                    break;
                 default:
                     break;
             }
         }
-        APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
+        testAPI(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
         });
     }, [isChecked, params.keyword]);
-    console.log(Phones);    
+    console.log(Phones);
     return (
         <>
             Search result for {params.keyword}
@@ -329,11 +353,14 @@ function Search() {
                                     <li className="filter-item">
                                         <label>
                                             <input
+                                                id="inputSmartWatch"
                                                 className="filter-item__checkbox"
+                                                checked={isChecked.inputSmartWatch}
+                                                onChange={handleCheckboxChange}
                                                 type="checkbox"
                                             />
                                             <span className="filter-item__name">
-                                                headphone
+                                                smart Watch
                                             </span>
                                             <span className="filter-item__custom-checkbox">
                                                 <i className="bi bi-check"></i>

@@ -50,10 +50,10 @@ function SiteMenu() {
                     </li>
                     <li className="site-menu__item">
                         <div className="site-menu__icon-item">
-                            <i className="bi bi-smartwatch"></i>
+                            <i className="bi bi-smart watch"></i>
                         </div>
                         <div className="site-menu__name-item">
-                            <Link to="search/smartwatch">Smart Watches</Link>
+                            <Link to="search/smart watch">Smart Watches</Link>
                         </div>
                     </li>
                     <li className="site-menu__item">
