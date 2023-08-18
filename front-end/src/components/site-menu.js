@@ -45,7 +45,7 @@ function SiteMenu() {
                             <i className="bi bi-headphones"></i>
                         </div>
                         <div className="site-menu__name-item">
-                            <Link to="search/accessory">Accessories</Link>
+                            <Link to="search/Accessories">Accessories</Link>
                         </div>
                     </li>
                     <li className="site-menu__item">

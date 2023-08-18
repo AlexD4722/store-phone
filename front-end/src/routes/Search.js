@@ -20,7 +20,7 @@ function Search() {
     const [maxPrice, setMaxPrice] = useState(10000);
     const [isChecked, setIsChecked] = useState({
         inputPhone: false,
-        inputLaptop: false,
+        inputAccessory: false,
         inputTablet: false,
         inputSmartWatch: false,
         inputApple: false,
@@ -119,9 +119,9 @@ function Search() {
                 setIsChecked((prev) => {
                     return {
                         inputPhone: true,
-                        inputLaptop: false,
+                        inputAccessory: false,
                         inputTablet: false,
-                        inputSmartWatchvvvv: false,
+                        inputSmartWatch: false,
                         inputApple: false,
                         inputSamSung: false,
                         inputXiaomi: false,
@@ -132,7 +132,7 @@ function Search() {
                 setIsChecked((prev) => {
                     return {
                         inputPhone: false,
-                        inputLaptop: false,
+                        inputAccessory: false,
                         inputTablet: true,
                         inputSmartWatch: false,
                         inputApple: false,
@@ -145,7 +145,7 @@ function Search() {
                 setIsChecked((prev) => {
                     return {
                         inputPhone: false,
-                        inputLaptop: false,
+                        inputAccessory: false,
                         inputTablet: false,
                         inputSmartWatch: true,
                         inputApple: false,
@@ -154,6 +154,33 @@ function Search() {
                     };
                 });
                 break;
+            case "Accessories":
+                setIsChecked((prev) => {
+                    return {
+                        inputPhone: false,
+                        inputAccessory: true,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
+                    };
+                });
+                break;
+            case "Apple":
+                setIsChecked((prev) => {
+                    return {
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: true,
+                        inputSamSung: false,
+                        inputXiaomi: false,
+                    };
+                });
+                break;
+
 
             default:
                 break;
@@ -218,6 +245,36 @@ function Search() {
                         setData(newData);
                     }
                     break;
+                case "inputAccessory":
+                    if (
+                        isChecked[arrayinput[index]] &&
+                        !newData.includes("Accessories")
+                    ) {
+                        newData.push("Accessories");
+                        setData(newData);
+                    } else if (
+                        !isChecked[arrayinput[index]] &&
+                        newData.includes("Accessories")
+                    ) {
+                        newData.splice(newData.indexOf("Accessories"), 1);
+                        setData(newData);
+                    }
+                    break;
+                case "inputApple":
+                    if (
+                        isChecked[arrayinput[index]] &&
+                        !newData.includes("Apple")
+                    ) {
+                        newData.push("Apple");
+                        setData(newData);
+                    } else if (
+                        !isChecked[arrayinput[index]] &&
+                        newData.includes("Apple")
+                    ) {
+                        newData.splice(newData.indexOf("Apple"), 1);
+                        setData(newData);
+                    }
+                    break;
                 default:
                     break;
             }
@@ -227,6 +284,15 @@ function Search() {
         });
     }, [isChecked, params.keyword]);
     console.log(Phones);
+    const textMessages = document.querySelector(".messageResponse");
+    if (textMessages) {
+        if (!Phones.length) {
+            console.log('No products were found matching your selection.')
+            textMessages.innerHTML = 'No products were found matching your selection.';
+        } else {
+            textMessages.innerHTML = '';
+        }
+    }
     return (
         <>
             Search result for {params.keyword}
@@ -319,14 +385,14 @@ function Search() {
                                     <li className="filter-item">
                                         <label>
                                             <input
-                                                id="inputLaptop"
+                                                id="inputAccessory"
                                                 className="filter-item__checkbox"
-                                                checked={isChecked.inputLaptop}
+                                                checked={isChecked.inputAccessory}
                                                 onChange={handleCheckboxChange}
                                                 type="checkbox"
                                             />
                                             <span className="filter-item__name">
-                                                laptop
+                                                Accessory
                                             </span>
                                             <span className="filter-item__custom-checkbox">
                                                 <i className="bi bi-check"></i>
@@ -379,7 +445,10 @@ function Search() {
                                     <li className="filter-item">
                                         <label>
                                             <input
+                                                id="inputApple"
                                                 className="filter-item__checkbox"
+                                                checked={isChecked.inputApple}
+                                                onChange={handleCheckboxChange}
                                                 type="checkbox"
                                             />
                                             <span className="filter-item__name">
@@ -487,6 +556,7 @@ function Search() {
                     </form>
                 </Col>
                 <Col xs={12} sm={12} md={9} lg={9} className="product-filter">
+                    <div className="messageResponse"></div>
                     <Row xs={1} sm={2} md={3} lg={4}>
                         {
                             Phones.map((phone) => {
