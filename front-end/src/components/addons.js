@@ -8,12 +8,13 @@ import {
     useCartContext,
     useWishlistContext,
 } from "../store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Addons() {
     const [account, setAccount] = useAccountContext();
     const [cart, dispatchCart] = useCartContext();
     const [wishlist, setWishlist] = useWishlistContext();
+    const [link, setLink] = useState("signin");
 
     useEffect(() => {
         const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
@@ -31,13 +32,14 @@ function Addons() {
         }
         if (sessionUser && sessionUser.login === "OK"){
             setAccount(sessionUser.user);
+            setLink("account");
         }
     }, []);
 
     return (
         <div className="header-addons">
             <Link
-                to="signin"
+                to={link}
                 className="header-addons__btn header-addons__btn--login"
             >
                 <div className="header-addons__icon">

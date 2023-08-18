@@ -1,13 +1,14 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import APIrequest, { USER_LOGIN } from "../API/callAPI.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAccountContext } from "../store";
 import { useState } from "react";
 
 function Signin() {
     const setAccount = useAccountContext()[1];
     const [report, setReport] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = () => {
         const username = document.querySelector("#formBasicUsername").value;
@@ -35,6 +36,7 @@ function Signin() {
                         user
                     }
                     sessionStorage.setItem("user", JSON.stringify(data));
+                    navigate("..");
                 } else {
                     setReport("Username or Password is wrong");
                 }

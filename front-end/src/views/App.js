@@ -17,6 +17,7 @@ import {
     NotFound,
     Signup,
     Search,
+    Account
 } from "../routes";
 import AddNewProductForm from "../routes/AddNewProduct.js";
 import AddNewProductLineForm from "../routes/AddNewProductLine.js";
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: "/signin",
                 element: <Signin />,
+            },
+            {
+                path: "/account",
+                element: <Account />,
             },
             {
                 path: "/wish-list",

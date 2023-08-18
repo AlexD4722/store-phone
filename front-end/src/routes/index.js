@@ -7,4 +7,5 @@ export {default as Cart} from "./Cart.js";
 export {default as Signup} from "./Signup.js";
 export {default as Search} from "./Search.js";
 export {default as NotFound} from "./NotFound.js";
+export {default as Account} from "./Account.js";
 export {default as DetailProduct} from "./DetailProduct.js";
