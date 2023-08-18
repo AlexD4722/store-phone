@@ -14,12 +14,10 @@ $result = $UT->getUser($user, $pass);
 if ($result && count($UT->data) == 1){
     $return = new APIresponse("Success");
     $return->data->result = "Success";
-    $return->data->userID = $UT->data[0]->id;
-    $return->data->username = $UT->data[0]->username;
-    $return->data->email = $UT->data[0]->email;
-    $return->data->user_type = $UT->data[0]->user_type;
+    $return->data->user = $UT->data[0];
+    $return->data->user->password = "///***///";
     $_SESSION["login_status"] = "OK";
-    $_SESSION["user"] = $UT->data[0]->username;
+    $_SESSION["user"] = $UT->data[0]->user->id;
 } else if (!$result) {
     $return = new APIresponse("Failed");
 } else {

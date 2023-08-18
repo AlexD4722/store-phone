@@ -1,6 +1,6 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_LOGIN } from "../API/callAPI.js";
+import APIrequest, { USER_LOGIN, testAPI } from "../API/callAPI.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useAccountContext } from "../store";
 import { useState } from "react";
@@ -19,23 +19,17 @@ function Signin() {
             setReport("");
             if (response.result === "Success") {
                 if (response.data.result == "Success") {
-                    if (remember) {
-                        localStorage.setItem("userID", response.data.userID);
-                    } else {
-                        sessionStorage.setItem("userID", response.data.userID);
-                    }
-                    const user = {
-                        userID: response.data.userID,
-                        username: response.data.username,
-                        email: response.data.email,
-                        userType: response.data.user_type,
-                    };
-                    setAccount(user);
+                    const user = response.data;
                     const data = {
                         login : "OK",
                         user
                     }
-                    sessionStorage.setItem("user", JSON.stringify(data));
+                    if (remember) {
+                        localStorage.setItem("user", JSON.stringify(data));
+                    } else {
+                        sessionStorage.setItem("user", JSON.stringify(data));
+                    }
+                    setAccount(user);     
                     navigate("..");
                 } else {
                     setReport("Username or Password is wrong");
