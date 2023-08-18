@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 17, 2023 lúc 04:17 PM
+-- Thời gian đã tạo: Th8 18, 2023 lúc 07:34 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -84,7 +84,15 @@ INSERT INTO `product` (`id`, `name`, `description`, `inital_price`, `selling_pri
 (65, 'Iphone 13', '[\"- Screen : 6.1 inch, OLED, Super Retina XDR, 2532 x 1170 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\" - Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"- Internal memory : 512GB\"]', 999, 990, 'Iphone 13', 'Iphone13', 1, '[\"Black\"]', '\"512GB\"', 1),
 (66, 'Iphone 13 Mini', '[\"- Screen : 5.4 inch, OLED, Super Retina XDR, 1080 x 2240 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\" - Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"- Internal memory : 128GB\"]', 825, 815, 'Iphone 13 Mini', 'Iphone13Mini', 6, '[\"Red\",\"White\",\"Green\",\"Blue\",\"Black\",\"Pink\"]', '\"128GB\"', 1),
 (67, 'Iphone 13 Mini', '[\"- Screen : 5.4 inch, OLED, Super Retina XDR, 1080 x 2240 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\" - Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"- Internal memory : 256GB\"]', 869, 859, 'Iphone 13 Mini', 'Iphone13Mini', 6, '[\"Red\",\"White\",\"Green\",\"Blue\",\"Black\",\"Pink\"]', '\"256 GB\"', 1),
-(68, 'Iphone 13 Mini', '[\"- Screen : 5.4 inch, OLED, Super Retina XDR, 1080 x 2240 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\" - Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"- Internal memory : 512GB\"]', 1130, 1120, 'Iphone 13 Mini', 'Iphone13Mini', 2, '[\"Black\",\"Green\"]', '\"512GB\"', 1);
+(68, 'Iphone 13 Mini', '[\"- Screen : 5.4 inch, OLED, Super Retina XDR, 1080 x 2240 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\" - Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"- Internal memory : 512GB\"]', 1130, 1120, 'Iphone 13 Mini', 'Iphone13Mini', 2, '[\"Black\",\"Green\"]', '\"512GB\"', 1),
+(69, 'Lightning Charging Cable', '[\"-Connectivity: The Lightning charging cable has a dedicated Lightning connector for connecting to Apple devices and a USB-A or USB-C plug for connecting to a power source or computer.\",\"-Data transfer speed: Lightning charging cable can support data transfer rate up to USB 2.0, allowing for fast data transfer between device and computer.\",\"-Length: Lightning charging cables are typically about 1-2 meters in length. However, there are also cable versions of different lengths to suit your needs.\",\"-Material: Lightning charging cables are usually made of high-quality materials such as PVC or nylon with break-resistant coating, which increases the strength and durability of the cable.\",\"-Functions: The Lightning charging cable is not only used to charge devices, but can also be used to connect other accessories such as speakers, headphones, or connect to an adapter for use with devices that do not have Lightning port.\"]', 9, 8, 'Lightning Charging Cable', 'LightningChargingCable', 2, '[\"Black\",\"White\"]', '', 1),
+(70, 'Magsafe Power Bank', '[\"-Input: Input voltage and current (e.g. 5V/2A, 9V/2A) - power bank recharge rate.\",\"-Output: Output voltage and current (eg 5V/2.4A) - device charging rate.\r\nConnectors: USB-A or USB-C, possibly including a Lightning port (for Apple devices).\",\"-Fast charging technology: Quick Charge.\",\"-Number of ports: 2.\",\"-Weight and dimensions: 15 x 5.\"]', 42, 40, 'Power bank Masafe', 'MagsafePowerBank', 3, '[\"Black\",\"Violet\",\"White\"]', '10000mAh', 1),
+(73, 'Magsafe Wireless Charging', '[\"-Output power: Output voltage and current - 5W.\",\"-Connector: Wireless charging usually has a USB port.\",\"-Protection technology: Wireless charging can integrate protection features such as over-temperature protection, over-current protection, and over-voltage protection to ensure device and charging safety.\",\"-Compatibility: Wireless charging can be compatible with devices that support Qi wireless charging technology, including devices such as iPhone, Samsung Galaxy, and AirPods.\",\"-Weight and dimensions: 15 x 5 and 250g.\"]', 47, 45, 'Magsafe wireless charger', 'WirelessCharging', 1, '[\"Grey]', '', 1),
+(74, 'Earphone AirPods 2', '[\"-Connectivity: The AirPods 2 wirelessly connect to the device via Bluetooth technology.\",\"-Weight: Each AirPods 2 headset weighs about 4 grams.\r\nPlaytime: AirPods 2 headphones provide up to 5 hours of music time and up to 3 hours of talk time on a full charge.\r\nCharging time: AirPods 2 need about 15 minutes to charge enough for 3 hours of music or 2 hours of talk.\",\"-Charging box: The charging box that comes with the AirPods 2 helps to charge and store the headphones. The charging case can provide up to 24 hours of music time and up to 18 hours of talk time.\",\"-Sensors and controls: AirPods 2 have motion sensors and noise sensors to adjust volume and play music automatically when placed in your ears.\",]', 116, 114, 'Earphone AirPods 2', 'EarphoneAirPods2', 1, '[\"White\"]', '', 1),
+(79, 'Earphone Beats Fit Pro True  Wireless Earbuds', '[\"-Connectivity: The BeatsFitProTrueWirelessEarbuds headphones connect wirelessly to the device via Bluetooth technology.\",\"-Weight: Each Beats Fit Pro True  Wireless Earbuds headset weighs about 4 grams.\r\nPlaytime: Beats Fit Pro True  Wireless Earbuds headphones provide up to 5 hours of music time and up to 3 hours of talk time on a full charge.\r\nCharging time: Beats Fit Pro True  Wireless Earbuds need about 15 minutes to charge enough for 3 hours of music or 2 hours of talk.\",\"-Charging box: The charging box that comes with the AirPods 2 helps to charge and store the headphones. The charging case can provide up to 24 hours of music time and up to 18 hours of talk time.\",\"-Sensors and controls: Beats Fit Pro True  Wireless Earbuds have motion sensors and noise sensors to adjust volume and play music automatically when placed in your ears.\"]', 195, 190, 'Earphone Beats FitPro True Wireless Earbuds', 'EarphoneBeatsFitProTrueWirelessEarbuds', 1, '[\"Black\"]', '', 1),
+(80, 'Earphone Beats Flex', '[\"-Connectivity: The BeatsFitProTrueWirelessEarbuds headphones connect wirelessly to the device via Bluetooth technology.\",\"-Weight: Each Beats Flex headset weighs about 4 grams.\r\nPlaytime: Beats Flex headphones provide up to 5 hours of music time and up to 3 hours of talk time on a full charge.\r\nCharging time: Beats Flex need about 15 minutes to charge enough for 3 hours of music or 2 hours of talk.\",\"-Charging box: The charging box that comes with the AirPods 2 helps to charge and store the headphones. The charging case can provide up to 24 hours of music time and up to 18 hours of talk time.\",\"-Sensors and controls: Beats Flex have motion sensors and noise sensors to adjust volume and play music automatically when placed in your ears.\"]', 65, 63, 'Earphone Beats Flex', 'EarphoneBeatsFlex', 3, '[\"Black\",\"Blue\",\"Gold\"]', '', 1),
+(81, 'Earphone Beats Studio 3 Wireless', '[\"-Connectivity: The Beats Studio 3 Wireless Earbuds headphones connect wirelessly to the device via Bluetooth technology.\",\"-Weight: Each Beats Flex headset weighs about 4 grams.\r\nPlaytime: Beats Flex headphones provide up to 5 hours of music time and up to 3 hours of talk time on a full charge.\r\nCharging time: Beats Flex need about 15 minutes to charge enough for 3 hours of music or 2 hours of talk.\",\"-Charging box: The charging box that comes with the AirPods 2 helps to charge and store the headphones. The charging case can provide up to 24 hours of music time and up to 18 hours of talk time.\",\"-Sensors and controls: Beats Flex have motion sensors and noise sensors to adjust volume and play music automatically when placed in your ears.\"]', 78, 72, 'Earphone Beats Studio 3 Wireless', 'EarphoneBeatsStudio3Wireless', 4, '[\"Black\",\"Blue\",\"Grey\",\"White\"]', '', 1),
+(82, 'Earphone Beats Studio Buds', '[\"-Connectivity: The Beats Studio 3 Wireless Earbuds headphones connect wirelessly to the device via Bluetooth technology.\",\"-Weight: Each Beats Flex headset weighs about 4 grams.\r\nPlaytime: Beats Flex headphones provide up to 5 hours of music time and up to 3 hours of talk time on a full charge.\r\nCharging time: Beats Flex need about 15 minutes to charge enough for 3 hours of music or 2 hours of talk.\",\"-Charging box: The charging box that comes with the AirPods 2 helps to charge and store the headphones. The charging case can provide up to 24 hours of music time and up to 18 hours of talk time.\",\"-Sensors and controls: Beats Flex have motion sensors and noise sensors to adjust volume and play music automatically when placed in your ears.\"]', 102, 100, 'Earphone Beats Studio Buds', 'EarphoneBeatsStudioBuds', 5, '[\"Black\",\"Blue\",\"Pink\",\"Red\",\"White\"]', '', 1);
 
 -- --------------------------------------------------------
 
@@ -107,6 +115,13 @@ INSERT INTO `product_line` (`name`, `brand`, `product_type`, `status`) VALUES
 ('Apple Watch Series 7', 'Apple', 'SmartWatch', 1),
 ('Apple Watch Series 8', 'Apple', 'SmartWatch', 1),
 ('Apple Watch Ultra', 'Apple', 'SmartWatch', 1),
+('Bluetooth Speaker PACK&GO LBS-02', 'Samsung', 'Loudspeaker', 1),
+('Earphone AirPods 2', 'Apple', 'Earphone ', 1),
+('Earphone Beats FitPro True Wireless Earbuds', 'Apple', 'Earphone', 1),
+('Earphone Beats Flex', 'Apple', 'Earphone', 1),
+('Earphone Beats Studio 3 Wireless', 'Apple', 'Earphone', 1),
+('Earphone Beats Studio Buds', 'Apple', 'Earphone', 1),
+('Harman Kardon Onyx Studio7 Bluetooth Speaker', 'Samsung', 'Loudspeaker', 1),
 ('IPad Gen 10', 'Apple', 'Tablet', 1),
 ('iPad Pro 11', 'Apple', 'Tablet', 1),
 ('IPadGen9', 'Apple', 'Tablet', 1),
@@ -116,6 +131,9 @@ INSERT INTO `product_line` (`name`, `brand`, `product_type`, `status`) VALUES
 ('Iphone 14 Plus', 'Apple', 'Phone', 1),
 ('Iphone 14 Pro', 'Apple', 'Phone', 1),
 ('Iphone 14 Pro Max', 'Apple', 'Phone', 1),
+('Lightning Charging Cable', 'Samsung', 'ChargingCable', 1),
+('Magsafe wireless charger', 'Samsung', 'Charging cable', 1),
+('Power bank Masafe', 'Samsung', 'charge', 1),
 ('Samsung Z Flip 4', 'Samsung', 'Phone', 1),
 ('SamSungUtra22', 'Samsung', 'Phone', 1),
 ('SamsungUtra23', 'Samsung', 'Phone', 1),
@@ -210,7 +228,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT cho bảng `receipt`
