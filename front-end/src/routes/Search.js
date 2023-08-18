@@ -110,12 +110,11 @@ function Search() {
             });
         });
     }, []);
-
     useEffect(() => {
         // let newData = [...data, params.keyword];
         let newData ={
             "Categories": [...data.Categories, params.keyword],
-            "Brand": [...data.Brand, params.keyword],
+            "Brand": [...data.Brand],
         }
         setData(newData);
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
@@ -206,7 +205,7 @@ function Search() {
     useEffect(() => {
         let newData ={
             "Categories": [...data.Categories, params.keyword],
-            "Brand": [...data.Brand, params.keyword],
+            "Brand": [...data.Brand],
         }
         for (let index = 0; index < arrayinput.length; index++) {
             switch (arrayinput[index]) {
@@ -270,29 +269,31 @@ function Search() {
                         setData(newData);
                     }
                     break;
-                // case "inputApple":
-                //     if (
-                //         isChecked[arrayinput[index]] &&
-                //         !newData.includes("Apple")
-                //     ) {
-                //         newData.push("Apple");
-                //         setData(newData);
-                //     } else if (
-                //         !isChecked[arrayinput[index]] &&
-                //         newData.includes("Apple")
-                //     ) {
-                //         newData.splice(newData.indexOf("Apple"), 1);
-                //         setData(newData);
-                //     }
-                //     break;
+                case "inputApple":
+                    if (
+                        isChecked[arrayinput[index]] &&
+                        !newData.Brand.includes("Apple")
+                    ) {
+                        newData.Brand.push("Apple");
+                        setData(newData);
+                    } else if (
+                        !isChecked[arrayinput[index]] &&
+                        newData.Brand.includes("Apple")
+                    ) {
+                        newData.Brand.splice(newData.Brand.indexOf("Apple"), 1);
+                        setData(newData);
+                    }   
+                    break;
                 default:
                     break;
             }
         }
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
+            console.log("new DATA:", newData);
         });
-    }, [isChecked, params.keyword]);
+    }, [isChecked]);
+    console.log(data,"............................................")
     console.log(Phones);
     const textMessages = document.querySelector(".messageResponse");
     if (textMessages) {

@@ -228,6 +228,17 @@ class ProductTable extends Database
                 array_push($params, $product_type->Categories[$i]);
             }
         }
+        $m = count($product_type->Brand);
+        if ($product_type->Brand[0]) {
+            $sql .= " AND`brand` like ?";
+            array_push($params, $product_type->Brand[0]);
+        }
+        for ($i = 1; $i < $m; $i++) {
+            if ($product_type->Brand[1]) {
+                $sql .= " OR `brand` like ?";
+                array_push($params, $product_type->Brand[$i]);
+            }
+        }
         // foreach ($product_type as $item) {
         //     if ($item) {
         //         $sql .= " AND`product_type` like ?";
