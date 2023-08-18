@@ -19,7 +19,7 @@ function Signin() {
             setReport("");
             if (response.result === "Success") {
                 if (response.data.result == "Success") {
-                    const user = response.data;
+                    const user = response.data.user;
                     const data = {
                         login : "OK",
                         user

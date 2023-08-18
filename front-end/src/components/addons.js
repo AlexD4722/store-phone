@@ -34,7 +34,7 @@ function Addons() {
             setAccount(sessionUser.user);
             setLink("account");
         }
-    }, []);
+    }, [account]);
 
     return (
         <div className="header-addons">

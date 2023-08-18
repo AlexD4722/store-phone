@@ -7,8 +7,15 @@ function Product(props) {
     const setWishlist = useWishlistContext()[1];
 
     const handleCart = () => {
-        const payload = { product: props.product, quantity: 1 };
-        const action = { type: "add", payload };
+        let userSession = sessionStorage.getItem("user");
+        if (userSession){
+            let loginStatus = JSON.parse(userSession);
+            if (loginStatus.login === "OK"){
+                
+            }
+        }
+        let payload = { product: props.product, quantity: 1 };
+        let action = { type: "add", payload };
         dispatchCart(action);
     };
 
