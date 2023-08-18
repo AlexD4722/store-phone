@@ -14,7 +14,10 @@ import PaginationPage from "../components/pagination";
 function Search() {
     const params = useParams();
     const setSearch = useSearchContext()[1];
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({
+        "Categories": [],
+        "Brand": [],
+    });
     const [Phones, setPhones] = useState([""]);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(10000);
@@ -109,7 +112,11 @@ function Search() {
     }, []);
 
     useEffect(() => {
-        let newData = [...data, params.keyword];
+        // let newData = [...data, params.keyword];
+        let newData ={
+            "Categories": [...data.Categories, params.keyword],
+            "Brand": [...data.Brand, params.keyword],
+        }
         setData(newData);
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
@@ -197,84 +204,87 @@ function Search() {
     };
     const arrayinput = Object.keys(isChecked);
     useEffect(() => {
-        let newData = [...data];
+        let newData ={
+            "Categories": [...data.Categories, params.keyword],
+            "Brand": [...data.Brand, params.keyword],
+        }
         for (let index = 0; index < arrayinput.length; index++) {
             switch (arrayinput[index]) {
                 case "inputPhone":
                     if (
                         isChecked[arrayinput[index]] &&
-                        !newData.includes("phone")
+                        !newData.Categories.includes("phone")
                     ) {
-                        newData.push("phone");
+                        newData.Categories.push("phone");
                         setData(newData);
                     } else if (
                         !isChecked[arrayinput[index]] &&
-                        newData.includes("phone")
+                        newData.Categories.includes("phone")
                     ) {
-                        newData.splice(newData.indexOf("phone"), 1);
+                        newData.Categories.splice(newData.Categories.indexOf("phone"), 1);
                         setData(newData);
                     }
                     break;
                 case "inputTablet":
                     if (
                         isChecked[arrayinput[index]] &&
-                        !newData.includes("tablet")
+                        !newData.Categories.includes("tablet")
                     ) {
-                        newData.push("tablet");
+                        newData.Categories.push("tablet");
                         setData(newData);
                     } else if (
                         !isChecked[arrayinput[index]] &&
-                        newData.includes("tablet")
+                        newData.Categories.includes("tablet")
                     ) {
-                        newData.splice(newData.indexOf("tablet"), 1);
+                        newData.Categories.splice(newData.Categories.indexOf("tablet"), 1);
                         setData(newData);
                     }
                     break;
                 case "inputSmartWatch":
                     if (
                         isChecked[arrayinput[index]] &&
-                        !newData.includes("SmartWatch")
+                        !newData.Categories.includes("SmartWatch")
                     ) {
-                        newData.push("SmartWatch");
+                        newData.Categories.push("SmartWatch");
                         setData(newData);
                     } else if (
                         !isChecked[arrayinput[index]] &&
-                        newData.includes("SmartWatch")
+                        newData.Categories.includes("SmartWatch")
                     ) {
-                        newData.splice(newData.indexOf("SmartWatch"), 1);
+                        newData.Categories.splice(newData.Categories.indexOf("SmartWatch"), 1);
                         setData(newData);
                     }
                     break;
                 case "inputAccessory":
                     if (
                         isChecked[arrayinput[index]] &&
-                        !newData.includes("Accessories")
+                        !newData.Categories.includes("Accessories")
                     ) {
-                        newData.push("Accessories");
+                        newData.Categories.push("Accessories");
                         setData(newData);
                     } else if (
                         !isChecked[arrayinput[index]] &&
-                        newData.includes("Accessories")
+                        newData.Categories.includes("Accessories")
                     ) {
-                        newData.splice(newData.indexOf("Accessories"), 1);
+                        newData.Categories.splice(newData.Categories.indexOf("Accessories"), 1);
                         setData(newData);
                     }
                     break;
-                case "inputApple":
-                    if (
-                        isChecked[arrayinput[index]] &&
-                        !newData.includes("Apple")
-                    ) {
-                        newData.push("Apple");
-                        setData(newData);
-                    } else if (
-                        !isChecked[arrayinput[index]] &&
-                        newData.includes("Apple")
-                    ) {
-                        newData.splice(newData.indexOf("Apple"), 1);
-                        setData(newData);
-                    }
-                    break;
+                // case "inputApple":
+                //     if (
+                //         isChecked[arrayinput[index]] &&
+                //         !newData.includes("Apple")
+                //     ) {
+                //         newData.push("Apple");
+                //         setData(newData);
+                //     } else if (
+                //         !isChecked[arrayinput[index]] &&
+                //         newData.includes("Apple")
+                //     ) {
+                //         newData.splice(newData.indexOf("Apple"), 1);
+                //         setData(newData);
+                //     }
+                //     break;
                 default:
                     break;
             }

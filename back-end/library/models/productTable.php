@@ -208,7 +208,7 @@ class ProductTable extends Database
     // return: boolean
 
     function filter(
-        $product_type = [],
+        $product_type,
         $brand = '',
         $startPrice = '',
         $endPrice = '',
@@ -217,15 +217,15 @@ class ProductTable extends Database
     ) {
         $params = [];
         $sql = "SELECT * FROM product JOIN product_line on product.product_line = product_line.name WHERE TRUE";
-        $n = count($product_type);
-        if ($product_type[0]) {
+        $n = count($product_type->Categories);
+        if ($product_type->Categories[0]) {
             $sql .= " AND`product_type` like ?";
-            array_push($params, $product_type[0]);
+            array_push($params, $product_type->Categories[0]);
         }
         for ($i = 1; $i < $n; $i++) {
-            if ($product_type[1]) {
+            if ($product_type->Categories[1]) {
                 $sql .= " OR `product_type` like ?";
-                array_push($params, $product_type[$i]);
+                array_push($params, $product_type->Categories[$i]);
             }
         }
         // foreach ($product_type as $item) {
