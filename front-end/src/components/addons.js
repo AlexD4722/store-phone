@@ -11,13 +11,14 @@ import {
 import { useEffect } from "react";
 
 function Addons() {
-    const account = useAccountContext()[0];
+    const [account, setAccount] = useAccountContext();
     const [cart, dispatchCart] = useCartContext();
     const [wishlist, setWishlist] = useWishlistContext();
 
     useEffect(() => {
         const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
         const sessionWishlist = JSON.parse(sessionStorage.getItem("wishlist"));
+        const sessionUser = JSON.parse(sessionStorage.getItem("user"));
         if (sessionCart) {
             const action = {
                 type: "replace",
@@ -27,6 +28,9 @@ function Addons() {
         }
         if (sessionWishlist) {
             setWishlist(sessionWishlist);
+        }
+        if (sessionUser && sessionUser.login === "OK"){
+            setAccount(sessionUser.user);
         }
     }, []);
 

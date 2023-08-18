@@ -6,7 +6,7 @@ import { useAccountContext } from "../store";
 import { useState } from "react";
 
 function Signin() {
-    const [account, setAccount] = useAccountContext();
+    const setAccount = useAccountContext()[1];
     const [report, setReport] = useState("");
 
     const handleSubmit = () => {
@@ -23,12 +23,18 @@ function Signin() {
                     } else {
                         sessionStorage.setItem("userID", response.data.userID);
                     }
-                    setAccount({
+                    const user = {
                         userID: response.data.userID,
                         username: response.data.username,
                         email: response.data.email,
                         userType: response.data.user_type,
-                    });
+                    };
+                    setAccount(user);
+                    const data = {
+                        login : "OK",
+                        user
+                    }
+                    sessionStorage.setItem("user", JSON.stringify(data));
                 } else {
                     setReport("Username or Password is wrong");
                 }

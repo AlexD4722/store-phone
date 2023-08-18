@@ -1,6 +1,6 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_SIGNUP } from "../API/callAPI.js";
+import APIrequest, { USER_SIGNUP, testAPI } from "../API/callAPI.js";
 import { useCallback, useState } from "react";
 
 function Signup() {
