@@ -1,7 +1,7 @@
 <?php
 class ProductTable extends Database
 {
-    public $LinkServer = "../../../../";
+    public $LinkServer = "../imgProduct/";
     public $data;
     function __construct()
     {
@@ -63,16 +63,15 @@ class ProductTable extends Database
         } else {
             $result = $this->SQLexec($sql);
         }
-        $data = $this->pdo_stm->fetchAll();
         $this->data = [];
+        $data = $this->pdo_stm->fetchAll();
         if (count($data) > 0) {
             foreach ($data as $row) {
-                // $folderImg = "$this->LinkServer . "" . $row['images']" ;
                 $arrayFiles = [];
                 $files = scandir($this->LinkServer . $row["images"]);
                 for ($i = 0; $i < count($files); $i++) {
                     if ($files[$i] != "." && $files[$i] != "..") {
-                        $files[$i] = "http://localhost:2203/" . $row["images"] . "/" . $files[$i];
+                        $files[$i] = "http://localhost:2203/learning/store-phone/back-end/imgProduct/" . $row["images"] . "/" . $files[$i];
                         array_push($arrayFiles, $files[$i]);
                     }
                 }
@@ -280,12 +279,11 @@ class ProductTable extends Database
         $data = $this->pdo_stm->fetchAll();
         if (count($data) > 0) {
             foreach ($data as $row) {
-                // $folderImg = "$this->LinkServer . "" . $row['images']" ;
                 $arrayFiles = [];
                 $files = scandir($this->LinkServer . $row["images"]);
                 for ($i = 0; $i < count($files); $i++) {
                     if ($files[$i] != "." && $files[$i] != "..") {
-                        $files[$i] = "http://localhost:2203/" . $row["images"] . "/" . $files[$i];
+                        $files[$i] = "http://localhost:2203/learning/store-phone/back-end/imgProduct/" . $row["images"] . "/" . $files[$i];
                         array_push($arrayFiles, $files[$i]);
                     }
                 }
