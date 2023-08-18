@@ -8,11 +8,27 @@ import {
     useCartContext,
     useWishlistContext,
 } from "../store";
+import { useEffect } from "react";
 
 function Addons() {
     const account = useAccountContext()[0];
-    const cart = useCartContext()[0];
-    const wishlist = useWishlistContext()[0];
+    const [cart, dispatchCart] = useCartContext();
+    const [wishlist, setWishlist] = useWishlistContext();
+
+    useEffect(() => {
+        const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+        const sessionWishlist = JSON.parse(sessionStorage.getItem("wishlist"));
+        if (sessionCart) {
+            const action = {
+                type: "replace",
+                payload: sessionCart,
+            };
+            dispatchCart(action);
+        }
+        if (sessionWishlist) {
+            setWishlist(sessionWishlist);
+        }
+    }, []);
 
     return (
         <div className="header-addons">

@@ -16,6 +16,8 @@ function reducer(state, action) {
                 sessionStorage.setItem("cart", JSON.stringify(newState));
             }
             return newState;
+        case "replace":
+            return action.payload;
         default:
             return state;
     }
