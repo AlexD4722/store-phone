@@ -34,7 +34,16 @@ function Addons() {
             setAccount(sessionUser.user);
             setLink("account");
         }
-    }, [account]);
+    }, []);
+
+    useEffect(() => {
+        const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+        if (sessionUser && sessionUser.login === "OK"){
+            setLink("account");
+        } else {
+            setLink("signin");
+        }
+    }, [account])
 
     return (
         <div className="header-addons">

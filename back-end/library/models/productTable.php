@@ -83,6 +83,18 @@ class ProductTable extends Database
         return $result;
     }
 
+    function getProductById($id)
+    {
+        $sql = "SELECT * FROM product WHERE id=?";
+        $params = [$id];
+        $result = $this->SQLexec($sql, $params);
+        $data = $this->pdo_stm->fetch();
+        if ($data) {
+            $this->data = $data;
+        }
+        return $result;
+    }
+
     function addProduct(Product $p)
     {
         $sql = "INSERT INTO `product`(`id`, `name`, `description`, `inital_price`, `selling_price`, `product_line`, `images`, `quantity`, `color`, `capacity`, `status`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

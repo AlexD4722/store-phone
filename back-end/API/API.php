@@ -58,6 +58,9 @@ switch ($action) {
     case GET_QUANTITY_PRODUCT:
         require("../controller/get_quantity_product.php");
         break;
+    case GET_PRODUCTS_BY_WISHLIST:
+        require("../controller/get_products_by_id_array.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

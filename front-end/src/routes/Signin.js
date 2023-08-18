@@ -1,16 +1,16 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_LOGIN, testAPI } from "../API/callAPI.js";
+import APIrequest, { USER_LOGIN } from "../API/callAPI.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useAccountContext } from "../store";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 function Signin() {
     const setAccount = useAccountContext()[1];
     const [report, setReport] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = useCallback(() => {
         const username = document.querySelector("#formBasicUsername").value;
         const password = document.querySelector("#formBasicPassword").value;
         const remember = document.querySelector("#formBasicCheckbox").checked;
@@ -18,18 +18,18 @@ function Signin() {
         APIrequest(USER_LOGIN, data).then((response) => {
             setReport("");
             if (response.result === "Success") {
-                if (response.data.result == "Success") {
+                if (response.data.result === "Success") {
                     const user = response.data.user;
                     const data = {
-                        login : "OK",
-                        user
-                    }
+                        login: "OK",
+                        user,
+                    };
                     if (remember) {
                         localStorage.setItem("user", JSON.stringify(data));
                     } else {
                         sessionStorage.setItem("user", JSON.stringify(data));
                     }
-                    setAccount(user);     
+                    setAccount(user);
                     navigate("..");
                 } else {
                     setReport("Username or Password is wrong");
@@ -38,7 +38,7 @@ function Signin() {
                 setReport("Failed to connect database");
             }
         });
-    };
+    }, [setAccount, setReport]);
 
     return (
         <div className="section-account">

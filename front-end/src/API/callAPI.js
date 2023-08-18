@@ -12,6 +12,7 @@ export const ADD_NEW_PRODUCT_LINE = 306;
 export const GET_ALL_PRODUCT_LINE = 307;
 export const FIlTER_PRODUCT = 308;
 export const GET_QUANTITY_PRODUCT = 309;
+export const GET_PRODUCTS_BY_WISHLIST = 310;
 
 async function APIrequest(action, data) {
     let sendData = new FormData();
