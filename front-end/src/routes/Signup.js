@@ -51,25 +51,25 @@ function Signup() {
             if (stop) {
                 return;
             }
-            const data = { username: name, password: pass, email: email };
-            APIrequest(USER_SIGNUP, data).then(obj => {
-                if (obj.result === "Failed"){
-                    setValidated((prev) => {
-                        return {
-                            ...prev,
-                            database: "Database error. Retry later"
-                        }
-                    })
-                } else if (obj.data.error){
-                    setValidated((prev) => {
-                        return {
-                            ...prev,
-                            error: obj.data.error
-                        }
-                    })
-                } else {
-                    window.location.href = "/signup/success";
-                }
+            const data = { username: name, password: pass, email: email};
+            testAPI(USER_SIGNUP, data).then(obj => {
+                // if (obj.result === "Failed"){
+                //     setValidated((prev) => {
+                //         return {
+                //             ...prev,
+                //             database: "Database error. Retry later"
+                //         }
+                //     })
+                // } else if (obj.data.error){
+                //     setValidated((prev) => {
+                //         return {
+                //             ...prev,
+                //             error: obj.data.error
+                //         }
+                //     })
+                // } else {
+                //     window.location.href = "/signup/success";
+                // }
             })
         },
         [email, name, pass, reenter]

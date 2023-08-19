@@ -1,6 +1,7 @@
 export const USER_LOGIN = 101;
 export const USER_LOGOUT = 102;
 export const USER_SIGNUP = 103;
+export const UPDATE_USER = 104;
 export const INSERT_RECEIPT = 201;
 export const DONE_RECEIPT = 202;
 export const GET_ALL_PRODUCTS = 301;

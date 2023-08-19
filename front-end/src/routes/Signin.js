@@ -1,6 +1,6 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_LOGIN } from "../API/callAPI.js";
+import APIrequest, { USER_LOGIN, UPDATE_USER, testAPI } from "../API/callAPI.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useAccountContext } from "../store";
 import { useCallback, useState } from "react";
@@ -22,6 +22,7 @@ function Signin() {
                     const user = response.data.user;
                     const data = {
                         login: "OK",
+                        time: new Date(),
                         user,
                     };
                     if (remember) {
@@ -29,6 +30,25 @@ function Signin() {
                     } else {
                         sessionStorage.setItem("user", JSON.stringify(data));
                     }
+                    let cart = sessionStorage.getItem("cart");
+                    let wishlist = sessionStorage.getItem("wishlist");
+                    if (wishlist){
+                        wishlist = JSON.parse(wishlist);
+                    }
+                    if (cart){
+                        cart = JSON.parse(cart);
+                    }
+                    if (user.wishlist && wishlist){
+                        user.wishlist = [...user.wishlist, ...wishlist];
+                    } else  if (wishlist) {
+                        user.wishlist = [...wishlist];
+                    }
+                    if (user.cart && cart){
+                        user.cart = [...user.cart, ...cart];
+                    } else if (cart) {
+                        user.cart = [...cart];
+                    }
+                    testAPI(UPDATE_USER, user);
                     setAccount(user);
                     navigate("..");
                 } else {

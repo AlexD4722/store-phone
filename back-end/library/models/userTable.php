@@ -8,7 +8,7 @@ class UserTable extends Database
     }
     //hàm __construct dùng để kết nối với CSDL
 
-    public function getUser($username = '', $password = '', $user_type = '')
+    public function getUser($username = '', $password = '', $user_type = '', $id = 0)
     {
         $sql = "SELECT * FROM user WHERE TRUE";
         $params = [];
@@ -23,6 +23,10 @@ class UserTable extends Database
         if ($user_type) {
             $sql .= " AND user_type = ?";
             array_push($params, $user_type);
+        }
+        if ($id != 0){
+            $sql .= " AND id = ?";
+            array_push($params, $id);
         }
         if (count($params)) {
             $result = $this->SQLexec($sql, $params);
@@ -63,8 +67,8 @@ class UserTable extends Database
 
     public function editUser($id, User $user)
     {
-        $sql = "UPDATE user SET username = ? AND password = MD5(?) AND user_type = ? WHERE id=?";
-        $params = [$user->username, $user->password, $user->user_type, $id];
+        $sql = "UPDATE user SET username = ? AND password = MD5(?) AND email = ? AND cart = ? AND wishlist = ? AND user_type = ? WHERE id=?";
+        $params = [$user->username, $user->password, $user->user_type, $user->email, json_encode($user->cart), json_encode($user->wishlist), $id];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }

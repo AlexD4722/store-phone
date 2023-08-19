@@ -61,6 +61,9 @@ switch ($action) {
     case GET_PRODUCTS_BY_WISHLIST:
         require("../controller/get_products_by_id_array.php");
         break;
+    case UPDATE_USER:
+        require("../controller/update_user.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);
