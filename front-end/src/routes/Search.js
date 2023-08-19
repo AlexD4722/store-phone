@@ -15,6 +15,7 @@ function Search() {
     const params = useParams();
     const setSearch = useSearchContext()[1];
     const [bgSort, setBgSort] = useState("header-sort__list-selector-detail");
+    const [statusBtnFilter, setStatusBtnFilter] = useState();
     const [data, setData] = useState({
         "Categories": [],
         "Brand": [],
@@ -443,11 +444,11 @@ function Search() {
         const sortedProducts = [...Phones].sort((a, b) => b.name.localeCompare(a.name));
         setPhones(sortedProducts);
     };
-    const filterPriceStartToEnd = () => {
-        APIrequest(FIlTER_PRODUCT, data).then((obj) => {
-            setPhones(obj.data.productArray);
-        });
-    }
+    // const filterPriceStartToEnd = () => {
+    //     APIrequest(FIlTER_PRODUCT, data).then((obj) => {
+    //         setPhones(obj.data.productArray);
+    //     });
+    // }
     return (
         <>
             Search result for {params.keyword}
@@ -751,7 +752,7 @@ function Search() {
                                 </div>
                                 <div className="side-part-filter__btn-filter-wrapper">
                                     <button
-                                        onClick={filterPriceStartToEnd()}
+                                        // onClick={filterPriceStartToEnd()}
                                         className="side-part-filter__btn-filter"
                                         type="button"
                                     >
