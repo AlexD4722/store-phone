@@ -220,7 +220,7 @@ class ProductTable extends Database
     // return: boolean
 
     function filter(
-        $product_type,
+        $filter_type,
         $brand = '',
         $startPrice = '',
         $endPrice = '',
@@ -229,36 +229,37 @@ class ProductTable extends Database
     ) {
         $params = [];
         $sql = "SELECT * FROM product JOIN product_line on product.product_line = product_line.name WHERE TRUE";
-        $n = count($product_type->Categories);
-        if ($product_type->Categories[0]) {
+        $n = count($filter_type->Categories);
+        if ($filter_type->Categories[0]) {
             $sql .= " AND`product_type` like ?";
-            array_push($params, $product_type->Categories[0]);
+            array_push($params, $filter_type->Categories[0]);
         }
         for ($i = 1; $i < $n; $i++) {
-            if ($product_type->Categories[1]) {
+            if ($filter_type->Categories[1]) {
                 $sql .= " OR `product_type` like ?";
-                array_push($params, $product_type->Categories[$i]);
+                array_push($params, $filter_type->Categories[$i]);
             }
         }
-        $m = count($product_type->Brand);
-        if ($product_type->Brand[0]) {
+        $m = count($filter_type->Brand);
+        if ($filter_type->Brand[0]) {
             $sql .= " AND`brand` like ?";
-            array_push($params, $product_type->Brand[0]);
+            array_push($params, $filter_type->Brand[0]);
         }
         for ($i = 1; $i < $m; $i++) {
-            if ($product_type->Brand[1]) {
+            if ($filter_type->Brand[1]) {
                 $sql .= " OR `brand` like ?";
-                array_push($params, $product_type->Brand[$i]);
+                array_push($params, $filter_type->Brand[$i]);
             }
+        }
+        if ($filter_type->SortPriceStart && $filter_type->SortPriceEnd) {
+            $sql .= " AND `selling_price` BETWEEN ? AND ? ";
+            array_push($params, $filter_type->SortPriceStart);
+            array_push($params, $filter_type->SortPriceEnd);
         }
         if (count($params) > 0) {
             $result = $this->SQLexec($sql, $params);
         } else {
             $result = $this->SQLexec($sql);
-        }
-        if ($product_type->SortPriceStart) {
-            $sql .= " AND`brand` like ?";
-            array_push($params, $product_type->Brand[0]);
         }
         $this->data = [];
         $data = $this->pdo_stm->fetchAll();

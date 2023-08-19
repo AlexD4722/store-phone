@@ -19,8 +19,6 @@ function Search() {
     const [data, setData] = useState({
         "Categories": [],
         "Brand": [],
-        "SortPriceStart": "",
-        "SortPriceEnd": "",
     });
     const [Phones, setPhones] = useState([""]);
     const [minPrice, setMinPrice] = useState(0);
@@ -53,7 +51,6 @@ function Search() {
         layout.style.display = "none";
         menuExtend.style.transform = "translateX(-100%)";
     }
-
     useEffect(() => {
         const rangeInput = document.querySelectorAll(
             ".side-part-filter__price-ranger input"
@@ -115,16 +112,13 @@ function Search() {
                 }
             });
         });
-        let newData = {
-            ...data,
-            "SortPriceStart": rangeInput[0].value,
-            "SortPriceEnd": rangeInput[1].value,
-        }
-        setData(newData);
-    }, []);
+        setMinPrice(rangeInput[0].value);
+        setMaxPrice(rangeInput[1].value);
+    }, [minPrice, maxPrice]);
     useEffect(() => {
         // let newData = [...data, params.keyword];
         let newData = {
+            ...data,
             "Categories": [params.keyword],
             "Brand": [],
         }
@@ -221,7 +215,6 @@ function Search() {
                 break;
         }
     }, [params.keyword]);
-    console.log("ischeck ----------------------------------", isChecked)
 
     const handleCheckboxChange = (event) => {
         setIsChecked((prev) => {
@@ -234,9 +227,9 @@ function Search() {
     const arrayinput = Object.keys(isChecked);
     useEffect(() => {
         let newData = {
+            ...data,
             "Categories": [...data.Categories],
             "Brand": [...data.Brand],
-            "SortOption": [],
         }
         for (let index = 0; index < arrayinput.length; index++) {
             switch (arrayinput[index]) {
@@ -415,8 +408,7 @@ function Search() {
             console.log("new DATA:", newData);
         });
     }, [isChecked]);
-    console.log(isChecked, "............................................")
-    console.log(Phones);
+
     const textMessages = document.querySelector(".messageResponse");
     if (textMessages) {
         if (!Phones.length) {
@@ -444,11 +436,26 @@ function Search() {
         const sortedProducts = [...Phones].sort((a, b) => b.name.localeCompare(a.name));
         setPhones(sortedProducts);
     };
-    // const filterPriceStartToEnd = () => {
-    //     APIrequest(FIlTER_PRODUCT, data).then((obj) => {
-    //         setPhones(obj.data.productArray);
-    //     });
-    // }
+    const filterByPriceRange = () => {
+        const newData = {
+            ...data,
+            "SortPriceStart": parseInt(minPrice),
+            "SortPriceEnd": parseInt(maxPrice),
+        }
+        setData(newData);
+        APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
+            setPhones(obj.data.productArray);
+        });
+        console.log(data)
+        console.log(Phones)
+        // const filteredProducts = Phones.filter((product) => {
+        //     return (
+        //         (minPrice === '' || parseInt(product.selling_price) >= parseInt(minPrice)) && (maxPrice === '' || parseInt(product.selling_price) <= parseInt(maxPrice))
+        //     )
+        // }
+        // )
+        // setPhones(filteredProducts)
+    };
     return (
         <>
             Search result for {params.keyword}
@@ -752,7 +759,7 @@ function Search() {
                                 </div>
                                 <div className="side-part-filter__btn-filter-wrapper">
                                     <button
-                                        // onClick={filterPriceStartToEnd()}
+                                        onClick={filterByPriceRange}
                                         className="side-part-filter__btn-filter"
                                         type="button"
                                     >
