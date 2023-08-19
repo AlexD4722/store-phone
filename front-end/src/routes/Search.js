@@ -18,7 +18,8 @@ function Search() {
     const [data, setData] = useState({
         "Categories": [],
         "Brand": [],
-        "SortOption": [],
+        "SortPriceStart": "",
+        "SortPriceEnd": "",
     });
     const [Phones, setPhones] = useState([""]);
     const [minPrice, setMinPrice] = useState(0);
@@ -31,10 +32,6 @@ function Search() {
         inputApple: false,
         inputSamSung: false,
         inputXiaomi: false,
-        inputPriceIncrease: false,
-        inputPriceDecrease: false,
-        inputNameAz: false,
-        inputNameZa: false,
     });
 
     const handleInputChangeMinPrice = (event) => {
@@ -43,7 +40,6 @@ function Search() {
     const handleInputChangeMaxPrice = (event) => {
         setMaxPrice(event.target.value);
     };
-
     function handleOpenFilterMobile() {
         const layout = document.querySelector(".filter-mobile-layout");
         const menuExtend = document.querySelector(".filter-mobile");
@@ -66,6 +62,9 @@ function Search() {
         );
         const progress = document.querySelector(
             ".side-part-filter__price-progress"
+        );
+        const btnFilterPrice = document.querySelector(
+            ".side-part-filter__btn-filter"
         );
         const priceGap = 1000;
         rangeInput.forEach((input) => {
@@ -115,13 +114,18 @@ function Search() {
                 }
             });
         });
+        let newData = {
+            ...data,
+            "SortPriceStart": rangeInput[0].value,
+            "SortPriceEnd": rangeInput[1].value,
+        }
+        setData(newData);
     }, []);
     useEffect(() => {
         // let newData = [...data, params.keyword];
         let newData = {
             "Categories": [params.keyword],
             "Brand": [],
-            "SortOption": [],
         }
         setData(newData);
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
@@ -421,6 +425,29 @@ function Search() {
             textMessages.innerHTML = '';
         }
     }
+
+    const sortByPriceDescending = () => {
+        const sortedProducts = [...Phones].sort((a, b) => b.selling_price - a.selling_price);
+        setPhones(sortedProducts);
+    };
+
+    const sortByPriceInscending = () => {
+        const sortedProducts = [...Phones].sort((a, b) => a.selling_price - b.selling_price);
+        setPhones(sortedProducts);
+    };
+    const sortByNameDescending = () => {
+        const sortedProducts = [...Phones].sort((a, b) => a.name.localeCompare(b.name));
+        setPhones(sortedProducts);
+    };
+    const sortByNameInscending = () => {
+        const sortedProducts = [...Phones].sort((a, b) => b.name.localeCompare(a.name));
+        setPhones(sortedProducts);
+    };
+    const filterPriceStartToEnd = () => {
+        APIrequest(FIlTER_PRODUCT, data).then((obj) => {
+            setPhones(obj.data.productArray);
+        });
+    }
     return (
         <>
             Search result for {params.keyword}
@@ -465,36 +492,32 @@ function Search() {
                                                 <li>
                                                     <label className={bgSort}>
                                                         <input
-                                                            id="inputPriceIncrease"
-                                                            checked={isChecked.inputPriceIncrease}
-                                                            onChange={handleCheckboxChange}
-                                                            className="filter-item__checkbox filter-item__checkbox--sort"
-                                                            type="radio"
-                                                            name="optionSort"
-                                                        />
-                                                        <span className="filter-item__name">
-                                                            Sort by price: low to high
-                                                        </span>
-                                                        <span className="filter-item__custom-checkbox">
-                                                            <i className="bi bi-check"></i>
-                                                        </span>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label className={bgSort}>
-                                                        <input
                                                             id="inputPriceDecrease"
                                                             checked={isChecked.inputPriceDecrease}
-                                                            onChange={handleCheckboxChange}
+                                                            onClick={sortByPriceDescending}
                                                             className="filter-item__checkbox filter-item__checkbox--sort"
                                                             type="radio"
                                                             name="optionSort"
+                                                            value={"inputPriceDecrease"}
                                                         />
                                                         <span className="filter-item__name">
                                                             Sort by price: high to low
                                                         </span>
-                                                        <span className="filter-item__custom-checkbox">
-                                                            <i className="bi bi-check"></i>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label className={bgSort}>
+                                                        <input
+                                                            id="inputPriceIncrease"
+                                                            checked={isChecked.inputPriceIncrease}
+                                                            onClick={sortByPriceInscending}
+                                                            className="filter-item__checkbox filter-item__checkbox--sort"
+                                                            type="radio"
+                                                            name="optionSort"
+                                                            value={"inputPriceIncrease"}
+                                                        />
+                                                        <span className="filter-item__name">
+                                                            Sort by price: low to high
                                                         </span>
                                                     </label>
                                                 </li>
@@ -505,13 +528,11 @@ function Search() {
                                                             className="filter-item__checkbox filter-item__checkbox--sort"
                                                             type="radio"
                                                             name="optionSort"
+                                                            onClick={sortByNameDescending}
                                                         />
                                                         <span className="filter-item__name">
                                                             Sort by name: a - z
                                                         </span>
-                                                        <span className="filter-item__custom-checkbox">
-                                                            <i className="bi bi-check"></i>
-                                                        </span>
                                                     </label>
                                                 </li>
                                                 <li>
@@ -521,12 +542,10 @@ function Search() {
                                                             className="filter-item__checkbox filter-item__checkbox--sort"
                                                             type="radio"
                                                             name="optionSort"
+                                                            onClick={sortByNameInscending}
                                                         />
                                                         <span className="filter-item__name">
                                                             Sort by name: z - a
-                                                        </span>
-                                                        <span className="filter-item__custom-checkbox">
-                                                            <i className="bi bi-check"></i>
                                                         </span>
                                                     </label>
                                                 </li>
@@ -732,6 +751,7 @@ function Search() {
                                 </div>
                                 <div className="side-part-filter__btn-filter-wrapper">
                                     <button
+                                        onClick={filterPriceStartToEnd()}
                                         className="side-part-filter__btn-filter"
                                         type="button"
                                     >
