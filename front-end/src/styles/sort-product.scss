@@ -91,16 +91,24 @@
   margin: 0;
   // border: 1px solid $color-theme-border;
   // box-shadow: 0 1px 30px rgba(62, 68, 90, 0.09);
+  ul {
+    list-style: none;
+    padding: 0;
+  }
 }
 .header-sort__list-selector-detail {
   text-transform: capitalize;
   font-size: 0.8125rem;
   padding: 5px 10px;
   transition: 0.3s;
+  width: 100%;
   &:hover {
     background-color: $color-theme-info;
   }
   cursor: pointer;
+}
+.header-sort__list-selector-detail--bg{
+  background-color: $color-theme-info;
 }
 .header-sort__result-count-wrapper,
 .side-part-filter {
@@ -155,6 +163,9 @@
       background-color: $color-main-text;
     }
   }
+}
+.filter-item__checkbox--sort {
+  position: absolute;
 }
 
 .side-part-filter__widget-title {
@@ -239,12 +250,12 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   pointer-events: auto;
 }
-.side-part-filter__btn-filter{
+.side-part-filter__btn-filter {
   border: none;
   border-radius: 3px;
 }
-.side-part-filter__btn-filter-content{
-  font-size: .6875rem;
+.side-part-filter__btn-filter-content {
+  font-size: 0.6875rem;
   text-transform: uppercase;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -255,8 +266,7 @@ input[type="range"]::-webkit-slider-thumb {
   font-weight: 600;
 }
 
-
-.filter-mobile{
+.filter-mobile {
   background-color: $color-background;
   position: fixed;
   top: 0;
@@ -274,7 +284,7 @@ input[type="range"]::-webkit-slider-thumb {
     max-width: 320px;
   }
 }
-.filter-mobile-layout{
+.filter-mobile-layout {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -286,23 +296,23 @@ input[type="range"]::-webkit-slider-thumb {
   will-change: opacity;
   display: none;
 }
-.filter-mobile__header{
+.filter-mobile__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  h3{
+  h3 {
     text-transform: uppercase;
-    font-size: .875rem;
+    font-size: 0.875rem;
     margin-bottom: 0;
   }
 }
-.filter-mobile__icon-close{
+.filter-mobile__icon-close {
   width: 30px;
   height: 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  i{
+  i {
     font-size: 23px;
   }
 }
