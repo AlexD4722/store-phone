@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import '../styles/contact.scss';
+import imgContact from '../assets/imgs/contact.jpg';
 
 function Contact() {
 
@@ -164,7 +165,7 @@ function Contact() {
                             </div>
 
                             <div className="img_contact">
-                                <img src="https://k4j3j2s7.rocketcdn.me/machic/wp-content/uploads/2021/10/contact-1.jpg" />
+                                <img src={imgContact} alt="img-contact"/>
                             </div>
                         </div>
                     </Col>
