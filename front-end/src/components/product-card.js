@@ -1,17 +1,17 @@
+import APIrequest, { UPDATE_USER } from "../API/callAPI";
 import { useCartContext, useWishlistContext } from "../store/hooks";
 import "../styles/product-card.scss";
 import React from "react";
 
 function Product(props) {
     const dispatchCart = useCartContext()[1];
-    const setWishlist = useWishlistContext()[1];
+    const [wishlist, setWishlist] = useWishlistContext();
 
     const handleCart = () => {
         let userSession = sessionStorage.getItem("user");
-        if (userSession){
+        if (userSession) {
             let loginStatus = JSON.parse(userSession);
-            if (loginStatus.login === "OK"){
-                
+            if (loginStatus.login === "OK") {
             }
         }
         let payload = { product: props.product, quantity: 1 };
@@ -20,24 +20,49 @@ function Product(props) {
     };
 
     const handleWishlist = () => {
-        setWishlist((prev) => {
-            if (!prev.includes(props.product)) {
-                let wishlist = [...prev, props.product];
-                sessionStorage.setItem("wishlist", JSON.stringify(wishlist));
-                return wishlist;
+        let loginStatus = sessionStorage.getItem("user");
+        let loginData = JSON.parse(loginStatus);
+        if (loginData && loginData.login === "OK") {
+            if (!wishlist.includes(props.product)) {
+                loginData.user.wishlist = [...wishlist, props.product];
             }
-            return prev;
-        });
+            let data = loginData.user;
+            APIrequest(UPDATE_USER, data).then((response) => {
+                if (
+                    response.result === "Success" &&
+                    response.data.result === "Success"
+                ) {
+                    setWishlist((prev) => {
+                        if (!prev.includes(props.product)) {
+                            return [...prev, props.product];
+                        }
+                        return prev;
+                    });
+                    loginStatus = JSON.stringify(loginData);
+                    sessionStorage.setItem("user", loginStatus);
+                } else {
+                    alert("Insert item to wishlist failed");
+                }
+            });
+        } else {
+            alert("Sign in to add item to wishlist");
+        }
     };
 
     return (
         <div className="product-card">
             <div className="product-card__img-wrap">
                 <div className="product-card__img-default">
-                    <img src={props.product && props.product.images[0]} alt="" />
+                    <img
+                        src={props.product && props.product.images[0]}
+                        alt=""
+                    />
                 </div>
                 <div className="product-card__img-sub">
-                    <img src={props.product && props.product.images[1]} alt="" />
+                    <img
+                        src={props.product && props.product.images[1]}
+                        alt=""
+                    />
                 </div>
                 <button
                     type="button"

@@ -1,6 +1,6 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_SIGNUP, testAPI } from "../API/callAPI.js";
+import APIrequest, { USER_SIGNUP } from "../API/callAPI.js";
 import { useCallback, useState } from "react";
 
 function Signup() {
@@ -51,26 +51,26 @@ function Signup() {
             if (stop) {
                 return;
             }
-            const data = { username: name, password: pass, email: email};
-            testAPI(USER_SIGNUP, data).then(obj => {
-                // if (obj.result === "Failed"){
-                //     setValidated((prev) => {
-                //         return {
-                //             ...prev,
-                //             database: "Database error. Retry later"
-                //         }
-                //     })
-                // } else if (obj.data.error){
-                //     setValidated((prev) => {
-                //         return {
-                //             ...prev,
-                //             error: obj.data.error
-                //         }
-                //     })
-                // } else {
-                //     window.location.href = "/signup/success";
-                // }
-            })
+            const data = { username: name, password: pass, email: email };
+            APIrequest(USER_SIGNUP, data).then((obj) => {
+                if (obj.result === "Failed") {
+                    setValidated((prev) => {
+                        return {
+                            ...prev,
+                            database: "Database error. Retry later",
+                        };
+                    });
+                } else if (obj.data.error) {
+                    setValidated((prev) => {
+                        return {
+                            ...prev,
+                            error: obj.data.error,
+                        };
+                    });
+                } else {
+                    window.location.href = "/signup/success";
+                }
+            });
         },
         [email, name, pass, reenter]
     );
@@ -171,14 +171,14 @@ function Signup() {
                                         }
                                     />
                                 </Form.Group>
-                                {validated.pass && (
+                                {(validated.pass || validated.error) && (
                                     <Form.Group className="mb-3">
                                         <Form.Control
                                             type="hidden"
                                             isInvalid={true}
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            {validated.pass}
+                                            {validated.pass} {validated.error}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 )}

@@ -8,7 +8,7 @@ class UserTable extends Database
     }
     //hàm __construct dùng để kết nối với CSDL
 
-    public function getUser($username = '', $password = '', $user_type = '', $id = 0)
+    public function getUser($username = '', $password = '', $user_type = '', $email = '', $id = 0)
     {
         $sql = "SELECT * FROM user WHERE TRUE";
         $params = [];
@@ -24,7 +24,11 @@ class UserTable extends Database
             $sql .= " AND user_type = ?";
             array_push($params, $user_type);
         }
-        if ($id != 0){
+        if ($email) {
+            $sql .= " AND email = ?";
+            array_push($params, $email);
+        }
+        if ($id != 0) {
             $sql .= " AND id = ?";
             array_push($params, $id);
         }
@@ -49,8 +53,8 @@ class UserTable extends Database
     //Dữ liệu trả về dạng mảng các object User.
     public function insertUser(User $user)
     {
-        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?, '[]', NULL)";
-        $params = [$user->username, $user->password, $user->user_type, $user->email];
+        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?, ?, ?)";
+        $params = [$user->username, $user->password, $user->user_type, $user->email, json_encode($user->wishlist), json_encode($user->cart)];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
@@ -67,13 +71,20 @@ class UserTable extends Database
 
     public function editUser($id, User $user)
     {
-        $sql = "UPDATE user SET username = ? AND password = MD5(?) AND email = ? AND cart = ? AND wishlist = ? AND user_type = ? WHERE id=?";
-        $params = [$user->username, $user->password, $user->user_type, $user->email, json_encode($user->cart), json_encode($user->wishlist), $id];
+        $sql = "UPDATE user SET username = ?, email = ?, cart = ?, wishlist = ?, user_type = ? WHERE id=?";
+        $params = [$user->username, $user->email, json_encode($user->cart), json_encode($user->wishlist), $user->user_type, $id];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
     //hàm edit user theo id
 
+    public function editUserPassword($id, $pass){
+        $sql = "UPDATE user SET password = ? WHERE id = ?";
+        $params = [$pass, $id];
+        $result = $this->SQLexec($sql, $params);
+        return $result;
+    }
+    // hàm edit user password
     public function checkUser($username)
     {
         $sql = "SELECT * FROM user WHERE username = ?";

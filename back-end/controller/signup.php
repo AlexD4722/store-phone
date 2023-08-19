@@ -20,10 +20,16 @@ if (!$result) {
     $response = new APIresponse("Success");
     $response->data->error = "Username existed";
 } else {
-    $user = new User($user, $pass, $email, "customer");
-    $UT->insertUser($user);
-    $response = new APIresponse("Success");
-    $response->data->result = "Success";
+    $result = $UT->getUser('', '', '', $email);
+    if (count($UT->data) > 0) {
+        $response = new APIresponse("Success");
+        $response->data->error = "Email existed";
+    } else {
+        $user = new User($user, $pass, $email, "customer");
+        $UT->insertUser($user);
+        $response = new APIresponse("Success");
+        $response->data->result = "Success";
+    }
 }
 
 echo json_encode($response);
