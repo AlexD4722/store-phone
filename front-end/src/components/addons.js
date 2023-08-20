@@ -15,26 +15,33 @@ function Addons() {
     const [cart, dispatchCart] = useCartContext();
     const [wishlist, setWishlist] = useWishlistContext();
     const [link, setLink] = useState("signin");
-    const [userCart, setUserCart] = useState([]);
 
     useEffect(() => {
-        const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
-        const sessionWishlist = JSON.parse(sessionStorage.getItem("wishlist"));
+        const localUser = JSON.parse(localStorage.getItem("user"));
+        if (localUser && localUser.login === "OK") {
+            sessionStorage.setItem("user", JSON.stringify(localUser));
+        }
         const sessionUser = JSON.parse(sessionStorage.getItem("user"));
-        if (sessionCart) {
+        if (sessionUser && sessionUser.login === "OK") {
+            setAccount(sessionUser.user);
+            setLink("account");
+            setWishlist(sessionUser.user.wishlist);
             const action = {
                 type: "replace",
-                payload: sessionCart,
+                payload: sessionUser.user.cart,
             };
             dispatchCart(action);
         }
-        if (sessionWishlist) {
-            setWishlist(sessionWishlist);
-        }
+    }, []);
+
+    useEffect(() => {
+        const sessionUser = JSON.parse(sessionStorage.getItem("user"));
         if (sessionUser && sessionUser.login === "OK") {
-            setAccount(sessionUser.user);
-            setUserCart(sessionUser.user.cart);
-            setLink("account");
+            const action = {
+                type: "replace",
+                payload: sessionUser.user.cart
+            }
+            dispatchCart(action)
         }
     }, [wishlist]);
 
@@ -86,10 +93,7 @@ function Addons() {
                         <span className="header-addons__icon-quantity-detail header-addons__icon-quantity-detail--cart">
                             {cart.reduce((total, rLine) => {
                                 return total + rLine.quantity;
-                            }, 0) +
-                                userCart.reduce((total, rLine) => {
-                                    return total + rLine.quantity;
-                                }, 0) || 0}
+                            }, 0) || 0}
                         </span>
                     </span>
                 </div>
@@ -102,13 +106,7 @@ function Addons() {
                                 total +
                                 rLine.product.selling_price * rLine.quantity
                             );
-                        }, 0) +
-                            userCart.reduce((total, rLine) => {
-                                return (
-                                    total +
-                                    rLine.product.selling_price * rLine.quantity
-                                );
-                            }, 0) || 0}
+                        }, 0) || 0}
                     </div>
                 </div>
             </Link>
