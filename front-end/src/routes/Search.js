@@ -17,8 +17,8 @@ function Search() {
     const [bgSort, setBgSort] = useState("header-sort__list-selector-detail");
     const [statusBtnFilter, setStatusBtnFilter] = useState();
     const [data, setData] = useState({
-        "Categories": [],
-        "Brand": [],
+        Categories: [],
+        Brand: [],
     });
     const [Phones, setPhones] = useState([""]);
     const [minPrice, setMinPrice] = useState(0);
@@ -119,9 +119,9 @@ function Search() {
         // let newData = [...data, params.keyword];
         let newData = {
             ...data,
-            "Categories": [params.keyword],
-            "Brand": [],
-        }
+            Categories: [params.keyword],
+            Brand: [],
+        };
         setData(newData);
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
@@ -180,7 +180,6 @@ function Search() {
                     return {
                         ...prev,
                         inputinputXiaomiSamSung: true,
-
                     };
                 });
                 break;
@@ -228,9 +227,9 @@ function Search() {
     useEffect(() => {
         let newData = {
             ...data,
-            "Categories": [...data.Categories],
-            "Brand": [...data.Brand],
-        }
+            Categories: [...data.Categories],
+            Brand: [...data.Brand],
+        };
         for (let index = 0; index < arrayinput.length; index++) {
             switch (arrayinput[index]) {
                 case "inputPhone":
@@ -244,9 +243,11 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.Categories.includes("phone")
                     ) {
-                        newData.Categories.splice(newData.Categories.indexOf("phone"), 1);
+                        newData.Categories.splice(
+                            newData.Categories.indexOf("phone"),
+                            1
+                        );
                         setData(newData);
-                        console.log("this is errol");
                     }
                     break;
                 case "inputTablet":
@@ -260,7 +261,10 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.Categories.includes("tablet")
                     ) {
-                        newData.Categories.splice(newData.Categories.indexOf("tablet"), 1);
+                        newData.Categories.splice(
+                            newData.Categories.indexOf("tablet"),
+                            1
+                        );
                         setData(newData);
                     }
                     break;
@@ -275,7 +279,10 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.Categories.includes("SmartWatch")
                     ) {
-                        newData.Categories.splice(newData.Categories.indexOf("SmartWatch"), 1);
+                        newData.Categories.splice(
+                            newData.Categories.indexOf("SmartWatch"),
+                            1
+                        );
                         setData(newData);
                     }
                     break;
@@ -290,7 +297,10 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.Categories.includes("Accessories")
                     ) {
-                        newData.Categories.splice(newData.Categories.indexOf("Accessories"), 1);
+                        newData.Categories.splice(
+                            newData.Categories.indexOf("Accessories"),
+                            1
+                        );
                         setData(newData);
                     }
                     break;
@@ -320,7 +330,10 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.Brand.includes("Samsung")
                     ) {
-                        newData.Brand.splice(newData.Brand.indexOf("Samsung"), 1);
+                        newData.Brand.splice(
+                            newData.Brand.indexOf("Samsung"),
+                            1
+                        );
                         setData(newData);
                     }
                     break;
@@ -335,7 +348,10 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.Brand.includes("Xiaomi")
                     ) {
-                        newData.Brand.splice(newData.Brand.indexOf("Xiaomi"), 1);
+                        newData.Brand.splice(
+                            newData.Brand.indexOf("Xiaomi"),
+                            1
+                        );
                         setData(newData);
                     }
                     break;
@@ -350,7 +366,12 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.SortOption.includes({ selling_price: "ASC" })
                     ) {
-                        newData.SortOption.splice(newData.SortOption.indexOf({ selling_price: "ASC" }), 1);
+                        newData.SortOption.splice(
+                            newData.SortOption.indexOf({
+                                selling_price: "ASC",
+                            }),
+                            1
+                        );
                         setData(newData);
                     }
                     break;
@@ -365,7 +386,12 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.SortOption.includes({ selling_price: "DESC" })
                     ) {
-                        newData.SortOption.splice(newData.SortOption.indexOf({ selling_price: "DESC" }), 1);
+                        newData.SortOption.splice(
+                            newData.SortOption.indexOf({
+                                selling_price: "DESC",
+                            }),
+                            1
+                        );
                         setData(newData);
                     }
                     break;
@@ -380,7 +406,10 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.SortOption.includes({ name: "ASC" })
                     ) {
-                        newData.SortOption.splice(newData.SortOption.indexOf({ name: "ASC" }), 1);
+                        newData.SortOption.splice(
+                            newData.SortOption.indexOf({ name: "ASC" }),
+                            1
+                        );
                         setData(newData);
                     }
                     break;
@@ -395,7 +424,10 @@ function Search() {
                         !isChecked[arrayinput[index]] &&
                         newData.SortOption.includes({ name: "DESC" })
                     ) {
-                        newData.SortOption.splice(newData.SortOption.indexOf({ name: "DESC" }), 1);
+                        newData.SortOption.splice(
+                            newData.SortOption.indexOf({ name: "DESC" }),
+                            1
+                        );
                         setData(newData);
                     }
                     break;
@@ -405,49 +437,55 @@ function Search() {
         }
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
-            console.log("new DATA:", newData);
         });
     }, [isChecked]);
 
     const textMessages = document.querySelector(".messageResponse");
     if (textMessages) {
         if (!Phones.length) {
-            console.log('No products were found matching your selection.')
-            textMessages.innerHTML = 'No products were found matching your selection.';
+            textMessages.innerHTML =
+                "No products were found matching your selection.";
         } else {
-            textMessages.innerHTML = '';
+            textMessages.innerHTML = "";
         }
     }
 
     const sortByPriceDescending = () => {
-        const sortedProducts = [...Phones].sort((a, b) => b.selling_price - a.selling_price);
+        const sortedProducts = [...Phones].sort(
+            (a, b) => b.selling_price - a.selling_price
+        );
         setPhones(sortedProducts);
     };
 
     const sortByPriceInscending = () => {
-        const sortedProducts = [...Phones].sort((a, b) => a.selling_price - b.selling_price);
+        const sortedProducts = [...Phones].sort(
+            (a, b) => a.selling_price - b.selling_price
+        );
         setPhones(sortedProducts);
     };
     const sortByNameDescending = () => {
-        const sortedProducts = [...Phones].sort((a, b) => a.name.localeCompare(b.name));
+        const sortedProducts = [...Phones].sort((a, b) =>
+            a.name.localeCompare(b.name)
+        );
         setPhones(sortedProducts);
     };
     const sortByNameInscending = () => {
-        const sortedProducts = [...Phones].sort((a, b) => b.name.localeCompare(a.name));
+        const sortedProducts = [...Phones].sort((a, b) =>
+            b.name.localeCompare(a.name)
+        );
         setPhones(sortedProducts);
     };
     const filterByPriceRange = () => {
         const newData = {
             ...data,
-            "SortPriceStart": parseInt(minPrice),
-            "SortPriceEnd": parseInt(maxPrice),
-        }
+            SortPriceStart: parseInt(minPrice),
+            SortPriceEnd: parseInt(maxPrice),
+        };
         setData(newData);
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
         });
-        console.log(data)
-        console.log(Phones)
+
         // const filteredProducts = Phones.filter((product) => {
         //     return (
         //         (minPrice === '' || parseInt(product.selling_price) >= parseInt(minPrice)) && (maxPrice === '' || parseInt(product.selling_price) <= parseInt(maxPrice))
@@ -501,15 +539,22 @@ function Search() {
                                                     <label className={bgSort}>
                                                         <input
                                                             id="inputPriceDecrease"
-                                                            checked={isChecked.inputPriceDecrease}
-                                                            onClick={sortByPriceDescending}
+                                                            checked={
+                                                                isChecked.inputPriceDecrease
+                                                            }
+                                                            onClick={
+                                                                sortByPriceDescending
+                                                            }
                                                             className="filter-item__checkbox filter-item__checkbox--sort"
                                                             type="radio"
                                                             name="optionSort"
-                                                            value={"inputPriceDecrease"}
+                                                            value={
+                                                                "inputPriceDecrease"
+                                                            }
                                                         />
                                                         <span className="filter-item__name">
-                                                            Sort by price: high to low
+                                                            Sort by price: high
+                                                            to low
                                                         </span>
                                                     </label>
                                                 </li>
@@ -517,15 +562,22 @@ function Search() {
                                                     <label className={bgSort}>
                                                         <input
                                                             id="inputPriceIncrease"
-                                                            checked={isChecked.inputPriceIncrease}
-                                                            onClick={sortByPriceInscending}
+                                                            checked={
+                                                                isChecked.inputPriceIncrease
+                                                            }
+                                                            onClick={
+                                                                sortByPriceInscending
+                                                            }
                                                             className="filter-item__checkbox filter-item__checkbox--sort"
                                                             type="radio"
                                                             name="optionSort"
-                                                            value={"inputPriceIncrease"}
+                                                            value={
+                                                                "inputPriceIncrease"
+                                                            }
                                                         />
                                                         <span className="filter-item__name">
-                                                            Sort by price: low to high
+                                                            Sort by price: low
+                                                            to high
                                                         </span>
                                                     </label>
                                                 </li>
@@ -536,7 +588,9 @@ function Search() {
                                                             className="filter-item__checkbox filter-item__checkbox--sort"
                                                             type="radio"
                                                             name="optionSort"
-                                                            onClick={sortByNameDescending}
+                                                            onClick={
+                                                                sortByNameDescending
+                                                            }
                                                         />
                                                         <span className="filter-item__name">
                                                             Sort by name: a - z
@@ -550,7 +604,9 @@ function Search() {
                                                             className="filter-item__checkbox filter-item__checkbox--sort"
                                                             type="radio"
                                                             name="optionSort"
-                                                            onClick={sortByNameInscending}
+                                                            onClick={
+                                                                sortByNameInscending
+                                                            }
                                                         />
                                                         <span className="filter-item__name">
                                                             Sort by name: z - a
@@ -597,7 +653,9 @@ function Search() {
                                             <input
                                                 id="inputAccessory"
                                                 className="filter-item__checkbox"
-                                                checked={isChecked.inputAccessory}
+                                                checked={
+                                                    isChecked.inputAccessory
+                                                }
                                                 onChange={handleCheckboxChange}
                                                 type="checkbox"
                                             />
@@ -631,7 +689,9 @@ function Search() {
                                             <input
                                                 id="inputSmartWatch"
                                                 className="filter-item__checkbox"
-                                                checked={isChecked.inputSmartWatch}
+                                                checked={
+                                                    isChecked.inputSmartWatch
+                                                }
                                                 onChange={handleCheckboxChange}
                                                 type="checkbox"
                                             />
@@ -775,17 +835,13 @@ function Search() {
                 <Col xs={12} sm={12} md={9} lg={9} className="product-filter">
                     <div className="messageResponse"></div>
                     <Row xs={1} sm={2} md={3} lg={4}>
-                        {
-                            Phones.map((phone) => {
-                                return (
-                                    <Col key={phone.id}>
-                                        <Product
-                                            product={phone}
-                                        />
-                                    </Col>
-                                )
-                            })
-                        }
+                        {Phones.map((phone) => {
+                            return (
+                                <Col key={phone.id}>
+                                    <Product product={phone} />
+                                </Col>
+                            );
+                        })}
                     </Row>
                     <PaginationPage />
                 </Col>
