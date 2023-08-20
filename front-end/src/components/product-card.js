@@ -29,10 +29,6 @@ function Product(props) {
                 }
                 userSession = JSON.stringify(loginStatus);
                 sessionStorage.setItem("user", userSession);
-                let userLocal = JSON.parse(localStorage.getItem("user"));
-                if (userLocal && userLocal.login === "OK") {
-                    localStorage.setItem("user", userSession);
-                }
                 setWishlist([...wishlist]);
             }
         }
@@ -64,10 +60,6 @@ function Product(props) {
                     });
                     loginStatus = JSON.stringify(loginData);
                     sessionStorage.setItem("user", loginStatus);
-                    let userLocal = JSON.parse(localStorage.getItem("user"));
-                    if (userLocal && userLocal.login === "OK") {
-                        localStorage.setItem("user", loginStatus);
-                    }
                 } else {
                     alert("Insert item to wishlist failed");
                 }

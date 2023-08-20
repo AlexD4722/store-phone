@@ -27,7 +27,6 @@ function Signin() {
                     };
                     if (remember) {
                         localStorage.setItem("user", JSON.stringify(data));
-                        sessionStorage.setItem("user", JSON.stringify(data));
                     } else {
                         sessionStorage.setItem("user", JSON.stringify(data));
                     }
