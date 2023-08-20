@@ -54,9 +54,9 @@ function Home() {
                         <div className="products-module__main-wrapper">
                             <Row xs={2} sm={3} md={4} lg={5}>
                                 {
-                                    Phones.map((phone, index) => {
+                                    Phones.map((phone) => {
                                         return (
-                                            <Col>
+                                            <Col key={phone.id}>
                                                 <Product
                                                     product={phone}
                                                 />
@@ -102,16 +102,11 @@ function Home() {
                                 <Col xs={12} sm={12} md={9}>
                                     <Row xs={1} sm={1} md={2} lg={2}>
                                         {
-                                            PhonesFlex.map((phoneflex, index) => {
+                                            PhonesFlex.map((phoneflex) => {
                                                 return (
-                                                    <Col>
+                                                    <Col key={phoneflex.id}>
                                                         <ProductFlex
-                                                            key={phoneflex.id}
-                                                            title={phoneflex.name}
-                                                            imgDefault={phoneflex.images[0]}
-                                                            imgHover={phoneflex.images[3]}
-                                                            priceOld={phoneflex.inital_price}
-                                                            priceNew={phoneflex.selling_price}
+                                                            product={phoneflex}
                                                         />
                                                     </Col>
                                                 );
@@ -124,10 +119,6 @@ function Home() {
                     </div >
                 </section >
             </div >
-
-            <DetailProduct />
-            {/* <SortProduct /> */}
-            {/* <PaginationPage /> */}
         </>
     );
 }

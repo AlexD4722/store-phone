@@ -9,14 +9,34 @@ function Product(props) {
 
     const handleCart = () => {
         let userSession = sessionStorage.getItem("user");
+        let localCartUsing = true;
         if (userSession) {
             let loginStatus = JSON.parse(userSession);
             if (loginStatus.login === "OK") {
+                localCartUsing = false;
+                let found = false;
+                loginStatus.user.cart.forEach((value) => {
+                    if (value.product.id === props.product.id) {
+                        value.quantity += 1;
+                        found = true;
+                    }
+                });
+                if (!found) {
+                    loginStatus.user.cart.push({
+                        product: props.product,
+                        quantity: 1,
+                    });
+                }
+                userSession = JSON.stringify(loginStatus);
+                sessionStorage.setItem("user", userSession);
+                setWishlist([...wishlist]);
             }
         }
-        let payload = { product: props.product, quantity: 1 };
-        let action = { type: "add", payload };
-        dispatchCart(action);
+        if (localCartUsing) {
+            let payload = { product: props.product, quantity: 1 };
+            let action = { type: "add", payload };
+            dispatchCart(action);
+        }
     };
 
     const handleWishlist = () => {

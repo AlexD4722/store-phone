@@ -15,6 +15,7 @@ function Addons() {
     const [cart, dispatchCart] = useCartContext();
     const [wishlist, setWishlist] = useWishlistContext();
     const [link, setLink] = useState("signin");
+    const [userCart, setUserCart] = useState([]);
 
     useEffect(() => {
         const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
@@ -30,20 +31,21 @@ function Addons() {
         if (sessionWishlist) {
             setWishlist(sessionWishlist);
         }
-        if (sessionUser && sessionUser.login === "OK"){
+        if (sessionUser && sessionUser.login === "OK") {
             setAccount(sessionUser.user);
+            setUserCart(sessionUser.user.cart);
             setLink("account");
         }
-    }, []);
+    }, [wishlist]);
 
     useEffect(() => {
         const sessionUser = JSON.parse(sessionStorage.getItem("user"));
-        if (sessionUser && sessionUser.login === "OK"){
+        if (sessionUser && sessionUser.login === "OK") {
             setLink("account");
         } else {
             setLink("signin");
         }
-    }, [account])
+    }, [account]);
 
     return (
         <div className="header-addons">
@@ -84,7 +86,10 @@ function Addons() {
                         <span className="header-addons__icon-quantity-detail header-addons__icon-quantity-detail--cart">
                             {cart.reduce((total, rLine) => {
                                 return total + rLine.quantity;
-                            }, 0) || 0}
+                            }, 0) +
+                                userCart.reduce((total, rLine) => {
+                                    return total + rLine.quantity;
+                                }, 0) || 0}
                         </span>
                     </span>
                 </div>
@@ -97,7 +102,13 @@ function Addons() {
                                 total +
                                 rLine.product.selling_price * rLine.quantity
                             );
-                        }, 0) || 0}
+                        }, 0) +
+                            userCart.reduce((total, rLine) => {
+                                return (
+                                    total +
+                                    rLine.product.selling_price * rLine.quantity
+                                );
+                            }, 0) || 0}
                     </div>
                 </div>
             </Link>
