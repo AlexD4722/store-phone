@@ -17,12 +17,11 @@ import {
     NotFound,
     Signup,
     Search,
-    Account
+    Account,
+    DetailProduct
 } from "../routes";
 import AddNewProductForm from "../routes/AddNewProduct.js";
 import AddNewProductLineForm from "../routes/AddNewProductLine.js";
-
-
 const router = createBrowserRouter([
     {
         path: "/",
@@ -31,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
+            },
+            {
+                path: "/product/:id",
+                element: <DetailProduct />,
             },
             {
                 path: "/search/:keyword",
@@ -75,7 +78,6 @@ const router = createBrowserRouter([
         ],
     },
 ]);
-
 function App() {
     return (
         <div className="xo-container">

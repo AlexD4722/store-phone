@@ -11,10 +11,11 @@ import ProductFlex from "../components/product-card2";
 import DetailProduct from "./DetailProduct";
 import React, { useState, useEffect } from 'react';
 import APIrequest, * as API from "../API/callAPI";
+import { Link } from "react-router-dom";
 
 function Home() {
     const [Phones, setPhones] = useState([]);
-    const data = { quantity: 10 , random: true};
+    const data = { quantity: 10, random: true };
     useEffect(() => {
         const action = API.GET_QUANTITY_PRODUCT;
         if (data.quantity) {
@@ -48,7 +49,7 @@ function Home() {
                             <h2 className="products-module__title">Best Sellers</h2>
                             <a className="products-module__link-more" href="/#">
                                 <span>View All </span>
-                                <i  className="bi bi-arrow-right"></i>
+                                <i className="bi bi-arrow-right"></i>
                             </a>
                         </div>
                         <div className="products-module__main-wrapper">
@@ -74,7 +75,7 @@ function Home() {
                             <h2 className="products-module__title">Trending Products</h2>
                             <a className="products-module__link-more" href="/#">
                                 <span>View All </span>
-                                <i  className="bi bi-arrow-right"></i>
+                                <i className="bi bi-arrow-right"></i>
                             </a>
                         </div>
                         <div className="products-module__main-wrapper">
@@ -105,9 +106,12 @@ function Home() {
                                             PhonesFlex.map((phoneflex) => {
                                                 return (
                                                     <Col key={phoneflex.id}>
-                                                        <ProductFlex
-                                                            product={phoneflex}
-                                                        />
+                                                        <Link to={`/product/${phoneflex.id}`}>
+                                                            <ProductFlex
+                                                                key={phoneflex.id}
+                                                                product={phoneflex}
+                                                            />
+                                                        </Link>
                                                     </Col>
                                                 );
                                             })

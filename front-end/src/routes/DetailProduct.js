@@ -3,7 +3,18 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import '../styles/detail-product.scss';
 import Carousel from 'react-bootstrap/Carousel';
-function DetailProduct() {
+
+import { useEffect, useState } from 'react';
+import APIrequest, { GET_ALL_PRODUCTS } from '../API/callAPI';
+import { useParams } from 'react-router';
+import { useDetailProductContext } from '../store/hooks';
+function DetailProduct({ match }) {
+    const params = useParams();
+    const [Phones, setPhones] = useDetailProductContext();
+    const productId = parseInt(params.id);
+    const product = Phones.find(p => parseInt(p.id) === productId);
+    console.log(product, "============================================")
+
     return (
         <div className='xo-container'>
             <h3>This is product detail</h3>
@@ -14,17 +25,17 @@ function DetailProduct() {
                             <Carousel data-bs-theme="dark" pause={"hover"}>
                                 <Carousel.Item>
                                     <div className='detail-product__img-detail'>
-                                        <img src="http://localhost:2203/learning/store-phone/back-end/img/Apple%2010.9-inch%20iPad%20Air%20Wi-Fi%20Cellular%2064GB/single-1.jpg" alt="" />
+                                        <img src={product.images[0]} alt="" />
                                     </div>
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <div className='detail-product__img-detail'>
-                                        <img src="http://localhost:2203/learning/store-phone/back-end/img/Apple%2010.9-inch%20iPad%20Air%20Wi-Fi%20Cellular%2064GB/single-1.jpg" alt="" />
+                                        <img src={product.images[1]} alt="" />
                                     </div>
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <div className='detail-product__img-detail'>
-                                        <img src="http://localhost:2203/learning/store-phone/back-end/img/Apple%2010.9-inch%20iPad%20Air%20Wi-Fi%20Cellular%2064GB/single-1.jpg" alt="" />
+                                        <img src={product.images[2]} alt="" />
                                     </div>
                                 </Carousel.Item>
                             </Carousel>
@@ -32,15 +43,15 @@ function DetailProduct() {
                         <Col>
                             <form className='detail-product__content-box'>
                                 <div className='detail-product__name-product'>
-                                    <h2>Apple 10.9-inch iPad Air Wi-Fi Cellular 64GB</h2>
+                                    <h2>{product.name}</h2>
                                 </div>
                                 <div className='detail-product__box-review'>
                                     <div className='detail-product__list-start'>
-                                        <i  className="bi bi-star-fill"></i>
-                                        <i  className="bi bi-star-fill"></i>
-                                        <i  className="bi bi-star-fill"></i>
-                                        <i  className="bi bi-star-fill"></i>
-                                        <i  className="bi bi-star-fill"></i>
+                                        <i className="bi bi-star-fill"></i>
+                                        <i className="bi bi-star-fill"></i>
+                                        <i className="bi bi-star-fill"></i>
+                                        <i className="bi bi-star-fill"></i>
+                                        <i className="bi bi-star-fill"></i>
                                     </div>
                                     <div className='detail-product__quantity-review'>
                                         <span className='detail-product__quantity-review-detail'>1</span>
@@ -49,60 +60,48 @@ function DetailProduct() {
                                 </div>
                                 <div className='detail-product__status-stock'>
                                     <div className='detail-product__status-icon-check'>
-                                        <i  className="bi bi-check-circle"></i>
+                                        <i className="bi bi-check-circle"></i>
                                     </div>
                                     <div className='detail-product__status-stock-running'>
                                         <p>in stock</p>
                                     </div>
                                 </div>
                                 <div className='detail-product__box-price'>
-                                    <p className='detail-product__price-new'>$959.00</p>
-                                    <p className='detail-product__price-old'>$859.00</p>
+                                    <p className='detail-product__price-new'>{product.selling_price}</p>
+                                    <p className='detail-product__price-old'>{product.inital_price}</p>
                                 </div>
                                 <div className='detail-product__box-option detail-product__box-option--color'>
                                     <p>Color: <span className='detail-product__name-option'>black</span></p>
                                     <div className='detail-product__box-list-option'>
-                                        <label>
-                                            <input type="radio" name='color' />
-                                            <span>black</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name='color' />
-                                            <span>blue</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name='color' />
-                                            <span>brown</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name='color' />
-                                            <span>green</span>
-                                        </label>
+                                        {
+                                            JSON.parse(product.color).map((color) => {
+                                                return (
+                                                    <label>
+                                                        <input type="radio" name='color' />
+                                                        <span>{color}</span>
+                                                    </label>
+                                                )
+                                            })
+
+                                        }
                                     </div>
+
                                 </div>
                                 <div className='detail-product__box-option detail-product__box-option--capacity'>
                                     <p>Capacity:<span className='detail-product__name-option'>128 GB</span></p>
                                     <div className='detail-product__box-list-option'>
-                                        <label>
-                                            <input type="radio" name='capacity' />
-                                            <span>64 GB</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name='capacity' />
-                                            <span>128 GB</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name='capacity' />
-                                            <span>256 GB</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name='capacity' />
-                                            <span>512 GB</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name='capacity' />
-                                            <span>1 TB</span>
-                                        </label>
+                                        {
+                                            JSON.parse(product.capacity).map((capacity) => {
+                                                return (
+                                                    <label>
+                                                        <label>
+                                                            <input type="radio" name='capacity' />
+                                                            <span>{capacity}</span>
+                                                        </label>
+                                                    </label>
+                                                )
+                                            })
+                                        }
                                     </div>
                                 </div>
                                 <div className='detail-product__info-quantity'>
@@ -121,14 +120,14 @@ function DetailProduct() {
                                         </div>
                                         <div className='detail-product__btn-add-wishlist'>
                                             <button type="button">
-                                                <span className='detail-product__btn-add-wishlist-icon'><i  className="bi bi-heart"></i></span>
+                                                <span className='detail-product__btn-add-wishlist-icon'><i className="bi bi-heart"></i></span>
                                                 <span className='detail-product__btn-add-wishlist-content'>Add to wishlist</span>
                                             </button>
                                         </div>
                                     </div>
                                     <div className='detail-product__info-bottom'>
                                         <div className='detail-product__info-delivery'>
-                                            <i  className="bi bi-box-seam"></i>
+                                            <i className="bi bi-box-seam"></i>
                                             <strong> 2-day Delivery</strong>
                                         </div>
                                         <div className='detail-product__info-delivery-slogan'>
