@@ -43,8 +43,10 @@ function DetailProduct({ match }) {
                         );
                     }
                     SetProduct(ListPhones);
-                    setValueColor(JSON.parse(ListPhones[0].color));
-                    setSelectedOptionColor(JSON.parse(ListPhones[0].color)[0]);
+                    if (ListPhones[0].color){
+                        setValueColor(ListPhones[0].color);
+                        setSelectedOptionColor(ListPhones[0].color[0]);
+                    }
                     let listCapacity = [];
                     if (ListPhones[0].capacity) {
                         setSelectedOptionCapacity(
