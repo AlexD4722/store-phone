@@ -12,7 +12,7 @@ function FormSearch() {
         setHint([]);
         setKey(e.target.value);
         const data = { search: e.target.value };
-        const action = API.SEARCH_PRODUCTS_BY_NAME;
+        const action = API.GET_5_PRODUCTS_BY_NAME;
         if (data.search !== "") {
             APIrequest(action, data).then((response) => {
                 if (response.result === "Success") {
@@ -26,7 +26,7 @@ function FormSearch() {
     }
 
     const handleEnter = e => {
-        if (e.key === "Enter"){
+        if (e.key === "Enter") {
             handleButton();
         }
     }
@@ -42,20 +42,27 @@ function FormSearch() {
                         onChange={(event) => handleSearch(event)}
                         onKeyUp={event => handleEnter(event)}
                     />
-                    {hint.map((value, index) => {
-                        return (
-                            <div
-                                key={index}
-                                style={{ top: 3.125 + 3.125 * index + "rem" }}
-                            >
-                                <img src={value.images} alt="" />
-                                <span>{value.name}</span>
-                                <span className="form-search__box-input-lastspan">
-                                    {value.selling_price}$
-                                </span>
-                            </div>
-                        );
-                    })}
+                    <div className="recommend-product">
+                        <ul className="recommend-product__box-list">
+                            {hint.map((value, index) => {
+                                return (
+                                    <li key = {value.id}>
+                                        <div className="recommend-product__box-img">
+                                            <img src={value.images[0]} alt="img search" />
+                                        </div>
+                                        {/* <img src={value.images} alt="" /> */}
+                                        <div className="recommend-product__info-product">
+                                            <h1 className="recommend-product__name-product">{value.name}</h1>
+                                        </div>
+                                        {/* <span>{value.name}</span> */}
+                                        {/* <span className="form-search__box-input-lastspan">
+                                            {value.selling_price}$
+                                        </span> */}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
                 </div>
 
                 <div className="form-search__button">

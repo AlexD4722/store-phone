@@ -90,7 +90,7 @@ function ProductFlex(props) {
                     <div className="product-flex__footer-wrapper">
                         <div className="product-flex__footer-btn-add">
                             <button type="button" onClick={handleCart}>
-                                <span>add to cart</span>
+                                <span>goto detail page</span>
                             </button>
                         </div>
                     </div>

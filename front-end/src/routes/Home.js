@@ -38,6 +38,7 @@ function Home() {
             });
         }
     }, []);
+    console.log(PhonesFlex,"///////////////")
     return (
         <>
             <SlideShow />

@@ -182,7 +182,7 @@ function DetailProduct({ match }) {
                         </div> */}
                         <div className='detail-product__key-feature-item'>
                             <p>Key Features:</p>
-                            <ul>
+                            {/* <ul>
                                 {
                                     JSON.parse(product.description).map((item) => {
                                         return (
@@ -192,7 +192,7 @@ function DetailProduct({ match }) {
                                         )
                                     })
                                 }
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
                 </div>
