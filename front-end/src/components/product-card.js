@@ -8,27 +8,27 @@ function Product(props) {
     const [wishlist, setWishlist] = useWishlistContext();
 
     const handleCart = () => {
-        let userSession = sessionStorage.getItem("user");
+        let userObject = JSON.parse(sessionStorage.getItem("user"));
         let localCartUsing = true;
-        if (userSession) {
-            let loginStatus = JSON.parse(userSession);
-            if (loginStatus.login === "OK") {
+        if (userObject) {
+            if (userObject.login === "OK") {
                 localCartUsing = false;
                 let found = false;
-                loginStatus.user.cart.forEach((value) => {
+                let userCart = userObject.user.cart;
+                userCart.forEach((value) => {
                     if (value.product.id === props.product.id) {
                         value.quantity += 1;
                         found = true;
                     }
                 });
                 if (!found) {
-                    loginStatus.user.cart.push({
+                    userCart.push({
                         product: props.product,
                         quantity: 1,
                     });
                 }
-                userSession = JSON.stringify(loginStatus);
-                sessionStorage.setItem("user", userSession);
+                userObject.user.cart = userCart;
+                sessionStorage.setItem("user", JSON.stringify(userObject));
                 setWishlist([...wishlist]);
             }
         }

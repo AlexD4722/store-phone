@@ -1,12 +1,13 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_LOGIN, UPDATE_USER, testAPI } from "../API/callAPI.js";
+import APIrequest, { USER_LOGIN, UPDATE_USER } from "../API/callAPI.js";
 import { Link, useNavigate } from "react-router-dom";
-import { useAccountContext } from "../store";
+import { useAccountContext, useCartContext, useWishlistContext } from "../store";
 import { useCallback, useState } from "react";
 
 function Signin() {
     const setAccount = useAccountContext()[1];
+    const setWishlist = useWishlistContext()[1];
     const [report, setReport] = useState("");
     const navigate = useNavigate();
 
@@ -19,36 +20,27 @@ function Signin() {
             setReport("");
             if (response.result === "Success") {
                 if (response.data.result === "Success") {
-                    const user = response.data.user;
-                    const data = {
-                        login: "OK",
-                        time: new Date(),
-                        user,
-                    };
-                    if (remember) {
-                        localStorage.setItem("user", JSON.stringify(data));
-                    } else {
-                        sessionStorage.setItem("user", JSON.stringify(data));
-                    }
+                    let user = response.data.user;
+                    setWishlist(user.wishlist);
                     let cart = sessionStorage.getItem("cart");
-                    let wishlist = sessionStorage.getItem("wishlist");
-                    if (wishlist){
-                        wishlist = JSON.parse(wishlist);
-                    }
-                    if (cart){
+                    if (cart) {
                         cart = JSON.parse(cart);
                     }
-                    if (user.wishlist && wishlist){
-                        user.wishlist = [...user.wishlist, ...wishlist];
-                    } else  if (wishlist) {
-                        user.wishlist = [...wishlist];
-                    }
-                    if (user.cart && cart){
+                    if (user.cart && cart) {
                         user.cart = [...user.cart, ...cart];
                     } else if (cart) {
                         user.cart = [...cart];
                     }
-                    testAPI(UPDATE_USER, user);
+                    const newData = {
+                        login: "OK",
+                        user,
+                    };
+                    if (remember) {
+                        localStorage.setItem("user", JSON.stringify(newData));
+                    } else {
+                        sessionStorage.setItem("user", JSON.stringify(newData));
+                    }
+                    APIrequest(UPDATE_USER, user);
                     setAccount(user);
                     navigate("..");
                 } else {
