@@ -15,11 +15,13 @@ function Addons() {
     const [cart, dispatchCart] = useCartContext();
     const [wishlist, setWishlist] = useWishlistContext();
     const [link, setLink] = useState("signin");
-    const [userCart, setUserCart] = useState([]);
 
     useEffect(() => {
+        const localUser = localStorage.getItem("user");
+        if (localUser) {
+            sessionStorage.setItem("user", localUser);
+        }
         const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
-        const sessionWishlist = JSON.parse(sessionStorage.getItem("wishlist"));
         const sessionUser = JSON.parse(sessionStorage.getItem("user"));
         if (sessionCart) {
             const action = {
@@ -28,13 +30,13 @@ function Addons() {
             };
             dispatchCart(action);
         }
-        if (sessionWishlist) {
-            setWishlist(sessionWishlist);
-        }
         if (sessionUser && sessionUser.login === "OK") {
             setAccount(sessionUser.user);
-            setUserCart(sessionUser.user.cart);
-            setLink("account");
+            const action = {
+                type: "replace",
+                payload: sessionUser.user.cart,
+            };
+            dispatchCart(action);
         }
     }, [wishlist]);
 
@@ -46,6 +48,13 @@ function Addons() {
             setLink("signin");
         }
     }, [account]);
+
+    useEffect(() => {
+        const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+        if (sessionUser) {
+            setWishlist(sessionUser.user.wishlist);
+        }
+    }, []);
 
     return (
         <div className="header-addons">
@@ -71,7 +80,7 @@ function Addons() {
                     <i className="bi bi-heart"></i>
                     <span className="header-addons__icon-quantity">
                         <span className="header-addons__icon-quantity-detail header-addons__icon-quantity-detail--heart">
-                            {wishlist.length}
+                            {wishlist && wishlist.length}
                         </span>
                     </span>
                 </div>
@@ -84,12 +93,11 @@ function Addons() {
                     <i className="bi bi-cart"></i>
                     <span className="header-addons__icon-quantity">
                         <span className="header-addons__icon-quantity-detail header-addons__icon-quantity-detail--cart">
-                            {cart.reduce((total, rLine) => {
-                                return total + rLine.quantity;
-                            }, 0) +
-                                userCart.reduce((total, rLine) => {
+                            {(cart &&
+                                cart.reduce((total, rLine) => {
                                     return total + rLine.quantity;
-                                }, 0) || 0}
+                                }, 0)) ||
+                                0}
                         </span>
                     </span>
                 </div>
@@ -97,18 +105,14 @@ function Addons() {
                     <div className="header-addons__sub-text">total</div>
                     <div className="header-addons__primary-text">
                         $
-                        {cart.reduce((total, rLine) => {
-                            return (
-                                total +
-                                rLine.product.selling_price * rLine.quantity
-                            );
-                        }, 0) +
-                            userCart.reduce((total, rLine) => {
+                        {(cart &&
+                            cart.reduce((total, rLine) => {
                                 return (
                                     total +
                                     rLine.product.selling_price * rLine.quantity
                                 );
-                            }, 0) || 0}
+                            }, 0)) ||
+                            0}
                     </div>
                 </div>
             </Link>

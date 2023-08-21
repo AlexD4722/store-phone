@@ -15,6 +15,8 @@ if ($result && count($UT->data) == 1){
     $return = new APIresponse("Success");
     $return->data->result = "Success";
     $return->data->user = $UT->data[0];
+    $return->data->user->wishlist = json_decode($return->data->user->wishlist);
+    $return->data->user->cart = json_decode($return->data->user->cart);
     $return->data->user->password = "///***///";
     $_SESSION["login_status"] = "OK";
     $_SESSION["user"] = $UT->data[0]->user->id;
