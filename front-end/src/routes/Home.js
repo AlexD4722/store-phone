@@ -107,7 +107,7 @@ function Home() {
                                             PhonesFlex.map((phoneflex) => {
                                                 return (
                                                     <Col key={phoneflex.id}>
-                                                        <Link to={`/product/${phoneflex.id}`}>
+                                                        <Link to={`/product/${phoneflex.name}`}>
                                                             <ProductFlex
                                                                 key={phoneflex.id}
                                                                 product={phoneflex}

@@ -25,6 +25,9 @@ switch ($action) {
     case SEARCH_PRODUCTS_BY_NAME:
         require("../controller/search_products_by_name.php");
         break;
+    case SEARCH_ITEM_EXACTLY:
+        require("../controller/search_item_exactly.php");
+        break;
     case GET_RECEIPTS_BY_CID:
         require("../controller/get_receipts_by_cid.php");
         break;
