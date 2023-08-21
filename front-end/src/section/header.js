@@ -37,7 +37,7 @@ function Header() {
         }
     }, []);
     return (
-        <header>
+        <header className='box-header'>
             <div className='xo-container'>
                 <div className='wrapper-header wrapper-header--tablet'>
                     <LogoShop />

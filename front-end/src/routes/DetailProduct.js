@@ -14,7 +14,41 @@ function DetailProduct({ match }) {
     const productId = parseInt(params.id);
     const product = Phones.find(p => parseInt(p.id) === productId);
     console.log(product, "============================================")
+    const [valueQuantity, setValueQuantity] = useState(1);
 
+    const [valueColor, setValueColor] = useState(JSON.parse(product.color)[0]);
+    const [selectedOptionColor, setSelectedOptionColor] = useState(JSON.parse(product.color)[0]);
+    const [valueCapacity, setValueCapacity] = useState(JSON.parse(product.capacity)[0]);
+    const [selectedOptionCapacity, setSelectedOptionCapacity] = useState(JSON.parse(product.capacity)[0]);
+    const handleChangeQuantity = event => {
+        const inputValue = event.target.value;
+        console.log("value", inputValue)
+        if (inputValue < 0) {
+            setValueQuantity(1);
+        } else {
+            setValueQuantity(inputValue);
+        }
+    };
+    const handleIncreseQuantity = event => {
+        setValueQuantity(prevValue => prevValue + 1);
+    };
+    const handleDecreseQuantity = event => {
+        if (parseInt(valueQuantity) < 0 || !valueQuantity) {
+            setValueQuantity(1);
+        }
+        if (valueQuantity >= 2) {
+            setValueQuantity(prevValue => prevValue - 1);
+        }
+    };
+    const handleChoseOptionColor = event => {
+        setValueColor(event.target.value);
+        setSelectedOptionColor(event.target.value)
+    };
+    const handleChoseOptionCapacity = event => {
+        setValueCapacity(event.target.value);
+        selectedOptionCapacity(event.target.value)
+        console.log(event.target)
+    };
     return (
         <div className='xo-container'>
             <h3>This is product detail</h3>
@@ -23,21 +57,19 @@ function DetailProduct({ match }) {
                     <Row xs={1} sm={2} >
                         <Col>
                             <Carousel data-bs-theme="dark" pause={"hover"}>
-                                <Carousel.Item>
-                                    <div className='detail-product__img-detail'>
-                                        <img src={product.images[0]} alt="" />
-                                    </div>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <div className='detail-product__img-detail'>
-                                        <img src={product.images[1]} alt="" />
-                                    </div>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <div className='detail-product__img-detail'>
-                                        <img src={product.images[2]} alt="" />
-                                    </div>
-                                </Carousel.Item>
+                                {
+                                    product.images.map((itemImg) => {
+                                        return (
+                                            <Carousel.Item>
+                                                <div className='detail-product__img-detail'>
+                                                    <img src={itemImg} alt="" />
+                                                </div>
+                                            </Carousel.Item>
+
+                                        )
+                                    })
+
+                                }
                             </Carousel>
                         </Col>
                         <Col>
@@ -67,18 +99,18 @@ function DetailProduct({ match }) {
                                     </div>
                                 </div>
                                 <div className='detail-product__box-price'>
-                                    <p className='detail-product__price-new'>{product.selling_price}</p>
-                                    <p className='detail-product__price-old'>{product.inital_price}</p>
+                                    <p className='detail-product__price-new'>${product.selling_price}</p>
+                                    <p className='detail-product__price-old'>${product.inital_price}</p>
                                 </div>
                                 <div className='detail-product__box-option detail-product__box-option--color'>
-                                    <p>Color: <span className='detail-product__name-option'>black</span></p>
+                                    <p>Color: <span className='detail-product__name-option'>{valueColor}</span></p>
                                     <div className='detail-product__box-list-option'>
                                         {
-                                            JSON.parse(product.color).map((color) => {
+                                            JSON.parse(product.color).map((coloritem) => {
                                                 return (
                                                     <label>
-                                                        <input type="radio" name='color' />
-                                                        <span>{color}</span>
+                                                        <input type="radio" name='color' value={coloritem} onChange={handleChoseOptionColor} checked = {selectedOptionColor === coloritem} />
+                                                        <span>{coloritem}</span>
                                                     </label>
                                                 )
                                             })
@@ -88,15 +120,15 @@ function DetailProduct({ match }) {
 
                                 </div>
                                 <div className='detail-product__box-option detail-product__box-option--capacity'>
-                                    <p>Capacity:<span className='detail-product__name-option'>128 GB</span></p>
+                                    <p>Capacity:<span className='detail-product__name-option'>{valueCapacity}</span></p>
                                     <div className='detail-product__box-list-option'>
                                         {
-                                            JSON.parse(product.capacity).map((capacity) => {
+                                            JSON.parse(product.capacity).map((capacitytem) => {
                                                 return (
                                                     <label>
                                                         <label>
-                                                            <input type="radio" name='capacity' />
-                                                            <span>{capacity}</span>
+                                                            <input type="radio" name='capacity' value={valueCapacity} onChange={handleChoseOptionCapacity} checked = {selectedOptionCapacity === capacitytem}/>
+                                                            <span>{capacitytem}</span>
                                                         </label>
                                                     </label>
                                                 )
@@ -107,10 +139,10 @@ function DetailProduct({ match }) {
                                 <div className='detail-product__info-quantity'>
                                     <div className='detail-product__info-top'>
                                         <div className='detail-product__info-quantity-detail'>
-                                            <div className='detail-product__btn-dash-quantity'>
+                                            <div className='detail-product__btn-dash-quantity' onClick={handleDecreseQuantity}>
                                             </div>
-                                            <input type="number" name='quantity' />
-                                            <div className='detail-product__btn-plus-quantity'>
+                                            <input type="number" name='quantity' min="0" step="1" onChange={handleChangeQuantity} value={valueQuantity} />
+                                            <div className='detail-product__btn-plus-quantity' onClick={handleIncreseQuantity}>
                                             </div>
                                         </div>
                                         <div className='detail-product__btn-add-cart'>
@@ -145,17 +177,21 @@ function DetailProduct({ match }) {
                         <h3>Description</h3>
                     </div>
                     <div className='detail-product__content-sub-info'>
-                        <div className='detail-product__intro-item'>
+                        {/* <div className='detail-product__intro-item'>
                             <p>The Aspire 5 is a compact laptop in a thin case with a metal cover, a high-quality Full HD IPS display and a rich set of interfaces. Thanks to its powerful components, the laptop can handle resource-intensive tasks perfectly and is also suitable for most games.</p>
-                        </div>
+                        </div> */}
                         <div className='detail-product__key-feature-item'>
                             <p>Key Features:</p>
                             <ul>
-                                <li>slim body with metal cover</li>
-                                <li>latest Intel Core i5-1135G7 processor (4 cores / 8 threads)</li>
-                                <li>8GB DDR4 RAM and fast 512GB PCIe SSD</li>
-                                <li>NVIDIA GeForce MX350 2GB GDDR5 graphics card</li>
-                                <li>backlit keyboard, touchpad with gesture support</li>
+                                {
+                                    JSON.parse(product.description).map((item) => {
+                                        return (
+                                            <li>
+                                                {item}
+                                            </li>
+                                        )
+                                    })
+                                }
                             </ul>
                         </div>
                     </div>

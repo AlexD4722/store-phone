@@ -70,6 +70,16 @@ function ProductFlex(props) {
                             </span>
                         </div>
                         <ul>
+{/* 
+                            {
+                                JSON.parse(props.product.description).map(items => {
+                                    return (
+                                        <li>
+                                            {items}
+                                        </li>
+                                    )
+                                })
+                            } */}
                             <li>Unlocked for All Carriers</li>
                             <li>6.1-inch (15.5 cm diagonal)</li>
                             <li>12MP TrueDepth front camera</li>

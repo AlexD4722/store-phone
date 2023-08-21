@@ -1,5 +1,5 @@
 import '../styles/logo.scss'
-import LogoShop from '../assets/imgs/logo-dark.png'
+import LogoShop from '../assets/imgs/logo-light.png'
 import React from 'react';
 function Logo() {
   return (
