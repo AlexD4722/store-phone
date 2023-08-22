@@ -213,6 +213,11 @@ function Search() {
             default:
                 break;
         }
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        topFunction();
     }, [params.keyword]);
 
     const handleCheckboxChange = (event) => {
@@ -438,6 +443,11 @@ function Search() {
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
         });
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        topFunction();
     }, [isChecked]);
 
     const textMessages = document.querySelector(".messageResponse");
