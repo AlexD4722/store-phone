@@ -42,6 +42,7 @@ function DetailProduct({ match }) {
                             ListPhones[0] && ListPhones[0].selling_price
                         );
                     }
+                    console.log(response.data.productArray);
                     SetProduct(ListPhones);
                     if (ListPhones[0].color) {
                         setValueColor(ListPhones[0].color);
@@ -50,10 +51,10 @@ function DetailProduct({ match }) {
                     let listCapacity = [];
                     if (ListPhones[0].capacity) {
                         setSelectedOptionCapacity(
-                            JSON.parse(ListPhones[0].capacity)[0]
+                            ListPhones[0].capacity
                         );
                         ListPhones.map((phone) => {
-                            listCapacity.push(JSON.parse(phone.capacity)[0]);
+                            listCapacity.push(phone.capacity);
                             setValueCapacity(listCapacity);
                         });
                     }
@@ -102,7 +103,7 @@ function DetailProduct({ match }) {
             }
         }
     };
-    console.log("//////////", product)
+
     return (
         <div className="xo-container">
             <h3>This is product detail</h3>
