@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import { useCartContext } from "../store/hooks";
+import TableProduct from "../components/tableProduct";
+import { Col, Row } from "react-bootstrap";
 
 function Cart() {
     const cart = useCartContext()[0];
-    
+    console.log(">>>>>>>>>",cart)
     return (
         <>
-            Local Cart <br />
-            {cart.map((rLine) => {
-                return (
-                    <p>
-                        {rLine.product.name} {rLine.product.selling_price} x
-                        {rLine.quantity}{" "}
-                        {rLine.product.selling_price * rLine.quantity}
-                    </p>
-                );
-            })}
+            <div className="xo-container">
+                <Row>
+                    <Col xs={12} md={9} lg={9}>
+                        <TableProduct items={cart}/>
+                    </Col>
+                    <Col xs={12} md={3} lg={3}>
+                        <p></p>
+                    </Col>
+                </Row>
+            </div>
         </>
     );
 }

@@ -125,6 +125,10 @@
     color: $color-shop-button;
   }
 }
+.product-card__btn-add--status {
+  background-color: #eff5f2;
+  border-color: #e4f0e9;
+}
 .product-card__footer {
   padding: 0 0.9375rem;
   position: absolute;
@@ -161,7 +165,7 @@
   transition: 0.3s;
   border: 1px solid $color-theme-border;
   background-color: $color-background;
-  i{
+  i {
     font-size: 13px;
     display: inline-flex;
     align-items: center;
@@ -175,4 +179,9 @@
     background-color: #fff3f3;
     border-color: #ffd8d8;
   }
+}
+.product-card__box-wishlist--status {
+  color: red;
+  background-color: #fff3f3;
+  border-color: #ffd8d8;
 }

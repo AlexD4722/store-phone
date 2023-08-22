@@ -6,7 +6,6 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")){
     die("<h1>404 not found</h1>");
 }
 $PT = new ProductTable();
-
 $result = $PT->getProductList();
 if ($result) {
     $return = new APIresponse("Success");

@@ -32,6 +32,7 @@ function ProductFlex(props) {
             }
         }
     };
+    console.log(">>>>>>>>>>>>>>>",props.product.description)
 
     return (
         <div>
@@ -63,26 +64,26 @@ function ProductFlex(props) {
                         </div>
                         <div className="product-flex__price">
                             <span className="product-flex__price-new">
-                                {props.product.selling_price}
+                                ${props.product.selling_price}
                             </span>
                             <span className="product-flex__price-old">
-                                {props.product.inital_price}
+                                ${props.product.inital_price}
                             </span>
                         </div>
                         <ul>
-{/* 
+
                             {
-                                JSON.parse(props.product.description).map(items => {
+                                props.product.description.map(items => {
                                     return (
                                         <li>
                                             {items}
                                         </li>
                                     )
                                 })
-                            } */}
-                            <li>Unlocked for All Carriers</li>
+                            }
+                            {/* <li>Unlocked for All Carriers</li>
                             <li>6.1-inch (15.5 cm diagonal)</li>
-                            <li>12MP TrueDepth front camera</li>
+                            <li>12MP TrueDepth front camera</li> */}
                         </ul>
                     </div>
                 </div>

@@ -32,7 +32,7 @@ function Search() {
         inputSamSung: false,
         inputXiaomi: false,
     });
-    
+
     const handleInputChangeMinPrice = (event) => {
         setMinPrice(event.target.value);
     };
@@ -130,7 +130,12 @@ function Search() {
             case "phone":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputPhone: true,
                     };
                 });
@@ -138,7 +143,12 @@ function Search() {
             case "tablet":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputTablet: true,
                     };
                 });
@@ -146,7 +156,12 @@ function Search() {
             case "SmartWatch":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputSmartWatch: true,
                     };
                 });
@@ -154,7 +169,12 @@ function Search() {
             case "Accessories":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputAccessory: true,
                     };
                 });
@@ -162,7 +182,12 @@ function Search() {
             case "Apple":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputApple: true,
                     };
                 });
@@ -170,7 +195,12 @@ function Search() {
             case "Samsung":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputXiaomi: false,
                         inputSamSung: true,
                     };
                 });
@@ -178,8 +208,13 @@ function Search() {
             case "Xiaomi":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
-                        inputinputXiaomiSamSung: true,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: true,
                     };
                 });
                 break;

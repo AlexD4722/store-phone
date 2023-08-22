@@ -83,7 +83,7 @@ class ProductTable extends Database
                     }
                 }
                 if ($row['status'] == "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], json_decode($row['description']), $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, json_decode($row['color']), $row['capacity'], $row['status']));
+                    array_push($this->data, new Product($row['id'], $row['name'], json_decode($row['description']), $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, json_decode($row['color']), json_decode($row['capacity']), $row['status']));
                 }
             }
         }

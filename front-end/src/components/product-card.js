@@ -1,12 +1,19 @@
+import { useState } from "react";
 import APIrequest, { UPDATE_USER } from "../API/callAPI";
 import { useCartContext, useWishlistContext } from "../store/hooks";
 import "../styles/product-card.scss";
 import React from "react";
-
 function Product(props) {
     const dispatchCart = useCartContext()[1];
     const [wishlist, setWishlist] = useWishlistContext();
-
+    const [buttonAddToCart, setButtonAddToCart] = useState(false);
+    const [buttonAddToWishlish, setButtonAddToWishlish] = useState(false);
+    const addItemToCart = () => {
+        setButtonAddToCart(!buttonAddToCart);
+    };
+    const addItemToWishlist = () => {
+        setButtonAddToWishlish(!buttonAddToWishlish);
+    };
     const handleCart = () => {
         let userObject = JSON.parse(sessionStorage.getItem("user"));
         let localCartUsing = true;
@@ -43,6 +50,7 @@ function Product(props) {
         let loginStatus = sessionStorage.getItem("user");
         let loginData = JSON.parse(loginStatus);
         if (loginData && loginData.login === "OK") {
+            setButtonAddToWishlish(!buttonAddToWishlish);
             if (!wishlist.includes(props.product)) {
                 loginData.user.wishlist = [...wishlist, props.product];
             }
@@ -86,7 +94,7 @@ function Product(props) {
                 </div>
                 <button
                     type="button"
-                    className="product-card__box-wishlist"
+                    className={`product-card__box-wishlist ${buttonAddToWishlish ? "product-card__box-wishlist--status" : ""}`}
                     onClick={handleWishlist}
                 >
                     <i className="bi bi-heart"></i>
@@ -121,7 +129,8 @@ function Product(props) {
                             className="product-card__box-btn-add"
                             onClick={handleCart}
                         >
-                            <div className="product-card__btn-add-cart">
+                            <div className={`product-card__btn-add-cart ${buttonAddToCart ? 'product-card__btn-add--status' : ''}`}
+                                onClick={addItemToCart}>
                                 <i className="bi bi-cart"></i>
                             </div>
                         </div>
