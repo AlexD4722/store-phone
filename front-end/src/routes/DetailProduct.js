@@ -43,7 +43,7 @@ function DetailProduct({ match }) {
                         );
                     }
                     SetProduct(ListPhones);
-                    if (ListPhones[0].color){
+                    if (ListPhones[0].color) {
                         setValueColor(ListPhones[0].color);
                         setSelectedOptionColor(ListPhones[0].color[0]);
                     }
@@ -69,8 +69,6 @@ function DetailProduct({ match }) {
         }
         topFunction();
     }, [params]);
-    console.log("0000000000000000000000000", priceInitall);
-    // console.log("-------------------------------------------------", JSON.parse(product[0].color)[0])
 
     const handleChangeQuantity = (event) => {
         const inputValue = event.target.value;
@@ -104,6 +102,7 @@ function DetailProduct({ match }) {
             }
         }
     };
+    console.log("//////////", product)
     return (
         <div className="xo-container">
             <h3>This is product detail</h3>
@@ -302,7 +301,8 @@ function DetailProduct({ match }) {
                         <div className="detail-product__key-feature-item">
                             <p>Key Features:</p>
                             <ul>
-                                {product[0] &&
+                                {
+                                    product[0] &&
                                     product[0].description &&
                                     product[0].description.map((item) => {
                                         return <li>{item}</li>;
