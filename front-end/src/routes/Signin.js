@@ -2,7 +2,7 @@ import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import APIrequest, { USER_LOGIN, UPDATE_USER } from "../API/callAPI.js";
 import { Link, useNavigate } from "react-router-dom";
-import { useAccountContext, useCartContext, useWishlistContext } from "../store";
+import { useAccountContext, useWishlistContext } from "../store";
 import { useCallback, useState } from "react";
 
 function Signin() {

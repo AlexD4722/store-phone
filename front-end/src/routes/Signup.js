@@ -1,7 +1,8 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_SIGNUP } from "../API/callAPI.js";
+import APIrequest, { USER_SIGNUP, SEND_VALIDATION_EMAIL } from "../API/callAPI.js";
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router";
 
 function Signup() {
     const [validated, setValidated] = useState({});
@@ -9,6 +10,7 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
     const [reenter, setReenter] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = useCallback(
         (e) => {
@@ -68,7 +70,11 @@ function Signup() {
                         };
                     });
                 } else {
-                    window.location.href = "/signup/success";
+                    let user = { username: name, email };
+                    let loginStatus = { login: "none", user };
+                    sessionStorage.setItem("user", JSON.stringify(loginStatus));
+                    APIrequest(SEND_VALIDATION_EMAIL, user);
+                    navigate("email-validation");
                 }
             });
         },

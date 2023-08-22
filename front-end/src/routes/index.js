@@ -9,3 +9,4 @@ export {default as Search} from "./Search.js";
 export {default as NotFound} from "./NotFound.js";
 export {default as Account} from "./Account.js";
 export {default as DetailProduct} from "./DetailProduct.js";
+export {default as EmailValidation} from "./EmailValidation.js";

@@ -67,6 +67,12 @@ switch ($action) {
     case UPDATE_USER:
         require("../controller/update_user.php");
         break;
+    case SEND_VALIDATION_EMAIL:
+        require("../controller/send_validation_email.php");
+        break;
+    case VALIDATE_CODE:
+        require("../controller/validate_code.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

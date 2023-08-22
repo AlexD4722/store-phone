@@ -11,7 +11,7 @@ import APIrequest, {
     testAPI,
 } from "../API/callAPI";
 import { useNavigate, useParams } from "react-router";
-import { useDetailProductContext } from "../store/hooks";
+import { useDetailProductContext, useSearchContext } from "../store/hooks";
 function DetailProduct({ match }) {
     const params = useParams();
     // const [Phones, setPhones] = useDetailProductContext();

@@ -18,10 +18,10 @@ import {
     Signup,
     Search,
     Account,
-    DetailProduct
+    DetailProduct,
+    EmailValidation
 } from "../routes";
-import AddNewProductForm from "../routes/AddNewProduct.js";
-import AddNewProductLineForm from "../routes/AddNewProductLine.js";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -60,16 +60,16 @@ const router = createBrowserRouter([
                 element: <WishList />,
             },
             {
-                path: "/wish-list/product-line",
-                element: <AddNewProductLineForm />,
-            },
-            {
                 path: "/cart",
                 element: <Cart />,
             },
             {
                 path: "/signup",
                 element: <Signup />,
+            },
+            {
+                path: "/signup/email-validation",
+                element: <EmailValidation />
             },
             {
                 path: "*",

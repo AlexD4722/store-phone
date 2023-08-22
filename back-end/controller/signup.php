@@ -5,6 +5,7 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")) {
 
 require_once("../library/classes/user.php");
 require_once("../library/models/userTable.php");
+require_once("../library/models/temporaryUserTable.php");
 
 $UT = new UserTable();
 $data = json_decode($_POST["data"]);
@@ -25,10 +26,12 @@ if (!$result) {
         $response = new APIresponse("Success");
         $response->data->error = "Email existed";
     } else {
-        $user = new User($user, $pass, $email, "customer");
-        $UT->insertUser($user);
+        $TUT = new TemporaryUserTable();
+        $validation_code = mt_rand(100000, 999999);
+        $TUT->insertUser($user, $pass, $email, $validation_code);
         $response = new APIresponse("Success");
         $response->data->result = "Success";
+        $response->data->username = $user;
     }
 }
 

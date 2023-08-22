@@ -13,7 +13,7 @@ import PaginationPage from "../components/pagination";
 
 function Search() {
     const params = useParams();
-    const setSearch = useSearchContext()[1];
+    const [search, setSearch] = useSearchContext();
     const [bgSort, setBgSort] = useState("header-sort__list-selector-detail");
     const [statusBtnFilter, setStatusBtnFilter] = useState();
     const [data, setData] = useState({
@@ -32,7 +32,7 @@ function Search() {
         inputSamSung: false,
         inputXiaomi: false,
     });
-
+    
     const handleInputChangeMinPrice = (event) => {
         setMinPrice(event.target.value);
     };
