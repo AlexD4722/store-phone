@@ -166,6 +166,7 @@
   border: 1px solid $color-theme-border;
   background-color: $color-background;
   i {
+    transition: 0.5s;
     font-size: 13px;
     display: inline-flex;
     align-items: center;
@@ -182,6 +183,11 @@
 }
 .product-card__box-wishlist--status {
   color: red;
-  background-color: #fff3f3;
   border-color: #ffd8d8;
+}
+.product-card__box-wishlist{
+  .bi-heart-fill{
+    color: $color-bs-danger;
+    font-size: 15px;
+  }
 }

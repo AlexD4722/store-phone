@@ -159,3 +159,8 @@
   font-size: 15px;
   color: $color-theme-danger;
 }
+.product-card__price{
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+}
