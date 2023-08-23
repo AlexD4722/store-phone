@@ -23,18 +23,17 @@ function Addons() {
         }
         const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
         const sessionUser = JSON.parse(sessionStorage.getItem("user"));
-        if (sessionCart) {
-            const action = {
-                type: "replace",
-                payload: sessionCart,
-            };
-            dispatchCart(action);
-        }
         if (sessionUser && sessionUser.login === "OK") {
             setAccount(sessionUser.user);
             const action = {
                 type: "replace",
                 payload: sessionUser.user.cart,
+            };
+            dispatchCart(action);
+        } else if (sessionCart) {
+            const action = {
+                type: "replace",
+                payload: sessionCart,
             };
             dispatchCart(action);
         }

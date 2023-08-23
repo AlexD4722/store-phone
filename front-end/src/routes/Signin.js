@@ -22,13 +22,13 @@ function Signin() {
                 if (response.data.result === "Success") {
                     let user = response.data.user;
                     setWishlist(user.wishlist);
-                    let cart = sessionStorage.getItem("cart");
-                    if (cart) {
-                        cart = JSON.parse(cart);
+                    let cart = JSON.parse(sessionStorage.getItem("cart"));
+                    if (!cart){
+                        cart = [];
                     }
-                    if (user.cart && cart) {
+                    if (user.cart.length > 0) {
                         user.cart = [...user.cart, ...cart];
-                    } else if (cart) {
+                    } else {
                         user.cart = [...cart];
                     }
                     const newData = {

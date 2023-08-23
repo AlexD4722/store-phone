@@ -18,6 +18,7 @@ function Account() {
             localStorage.removeItem("user");
         }
         sessionStorage.removeItem("user");
+        sessionStorage.removeItem("cart");
         setAccount({});
         setWishlist([]);
         const action = { type: "replace", payload: [] };

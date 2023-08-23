@@ -35,6 +35,7 @@ function Product(props) {
                     });
                 }
                 userObject.user.cart = userCart;
+                APIrequest(UPDATE_USER, userObject.user);
                 sessionStorage.setItem("user", JSON.stringify(userObject));
                 setWishlist([...wishlist]);
             }
