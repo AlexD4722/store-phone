@@ -1,9 +1,9 @@
 import { Row, Col, ListGroup, Tabs, Tab } from "react-bootstrap";
-import DashboardUserTab from "../components/dashboard-user.js";
-import DashboardInfoTab from "../components/dashboard-info.js";
-import DashboardProductTab from "../components/dashboard-product.js";
-import DashboardOrderTab from "../components/dashboard-order.js";
-import DashboardSettingTab from "../components/dashboard-setting.js";
+import DashboardUserTab from "../section/dashboard-user.js";
+import DashboardInfoTab from "../section/dashboard-info.js";
+import DashboardProductTab from "../section/dashboard-product.js";
+import DashboardOrderTab from "../section/dashboard-order.js";
+import DashboardSettingTab from "../section/dashboard-setting.js";
 
 function Dashboard() {
     return (
