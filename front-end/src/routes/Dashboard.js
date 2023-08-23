@@ -1,51 +1,44 @@
-import { Row, Col, ListGroup, Tab, Navbar } from "react-bootstrap";
-import APIrequest, * as action from "../API/callAPI.js";
-import { useCallback, useState } from "react";
+import { Row, Col, ListGroup, Tabs, Tab } from "react-bootstrap";
+import DashboardUserTab from "../components/dashboard-user.js";
+import DashboardInfoTab from "../components/dashboard-info.js";
+import DashboardProductTab from "../components/dashboard-product.js";
+import DashboardOrderTab from "../components/dashboard-order.js";
+import DashboardSettingTab from "../components/dashboard-setting.js";
 
 function Dashboard() {
-    const [data, setData] = useState([]);
-
     return (
         <>
             <Tab.Container defaultActiveKey="#link1">
                 <Row>
                     <Col sm={2}>
                         <ListGroup>
-                            <ListGroup.Item action href="#link1">
-                                Dashboard
+                            <ListGroup.Item action href="#info">
+                                INFO
                             </ListGroup.Item>
-                            <ListGroup.Item action href="#link2">
+                            <ListGroup.Item action href="#user">
                                 Users
                             </ListGroup.Item>
-                            <ListGroup.Item action href="#link3">
+                            <ListGroup.Item action href="#product">
                                 Products
                             </ListGroup.Item>
-                            <ListGroup.Item action href="#link4">
+                            <ListGroup.Item action href="#order">
                                 Orders
                             </ListGroup.Item>
-                            <ListGroup.Item action href="#link5">
+                            <ListGroup.Item action href="#setting">
                                 Settings
                             </ListGroup.Item>
                         </ListGroup>
                     </Col>
                     <Col sm={8}>
                         <Tab.Content>
-                            <Tab.Pane eventKey="#link1">
-                                Information about website
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="#link2">
-                                User functions
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="#link3">
-                                Product functions
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="#link4">
-                                Order function
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="#link5">Settings</Tab.Pane>
+                            <DashboardInfoTab />
+                            <DashboardUserTab />
+                            <DashboardProductTab />
+                            <DashboardOrderTab />
+                            <DashboardSettingTab />
                         </Tab.Content>
                     </Col>
-                    <Col sm={2}>Hello</Col>
+                    <Col sm={2}>Một cái gì đó linh tinh bên này nữa</Col>
                 </Row>
             </Tab.Container>
         </>
