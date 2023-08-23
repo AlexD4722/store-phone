@@ -32,7 +32,6 @@ function ProductFlex(props) {
             }
         }
     };
-    console.log(">>>>>>>>>>>>>>>",props.product.description)
 
     return (
         <div>

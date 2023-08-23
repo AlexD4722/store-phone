@@ -42,7 +42,6 @@ function DetailProduct({ match }) {
                             ListPhones[0] && ListPhones[0].selling_price
                         );
                     }
-                    console.log(response.data.productArray);
                     SetProduct(ListPhones);
                     if (ListPhones[0].color) {
                         setValueColor(ListPhones[0].color);
@@ -50,9 +49,7 @@ function DetailProduct({ match }) {
                     }
                     let listCapacity = [];
                     if (ListPhones[0].capacity) {
-                        setSelectedOptionCapacity(
-                            ListPhones[0].capacity
-                        );
+                        setSelectedOptionCapacity(ListPhones[0].capacity);
                         ListPhones.map((phone) => {
                             listCapacity.push(phone.capacity);
                             setValueCapacity(listCapacity);
@@ -73,7 +70,6 @@ function DetailProduct({ match }) {
 
     const handleChangeQuantity = (event) => {
         const inputValue = event.target.value;
-        console.log("value", inputValue);
         if (inputValue < 0) {
             setValueQuantity(1);
         } else {
@@ -97,7 +93,7 @@ function DetailProduct({ match }) {
     const handleChoseOptionCapacity = (event) => {
         setSelectedOptionCapacity(event.target.value);
         for (let index = 0; index < product.length; index++) {
-            if (JSON.parse(product[index].capacity)[0] === event.target.value) {
+            if (product[index].capacity[0] === event.target.value) {
                 setPriceSelling(product[index].selling_price);
                 setPriceInitall(product[index].inital_price);
             }
@@ -302,8 +298,7 @@ function DetailProduct({ match }) {
                         <div className="detail-product__key-feature-item">
                             <p>Key Features:</p>
                             <ul>
-                                {
-                                    product[0] &&
+                                {product[0] &&
                                     product[0].description &&
                                     product[0].description.map((item) => {
                                         return <li>{item}</li>;
