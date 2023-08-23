@@ -19,7 +19,8 @@ import {
     Search,
     Account,
     DetailProduct,
-    EmailValidation
+    EmailValidation,
+    Dashboard,
 } from "../routes";
 
 const router = createBrowserRouter([
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/search/:keyword",
-                element: <Search />
+                element: <Search />,
             },
             {
                 path: "/blog",
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
                 element: <Account />,
             },
             {
+                path: "/account/admin-dashboard",
+                element: <Dashboard />,
+            },
+            {
                 path: "/wish-list",
                 element: <WishList />,
             },
@@ -69,7 +74,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/signup/email-validation",
-                element: <EmailValidation />
+                element: <EmailValidation />,
             },
             {
                 path: "*",
@@ -79,9 +84,7 @@ const router = createBrowserRouter([
     },
 ]);
 function App() {
-    return (
-        <RouterProvider router={router} />
-    );
+    return <RouterProvider router={router} />;
 }
 
 export default App;

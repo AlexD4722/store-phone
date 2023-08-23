@@ -4,7 +4,7 @@ import {
     useCartContext,
     useWishlistContext,
 } from "../store";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router";
 
 function Account() {
@@ -25,9 +25,17 @@ function Account() {
         navigate("..");
     }, []);
 
+    const goToDashboard = useCallback(()=>{
+        navigate("admin-dashboard")
+    },[account])
+
     return (
         <>
             Account Page
+            <br />
+            {account.user_type === "admin" && (
+                <Button onClick={goToDashboard}>Admin Dashboard</Button>
+            )}
             <br />
             {Object.keys(account).length > 0 && (
                 <Button onClick={handleSignOut}>Sign out</Button>

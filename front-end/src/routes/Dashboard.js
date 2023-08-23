@@ -1,35 +1,12 @@
-import { Container, Row, Col, ListGroup, Tab, Navbar } from "react-bootstrap";
+import { Row, Col, ListGroup, Tab, Navbar } from "react-bootstrap";
 import APIrequest, * as action from "../API/callAPI.js";
 import { useCallback, useState } from "react";
 
 function Dashboard() {
     const [data, setData] = useState([]);
-    const getData = () => {
-        APIrequest(action.GET_RECEIPTS_BY_CID, { customer_id: 1 })
-            .then((obj) => {
-                if (obj.result === "Success") {
-                    setData(obj.data.receiptArray);
-                }
-            })
-            .catch((err) => console.log(err));
-    }
 
     return (
         <>
-            <Navbar className="bg-body-tertiary">
-                <Container>
-                    <Navbar.Brand>Machic Tech</Navbar.Brand>
-                    <Navbar.Toggle />
-                    <Navbar.Collapse
-                        id="basic-navbar-nav"
-                        className="justify-content-end"
-                    >
-                        <Navbar.Text>Hello, Lam Tran</Navbar.Text>
-                        <Navbar.Text>Icon</Navbar.Text>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-
             <Tab.Container defaultActiveKey="#link1">
                 <Row>
                     <Col sm={2}>
@@ -43,11 +20,7 @@ function Dashboard() {
                             <ListGroup.Item action href="#link3">
                                 Analytics
                             </ListGroup.Item>
-                            <ListGroup.Item
-                                action
-                                href="#link4"
-                                onClick={getData}
-                            >
+                            <ListGroup.Item action href="#link4">
                                 Orders
                             </ListGroup.Item>
                             <ListGroup.Item action href="#link5">
@@ -60,8 +33,8 @@ function Dashboard() {
                     </Col>
                     <Col sm={8}>
                         <Tab.Content>
-                            <Tab.Pane eventKey="#link1">Tab 1</Tab.Pane>
-                            <Tab.Pane eventKey="#link2">Tab 2</Tab.Pane>
+                            <Tab.Pane eventKey="#link1">Information about website</Tab.Pane>
+                            <Tab.Pane eventKey="#link2">User functions</Tab.Pane>
                             <Tab.Pane eventKey="#link3">Tab 3</Tab.Pane>
                             <Tab.Pane eventKey="#link4">
                                 {data.map((receipt, index) => {
