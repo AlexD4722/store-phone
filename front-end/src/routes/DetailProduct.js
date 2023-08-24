@@ -2,6 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "../styles/detail-product.scss";
+import "../styles/showMessage.scss";
 import Carousel from "react-bootstrap/Carousel";
 
 import { useEffect, useState } from "react";
@@ -13,11 +14,12 @@ import APIrequest, {
 } from "../API/callAPI";
 import { useNavigate, useParams } from "react-router";
 import { useCartContext, useDetailProductContext, useSearchContext, useWishlistContext } from "../store/hooks";
+import { Link } from "react-router-dom";
 
 
 function DetailProduct({ match }) {
     const params = useParams();
-    // const [Phones, setPhones] = useDetailProductContext();
+    const [showMessage, setShowMessage] = useState(false);
     const [priceInitall, setPriceInitall] = useState();
     const [priceSelling, setPriceSelling] = useState();
     const [dataRequest, setDataRequest] = useState();
@@ -31,6 +33,15 @@ function DetailProduct({ match }) {
     const [wishlist, setWishlist] = useWishlistContext();
     const dispatchCart = useCartContext()[1];
     const navigate = useNavigate();
+    const displayMessage = () => {
+        setShowMessage(true);
+        setTimeout(() => {
+            setShowMessage(false);
+        }, 3000);
+    };
+    const closeMessage = () => {
+        setShowMessage(false);
+    };
     const handleCart = () => {
         // const itemChoose = {
         //     id: product[0].id,
@@ -80,6 +91,7 @@ function DetailProduct({ match }) {
                 }
             })
         }
+        displayMessage();
     };
 
     //////////////////////////////////////
@@ -369,6 +381,22 @@ function DetailProduct({ match }) {
                     </div>
                 </div>
             </div>
+            {
+                showMessage ?
+                    <div className="showMessage">
+                        <div className="showMessage__box">
+                            <p className="showMessage__content">“{product[0].name} {selectedOptionCapacity} {selectedOptionColor}” has been added to your cart.</p>
+                            <div className="showMessage__close" onClick={closeMessage}>
+                                <i class="bi bi-x"></i>
+                            </div>
+                            <Link to="/cart"className="showMessage__link">
+                                <div className="showMessage__view-more"><p>View more</p></div>
+                            </Link>
+                        </div>
+                    </div>
+                    : ""
+            }
+
         </div>
     );
 }

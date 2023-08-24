@@ -6,7 +6,7 @@ function reducer(state, action) {
             newState.forEach((productLine) => {
                 if (productLine.product.id === action.payload.product.id && productLine.color === action.payload.color) {
                     productLine.quantity += action.payload.quantity;
-                    productLine.totalPrice = parseFloat(productLine.totalPrice) * parseFloat(productLine.quantity)
+                    productLine.totalPrice = parseFloat(productLine.product.selling_price) * parseFloat(productLine.quantity)
                     found = true;
                 }
             });
