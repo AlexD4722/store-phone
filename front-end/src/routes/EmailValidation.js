@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import APIrequest, { VALIDATE_CODE, testAPI } from "../API/callAPI";
+import APIrequest, { VALIDATE_CODE } from "../API/callAPI";
 
 function EmailValidation() {
     const navigate = useNavigate();
@@ -11,31 +11,34 @@ function EmailValidation() {
 
     useEffect(() => {
         const loginStatus = JSON.parse(sessionStorage.getItem("user"));
-        if ((!loginStatus) || loginStatus.login !== "none"){
+        if (!loginStatus || loginStatus.login !== "none") {
             navigate("404notfound");
         }
     }, []);
 
-    const handleSubmitCode = useCallback((e) => {
-        e.preventDefault();
+    const handleSubmitCode = useCallback(
+        (e) => {
+            e.preventDefault();
 
-        const loginStatus = JSON.parse(sessionStorage.getItem("user"));
-        setEmail(loginStatus.user.email);
-        const data = {
-            username: loginStatus.user.username,
-            email: loginStatus.user.email,
-            validation_code: code,
-        };
-        APIrequest(VALIDATE_CODE, data).then((response) => {
-            if (response.result === "Success") {
-                if (response.data.result === "Success") {
-                    navigate("success");
-                } else {
-                    setResult("Validation code is not correct!");
+            const loginStatus = JSON.parse(sessionStorage.getItem("user"));
+            setEmail(loginStatus.user.email);
+            const data = {
+                username: loginStatus.user.username,
+                email: loginStatus.user.email,
+                validation_code: code,
+            };
+            APIrequest(VALIDATE_CODE, data).then((response) => {
+                if (response.result === "Success") {
+                    if (response.data.result === "Success") {
+                        navigate("success");
+                    } else {
+                        setResult("Validation code is not correct!");
+                    }
                 }
-            }
-        });
-    }, [code]);
+            });
+        },
+        [code]
+    );
 
     return (
         <>

@@ -20,12 +20,12 @@ $result = $TUT->getUser($username);
 if ($result) {
     $return = new APIresponse("Success");
     $temp_user = $TUT->data;
-    if ($temp_user != NULL){
-        if ($validation_code == $temp_user->validation_code){
-           $return->data->result = "Success";
-           $new_user = new User($temp_user->username, $temp_user->password, $temp_user->email, "customer");
-           $UT->insertUser($new_user);
-           $TUT->deleteUser($username);
+    if ($temp_user != NULL) {
+        if ($validation_code == $temp_user->validation_code) {
+            $return->data->result = "Success";
+            $new_user = new User($temp_user->username, $temp_user->password, $temp_user->email, $temp_user->phone, $temp_user->address, "customer");
+            $UT->insertUser($new_user);
+            $TUT->deleteUser($username);
         } else {
             $return->data->result = "Failed";
         }

@@ -7,39 +7,48 @@ function UserInformation() {
     const [name, setName] = useState("");
     const [user, setUser] = useState({});
     const [result, setResult] = useState("");
-    const [result2, setResult2] = useState("")
+    const [result2, setResult2] = useState("");
 
-    const handleSearch = useCallback((e) => {
-        e.preventDefault();
-        const data = { username: name };
-        APIrequest(FIND_USER_TO_UPDATE, data).then((response) => {
-            if (response.result === "Success") {
-                if (response.data.result === "Success") {
-                    setUser(response.data.user);
-                    setDisable(false);
+    const handleSearch = useCallback(
+        (e) => {
+            e.preventDefault();
+            const data = { username: name };
+            APIrequest(FIND_USER_TO_UPDATE, data).then((response) => {
+                if (response.result === "Success") {
+                    if (response.data.result === "Success") {
+                        setUser(response.data.user);
+                        setDisable(false);
+                    } else {
+                        setResult("Can't find user");
+                    }
                 } else {
-                    setResult("Can't find user");
-                    
+                    setResult("Can't connect to database");
                 }
-            } else {
-                setResult("Can't connect to database");
-            }
-        });
-    }, []);
+            });
+        },
+        [name]
+    );
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        APIrequest(UPDATE_USER, user).then((response) => {
-            if (response.result === "Success"){
-                if (response.data.result === "Success"){
-                    alert("Edit successful")
-                    setDisable(true);
+        if (user.phone.length > 11) {
+            setResult2("Phone number is too long");
+            return;
+        } else {
+            APIrequest(UPDATE_USER, user).then((response) => {
+                if (response.result === "Success") {
+                    if (response.data.result === "Success") {
+                        alert("Edit successful");
+                        setDisable(true);
+                    } else {
+                        setResult2("Can't edit user information");
+                    }
+                } else {
+                    setResult2("Can't connect to database");
                 }
-            } else {
-                setResult2("Can't connect to database");
-            }
-        })
-    }
+            });
+        }
+    };
 
     return (
         <>
@@ -61,8 +70,8 @@ function UserInformation() {
                     <Form.Label>ID</Form.Label>
                     <Form.Control
                         type="number"
-                        disabled={true}
-                        value={user.id}
+                        disabled
+                        defaultValue={user.id}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3">

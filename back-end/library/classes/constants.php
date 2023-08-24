@@ -10,6 +10,7 @@ define("USER_SIGNUP", 103);
 define("UPDATE_USER", 104);
 define("VALIDATE_CODE", 105);
 define("SEND_VALIDATION_EMAIL", 106);
+define("FIND_USER_TO_UPDATE", 107);
 define("INSERT_RECEIPT", 201);
 define("DONE_RECEIPT", 202);
 define("GET_ALL_PRODUCTS", 301);

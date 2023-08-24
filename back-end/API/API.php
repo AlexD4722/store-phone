@@ -73,6 +73,9 @@ switch ($action) {
     case VALIDATE_CODE:
         require("../controller/validate_code.php");
         break;
+    case FIND_USER_TO_UPDATE:
+        require("../controller/find_user.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

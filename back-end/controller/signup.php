@@ -13,6 +13,8 @@ $data = json_decode($_POST["data"]);
 $user = $UT->test_input($data->username);
 $pass = $UT->test_input($data->password);
 $email = $UT->test_input($data->email);
+$phone = $UT->test_input($data->phone);
+$address = $UT->test_input($data->address);
 
 $result = $UT->checkUser($user);
 if (!$result) {
@@ -28,7 +30,7 @@ if (!$result) {
     } else {
         $TUT = new TemporaryUserTable();
         $validation_code = mt_rand(100000, 999999);
-        $TUT->insertUser($user, $pass, $email, $validation_code);
+        $TUT->insertUser($user, $pass, $email, $phone, $address, $validation_code);
         $response = new APIresponse("Success");
         $response->data->result = "Success";
         $response->data->username = $user;

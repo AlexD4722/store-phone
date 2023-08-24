@@ -54,7 +54,7 @@ class UserTable extends Database
     public function insertUser(User $user)
     {
         $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?, ?, ?, ?, ?)";
-        $params = [$user->username, $user->password, $user->user_type, $user->email, $user->phone, $user->address, json_encode($user->wishlist), json_encode($user->cart)];
+        $params = [$user->username, $user->password, $user->user_type, $user->email, json_encode($user->wishlist), json_encode($user->cart), $user->phone, $user->address];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
