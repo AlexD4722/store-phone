@@ -2,180 +2,221 @@ import { Link } from 'react-router-dom';
 import '../styles/table-product.scss';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useCartContext } from '../store';
 function TableProduct(props) {
     const [valueQuantity, setValueQuantity] = useState(1);
     const [cart, setCart] = useState([]);
-    // const [valueQuantity, setValueQuantity] = useState(props);
-    const listReceipt = [];
-    props.items.map((item, index) => {
-        listReceipt.push(
-            {
-                id: item.product.id,
-                images: item.product.images,
-                name: item.product.name,
-                color: item.product.color,
-                capacity: item.product.capacity,
-                selling_price: item.product.selling_price,
-                quantity: item.quantity,
-                totalPrice: parseFloat(item.product.selling_price) * parseFloat(item.quantity),
-            }
-        )
-    });
-
+    const [carts, dispatch] = useCartContext();
     useEffect(() => {
-        if (listReceipt) {
-            setCart(listReceipt);
+        if (props.items) {
+            setCart(props.items);
         }
-
     }, [props])
-    // const test = document.querySelector(".table-product__btn-plus-quantity");
-    // test.addEventListener("click", ("4") => {
-    //     console.log("okokeokkoke")
-    // });
 
-
-    const increaseQuantity = (productId) => {
-        setCart(prevProducts =>
-            prevProducts.map(product => {
-                if (product.id === productId) {
+    const increaseQuantity = (productId, colorId) => {
+        console.log("product ID", productId)
+        setCart(prevProducts => {
+            const lists = prevProducts.map(item => {
+                if (item.product.id === productId && item.color === colorId) {
                     return {
-                        ...product,
-                        quantity: product.quantity + 1,
-                        totalPrice: parseFloat(product.selling_price) * parseFloat(product.quantity + 1),
+                        ...item,
+                        product: item.product,
+                        quantity: parseInt(item.quantity) + 1,
+                        totalPrice: parseFloat(item.product.selling_price) * parseFloat(item.quantity + 1),
                     };
                 }
-                return product;
+                return item;
             })
+            const localUser = localStorage.getItem("user");
+            const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+            sessionStorage.setItem("cart", JSON.stringify(lists));
+            if (sessionUser && sessionUser.login === "OK") {
+                sessionUser.user.cart = lists;
+                sessionStorage.setItem("user", JSON.stringify(sessionUser));
+            }
+            if (localUser) {
+                localStorage.setItem("user", sessionUser);
+            }
+            let action = { type: "replace", payload: lists };
+            dispatch(action);
+            return lists;
+        }
         );
+
     };
-    const decreaseQuantity = (productId) => {
-        setCart(prevProducts =>
-            prevProducts.map(product => {
-                if (product.id === productId && product.quantity > 1) {
+    const decreaseQuantity = (productId, colorId) => {
+        setCart(prevProducts => {
+            const lists = prevProducts.map(item => {
+                if (item.product.id === productId && item.color === colorId && item.quantity > 1) {
                     return {
-                        ...product,
-                        quantity: product.quantity - 1,
-                        totalPrice: parseFloat(product.selling_price) * parseFloat(product.quantity - 1)
+                        ...item,
+                        product: item.product,
+                        quantity: item.quantity - 1,
+                        totalPrice: parseFloat(item.product.selling_price) * parseFloat(item.quantity - 1)
                     };
                 }
-                return product;
+                return item;
             })
-        );
+            const localUser = localStorage.getItem("user");
+            const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+            sessionStorage.setItem("cart", JSON.stringify(lists));
+            if (sessionUser && sessionUser.login === "OK") {
+                sessionUser.user.cart = lists;
+                sessionStorage.setItem("user", JSON.stringify(sessionUser));
+            }
+            if (localUser) {
+                localStorage.setItem("user", sessionUser);
+            }
+            let action = { type: "replace", payload: lists };
+            dispatch(action);
+            return lists;
+        });
     };
-    const handleChangeQuantity = (productId, newQuantity) => {
+    const handleBlurChangeQuantity = (productId, newQuantity, colorID) => {
         setCart(prevProducts =>
-            prevProducts.map(product => {
-                if (product.id === productId) {
+            prevProducts.map(item => {
+                if (item.product.id === productId && item.color === colorID) {
                     if (newQuantity <= 0) {
                         return {
-                            ...product,
+                            ...item,
+                            product: item.product,
                             quantity: 1,
-                            totalPrice: parseFloat(product.selling_price) * parseFloat(1),
+                            totalPrice: parseFloat(item.product.selling_price) * parseFloat(1),
+                        };
+                    }
+                }
+                return item;
+            })
+        );
+    }
+    const handleChangeQuantity = (productId, newQuantity, colorID) => {
+        setCart(prevProducts => {
+            const lists = prevProducts.map(item => {
+                if (item.product.id === productId && item.color === colorID) {
+                    if (newQuantity < 0) {
+                        return {
+                            ...item,
+                            product: item.product,
+                            quantity: 1,
+                            totalPrice: parseFloat(item.product.selling_price) * parseFloat(1),
                         };
                     }
                     return {
-                        ...product,
+                        ...item,
+                        product: item.product,
                         quantity: newQuantity,
-                        totalPrice: parseFloat(product.selling_price) * parseFloat(newQuantity),
+                        totalPrice: parseFloat(item.product.selling_price) * parseFloat(newQuantity),
                     };
                 }
-                return product;
+                return item;
             })
+            const localUser = localStorage.getItem("user");
+            const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+            sessionStorage.setItem("cart", JSON.stringify(lists));
+            if (sessionUser && sessionUser.login === "OK") {
+                sessionUser.user.cart = lists;
+                sessionStorage.setItem("user", JSON.stringify(sessionUser));
+            }
+            if (localUser) {
+                localStorage.setItem("user", sessionUser);
+            }
+            let action = { type: "replace", payload: lists };
+            dispatch(action);
+            return lists;
+        }
         );
     };
     const calculateTotalPrice = () => {
         return cart.reduce((total, product) => total + product.totalPrice, 0);
     };
-
-    // console.log("cart", cart)
-    // const increaseQuantity = (productId) => {
-    //     console.log("running", productId);
-    // };
-
-
-
-    // const handleChangeQuantity = (event,idProduct) => {
-    //     const inputValue = event.target.value;
-    //     cart.map((item)=>{
-    //         if(item.quantity === idProduct){
-    //             console.log("it is id of: ",item.quantity)
-    //         }
-    //     })
-    //     if (inputValue < 0) {
-    //         setValueQuantity(1);
-    //     } else {
-    //         setValueQuantity(inputValue);
-    //     }
-    // };
-    // const handleDecreseQuantity = (event) => {
-    //     if (parseInt(valueQuantity) < 0 || !valueQuantity) {
-    //         setValueQuantity(1);
-    //     }
-    //     if (valueQuantity >= 2) {
-    //         setValueQuantity((prevValue) => prevValue - 1);
-    //     }
-    // };
+    const handleRemoveItem = (productId, colorID) => {
+        setCart(prevProducts => {
+            const lists = prevProducts.filter(item => (item.product.id !== productId) ||     (item.color !== colorID));
+            const localUser = localStorage.getItem("user");
+            const sessionUser = JSON.parse(sessionStorage.getItem("user"));
+            sessionStorage.setItem("cart", JSON.stringify(lists));
+            if (sessionUser && sessionUser.login === "OK") {
+                sessionUser.user.cart = lists;
+                sessionStorage.setItem("user", JSON.stringify(sessionUser));
+            }
+            if (localUser) {
+                localStorage.setItem("user", sessionUser);
+            }
+            let action = { type: "replace", payload: lists };
+            dispatch(action);
+            return lists;
+        }
+        );
+    };
+    console.log("cart>>>>>>>>>>", cart)
     return (
-        <table className='table-product'>
-            <thead>
-                <tr>
-                    <th className='table-product__colum-product'>Product</th>
-                    <th className='table-product__colum-pice'>Price</th>
-                    <th className='table-product__colum-quantity'>Quantity</th>
-                    <th className='table-product__colum-subtotal'>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    cart && cart.map((item, index) => {
-                        console.log(item, "||||||||||||||")
-                        return (
-                            <tr className='table-product__row-item' key={index}>
-                                <td className='table-product__value-product' data-label="Product:">
-                                    <div className='table-product__img-item'>
-                                        <div className='table-product__img-detail'>
-                                            <img src={item.images[0]} alt="images product" />
+        <div>
+            <table className='table-product'>
+                <thead>
+                    <tr>
+                        <th className='table-product__colum-product'>Product</th>
+                        <th className='table-product__colum-pice'>Price</th>
+                        <th className='table-product__colum-quantity'>Quantity</th>
+                        <th className='table-product__colum-subtotal'>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        cart && cart.map((item, index) => {
+                            console.log(item.product, "||||||||||||||")
+                            return (
+                                <tr className='table-product__row-item' key={index}>
+                                    <td className='table-product__value-product' data-label="Product:">
+                                        <div className='table-product__img-item'>
+                                            <div className='table-product__img-detail'>
+                                                <img src={item.product.images[0]} alt="images product" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className='table-product__title-item'>
-                                        <Link>
-                                            <h3>{item.name} {item.capacity} {item.color}</h3>
-                                        </Link>
-                                    </div>
-                                </td>
-                                <td className='table-product__value-pice' data-label="Price:">
-                                    <p><span>$</span>{item.selling_price}</p>
-                                </td>
-                                <td className='table-product__value-quantity' data-label="Quantity:">
-                                    <div className="table-product__info-quantity-detail">
-                                        <div
-                                            className="table-product__btn-dash-quantity"
-                                            onClick={() => decreaseQuantity(item.id)}
-                                        ></div>
-                                        <input
-                                            type="number"
-                                            name="quantity"
-                                            min="0"
-                                            step="1"
-                                            onChange={(e) => {
-                                                const newValue = e.target.value;
-                                                handleChangeQuantity(item.id, newValue)
-                                            }}
-                                            value={item.quantity}
-                                        />
-                                        <div
-                                            onClick={() => increaseQuantity(item.id)}
-                                            className="table-product__btn-plus-quantity"
-                                        ></div>
-                                    </div>
-                                </td>
-                                <td className='table-product__value-subtotal' data-label="Subtotal:"><span>$</span>{item.totalPrice}</td>
-                                <td className='table-product__btn-remove' data-label=""><span>Remove</span></td>
-                            </tr>
-                        )
-                    })
-                }
-            </tbody>
+                                        <div className='table-product__title-item'>
+                                            <Link>
+                                                <h3>{item.product.name} {item.product.capacity} {item.color}</h3>
+                                            </Link>
+                                        </div>
+                                    </td>
+                                    <td className='table-product__value-pice' data-label="Price:">
+                                        <p><span>$</span>{item.product.selling_price}</p>
+                                    </td>
+                                    <td className='table-product__value-quantity' data-label="Quantity:">
+                                        <div className="table-product__info-quantity-detail">
+                                            <div
+                                                className="table-product__btn-dash-quantity"
+                                                onClick={() => decreaseQuantity(item.product.id, item.color)}
+                                            ></div>
+                                            <input
+                                                type="number"
+                                                name="quantity"
+                                                min="0"
+                                                step="1"
+                                                onChange={(e) => {
+                                                    const newValue = e.target.value;
+                                                    handleChangeQuantity(item.product.id, newValue, item.color)
+                                                }}
+                                                onBlur={(e) => {
+                                                    const newValue = e.target.value;
+                                                    handleBlurChangeQuantity(item.product.id, newValue, item.color)
+                                                }}
+
+                                                value={item.quantity}
+                                            />
+                                            <div
+                                                onClick={() => increaseQuantity(item.product.id, item.color)}
+                                                className="table-product__btn-plus-quantity"
+                                            ></div>
+                                        </div>
+                                    </td>
+                                    <td className='table-product__value-subtotal' data-label="Subtotal:"><span>$</span>{item.totalPrice}</td>
+                                    <td className='table-product__btn-remove' data-label=""><span onClick={() => handleRemoveItem(item.product.id, item.color)}>Remove</span></td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
             <div className="cart-totals__box-comp">
                 <div className="cart-totals__name-comp cart-totals__name-comp--total">
                     <h4>Total</h4>
@@ -184,7 +225,7 @@ function TableProduct(props) {
                     </div>
                 </div>
             </div>
-        </table>
+        </div>
     )
 }
 

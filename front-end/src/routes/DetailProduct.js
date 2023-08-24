@@ -25,21 +25,22 @@ function DetailProduct({ match }) {
     const [valueQuantity, setValueQuantity] = useState(1);
     const [valueColor, setValueColor] = useState([]);
     const [valueCapacity, setValueCapacity] = useState([]);
+    const [idChooseItem, setIdChooseItem] = useState();
     const [selectedOptionColor, setSelectedOptionColor] = useState();
     const [selectedOptionCapacity, setSelectedOptionCapacity] = useState();
     const [wishlist, setWishlist] = useWishlistContext();
     const dispatchCart = useCartContext()[1];
     const navigate = useNavigate();
     const handleCart = () => {
-        const itemChoose = {
-            id: product[0].id,
-            name: product[0].name,
-            images: product[0].images,
-            inital_price: product[0].inital_price,
-            selling_price: product[0].selling_price,
-            capacity: product[0].capacity,
-            color: selectedOptionColor,
-        } 
+        // const itemChoose = {
+        //     id: product[0].id,
+        //     name: product[0].name,
+        //     images: product[0].images,
+        //     inital_price: product[0].inital_price,
+        //     selling_price: product[0].selling_price,
+        //     capacity: product[0].capacity,
+        //     color: selectedOptionColor,
+        // } 
         let userObject = JSON.parse(sessionStorage.getItem("user"));
         let localCartUsing = true;
         if (userObject) {
@@ -66,9 +67,18 @@ function DetailProduct({ match }) {
             }
         }
         if (localCartUsing) {
-            let payload = { product: itemChoose, quantity: valueQuantity };
-            let action = { type: "add", payload };
-            dispatchCart(action);
+            product.map((item) => {
+                if (item.id === idChooseItem) {
+                    let payload = {
+                        product: item,
+                        quantity: valueQuantity,
+                        color: selectedOptionColor,
+                        totalPrice: parseFloat(priceSelling)
+                    };
+                    let action = { type: "add", payload };
+                    dispatchCart(action);
+                }
+            })
         }
     };
 
@@ -98,6 +108,7 @@ function DetailProduct({ match }) {
                     let listCapacity = [];
                     if (ListPhones[0].capacity) {
                         setSelectedOptionCapacity(ListPhones[0].capacity);
+                        setIdChooseItem(ListPhones[0].id)
                         ListPhones.map((phone) => {
                             listCapacity.push(phone.capacity);
                             setValueCapacity(listCapacity);
@@ -140,14 +151,16 @@ function DetailProduct({ match }) {
     };
     const handleChoseOptionCapacity = (event) => {
         setSelectedOptionCapacity(event.target.value);
+        console.log("event ----", event.target.value)
         for (let index = 0; index < product.length; index++) {
-            if (product[index].capacity[0] === event.target.value) {
+            console.log("product[index].capacity[0] ----", product[index].capacity)
+            if (product[index].capacity === event.target.value) {
                 setPriceSelling(product[index].selling_price);
                 setPriceInitall(product[index].inital_price);
+                setIdChooseItem(product[index].id)
             }
         }
     };
-    console.log("product...",product[0])
     return (
         <div className="xo-container">
             <h3>This is product detail</h3>

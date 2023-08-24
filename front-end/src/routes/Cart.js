@@ -5,7 +5,7 @@ import { Col, Row } from "react-bootstrap";
 
 function Cart() {
     const cart = useCartContext()[0];
-    console.log(">>>>>>>>>", cart)
+    console.log("cart>>>>>>>>",cart)
     return (
         <>
             <div className="xo-container">
