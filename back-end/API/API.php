@@ -76,6 +76,9 @@ switch ($action) {
     case FIND_USER_TO_UPDATE:
         require("../controller/find_user.php");
         break;
+    case ADD_NEW_USER:
+        require("../controller/add_new_user.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

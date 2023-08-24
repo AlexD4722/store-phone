@@ -67,7 +67,13 @@ function Signup() {
             if (stop) {
                 return;
             }
-            const data = { username: name, password: pass, email, phone, address };
+            const data = {
+                username: name,
+                password: pass,
+                email,
+                phone,
+                address,
+            };
             APIrequest(USER_SIGNUP, data).then((obj) => {
                 if (obj.result === "Failed") {
                     setValidated((prev) => {
@@ -84,7 +90,12 @@ function Signup() {
                         };
                     });
                 } else {
-                    let user = { username: name, email };
+                    let user = {
+                        username: name,
+                        email,
+                        wishlist: [],
+                        cart: [],
+                    };
                     let loginStatus = { login: "none", user };
                     sessionStorage.setItem("user", JSON.stringify(loginStatus));
                     APIrequest(SEND_VALIDATION_EMAIL, user);
