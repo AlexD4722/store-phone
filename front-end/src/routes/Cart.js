@@ -13,14 +13,6 @@ function Cart() {
                     <Col xs={12}>
                         <TableProduct items={cart} />
                     </Col>
-                    <div className="cart-totals__box-comp">
-                        <div className="cart-totals__name-comp cart-totals__name-comp--total">
-                            <h4>Total</h4>
-                            <div className="cart-totals__total-price">
-                                <p><span>$</span>100</p>
-                            </div>
-                        </div>
-                    </div>
                     {/* <Col xs={12} md={3} lg={3}>
                         <div className="cart-totals">
                             <div className="cart-totals__title-box">

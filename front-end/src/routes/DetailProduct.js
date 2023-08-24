@@ -8,10 +8,13 @@ import { useEffect, useState } from "react";
 import APIrequest, {
     GET_ALL_PRODUCTS,
     SEARCH_ITEM_EXACTLY,
+    UPDATE_USER,
     testAPI,
 } from "../API/callAPI";
 import { useNavigate, useParams } from "react-router";
-import { useDetailProductContext, useSearchContext } from "../store/hooks";
+import { useCartContext, useDetailProductContext, useSearchContext, useWishlistContext } from "../store/hooks";
+
+
 function DetailProduct({ match }) {
     const params = useParams();
     // const [Phones, setPhones] = useDetailProductContext();
@@ -24,7 +27,52 @@ function DetailProduct({ match }) {
     const [valueCapacity, setValueCapacity] = useState([]);
     const [selectedOptionColor, setSelectedOptionColor] = useState();
     const [selectedOptionCapacity, setSelectedOptionCapacity] = useState();
+    const [wishlist, setWishlist] = useWishlistContext();
+    const dispatchCart = useCartContext()[1];
     const navigate = useNavigate();
+    const handleCart = () => {
+        const itemChoose = {
+            id: product[0].id,
+            name: product[0].name,
+            images: product[0].images,
+            inital_price: product[0].inital_price,
+            selling_price: product[0].selling_price,
+            capacity: product[0].capacity,
+            color: selectedOptionColor,
+        } 
+        let userObject = JSON.parse(sessionStorage.getItem("user"));
+        let localCartUsing = true;
+        if (userObject) {
+            if (userObject.login === "OK") {
+                localCartUsing = false;
+                let found = false;
+                let userCart = userObject.user.cart;
+                userCart.forEach((value) => {
+                    if (value.product.id === product.product.id) {
+                        value.quantity += 1;
+                        found = true;
+                    }
+                });
+                if (!found) {
+                    userCart.push({
+                        product: product.product,
+                        quantity: 1,
+                    });
+                }
+                userObject.user.cart = userCart;
+                APIrequest(UPDATE_USER, userObject.user);
+                sessionStorage.setItem("user", JSON.stringify(userObject));
+                setWishlist([...wishlist]);
+            }
+        }
+        if (localCartUsing) {
+            let payload = { product: itemChoose, quantity: valueQuantity };
+            let action = { type: "add", payload };
+            dispatchCart(action);
+        }
+    };
+
+    //////////////////////////////////////
     useEffect(() => {
         let newData = {
             search: params.nameProduct,
@@ -99,7 +147,7 @@ function DetailProduct({ match }) {
             }
         }
     };
-
+    console.log("product...",product[0])
     return (
         <div className="xo-container">
             <h3>This is product detail</h3>
@@ -253,7 +301,7 @@ function DetailProduct({ match }) {
                                             ></div>
                                         </div>
                                         <div className="detail-product__btn-add-cart">
-                                            <button type="submit">
+                                            <button type="button" onClick={handleCart}>
                                                 <span className="detail-product__btn-add-cart-content">
                                                     Add to cart
                                                 </span>
