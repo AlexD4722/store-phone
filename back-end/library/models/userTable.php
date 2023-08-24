@@ -41,7 +41,7 @@ class UserTable extends Database
             $data = $this->pdo_stm->fetchAll();
             $arr = [];
             foreach ($data as $row) {
-                $one = new User($row["username"], $row["password"], $row["email"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
+                $one = new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
                 $one->id = $row["id"];
                 array_push($arr, $one);
             }
@@ -53,8 +53,8 @@ class UserTable extends Database
     //Dữ liệu trả về dạng mảng các object User.
     public function insertUser(User $user)
     {
-        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?, ?, ?)";
-        $params = [$user->username, $user->password, $user->user_type, $user->email, json_encode($user->wishlist), json_encode($user->cart)];
+        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?, ?, ?, ?, ?)";
+        $params = [$user->username, $user->password, $user->user_type, $user->email, $user->phone, $user->address, json_encode($user->wishlist), json_encode($user->cart)];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
@@ -71,14 +71,15 @@ class UserTable extends Database
 
     public function editUser($id, User $user)
     {
-        $sql = "UPDATE user SET username = ?, email = ?, cart = ?, wishlist = ?, user_type = ? WHERE id=?";
-        $params = [$user->username, $user->email, json_encode($user->cart), json_encode($user->wishlist), $user->user_type, $id];
+        $sql = "UPDATE user SET username = ?, email = ?, phone = ?, address = ?, cart = ?, wishlist = ?, user_type = ? WHERE id=?";
+        $params = [$user->username, $user->email, $user->phone, $user->address, json_encode($user->cart), json_encode($user->wishlist), $user->user_type, $id];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
     //hàm edit user theo id
 
-    public function editUserPassword($id, $pass){
+    public function editUserPassword($id, $pass)
+    {
         $sql = "UPDATE user SET password = ? WHERE id = ?";
         $params = [$pass, $id];
         $result = $this->SQLexec($sql, $params);

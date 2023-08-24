@@ -4,6 +4,7 @@ export const USER_SIGNUP = 103;
 export const UPDATE_USER = 104;
 export const VALIDATE_CODE = 105;
 export const SEND_VALIDATION_EMAIL = 106;
+export const FIND_USER_TO_UPDATE = 107;
 export const INSERT_RECEIPT = 201;
 export const DONE_RECEIPT = 202;
 export const GET_ALL_PRODUCTS = 301;

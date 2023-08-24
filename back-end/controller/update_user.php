@@ -10,7 +10,7 @@ $data = json_decode($_POST["data"]);
 
 $result = $UT->getUser('', '', '', '', $data->id);
 if (count($UT->data) === 1){
-    $user = new User($data->username, $UT->data->password, $data->email, $data->user_type, $data->wishlist, $data->cart);
+    $user = new User($data->username, $UT->data->password, $data->email, $data->phone, $data->address, $data->user_type, $data->wishlist, $data->cart);
     $result = $UT->editUser($data->id, $user);
     if ($result){
         $return = new APIresponse("Success");
