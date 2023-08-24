@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useCartContext } from "../store/hooks";
 import TableProduct from "../components/tableProduct";
 import { Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import '../styles/cart-page.scss'
 
 function Cart() {
     const cart = useCartContext()[0];
-    console.log("cart>>>>>>>>",cart)
+    console.log("cart>>>>>>>>", cart)
     return (
         <>
             <div className="xo-container">
@@ -41,6 +43,15 @@ function Cart() {
                         </div>
                     </Col> */}
                 </Row>
+                <Link to="/checkOut">
+                    <div className="cart-page__box-btn-footer">
+                        <button type="button" className="cart-page__btn-checkout">
+                            <span className="cart-page__btn-checkout-content">
+                                checkout
+                            </span>
+                        </button>
+                    </div>
+                </Link>
             </div>
         </>
     );

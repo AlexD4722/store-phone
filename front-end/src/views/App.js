@@ -22,6 +22,7 @@ import {
     EmailValidation,
     Dashboard,
 } from "../routes";
+import CheckOut from "../routes/Checkout";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: "/account/admin-dashboard",
                 element: <Dashboard />,
+            },
+            {
+                path: "/checkout",
+                element: <CheckOut />,
             },
             {
                 path: "/wish-list",
