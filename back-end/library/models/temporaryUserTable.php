@@ -14,12 +14,12 @@ class TemporaryUserTable extends Database
         $params = [$username];
         $result = $this->SQLexec($sql, $params);
         if ($result) {
-            $data = $this->pdo_stm->fetch();
+            $data = $this->pdo_stm->fetchAll();
             $return = new stdClass();
-            $return->username = $data["username"];
-            $return->password = $data["password"];
-            $return->email = $data["email"];
-            $return->validation_code = $data["validation_code"];
+            $return->username = $data[0]["username"];
+            $return->password = $data[0]["password"];
+            $return->email = $data[0]["email"];
+            $return->validation_code = $data[0]["validation_code"];
             $this->data = $return;
         }
         return $result;

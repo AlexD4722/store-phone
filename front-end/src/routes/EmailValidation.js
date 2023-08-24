@@ -35,7 +35,7 @@ function EmailValidation() {
                 }
             }
         });
-    }, []);
+    }, [code]);
 
     return (
         <>

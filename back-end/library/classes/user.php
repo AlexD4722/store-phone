@@ -11,7 +11,7 @@ class User
     public $wishlist;
     public $cart;
 
-    public function __construct($username, $password, $email, $phone, $address, $user_type, $wishlist = [], $cart = [])
+    public function __construct($username, $password, $email, $phone, $address = "", $user_type = "", $wishlist = [], $cart = [])
     {
         $this->username = $username;
         $this->password = $password;
