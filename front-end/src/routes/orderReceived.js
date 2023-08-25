@@ -65,7 +65,7 @@ function OrderReceived() {
                         <p>Email:<strong>{dataUser[0].email}</strong></p>
                     </li>
                     <li class="order-received__overview">
-                        <p>phone:<strong>{dataUser[0].phone}</strong></p>
+                        <p>Phone:<strong>{dataUser[0].phone}</strong></p>
                     </li>
                     <li class="order-received__overview">
                         <p>Total:<strong>$635.99</strong></p>

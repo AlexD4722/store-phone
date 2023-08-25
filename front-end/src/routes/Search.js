@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 import Product from "../components/product-card";
 import PaginationPage from "../components/pagination";
+import Pagination from 'react-bootstrap/Pagination';
 
 function Search() {
     const params = useParams();
@@ -39,6 +40,7 @@ function Search() {
     const handleInputChangeMaxPrice = (event) => {
         setMaxPrice(event.target.value);
     };
+
     function handleOpenFilterMobile() {
         const layout = document.querySelector(".filter-mobile-layout");
         const menuExtend = document.querySelector(".filter-mobile");
@@ -539,6 +541,30 @@ function Search() {
         // )
         // setPhones(filteredProducts)
     };
+    const [currentPage, setCurrentPage] = useState(1);
+    const recordsPerPage = 5;
+    const lastIndex = currentPage * recordsPerPage;
+    const firstIndex = lastIndex - recordsPerPage;
+    const records = Phones.slice(firstIndex, lastIndex);
+    console.log(records, "******************")
+    const npage = Math.ceil(Phones.length / recordsPerPage);
+    const numbers = [...Array(npage + 1).keys()].slice(1);
+    console.log("NNNNNNNNNNNNNNN", numbers)
+
+    const changePage = (id) => {
+        setCurrentPage(id)
+    }
+    const prePage = () => {
+        if (currentPage !== firstIndex) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+    const nextPage = () => {
+        if (currentPage !== lastIndex) {
+            setCurrentPage(currentPage + 1)
+        }
+    }
+
     return (
         <>
             <div className="xo-container">
@@ -880,7 +906,7 @@ function Search() {
                     <Col xs={12} sm={12} md={9} lg={9} className="product-filter">
                         <div className="messageResponse"></div>
                         <Row xs={1} sm={2} md={3} lg={4}>
-                            {Phones.map((phone) => {
+                            {records && records.map((phone) => {
                                 return (
                                     <Col key={phone.id}>
                                         <Product product={phone} />
@@ -888,7 +914,25 @@ function Search() {
                                 );
                             })}
                         </Row>
-                        <PaginationPage />
+                        {/* <PaginationPage data={Phones} /> */}
+                        <Pagination>
+                            <Pagination.Prev
+                                onClick={prePage}
+                            />
+                            {
+                                numbers.length && numbers.map((item, index) => {
+                                    return (
+                                        <Pagination.Item key={index}
+                                            onClick={() => changePage(item)}>
+                                            {item}
+                                        </Pagination.Item>
+                                    )
+                                })
+                            }
+                            <Pagination.Next
+                                onClick={nextPage}
+                            />
+                        </Pagination>
                     </Col>
                 </Row>
                 <div className="filter-mobile">
