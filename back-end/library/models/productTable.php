@@ -48,7 +48,7 @@ class ProductTable extends Database
                     }
                 }
                 if ($row['status'] == "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, $row['color'], $row['capacity'], $row['status']));
+                    array_push($this->data, new Product($row['id'], $row['name'], json_decode($row['description']), $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, json_decode($row['color']), $row['capacity'], $row['status']));
                 }
             }
         }
@@ -57,7 +57,38 @@ class ProductTable extends Database
     // function getProductList() is used to get all suitable products 
     // parameters: $name, $desc, $product_line
     // return: boolean
-
+    function searchItemExactly($name = '')
+    {
+        $sql = "SELECT * FROM product WHERE TRUE";
+        $params = [];
+        if ($name) {
+            $sql .= " AND name LIKE ?";
+            array_push($params, $name);
+        }
+        if (count($params) > 0) {
+            $result = $this->SQLexec($sql, $params);
+        } else {
+            $result = $this->SQLexec($sql);
+        }
+        $data = $this->pdo_stm->fetchAll();
+        $this->data = [];
+        if (count($data) > 0) {
+            foreach ($data as $row) {
+                $arrayFiles = [];
+                $files = scandir($this->LinkServer . $row["images"]);
+                for ($i = 0; $i < count($files); $i++) {
+                    if ($files[$i] != "." && $files[$i] != "..") {
+                        $files[$i] = "http://localhost:2203/learning/store-phone/back-end/imgProduct/" . $row["images"] . "/" . $files[$i];
+                        array_push($arrayFiles, $files[$i]);
+                    }
+                }
+                if ($row['status'] == "1") {
+                    array_push($this->data, new Product($row['id'], $row['name'], json_decode($row['description']), $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, json_decode($row['color']), $row['capacity'], $row['status']));
+                }
+            }
+        }
+        return $result;
+    }
     function getInfoProduct($limit = 1, $random = "false")
     {
         $params = [];
@@ -86,7 +117,7 @@ class ProductTable extends Database
                     }
                 }
                 if ($row['status'] == "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, $row['color'], $row['capacity'], $row['status']));
+                    array_push($this->data, new Product($row['id'], $row['name'], json_decode($row['description']), $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, json_decode($row['color']), $row['capacity'], $row['status']));
                 }
             }
         }

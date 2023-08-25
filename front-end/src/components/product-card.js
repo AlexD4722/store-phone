@@ -1,34 +1,44 @@
+import { useState } from "react";
 import APIrequest, { UPDATE_USER } from "../API/callAPI";
 import { useCartContext, useWishlistContext } from "../store/hooks";
 import "../styles/product-card.scss";
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Product(props) {
     const dispatchCart = useCartContext()[1];
     const [wishlist, setWishlist] = useWishlistContext();
-
+    const [buttonAddToCart, setButtonAddToCart] = useState(false);
+    const [buttonAddToWishlish, setButtonAddToWishlish] = useState(false);
+const [wishCheck, setWishCheck] = useState(false);
+    const addItemToCart = () => {
+        setButtonAddToCart(!buttonAddToCart);
+    };
+    const addItemToWishlist = () => {
+        setButtonAddToWishlish(!buttonAddToWishlish);
+    };
     const handleCart = () => {
-        let userSession = sessionStorage.getItem("user");
+        let userObject = JSON.parse(sessionStorage.getItem("user"));
         let localCartUsing = true;
-        if (userSession) {
-            let loginStatus = JSON.parse(userSession);
-            if (loginStatus.login === "OK") {
+        if (userObject) {
+            if (userObject.login === "OK") {
                 localCartUsing = false;
                 let found = false;
-                loginStatus.user.cart.forEach((value) => {
+                let userCart = userObject.user.cart;
+                userCart.forEach((value) => {
                     if (value.product.id === props.product.id) {
                         value.quantity += 1;
                         found = true;
                     }
                 });
                 if (!found) {
-                    loginStatus.user.cart.push({
+                    userCart.push({
                         product: props.product,
                         quantity: 1,
                     });
                 }
-                userSession = JSON.stringify(loginStatus);
-                sessionStorage.setItem("user", userSession);
+                userObject.user.cart = userCart;
+                APIrequest(UPDATE_USER, userObject.user);
+                sessionStorage.setItem("user", JSON.stringify(userObject));
                 setWishlist([...wishlist]);
             }
         }
@@ -43,8 +53,10 @@ function Product(props) {
         let loginStatus = sessionStorage.getItem("user");
         let loginData = JSON.parse(loginStatus);
         if (loginData && loginData.login === "OK") {
+            setButtonAddToWishlish(!buttonAddToWishlish);
             if (!wishlist.includes(props.product)) {
                 loginData.user.wishlist = [...wishlist, props.product];
+setWishCheck(true)
             }
             let data = loginData.user;
             APIrequest(UPDATE_USER, data).then((response) => {
@@ -86,18 +98,19 @@ function Product(props) {
                 </div>
                 <button
                     type="button"
-                    className="product-card__box-wishlist"
+                    className={`product-card__box-wishlist ${buttonAddToWishlish ? "product-card__box-wishlist--status" : ""}`}
                     onClick={handleWishlist}
                 >
-                    <i className="bi bi-heart"></i>
+                    <i className={`bi bi-heart${wishCheck ? "-fill" : ""}`}></i>
                 </button>
             </div>
             <div className="product-card__main">
                 <div className="product-card__content-wrapper">
+<Link to={`/product/${props.product.name}`}>
                     <h3 className="product-card__product-title">
-                        {" "}
-                        {props.product.name}
+                        {props.product.name} {props.product.capacity}
                     </h3>
+</Link>
                     <div className="product-card__product-rating">
                         <div className="product-card__box-start-rating">
                             <i className="bi bi-star-fill"></i>
@@ -110,21 +123,29 @@ function Product(props) {
                     </div>
                     <div className="product-card__product-price-cart">
                         <div className="product-card__price">
-                            <span className="product-card__price-old">
-                                ${props.product.inital_price}
-                            </span>
                             <span className="product-card__price-new">
                                 ${props.product.selling_price}
                             </span>
+<span className="product-card__price-old">
+                                ${props.product.inital_price}
+                            </span>
                         </div>
-                        <div
+                        {/* <button
+                            type="button"
+                            className={`product-card__box-wishlist ${buttonAddToWishlish ? "product-card__box-wishlist--status" : ""}`}
+                            onClick={handleWishlist}
+                        >
+                            <i className="bi bi-heart"></i>
+                        </button> */}
+                        {/* <div
                             className="product-card__box-btn-add"
                             onClick={handleCart}
                         >
-                            <div className="product-card__btn-add-cart">
+                            <div className={`product-card__btn-add-cart ${buttonAddToCart ? 'product-card__btn-add--status' : ''}`}
+                                onClick={addItemToCart}>
                                 <i className="bi bi-cart"></i>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

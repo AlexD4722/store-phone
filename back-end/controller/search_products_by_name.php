@@ -7,7 +7,7 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")){
 }
 $PT = new ProductTable();
 $data = json_decode($_POST["data"]);
-$keyword = $data->search;
+$keyword = $data->nameProduct;
 
 $result = $PT->getProductList($keyword);
 if ($result){

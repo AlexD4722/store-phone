@@ -4,8 +4,9 @@ function reducer(state, action) {
             let found = false;
             let newState = [...state]
             newState.forEach((productLine) => {
-                if (productLine.product.id === action.payload.product.id) {
+                if (productLine.product.id === action.payload.product.id && productLine.color === action.payload.color) {
                     productLine.quantity += action.payload.quantity;
+                    productLine.totalPrice = parseFloat(productLine.product.selling_price) * parseFloat(productLine.quantity)
                     found = true;
                 }
             });

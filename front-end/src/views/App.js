@@ -18,10 +18,13 @@ import {
     Signup,
     Search,
     Account,
-    DetailProduct
+    DetailProduct,
+    EmailValidation,
+    Dashboard,
 } from "../routes";
-import AddNewProductForm from "../routes/AddNewProduct.js";
-import AddNewProductLineForm from "../routes/AddNewProductLine.js";
+import CheckOut from "../routes/Checkout";
+import OrderReceived from "../routes/orderReceived";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -32,12 +35,12 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "/product/:id",
+                path: "/product/:nameProduct",
                 element: <DetailProduct />,
             },
             {
                 path: "/search/:keyword",
-                element: <Search />
+                element: <Search />,
             },
             {
                 path: "/blog",
@@ -56,12 +59,20 @@ const router = createBrowserRouter([
                 element: <Account />,
             },
             {
-                path: "/wish-list",
-                element: <WishList />,
+                path: "/account/admin-dashboard",
+                element: <Dashboard />,
             },
             {
-                path: "/wish-list/product-line",
-                element: <AddNewProductLineForm />,
+                path: "/checkout",
+                element: <CheckOut />,
+            },
+            {
+                path: "/OrderReceived",
+                element: <OrderReceived />,
+            },
+            {
+                path: "/wish-list",
+                element: <WishList />,
             },
             {
                 path: "/cart",
@@ -72,6 +83,10 @@ const router = createBrowserRouter([
                 element: <Signup />,
             },
             {
+                path: "/signup/email-validation",
+                element: <EmailValidation />,
+            },
+            {
                 path: "*",
                 element: <NotFound />,
             },
@@ -79,9 +94,7 @@ const router = createBrowserRouter([
     },
 ]);
 function App() {
-    return (
-        <RouterProvider router={router} />
-    );
+    return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -1,12 +1,13 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_LOGIN, UPDATE_USER, testAPI } from "../API/callAPI.js";
+import APIrequest, { USER_LOGIN, UPDATE_USER } from "../API/callAPI.js";
 import { Link, useNavigate } from "react-router-dom";
-import { useAccountContext } from "../store";
+import { useAccountContext, useWishlistContext } from "../store";
 import { useCallback, useState } from "react";
 
 function Signin() {
     const setAccount = useAccountContext()[1];
+    const setWishlist = useWishlistContext()[1];
     const [report, setReport] = useState("");
     const navigate = useNavigate();
 
@@ -19,36 +20,27 @@ function Signin() {
             setReport("");
             if (response.result === "Success") {
                 if (response.data.result === "Success") {
-                    const user = response.data.user;
-                    const data = {
+                    let user = response.data.user;
+                    setWishlist(user.wishlist);
+                    let cart = JSON.parse(sessionStorage.getItem("cart"));
+                    if (!cart){
+                        cart = [];
+                    }
+                    if (user.cart.length > 0) {
+                        user.cart = [...user.cart, ...cart];
+                    } else {
+                        user.cart = [...cart];
+                    }
+                    const newData = {
                         login: "OK",
-                        time: new Date(),
                         user,
                     };
                     if (remember) {
-                        localStorage.setItem("user", JSON.stringify(data));
+                        localStorage.setItem("user", JSON.stringify(newData));
                     } else {
-                        sessionStorage.setItem("user", JSON.stringify(data));
+                        sessionStorage.setItem("user", JSON.stringify(newData));
                     }
-                    let cart = sessionStorage.getItem("cart");
-                    let wishlist = sessionStorage.getItem("wishlist");
-                    if (wishlist){
-                        wishlist = JSON.parse(wishlist);
-                    }
-                    if (cart){
-                        cart = JSON.parse(cart);
-                    }
-                    if (user.wishlist && wishlist){
-                        user.wishlist = [...user.wishlist, ...wishlist];
-                    } else  if (wishlist) {
-                        user.wishlist = [...wishlist];
-                    }
-                    if (user.cart && cart){
-                        user.cart = [...user.cart, ...cart];
-                    } else if (cart) {
-                        user.cart = [...cart];
-                    }
-                    testAPI(UPDATE_USER, user);
+                    APIrequest(UPDATE_USER, user);
                     setAccount(user);
                     navigate("..");
                 } else {

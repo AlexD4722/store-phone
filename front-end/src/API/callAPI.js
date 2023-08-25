@@ -2,6 +2,11 @@ export const USER_LOGIN = 101;
 export const USER_LOGOUT = 102;
 export const USER_SIGNUP = 103;
 export const UPDATE_USER = 104;
+export const VALIDATE_CODE = 105;
+export const SEND_VALIDATION_EMAIL = 106;
+export const FIND_USER_TO_UPDATE = 107;
+export const ADD_NEW_USER = 108;
+export const REMOVE_USER = 109;
 export const INSERT_RECEIPT = 201;
 export const DONE_RECEIPT = 202;
 export const GET_ALL_PRODUCTS = 301;
@@ -14,6 +19,7 @@ export const GET_ALL_PRODUCT_LINE = 307;
 export const FIlTER_PRODUCT = 308;
 export const GET_QUANTITY_PRODUCT = 309;
 export const GET_PRODUCTS_BY_WISHLIST = 310;
+export const SEARCH_ITEM_EXACTLY = 311;
 
 async function APIrequest(action, data) {
     let sendData = new FormData();

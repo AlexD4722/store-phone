@@ -9,11 +9,12 @@
   padding: 1rem;
   margin: 10px 0;
   background-color: $color-background;
-  &:hover{
+  width: 100%;
+  overflow: hidden;
+  &:hover {
     box-shadow: 0 1px 30px rgba(62, 68, 90, 0.09);
     border: 1px solid $color-product-fade-border;
   }
-
 }
 .product-flex__product-title {
   font-size: 0.875rem;
@@ -71,6 +72,13 @@
     margin: 0;
     padding-left: 0.9375rem;
     color: $color-text-light;
+    overflow: hidden;
+    li {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+    }
   }
 }
 .product-flex__wrapper {
@@ -100,6 +108,7 @@
   position: relative;
   cursor: pointer;
   width: 100%;
+  min-width: 70px;
   max-width: 160px;
   height: 100%;
   &:hover {

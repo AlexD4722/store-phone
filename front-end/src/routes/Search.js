@@ -13,7 +13,7 @@ import PaginationPage from "../components/pagination";
 
 function Search() {
     const params = useParams();
-    const setSearch = useSearchContext()[1];
+    const [search, setSearch] = useSearchContext();
     const [bgSort, setBgSort] = useState("header-sort__list-selector-detail");
     const [statusBtnFilter, setStatusBtnFilter] = useState();
     const [data, setData] = useState({
@@ -130,7 +130,12 @@ function Search() {
             case "phone":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputPhone: true,
                     };
                 });
@@ -138,7 +143,12 @@ function Search() {
             case "tablet":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputTablet: true,
                     };
                 });
@@ -146,7 +156,12 @@ function Search() {
             case "SmartWatch":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputSmartWatch: true,
                     };
                 });
@@ -154,7 +169,12 @@ function Search() {
             case "Accessories":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputAccessory: true,
                     };
                 });
@@ -162,7 +182,12 @@ function Search() {
             case "Apple":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputSamSung: false,
+                        inputXiaomi: false,
                         inputApple: true,
                     };
                 });
@@ -170,7 +195,12 @@ function Search() {
             case "Samsung":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputXiaomi: false,
                         inputSamSung: true,
                     };
                 });
@@ -178,8 +208,13 @@ function Search() {
             case "Xiaomi":
                 setIsChecked((prev) => {
                     return {
-                        ...prev,
-                        inputinputXiaomiSamSung: true,
+                        inputPhone: false,
+                        inputAccessory: false,
+                        inputTablet: false,
+                        inputSmartWatch: false,
+                        inputApple: false,
+                        inputSamSung: false,
+                        inputXiaomi: true,
                     };
                 });
                 break;
@@ -213,6 +248,11 @@ function Search() {
             default:
                 break;
         }
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        topFunction();
     }, [params.keyword]);
 
     const handleCheckboxChange = (event) => {
@@ -438,6 +478,11 @@ function Search() {
         APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
         });
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        topFunction();
     }, [isChecked]);
 
     const textMessages = document.querySelector(".messageResponse");

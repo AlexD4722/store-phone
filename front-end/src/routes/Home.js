@@ -11,7 +11,7 @@ import ProductFlex from "../components/product-card2";
 import DetailProduct from "./DetailProduct";
 import React, { useState, useEffect } from 'react';
 import APIrequest, * as API from "../API/callAPI";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function Home() {
     const [Phones, setPhones] = useState([]);
@@ -26,6 +26,14 @@ function Home() {
             });
         }
     }, []);
+    const params = useParams();
+    useEffect(() => {
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        topFunction();
+    }, [params]);
     const [PhonesFlex, setPhonesFlex] = useState([]);
     const dataFlex = { quantity: 4, random: true };
     useEffect(() => {
@@ -38,7 +46,7 @@ function Home() {
             });
         }
     }, []);
-    console.log(PhonesFlex,"///////////////")
+    console.log(PhonesFlex, "///////////////")
     return (
         <>
             <SlideShow />
@@ -107,7 +115,7 @@ function Home() {
                                             PhonesFlex.map((phoneflex) => {
                                                 return (
                                                     <Col key={phoneflex.id}>
-                                                        <Link to={`/product/${phoneflex.id}`}>
+                                                        <Link to={`/product/${phoneflex.name}`}>
                                                             <ProductFlex
                                                                 key={phoneflex.id}
                                                                 product={phoneflex}

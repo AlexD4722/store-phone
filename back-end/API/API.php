@@ -25,6 +25,9 @@ switch ($action) {
     case SEARCH_PRODUCTS_BY_NAME:
         require("../controller/search_products_by_name.php");
         break;
+    case SEARCH_ITEM_EXACTLY:
+        require("../controller/search_item_exactly.php");
+        break;
     case GET_RECEIPTS_BY_CID:
         require("../controller/get_receipts_by_cid.php");
         break;
@@ -63,6 +66,21 @@ switch ($action) {
         break;
     case UPDATE_USER:
         require("../controller/update_user.php");
+        break;
+    case SEND_VALIDATION_EMAIL:
+        require("../controller/send_validation_email.php");
+        break;
+    case VALIDATE_CODE:
+        require("../controller/validate_code.php");
+        break;
+    case FIND_USER_TO_UPDATE:
+        require("../controller/find_user.php");
+        break;
+    case ADD_NEW_USER:
+        require("../controller/add_new_user.php");
+        break;
+    case REMOVE_USER:
+        require("../controller/remove_user.php");
         break;
     default:
         $return = new APIresponse("Action invalid");

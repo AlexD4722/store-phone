@@ -1,7 +1,11 @@
 import Logo from "../components/logo.js";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_SIGNUP } from "../API/callAPI.js";
+import APIrequest, {
+    USER_SIGNUP,
+    SEND_VALIDATION_EMAIL,
+} from "../API/callAPI.js";
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router";
 
 function Signup() {
     const [validated, setValidated] = useState({});
@@ -9,6 +13,9 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
     const [reenter, setReenter] = useState("");
+    const [phone, setPhone] = useState("");
+    const [address, setAddress] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = useCallback(
         (e) => {
@@ -48,10 +55,25 @@ function Signup() {
                 });
                 stop = true;
             }
+            if (phone.length > 11) {
+                setValidated((prev) => {
+                    return {
+                        ...prev,
+                        phone: "Phone number exceeds length limit",
+                    };
+                });
+                stop = true;
+            }
             if (stop) {
                 return;
             }
-            const data = { username: name, password: pass, email: email };
+            const data = {
+                username: name,
+                password: pass,
+                email,
+                phone,
+                address,
+            };
             APIrequest(USER_SIGNUP, data).then((obj) => {
                 if (obj.result === "Failed") {
                     setValidated((prev) => {
@@ -68,7 +90,16 @@ function Signup() {
                         };
                     });
                 } else {
-                    window.location.href = "/signup/success";
+                    let user = {
+                        username: name,
+                        email,
+                        wishlist: [],
+                        cart: [],
+                    };
+                    let loginStatus = { login: "none", user };
+                    sessionStorage.setItem("user", JSON.stringify(loginStatus));
+                    APIrequest(SEND_VALIDATION_EMAIL, user);
+                    navigate("email-validation");
                 }
             });
         },
@@ -89,10 +120,7 @@ function Signup() {
                         </h2>
                         <div className="section-account-form">
                             <Form onSubmit={(event) => handleSubmit(event)}>
-                                <Form.Group
-                                    className="mb-3"
-                                    controlId="formBasicUsername"
-                                >
+                                <Form.Group className="mb-3">
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control
                                         required
@@ -115,10 +143,7 @@ function Signup() {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 )}
-                                <Form.Group
-                                    className="mb-3"
-                                    controlId="formBasicEmail"
-                                >
+                                <Form.Group className="mb-3">
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         required
@@ -141,10 +166,7 @@ function Signup() {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 )}
-                                <Form.Group
-                                    className="mb-3"
-                                    controlId="formBasicPassword"
-                                >
+                                <Form.Group className="mb-3">
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control
                                         required
@@ -156,10 +178,7 @@ function Signup() {
                                         }
                                     />
                                 </Form.Group>
-                                <Form.Group
-                                    className="mb-3"
-                                    controlId="formBasicReEnter"
-                                >
+                                <Form.Group className="mb-3">
                                     <Form.Label>Re-enter password</Form.Label>
                                     <Form.Control
                                         required
@@ -182,6 +201,40 @@ function Signup() {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 )}
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Phone Number</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="text"
+                                        placeholder="Enter phone number"
+                                        value={phone}
+                                        onChange={(e) =>
+                                            setPhone(e.target.value)
+                                        }
+                                    />
+                                </Form.Group>
+                                {validated.phone && (
+                                    <Form.Group className="mb-3">
+                                        <Form.Control
+                                            type="hidden"
+                                            isInvalid={true}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {validated.phone}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                )}
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Address</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Enter address"
+                                        value={address}
+                                        onChange={(e) =>
+                                            setAddress(e.target.value)
+                                        }
+                                    />
+                                </Form.Group>
                                 <Button
                                     variant="primary"
                                     className="ma"
