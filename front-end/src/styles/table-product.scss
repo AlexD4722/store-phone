@@ -26,6 +26,8 @@
   }
   .table-product__info-quantity-detail{
     width: 120px;
+    display: inline-flex;
+    justify-content: end;
   }
   .table-product__row-item{
     margin: 1.5rem 0;
@@ -80,6 +82,8 @@
 .table-product__info-quantity-detail {
   position: relative;
   height: 46px;
+  display: inline-flex;
+  align-items: center;
   input {
     position: relative;
     display: inline-flex;

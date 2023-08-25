@@ -1,24 +1,60 @@
 import { useEffect, useState } from "react";
 import { useCartContext } from "../store/hooks";
-import TableProduct from "../components/tableProduct";
-import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import '../styles/cart-page.scss';
 import '../styles/box-empty.scss'
 import '../styles/order-received.scss'
-
+import APIrequest, { GET_USER_Receipt, testAPI } from "../API/callAPI";
 function OrderReceived() {
     const cart = useCartContext()[0];
+    const [dataUser, setDataUser] = useState({});
+    const [idUser, setIdUser] = useState();
+    const [totalPriceOrder, setTotalPriceOrder] = useState();
     console.log("cart>>>>>>>>", cart)
+    useEffect(() => {
+        let userObject = JSON.parse(sessionStorage.getItem("user"));
+        const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+        let localCartUsing = true;
+        if (userObject) {
+            localCartUsing = false;
+            if (userObject.login === "OK") {
+                const newData = {
+                    userId: userObject.user.id
+                }
+                console.log("newData>>>>>>>", newData)
+                setIdUser(newData);
+                APIrequest(GET_USER_Receipt, newData).then((obj) => {
+                    setDataUser(obj.data.userArray)
+                });
+            }
+        }
+        if (localCartUsing) {
+            const newData = {
+                userId: sessionCart.id
+            }
+            setIdUser(newData);
+            APIrequest(GET_USER_Receipt, newData).then((obj) => {
+                setDataUser(obj.data.userArray)
+            });
+        }
+    }, [])
+        // if(cart.length){
+        //     setTotalPriceOrder(cart.reduce((total, item) => total + item.totalPrice, 0))
+        // }
+        // console.log(">>>>>>>>>>>>>dataUser", dataUser)
+        // console.log(">>>>>>>>>>>>>TotalPriceOrder", totalPriceOrder)
+
     return (
         <>
+        {
+            dataUser && dataUser[0] ?
             <div className="xo-container">
                 <div className="order-received">
                     <h2 className="order-received__text-success">Thank you. Your order has been received.</h2>
                 </div>
                 <ul class="order-received__overview">
                     <li class="order-received__overview">
-                        <p>Order Id:<strong>3905</strong></p>
+                        <p>Order Id:<strong>{dataUser[0].id}</strong></p>
                     </li>
 
                     <li class="order-received__overview">
@@ -26,10 +62,10 @@ function OrderReceived() {
                     </li>
 
                     <li class="order-received__overview">
-                        <p>Email:<strong>anh112@gmail.com</strong></p>
+                        <p>Email:<strong>{dataUser[0].email}</strong></p>
                     </li>
                     <li class="order-received__overview">
-                        <p>phone:<strong>0123456789</strong></p>
+                        <p>phone:<strong>{dataUser[0].phone}</strong></p>
                     </li>
                     <li class="order-received__overview">
                         <p>Total:<strong>$635.99</strong></p>
@@ -81,6 +117,8 @@ function OrderReceived() {
                     </tbody>
                 </table>
             </div>
+            :" NO DATA USER"
+        }
 
         </>
     );

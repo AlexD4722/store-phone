@@ -52,6 +52,7 @@ function DetailProduct({ match }) {
         //     capacity: product[0].capacity,
         //     color: selectedOptionColor,
         // } 
+
         let userObject = JSON.parse(sessionStorage.getItem("user"));
         let localCartUsing = true;
         if (userObject) {
@@ -60,16 +61,23 @@ function DetailProduct({ match }) {
                 let found = false;
                 let userCart = userObject.user.cart;
                 userCart.forEach((value) => {
-                    if (value.product.id === product.product.id) {
-                        value.quantity += 1;
+                    if (value.product.id === idChooseItem && value.color === selectedOptionColor) {
+                        value.quantity += valueQuantity;
+                        value.totalPrice = parseFloat(priceSelling) * parseFloat(valueQuantity);
                         found = true;
                     }
                 });
                 if (!found) {
-                    userCart.push({
-                        product: product.product,
-                        quantity: 1,
-                    });
+                    product.forEach((item) => {
+                        if (item.id === idChooseItem) {
+                            userCart.push({
+                                product: item,
+                                quantity: valueQuantity,
+                                color: selectedOptionColor,
+                                totalPrice: parseFloat(priceSelling) * parseFloat(valueQuantity)
+                            });
+                        }
+                    })
                 }
                 userObject.user.cart = userCart;
                 APIrequest(UPDATE_USER, userObject.user);
@@ -84,7 +92,7 @@ function DetailProduct({ match }) {
                         product: item,
                         quantity: valueQuantity,
                         color: selectedOptionColor,
-                        totalPrice: parseFloat(priceSelling)
+                        totalPrice: parseFloat(priceSelling) * parseFloat(valueQuantity)
                     };
                     let action = { type: "add", payload };
                     dispatchCart(action);
@@ -389,7 +397,7 @@ function DetailProduct({ match }) {
                             <div className="showMessage__close" onClick={closeMessage}>
                                 <i class="bi bi-x"></i>
                             </div>
-                            <Link to="/cart"className="showMessage__link">
+                            <Link to="/cart" className="showMessage__link">
                                 <div className="showMessage__view-more"><p>View more</p></div>
                             </Link>
                         </div>

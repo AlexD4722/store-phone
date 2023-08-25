@@ -7,45 +7,42 @@ class UserTable extends Database
         parent::__construct(DatabaseServerName, Database, Username, Password);
     }
     //hàm __construct dùng để kết nối với CSDL
-
-    public function getUser($username = '', $password = '', $user_type = '', $email = '', $id = 0)
+    public function getUserReceipt($id = "", $username = '', $password = '', $user_type = '', $email = '')
     {
         $sql = "SELECT * FROM user WHERE TRUE";
         $params = [];
-        if ($username) {
-            $sql .= " AND username = ?";
-            array_push($params, $username);
-        }
-        if ($password) {
-            $sql .= " AND password = MD5(?)";
-            array_push($params, $password);
-        }
-        if ($user_type) {
-            $sql .= " AND user_type = ?";
-            array_push($params, $user_type);
-        }
-        if ($email) {
-            $sql .= " AND email = ?";
-            array_push($params, $email);
-        }
-        if ($id != 0) {
+        // if ($username) {
+        //     $sql .= " AND username = ?";
+        //     array_push($params, $username);
+        // }
+        // if ($password) {
+        //     $sql .= " AND password = MD5(?)";
+        //     array_push($params, $password);
+        // }
+        // if ($user_type) {
+        //     $sql .= " AND user_type = ?";
+        //     array_push($params, $user_type);
+        // }
+        // if ($email) {
+        //     $sql .= " AND email = ?";
+        //     array_push($params, $email);
+        // }
+        $params = [];
+        if ($id) {
             $sql .= " AND id = ?";
             array_push($params, $id);
         }
-        if (count($params)) {
+        if (count($params) > 0) {
             $result = $this->SQLexec($sql, $params);
         } else {
             $result = $this->SQLexec($sql);
         }
-        if ($result) {
-            $data = $this->pdo_stm->fetchAll();
-            $arr = [];
+        $data = $this->pdo_stm->fetchAll();
+        $this->data = [];
+        if (count($data) > 0) {
             foreach ($data as $row) {
-                $one = new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
-                $one->id = $row["id"];
-                array_push($arr, $one);
+                array_push($this->data, new User($row["id"], $row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"])));
             }
-            $this->data = $arr;
         }
         return $result;
     }

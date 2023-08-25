@@ -26,5 +26,7 @@ define("FIlTER_PRODUCT", 308);
 define("GET_QUANTITY_PRODUCT", 309);
 define("GET_PRODUCTS_BY_WISHLIST", 310);
 define("SEARCH_ITEM_EXACTLY", 311);
+define("GET_USER_Receipt", 312);
+
 
 ?>

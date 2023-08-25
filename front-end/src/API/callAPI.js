@@ -20,6 +20,7 @@ export const FIlTER_PRODUCT = 308;
 export const GET_QUANTITY_PRODUCT = 309;
 export const GET_PRODUCTS_BY_WISHLIST = 310;
 export const SEARCH_ITEM_EXACTLY = 311;
+export const GET_USER_Receipt = 312;
 
 async function APIrequest(action, data) {
     let sendData = new FormData();

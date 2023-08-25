@@ -7,8 +7,15 @@ import '../styles/cart-page.scss';
 import '../styles/box-empty.scss'
 
 function Cart() {
+    const [checkUser, setCheckUser] = useState(false);
     const cart = useCartContext()[0];
     console.log("cart>>>>>>>>", cart)
+    useEffect(() => {
+        let userObject = JSON.parse(sessionStorage.getItem("user"));
+        if (userObject) {
+            setCheckUser(true)
+        }
+    }, [])
     return (
         <>
             {
@@ -20,15 +27,32 @@ function Cart() {
                                 <TableProduct items={cart} />
                             </Col>
                         </Row>
-                        <Link to="/checkOut">
-                            <div className="cart-page__box-btn-footer">
-                                <button type="button" className="cart-page__btn-checkout">
-                                    <span className="cart-page__btn-checkout-content">
-                                        checkout
-                                    </span>
-                                </button>
-                            </div>
-                        </Link>
+                        {
+                            !checkUser ?
+                                <Link to="/checkOut">
+                                    <div className="cart-page__box-btn-footer">
+                                        <button type="button" className="cart-page__btn-checkout">
+                                            <span className="cart-page__btn-checkout-content">
+                                                checkout
+                                            </span>
+                                        </button>
+                                    </div>
+                                </Link>
+                                : ""
+                        }
+                        {
+                            checkUser ?
+                                <Link to="/OrderReceived">
+                                    <div className="cart-page__box-btn-footer">
+                                        <button type="button" className="cart-page__btn-checkout">
+                                            <span className="cart-page__btn-checkout-content">
+                                                display bill
+                                            </span>
+                                        </button>
+                                    </div>
+                                </Link>
+                                : ""
+                        }
                     </div>
                     :
                     <div className="box-empty">

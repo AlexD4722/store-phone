@@ -79,8 +79,8 @@ switch ($action) {
     case ADD_NEW_USER:
         require("../controller/add_new_user.php");
         break;
-    case REMOVE_USER:
-        require("../controller/remove_user.php");
+    case GET_USER_Receipt:
+        require("../controller/getUserReceipt.php");
         break;
     default:
         $return = new APIresponse("Action invalid");

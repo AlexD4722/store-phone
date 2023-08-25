@@ -26,7 +26,7 @@ function Signin() {
                     if (!cart){
                         cart = [];
                     }
-                    if (user.cart.length > 0) {
+                    if (user.cart.length >= 0) {
                         user.cart = [...user.cart, ...cart];
                     } else {
                         user.cart = [...cart];
