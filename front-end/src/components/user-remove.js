@@ -1,13 +1,17 @@
 import { useCallback, useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import APIrequest, { FIND_USER_TO_UPDATE, UPDATE_USER } from "../API/callAPI";
+import APIrequest, {
+    FIND_USER_TO_UPDATE,
+    REMOVE_USER,
+    UPDATE_USER,
+} from "../API/callAPI";
 
-function UserInformation() {
+function UserRemove() {
     const [disable, setDisable] = useState(true);
     const [name, setName] = useState("");
     const [user, setUser] = useState({});
     const [result, setResult] = useState("");
-    const [result2, setResult2] = useState("");
+    const [removeResult, setRResult] = useState("");
 
     const handleSearch = useCallback(
         (e) => {
@@ -31,24 +35,19 @@ function UserInformation() {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        if (user.phone.length > 11) {
-            setResult2("Phone number is too long");
-            return;
-        } else {
-            APIrequest(UPDATE_USER, user).then((response) => {
-                if (response.result === "Success") {
-                    if (response.data.result === "Success") {
-                        alert("Edit successful");
-                        setUser({});
-                        setDisable(true);
-                    } else {
-                        setResult2("Can't edit user information");
-                    }
+        APIrequest(REMOVE_USER, { id: user.id }).then((response) => {
+            if (response.result === "Success") {
+                if (response.data.result === "Success") {
+                    alert("Remove user successfully");
+                    setUser({});
+                    setName("");
                 } else {
-                    setResult2("Can't connect to database");
+                    setRResult("Failed to remove user");
                 }
-            });
-        }
+            } else {
+                setRResult("Failed to connect database");
+            }
+        });
     };
 
     return (
@@ -72,14 +71,14 @@ function UserInformation() {
                     <Form.Control
                         type="number"
                         disabled
-                        defaultValue={user.id || ""}
+                        defaultValue={user.id}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                         type="text"
-                        disabled={disable}
+                        disabled
                         value={user.username || ""}
                         onChange={(e) =>
                             setUser((prev) => {
@@ -92,7 +91,7 @@ function UserInformation() {
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         type="text"
-                        disabled={disable}
+                        disabled={true}
                         value={user.email || ""}
                         onChange={(e) =>
                             setUser((prev) => {
@@ -105,7 +104,7 @@ function UserInformation() {
                     <Form.Label>Phone Number</Form.Label>
                     <Form.Control
                         type="number"
-                        disabled={disable}
+                        disabled={true}
                         value={user.phone || ""}
                         onChange={(e) =>
                             setUser((prev) => {
@@ -118,7 +117,7 @@ function UserInformation() {
                     <Form.Label>Address</Form.Label>
                     <Form.Control
                         type="text"
-                        disabled={disable}
+                        disabled={true}
                         value={user.address || ""}
                         onChange={(e) =>
                             setUser((prev) => {
@@ -127,13 +126,15 @@ function UserInformation() {
                         }
                     />
                 </Form.Group>
-                {result2 && <div className="text-danger">{result2}</div>}
+                {removeResult && (
+                    <div className="text-danger">{removeResult}</div>
+                )}
                 <Button type="submit" disabled={disable}>
-                    Update
+                    Remove
                 </Button>
             </Form>
         </>
     );
 }
 
-export default UserInformation;
+export default UserRemove;

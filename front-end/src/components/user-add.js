@@ -1,5 +1,5 @@
 import { Form, Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import APIrequest, { ADD_NEW_USER } from "../API/callAPI";
 
 function UserAdd() {
@@ -7,6 +7,7 @@ function UserAdd() {
     const [result, setResult] = useState("");
 
     const handleAdd = (e) => {
+        e.preventDefault();
         APIrequest(ADD_NEW_USER, user).then((response) => {
             if (response.result === "Success") {
                 if (response.data.result === "Success") {
@@ -29,7 +30,7 @@ function UserAdd() {
                     <Form.Control
                         required
                         type="text"
-                        value={user.username}
+                        value={user.username || ""}
                         onChange={(e) =>
                             setUser((prev) => {
                                 return { ...prev, username: e.target.value };
@@ -42,7 +43,7 @@ function UserAdd() {
                     <Form.Control
                         required
                         type="password"
-                        value={user.password}
+                        value={user.password || ""}
                         onChange={(e) =>
                             setUser((prev) => {
                                 return { ...prev, password: e.target.value };
@@ -55,7 +56,7 @@ function UserAdd() {
                     <Form.Control
                         required
                         type="text"
-                        value={user.email}
+                        value={user.email || ""}
                         onChange={(e) =>
                             setUser((prev) => {
                                 return { ...prev, email: e.target.value };
@@ -68,7 +69,7 @@ function UserAdd() {
                     <Form.Control
                         required
                         type="number"
-                        value={user.phone}
+                        value={user.phone || ""}
                         onChange={(e) =>
                             setUser((prev) => {
                                 return { ...prev, phone: e.target.value };
@@ -81,7 +82,7 @@ function UserAdd() {
                     <Form.Control
                         required
                         type="text"
-                        value={user.address}
+                        value={user.address || ""}
                         onChange={(e) =>
                             setUser((prev) => {
                                 return { ...prev, address: e.target.value };

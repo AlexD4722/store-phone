@@ -17,7 +17,13 @@ $phone = $UT->test_input($data->phone);
 $address = $UT->test_input($data->address);
 $user_type = $UT->test_input($data->user_type);
 
-if ($UT->getUser($username) || $UT->getUser("", "", "", $email)) {
+$UT->getUser($username);
+$user_type_accepted = ["admin", "customer", "removed"];
+$username_exist = count($UT->data) === 1 && in_array($UT->data[0]->user_type, $user_type_accepted);
+$UT->getUser("", "", "", $email);
+$email_exist = count($UT->data) === 1 && in_array($UT->data[0]->user_type, $user_type_accepted);
+
+if ($username_exist && $email_exist) {
     $return = new APIresponse("Success");
     $return->data->result = "Failed";
 } else {

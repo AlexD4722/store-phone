@@ -1,6 +1,7 @@
 import { Tabs, Tab } from "react-bootstrap";
 import UserInformation from "../components/user-information";
 import UserAdd from "../components/user-add";
+import UserRemove from "../components/user-remove";
 
 function DashboardUserTab() {
     return (
@@ -19,7 +20,7 @@ function DashboardUserTab() {
                     <UserAdd />
                 </Tab>
                 <Tab eventKey="remove" title="Remove user">
-                    asdasdas
+                    <UserRemove />
                 </Tab>
             </Tabs>
         </Tab.Pane>
