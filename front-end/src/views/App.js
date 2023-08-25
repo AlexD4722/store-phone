@@ -23,6 +23,7 @@ import {
     Dashboard,
 } from "../routes";
 import CheckOut from "../routes/Checkout";
+import OrderReceived from "../routes/orderReceived";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             {
                 path: "/checkout",
                 element: <CheckOut />,
+            },
+            {
+                path: "/OrderReceived",
+                element: <OrderReceived />,
             },
             {
                 path: "/wish-list",

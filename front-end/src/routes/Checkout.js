@@ -137,71 +137,73 @@ function CheckOut() {
         <>
             {
                 cart.length ?
-                <div className="xo-container">
-                    <div className="checkout">
-                        <div className="checkout__wrapper-form">
-                            <form className="checkout__form-delivery-info" onSubmit={handleSubmit}>
-                                <div className="checkout__title-form">
-                                    <h2>delivery information</h2>
-                                </div>
-                                <div className="checkout__main">
-                                    <div className="checkout__fill-box">
-                                        <label>
-                                            <div className="checkout__title-fill">
-                                                <h3>Enter your name</h3>
-                                            </div>
-                                            <input
-                                                onChange={handleChange}
-                                                onBlur={validateUserName}
-                                                type="text"
-                                                name="userName"
-                                                value={formData.userName}
-                                                className="checkout__input-fill" />
-                                        </label>
-                                        {errors.userName && <p className="checkout__messenger-error">{errors.userName}</p>}
+                    <div className="xo-container">
+                        <div className="checkout">
+                            <div className="checkout__wrapper-form">
+                                <form className="checkout__form-delivery-info" onSubmit={handleSubmit}>
+                                    <div className="checkout__title-form">
+                                        <h2>delivery information</h2>
                                     </div>
-                                    <div className="checkout__fill-box">
-                                        <label>
-                                            <div className="checkout__title-fill">
-                                                <h3>phone number</h3>
-                                            </div>
-                                            <input
-                                                onChange={handleChange}
-                                                onBlur={validatePhone}
-                                                name="phone"
-                                                value={formData.phone}
-                                                type="text" className="checkout__input-fill" />
-                                        </label>
-                                        {errors.phone && <span className="checkout__messenger-error">{errors.phone}</span>}
+                                    <div className="checkout__main">
+                                        <div className="checkout__fill-box">
+                                            <label>
+                                                <div className="checkout__title-fill">
+                                                    <h3>Enter your name</h3>
+                                                </div>
+                                                <input
+                                                    onChange={handleChange}
+                                                    onBlur={validateUserName}
+                                                    type="text"
+                                                    name="userName"
+                                                    value={formData.userName}
+                                                    className="checkout__input-fill" />
+                                            </label>
+                                            {errors.userName && <p className="checkout__messenger-error">{errors.userName}</p>}
+                                        </div>
+                                        <div className="checkout__fill-box">
+                                            <label>
+                                                <div className="checkout__title-fill">
+                                                    <h3>phone number</h3>
+                                                </div>
+                                                <input
+                                                    onChange={handleChange}
+                                                    onBlur={validatePhone}
+                                                    name="phone"
+                                                    value={formData.phone}
+                                                    type="text" className="checkout__input-fill" />
+                                            </label>
+                                            {errors.phone && <span className="checkout__messenger-error">{errors.phone}</span>}
+                                        </div>
+                                        <div className="checkout__fill-box">
+                                            <label>
+                                                <div className="checkout__title-fill">
+                                                    <h3>delivery address</h3>
+                                                </div>
+                                                <textarea
+                                                    onChange={handleChange}
+                                                    onBlur={validateAddress}
+                                                    name="address"
+                                                    value={formData.address}
+                                                    className="checkout__input-fill checkout__input-fill--area"></textarea>
+                                            </label>
+                                            {errors.address && <span className="checkout__messenger-error">{errors.address}</span>}
+                                        </div>
                                     </div>
-                                    <div className="checkout__fill-box">
-                                        <label>
-                                            <div className="checkout__title-fill">
-                                                <h3>delivery address</h3>
-                                            </div>
-                                            <textarea
-                                                onChange={handleChange}
-                                                onBlur={validateAddress}
-                                                name="address"
-                                                value={formData.address}
-                                                className="checkout__input-fill checkout__input-fill--area"></textarea>
-                                        </label>
-                                        {errors.address && <span className="checkout__messenger-error">{errors.address}</span>}
-                                    </div>
-                                </div>
-                                <div className="checkout__box-btn-footer">
-                                    <button type="submit" className="checkout__btn-checkout">
-                                        <span className="checkout__btn-checkout-content">
-                                            continue
-                                        </span>
-                                    </button>
-                                </div>
-                            </form>
+                                    <Link to="/OrderReceived">
+                                        <div className="checkout__box-btn-footer">
+                                            <button type="submit" className="checkout__btn-checkout">
+                                                <span className="checkout__btn-checkout-content">
+                                                    continue
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </Link>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                :
-                <h1>Errol</h1>
+                    :
+                    <h1>Errol</h1>
             }
         </>
     );

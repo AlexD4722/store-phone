@@ -1,6 +1,47 @@
 @import "./font.scss";
 @import "./color.scss";
-.table-product {
+.order-received__text-success {
+  width: 100%;
+  margin: 3rem 0;
+  padding: 3%;
+  width: 100%;
+  border: 2px dashed $color-theme-success;
+  color: $color-theme-success;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.4;
+  @media all and (max-width: 501px) {
+    font-size: 1.3rem;
+  }
+}
+.order-received__overview {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  gap: 1rem;
+}
+.order-received__overview {
+  strong {
+    margin: 0.5rem 0;
+    display: block;
+  }
+}
+.order-received__title-order-detail {
+  font-family: $font-secondary;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  @media all and (max-width: 501px) {
+    font-size: 0.9rem;
+  }
+}
+.order-received__order-detail {
+}
+.order-receivedt {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -18,18 +59,6 @@
   }
 }
 @media screen and (max-width: 600px) {
-  .table-product__value-quantity{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100% !important;
-  }
-  .table-product__info-quantity-detail{
-    width: 120px;
-  }
-  .table-product__row-item{
-    margin: 1.5rem 0;
-  }
   table {
     border: 0;
   }
@@ -59,9 +88,9 @@
 
   table td::before {
     /*
-      * aria-label has no advantage, it won't be read inside a table
-      content: attr(aria-label);
-      */
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
     content: attr(data-label);
     float: left;
     font-weight: bold;
@@ -71,15 +100,12 @@
   table td:last-child {
     border-bottom: 0;
   }
-  .table-product {
-    td {
-      text-align: end;
-    }
-  }
 }
-.table-product__info-quantity-detail {
+.order-receivedt__info-quantity-detail {
   position: relative;
   height: 46px;
+  width: 110px;
+  transform: translateX(50%);
   input {
     position: relative;
     display: inline-flex;
@@ -94,7 +120,7 @@
     outline: none;
   }
 }
-.table-product__btn-dash-quantity {
+.order-receivedt__btn-dash-quantity {
   cursor: pointer;
   &::after {
     content: "";
@@ -105,7 +131,7 @@
     position: absolute;
   }
 }
-.table-product__btn-plus-quantity {
+.order-receivedt__btn-plus-quantity {
   cursor: pointer;
   &::after {
     content: "";
@@ -124,8 +150,8 @@
     position: absolute;
   }
 }
-.table-product__btn-dash-quantity,
-.table-product__btn-plus-quantity {
+.order-receivedt__btn-dash-quantity,
+.order-receivedt__btn-plus-quantity {
   position: absolute;
   height: 100%;
   width: 30px;
@@ -137,14 +163,14 @@
   justify-content: center;
   align-items: center;
 }
-.table-product__btn-dash-quantity {
+.order-receivedt__btn-dash-quantity {
   left: 0x;
 }
-.table-product__btn-plus-quantity {
+.order-receivedt__btn-plus-quantity {
   right: 0px;
 }
 
-.table-product__img-item {
+.order-receivedt__img-item {
   width: 70px;
   img {
     object-fit: cover;
@@ -158,7 +184,7 @@
   }
 }
 
-.table-product__img-detail {
+.order-receivedt__img-detail {
   display: block;
   overflow: hidden;
   height: 0;
@@ -166,12 +192,12 @@
   width: 100%;
   padding-bottom: 100%;
 }
-.table-product__value-product {
+.order-receivedt__value-product {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.table-product__title-item {
+.order-receivedt__title-item {
   a {
     h3 {
       font-size: 14px;
@@ -179,15 +205,12 @@
     }
   }
 }
-.table-product__btn-remove {
+.order-receivedt__btn-remove {
   text-align: end !important;
 }
-.table-product__value-quantity {
-  width: 120px;
+.order-receivedt__value-quantity {
 }
-.table-product__row-item {
-  td {
-  }
+.order-receivedt__row-item {
 }
 .cart-totals__text-area {
   textarea {
@@ -238,7 +261,7 @@
 .cart-totals__box-comp {
   padding-bottom: 0.9375rem;
 }
-.table-product__btn-remove {
+.order-receivedt__btn-remove {
   cursor: pointer;
   span {
     font-size: 0.85rem;
