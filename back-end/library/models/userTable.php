@@ -6,7 +6,7 @@ class UserTable extends Database
     {
         parent::__construct(DatabaseServerName, Database, Username, Password);
     }
-   public function getUser($username = '', $password = '', $user_type = '', $email = '', $id = 0)
+    public function getUser($username = '', $password = '', $user_type = '', $email = '', $id = 0)
     {
         $sql = "SELECT * FROM user WHERE TRUE";
         $params = [];
@@ -39,8 +39,8 @@ class UserTable extends Database
             $data = $this->pdo_stm->fetchAll();
             $arr = [];
             foreach ($data as $row) {
-                $one = new User($row["id"], $row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
-
+                $one = new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
+                $one->id = $row["id"];
                 array_push($arr, $one);
             }
             $this->data = $arr;
@@ -82,7 +82,8 @@ class UserTable extends Database
         $this->data = [];
         if (count($data) > 0) {
             foreach ($data as $row) {
-                array_push($this->data, new User($row["id"], $row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"])));
+                array_push($this->data, new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"])));
+                $this->data->id = $row["id"];
             }
         }
         return $result;
