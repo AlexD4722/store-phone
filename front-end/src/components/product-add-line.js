@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import APIrequest, { ADD_NEW_PRODUCT_LINE } from "../API/callAPI";
-import { Link } from "react-router-dom";
 
-function AddNewProductLineForm() {
+function ProductAddLine() {
     const [name, setName] = useState("");
     const [brand, setBrand] = useState("");
     const [type, setType] = useState("");
@@ -30,9 +29,6 @@ function AddNewProductLineForm() {
 
     return (
         <Form onSubmit={(e) => handleSubmit(e)}>
-            <Button>
-                <Link to="../wish-list">Add product</Link>
-            </Button>
             <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
@@ -69,4 +65,4 @@ function AddNewProductLineForm() {
     );
 }
 
-export default AddNewProductLineForm;
+export default ProductAddLine;

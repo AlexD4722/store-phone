@@ -10,7 +10,7 @@ $PT = new ProductTable();
 $data = json_decode($_POST["data"]);
 $product_line_name = $data->productLine;
 $PT->getProductLineList($product_line_name);
-$product = new Product(null, $data->name, json_encode($data->description), $data->initalPrice, $data->sellingPrice, $data->quantity, $data->images, json_encode($data->color), $data->capacity, 1);
+$product = new Product(null, $data->name, $data->description, $data->initalPrice, $data->sellingPrice, $data->quantity, $data->images, $data->color, $data->capacity, 1);
 $product->product_line = $PT->data[0];
 $result = $PT->addProduct($product);
 if ($result) {

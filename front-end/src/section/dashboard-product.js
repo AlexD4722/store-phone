@@ -1,4 +1,8 @@
 import { Tabs, Tab } from "react-bootstrap";
+import ProductCheck from "../components/product-check";
+import ProductAdd from "../components/product-add";
+import ProductAddLine from "../components/product-add-line";
+import ProductEdit from "../components/product-edit";
 
 function DashboardProductTab() {
     return (
@@ -9,17 +13,22 @@ function DashboardProductTab() {
                 className="mb-3"
                 fill
                 justify
+                mountOnEnter
+                unmountOnExit
             >
-                <Tab eventKey="check" title="Check product information">
-                    svasdfa
+                <Tab eventKey="check" title="Check product info">
+                    <ProductCheck />
                 </Tab>
                 <Tab eventKey="add" title="Add product">
-                    sdasdasd
+                    <ProductAdd />
                 </Tab>
-                <Tab eventKey="remove" title="Remove product">
-                    asdasdas
+                <Tab eventKey="addPL" title="Add product line">
+                    <ProductAddLine />
                 </Tab>
-                <Tab eventKey="edit" title="Edit product information">
+                <Tab eventKey="remove" title="Edit product info">
+                    <ProductEdit />
+                </Tab>
+                <Tab eventKey="edit" title="Remove product">
                     sdasfaf
                 </Tab>
             </Tabs>

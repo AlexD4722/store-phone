@@ -12,8 +12,13 @@ $productArray = [];
 if (count($data) > 0) {
     foreach ($data as $id) {
         $result = $PT->getProductById($id);
-        $product = $PT->data;
-        array_push($productArray, $product);
+        if ($result) {
+            $product = $PT->data;
+            array_push($productArray, $product);
+        }
+    }
+    if (count($productArray) > 0){
+        $result = true;
     }
 } else {
     $result = true;

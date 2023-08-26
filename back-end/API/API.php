@@ -82,6 +82,9 @@ switch ($action) {
     case GET_USER_Receipt:
         require("../controller/getUserReceipt.php");
         break;
+    case EDIT_PRODUCT:
+        require("../controller/edit_product.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

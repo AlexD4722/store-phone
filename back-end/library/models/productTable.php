@@ -131,7 +131,19 @@ class ProductTable extends Database
         $result = $this->SQLexec($sql, $params);
         $data = $this->pdo_stm->fetch();
         if ($data) {
-            $this->data = $data;
+            $this->getProductLineList($data["product_line"]);
+            $productLine = $this->data[0];
+            $arrayFiles = [];
+                $files = scandir($this->LinkServer . $data["images"]);
+                for ($i = 0; $i < count($files); $i++) {
+                    if ($files[$i] != "." && $files[$i] != "..") {
+                        $files[$i] = "http://localhost:2203/learning/store-phone/back-end/imgProduct/" . $data["images"] . "/" . $files[$i];
+                        array_push($arrayFiles, $files[$i]);
+                    }
+                }
+            $product = new Product($data['id'], $data['name'], json_decode($data['description']), $data['inital_price'], $data['selling_price'], $data['quantity'], $arrayFiles, json_decode($data['color']), $data['capacity'], $data['status']);
+            $product->product_line = $productLine;
+            $this->data = $product;
         }
         return $result;
     }
@@ -142,13 +154,13 @@ class ProductTable extends Database
         $data = [
             $p->id,
             $p->name,
-            $p->description,
+            json_encode($p->description),
             $p->inital_price,
             $p->selling_price,
             $p->product_line->name,
             $p->images,
             $p->quantity,
-            $p->color,
+            json_encode($p->color),
             $p->capacity,
             $p->status
         ];
@@ -171,16 +183,18 @@ class ProductTable extends Database
     // return: boolean
     function editProduct($id, Product $p)
     {
-        $sql = "UPDATE `product` SET `name`= ?,`description`= ?,`inital_price`= ?,`selling_price`= ?,`product_line`= ?,`images`= ?,`quantity`= ? WHERE `id` = ?";
+        $sql = "UPDATE `product` SET `name`= ?,`description`= ?,`inital_price`= ?,`selling_price`= ?,`product_line`= ?,`images`= ?,`quantity`= ?, `color` = ?, `capacity` = ? WHERE `id` = ?";
 
         $data = [
             $p->name,
-            $p->description,
+            json_encode($p->description),
             $p->inital_price,
             $p->selling_price,
             $p->product_line->name,
             $p->images,
             $p->quantity,
+            json_encode($p->color),
+            $p->capacity,
             $id
         ];
         $result = $this->SQLexec($sql, $data);
