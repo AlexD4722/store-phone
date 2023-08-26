@@ -183,7 +183,7 @@ class ProductTable extends Database
     // return: boolean
     function editProduct($id, Product $p)
     {
-        $sql = "UPDATE `product` SET `name`= ?,`description`= ?,`inital_price`= ?,`selling_price`= ?,`product_line`= ?,`images`= ?,`quantity`= ?, `color` = ?, `capacity` = ? WHERE `id` = ?";
+        $sql = "UPDATE `product` SET `name`= ?,`description`= ?,`inital_price`= ?,`selling_price`= ?,`product_line`= ?,`images`= ?,`quantity`= ?, `color` = ?, `capacity` = ?, `status` = ? WHERE `id` = ?";
 
         $data = [
             $p->name,
@@ -195,6 +195,7 @@ class ProductTable extends Database
             $p->quantity,
             json_encode($p->color),
             $p->capacity,
+            $p->status,
             $id
         ];
         $result = $this->SQLexec($sql, $data);

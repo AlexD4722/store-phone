@@ -22,6 +22,7 @@ export const GET_PRODUCTS_BY_WISHLIST = 310;
 export const SEARCH_ITEM_EXACTLY = 311;
 export const GET_USER_Receipt = 312;
 export const EDIT_PRODUCT = 313;
+export const REMOVE_PRODUCT = 314;
 
 async function APIrequest(action, data) {
     let sendData = new FormData();

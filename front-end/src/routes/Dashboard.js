@@ -1,4 +1,4 @@
-import { Row, Col, ListGroup, Tabs, Tab } from "react-bootstrap";
+import { Row, Col, ListGroup, Tab } from "react-bootstrap";
 import DashboardUserTab from "../section/dashboard-user.js";
 import DashboardInfoTab from "../section/dashboard-info.js";
 import DashboardProductTab from "../section/dashboard-product.js";
@@ -8,7 +8,7 @@ import DashboardSettingTab from "../section/dashboard-setting.js";
 function Dashboard() {
     return (
         <>
-            <Tab.Container defaultActiveKey="#link1">
+            <Tab.Container defaultActiveKey="#info" mountOnEnter unmountOnExit>
                 <Row>
                     <Col sm={2}>
                         <ListGroup>

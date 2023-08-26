@@ -3,7 +3,6 @@ import { Button, Form } from "react-bootstrap";
 import APIrequest, {
     GET_PRODUCTS_BY_WISHLIST,
     GET_ALL_PRODUCT_LINE,
-    testAPI,
     EDIT_PRODUCT,
 } from "../API/callAPI";
 

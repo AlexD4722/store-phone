@@ -48,11 +48,14 @@ class ReceiptLine
     public $id;
     public $product_id;
     public $quantity;
+    public $color;
     public $order_id;
-    public function __construct($product_id, $quantity, $order_id)
+
+    public function __construct($product_id, $quantity, $color, $order_id)
     {
         $this->product_id = $product_id;
         $this->quantity = $quantity;
+        $this->color = $color;
         $this->order_id = $order_id;
     }
 }

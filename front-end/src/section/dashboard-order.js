@@ -1,4 +1,8 @@
 import { Tabs, Tab } from "react-bootstrap";
+import OrderCheck from "../components/order-check.js";
+import OrderAdd from "../components/order-add.js";
+import OrderEdit from "../components/order-edit.js";
+import OrderRemove from "../components/order-remove.js";
 
 function DashboardOrderTab() {
     return (
@@ -11,16 +15,16 @@ function DashboardOrderTab() {
                 justify
             >
                 <Tab eventKey="check" title="Check order information">
-                    svasdfa
+                    <OrderCheck />
                 </Tab>
                 <Tab eventKey="add" title="Add order">
-                    sdasdasd
-                </Tab>
-                <Tab eventKey="remove" title="Remove order">
-                    asdasdas
+                    <OrderAdd />
                 </Tab>
                 <Tab eventKey="edit" title="Edit order">
-                    sdasfaf
+                    <OrderEdit />
+                </Tab>
+                <Tab eventKey="remove" title="Remove order">
+                    <OrderRemove />
                 </Tab>
             </Tabs>
         </Tab.Pane>

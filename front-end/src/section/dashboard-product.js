@@ -3,6 +3,7 @@ import ProductCheck from "../components/product-check";
 import ProductAdd from "../components/product-add";
 import ProductAddLine from "../components/product-add-line";
 import ProductEdit from "../components/product-edit";
+import ProductRemove from "../components/product-remove";
 
 function DashboardProductTab() {
     return (
@@ -25,11 +26,11 @@ function DashboardProductTab() {
                 <Tab eventKey="addPL" title="Add product line">
                     <ProductAddLine />
                 </Tab>
-                <Tab eventKey="remove" title="Edit product info">
+                <Tab eventKey="edit" title="Edit product info">
                     <ProductEdit />
                 </Tab>
-                <Tab eventKey="edit" title="Remove product">
-                    sdasfaf
+                <Tab eventKey="remove" title="Remove product">
+                    <ProductRemove />
                 </Tab>
             </Tabs>
         </Tab.Pane>
