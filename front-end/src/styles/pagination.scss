@@ -31,3 +31,9 @@
         }
     }
 }
+.pagination-active{
+    a{      
+        background-color: $color-bs-blue;
+        color: $color-background;
+    }
+}

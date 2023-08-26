@@ -5,6 +5,7 @@ import APIrequest, { FIlTER_PRODUCT, testAPI } from "../API/callAPI";
 
 // import React, { useEffect, useState } from 'react';
 import "../styles/sort-product.scss";
+import '../styles/pagination.scss'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -546,22 +547,27 @@ function Search() {
     const lastIndex = currentPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
     const records = Phones.slice(firstIndex, lastIndex);
-    console.log(records, "******************")
     const npage = Math.ceil(Phones.length / recordsPerPage);
     const numbers = [...Array(npage + 1).keys()].slice(1);
-    console.log("NNNNNNNNNNNNNNN", numbers)
-
     const changePage = (id) => {
         setCurrentPage(id)
+        console.log(id)
+        console.log(firstIndex)
     }
     const prePage = () => {
-        if (currentPage !== firstIndex) {
-            setCurrentPage(currentPage - 1)
+        if (currentPage !== 1) {
+            if (currentPage !== firstIndex) {
+                setCurrentPage(currentPage - 1)
+            }
         }
+        console.log(currentPage)
+        console.log(firstIndex)
     }
     const nextPage = () => {
-        if (currentPage !== lastIndex) {
-            setCurrentPage(currentPage + 1)
+        if (currentPage !== npage) {
+            if (currentPage !== lastIndex) {
+                setCurrentPage(currentPage + 1)
+            }
         }
     }
 
@@ -923,7 +929,9 @@ function Search() {
                                 numbers.length && numbers.map((item, index) => {
                                     return (
                                         <Pagination.Item key={index}
-                                            onClick={() => changePage(item)}>
+                                            onClick={() => changePage(item)}
+                                            className={currentPage === item ? "pagination-active" : ""}
+                                        >
                                             {item}
                                         </Pagination.Item>
                                     )
