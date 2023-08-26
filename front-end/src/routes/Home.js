@@ -14,6 +14,28 @@ import APIrequest, * as API from "../API/callAPI";
 import { Link, useParams } from "react-router-dom";
 
 function Home() {
+    const [messeage, setMesseage] = useState();
+    const [errolWishlist, setErrolWishlist] = useState(false);
+    const handleDataFromChild = (dataErrol) => {
+        setMesseage(dataErrol);
+        if (dataErrol) {
+            setErrolWishlist(true);
+            setTimeout(() => {
+                setErrolWishlist(false);
+            }, 3000)
+        }
+    };
+
+    const closeMessage = () => {
+        setErrolWishlist(false);
+    };
+    // console.log("messageErrol",messageErrol)
+    // if (messageErrol) {
+    //     setErrolWishlist(true);
+    //     setTimeout(() => {
+    //         setErrolWishlist(false);
+    //     }, 3000)
+    // }
     const [Phones, setPhones] = useState([]);
     const data = { quantity: 10, random: true };
     useEffect(() => {
@@ -69,6 +91,7 @@ function Home() {
                                             <Col key={phone.id}>
                                                 <Product
                                                     product={phone}
+                                                    onDataToParent={handleDataFromChild}
                                                 />
                                             </Col>
                                         );
@@ -132,6 +155,18 @@ function Home() {
                     </div >
                 </section >
             </div >
+            {
+                errolWishlist ?
+                    <div className="showMessage-eroll">
+                        <div className="showMessage-eroll__box">
+                            <p className="showMessage-eroll__content">“{messeage}”</p>
+                            <div className="showMessage-eroll__close" onClick={closeMessage}>
+                                <i class="bi bi-x"></i>
+                            </div>
+                        </div>
+                    </div>
+                    : ""
+            }
         </>
     );
 }

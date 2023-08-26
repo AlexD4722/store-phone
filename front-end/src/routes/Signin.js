@@ -20,7 +20,7 @@ function Signin() {
             setReport("");
             if (response.result === "Success") {
                 if (response.data.result === "Success") {
-                    let user = response.data.user;
+                    let user = response.data.user;  
                     setWishlist(user.wishlist);
                     let cart = JSON.parse(sessionStorage.getItem("cart"));
                     if (!cart){

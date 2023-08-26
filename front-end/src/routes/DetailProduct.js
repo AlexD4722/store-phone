@@ -394,7 +394,7 @@ function DetailProduct({ match }) {
                     <div className="showMessage">
                         <div className="showMessage__box">
                             <p className="showMessage__content">“{product[0].name} {selectedOptionCapacity} {selectedOptionColor}” has been added to your cart.</p>
-                            <div className="showMessage__close" onClick={closeMessage}>
+                            <div className="showMessage__close" onClick={() => closeMessage}>
                                 <i class="bi bi-x"></i>
                             </div>
                             <Link to="/cart" className="showMessage__link">
@@ -404,7 +404,6 @@ function DetailProduct({ match }) {
                     </div>
                     : ""
             }
-
         </div>
     );
 }

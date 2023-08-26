@@ -34,3 +34,37 @@
         color: $color-primary;
     }
 }
+.showMessage-eroll {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 9999;
+    color: #fff;
+    max-width: 400px;
+    background-color: $color-bs-danger;
+    border-radius: 7px;
+    padding: 15px 20px;
+}
+.showMessage-eroll__content{
+   font-size: 0.75rem;
+}
+.showMessage-eroll__close{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+}
+.showMessage-eroll__view-more{
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.showMessage-eroll__link{
+    color: #fff;
+    transition: 0.3s;
+    &:hover{
+        color: $color-primary;
+    }
+}

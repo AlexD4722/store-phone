@@ -9,7 +9,7 @@ function Product(props) {
     const [wishlist, setWishlist] = useWishlistContext();
     const [buttonAddToCart, setButtonAddToCart] = useState(false);
     const [buttonAddToWishlish, setButtonAddToWishlish] = useState(false);
-const [wishCheck, setWishCheck] = useState(false);
+    const [wishCheck, setWishCheck] = useState(false);
     const addItemToCart = () => {
         setButtonAddToCart(!buttonAddToCart);
     };
@@ -48,7 +48,7 @@ const [wishCheck, setWishCheck] = useState(false);
             dispatchCart(action);
         }
     };
-
+    const messageErrol = sessionStorage.getItem("messageErrol");
     const handleWishlist = () => {
         let loginStatus = sessionStorage.getItem("user");
         let loginData = JSON.parse(loginStatus);
@@ -56,7 +56,7 @@ const [wishCheck, setWishCheck] = useState(false);
             setButtonAddToWishlish(!buttonAddToWishlish);
             if (!wishlist.includes(props.product)) {
                 loginData.user.wishlist = [...wishlist, props.product];
-setWishCheck(true)
+                setWishCheck(true)
             }
             let data = loginData.user;
             APIrequest(UPDATE_USER, data).then((response) => {
@@ -77,7 +77,8 @@ setWishCheck(true)
                 }
             });
         } else {
-            alert("Sign in to add item to wishlist");
+            const dataErrol = "Please login to add items to your wishlist";
+            props.onDataToParent(dataErrol);
         }
     };
 
@@ -106,11 +107,11 @@ setWishCheck(true)
             </div>
             <div className="product-card__main">
                 <div className="product-card__content-wrapper">
-<Link to={`/product/${props.product.name}`}>
-                    <h3 className="product-card__product-title">
-                        {props.product.name} {props.product.capacity}
-                    </h3>
-</Link>
+                    <Link to={`/product/${props.product.name}`}>
+                        <h3 className="product-card__product-title">
+                            {props.product.name} {props.product.capacity}
+                        </h3>
+                    </Link>
                     <div className="product-card__product-rating">
                         <div className="product-card__box-start-rating">
                             <i className="bi bi-star-fill"></i>
@@ -126,7 +127,7 @@ setWishCheck(true)
                             <span className="product-card__price-new">
                                 ${props.product.selling_price}
                             </span>
-<span className="product-card__price-old">
+                            <span className="product-card__price-old">
                                 ${props.product.inital_price}
                             </span>
                         </div>
