@@ -8,7 +8,6 @@ import "../styles/product-module.scss";
 import "../styles/banner-sidebar.scss";
 import "../styles/section.scss";
 import ProductFlex from "../components/product-card2";
-import DetailProduct from "./DetailProduct";
 import React, { useState, useEffect } from 'react';
 import APIrequest, * as API from "../API/callAPI";
 import { Link, useParams } from "react-router-dom";
@@ -78,7 +77,7 @@ function Home() {
             });
         }
     }, []);
-    console.log(PhonesFlex, "///////////////")
+
     return (
         <>
             <SlideShow />

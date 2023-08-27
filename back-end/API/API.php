@@ -88,6 +88,9 @@ switch ($action) {
     case REMOVE_PRODUCT:
         require("../controller/remove_product.php");
         break;
+    case SEARCH_RECEIPT:
+        require("../controller/search_receipt.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

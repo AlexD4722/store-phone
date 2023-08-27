@@ -1,6 +1,5 @@
 import { Tabs, Tab } from "react-bootstrap";
 import OrderCheck from "../components/order-check.js";
-import OrderAdd from "../components/order-add.js";
 import OrderEdit from "../components/order-edit.js";
 import OrderRemove from "../components/order-remove.js";
 
@@ -16,9 +15,6 @@ function DashboardOrderTab() {
             >
                 <Tab eventKey="check" title="Check order information">
                     <OrderCheck />
-                </Tab>
-                <Tab eventKey="add" title="Add order">
-                    <OrderAdd />
                 </Tab>
                 <Tab eventKey="edit" title="Edit order">
                     <OrderEdit />

@@ -5,7 +5,7 @@ class Receipt
     public $date;
     public $customer_id;
     public $status;
-    private $lines = [];
+    public $lines = [];
     public function __construct($date, $cid, $stt)
     {
         $this->date = $date;
@@ -37,10 +37,7 @@ class Receipt
         }
         return true;
     }
-    public function getLines()
-    {
-        return $this->lines;
-    }
+
 }
 
 class ReceiptLine
