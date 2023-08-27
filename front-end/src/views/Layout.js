@@ -9,7 +9,7 @@ function Layout({children}) {
         <div>
             <Headers />
             <SiteMenu />
-            <Outlet />
+            <Outlet/>
             <NavBottom />
             <Footer />
         </div>

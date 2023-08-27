@@ -43,16 +43,6 @@ function DetailProduct({ match }) {
         setShowMessage(false);
     };
     const handleCart = () => {
-        // const itemChoose = {
-        //     id: product[0].id,
-        //     name: product[0].name,
-        //     images: product[0].images,
-        //     inital_price: product[0].inital_price,
-        //     selling_price: product[0].selling_price,
-        //     capacity: product[0].capacity,
-        //     color: selectedOptionColor,
-        // } 
-
         let userObject = JSON.parse(sessionStorage.getItem("user"));
         let localCartUsing = true;
         if (userObject) {
@@ -80,9 +70,9 @@ function DetailProduct({ match }) {
                     })
                 }
                 userObject.user.cart = userCart;
-                APIrequest(UPDATE_USER, userObject.user);
                 sessionStorage.setItem("user", JSON.stringify(userObject));
-                setWishlist([...wishlist]);
+                APIrequest(UPDATE_USER, userObject.user);
+                // setWishlist([...wishlist]);
             }
         }
         if (localCartUsing) {
@@ -133,6 +123,8 @@ function DetailProduct({ match }) {
                             listCapacity.push(phone.capacity);
                             setValueCapacity(listCapacity);
                         });
+                    }else{
+                        setIdChooseItem(ListPhones[0].id)
                     }
                     if (!ListPhones.length) {
                         navigate("../productNotFound");
@@ -391,11 +383,11 @@ function DetailProduct({ match }) {
             </div>
             {
                 showMessage ?
-                    <div className="showMessage">
+                    <div className="showMessage showMessage--add-cart">
                         <div className="showMessage__box">
                             <p className="showMessage__content">“{product[0].name} {selectedOptionCapacity} {selectedOptionColor}” has been added to your cart.</p>
                             <div className="showMessage__close" onClick={() => closeMessage}>
-                                <i class="bi bi-x"></i>
+                                <i className="bi bi-x"></i>
                             </div>
                             <Link to="/cart" className="showMessage__link">
                                 <div className="showMessage__view-more"><p>View more</p></div>

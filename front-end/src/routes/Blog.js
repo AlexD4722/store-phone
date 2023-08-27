@@ -181,7 +181,7 @@ function Blog() {
                             </div>
                         </div>
                     </div>
-                    <PaginationPage />
+                    {/* <PaginationPage /> */}
                 </Col>
                 <Col xs={12} sm={12} md={3} lg={3}>
                     <div className="sidebar-blog">

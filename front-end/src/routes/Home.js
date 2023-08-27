@@ -15,14 +15,24 @@ import { Link, useParams } from "react-router-dom";
 
 function Home() {
     const [messeage, setMesseage] = useState();
+    const [styleMesseage, setStyleMesseage] = useState('');
     const [errolWishlist, setErrolWishlist] = useState(false);
-    const handleDataFromChild = (dataErrol) => {
-        setMesseage(dataErrol);
-        if (dataErrol) {
+    const handleDataFromChild = (messeage) => {
+        // setMesseage(messeage);
+
+        if (messeage) {
             setErrolWishlist(true);
+            setMesseage("The product has been added to the wishlist");
+            setStyleMesseage("showMessage--success")
             setTimeout(() => {
                 setErrolWishlist(false);
-            }, 3000)
+            }, 100000)
+        } else {
+            setErrolWishlist(true);
+            setMesseage("Insert item to wishlist failed");
+            setTimeout(() => {
+                setErrolWishlist(false);
+            }, 10000000)
         }
     };
 
@@ -157,12 +167,19 @@ function Home() {
             </div >
             {
                 errolWishlist ?
-                    <div className="showMessage-eroll">
-                        <div className="showMessage-eroll__box">
-                            <p className="showMessage-eroll__content">“{messeage}”</p>
-                            <div className="showMessage-eroll__close" onClick={closeMessage}>
+                    <div className={`showMessage ${styleMesseage}`}>
+                        <div className="showMessage__box">
+                            <p className="showMessage__content">“{messeage}”</p>
+                            <div className="showMessage__close" onClick={closeMessage}>
                                 <i class="bi bi-x"></i>
                             </div>
+                            {
+                                styleMesseage ?
+                                    <Link to="/wish-list" className="showMessage__link">
+                                        <div className="showMessage__view-more"><p>View more</p></div>
+                                    </Link>
+                                    : ""
+                            }
                         </div>
                     </div>
                     : ""

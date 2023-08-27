@@ -1,21 +1,113 @@
 import { Link } from "react-router-dom";
 import { useWishlistContext } from "../store";
+import { useEffect, useState } from "react";
+import '../styles/wishList.scss'
+import APIrequest, { UPDATE_USER } from "../API/callAPI";
 
 function WishList() {
-    const wishlist = useWishlistContext()[0];
-
+    const [wishlist, setWishlist] = useWishlistContext();
+    console.log(wishlist, ">>>>>>>>>>>>>>");
+    useEffect(()=>{
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        topFunction();
+    },[])
+    const removeItem = (idItem) => {
+        let loginStatus = sessionStorage.getItem("user");
+        let loginData = JSON.parse(loginStatus);
+        if (loginData && loginData.login === "OK") {
+            loginData.user.wishlist = wishlist.filter(product => {
+                return product.product.id !== idItem
+            });
+            let data = loginData.user;
+            APIrequest(UPDATE_USER, data).then((response) => {
+                if (
+                    response.result === "Success" &&
+                    response.data.result === "Success"
+                ) {
+                    setWishlist((prev) => {
+                        prev = wishlist.filter(product => {
+                            return product.product.id !== idItem
+                        });
+                        return prev;
+                    });
+                    loginStatus = JSON.stringify(loginData);
+                    sessionStorage.setItem("user", loginStatus);
+                } else {
+                    alert("Insert item to wishlist failed");
+                }
+            });
+        }
+    };
     return (
         <>
-            Wishlist in session storage <br />
             {
                 wishlist.length ?
-                    <div>
-                        {wishlist.map((product) => (
-                            <>
-                                {product.name}
-                                <br />
-                            </>
-                        ))}
+                    <div className="wishlist-product">
+                        <table className='wishlist-product__box-table'>
+                            <thead>
+                                <tr>
+                                    <th className='wishlist-product__colum-product'>Product</th>
+                                    <th className='wishlist-product__colum-pice'>Price</th>
+                                    <th className='wishlist-product__colum-date'>Date Added</th>
+                                    <th className='wishlist-product__colum-btn-add'>Add to card</th>
+                                    <th className='wishlist-product__colum-pice'></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    wishlist && wishlist.map((item, index) => {
+                                        console.log(item.product, "||||||||||||||")
+                                        return (
+                                            <tr className='wishlist-product__row-item' key={index}>
+                                                <td className='wishlist-product__value-product' data-label="Product:">
+                                                    <div className='wishlist-product__img-item'>
+                                                        <div className='wishlist-product__img-detail'>
+                                                            <img src={item.product.images[0]} alt="images product" />
+                                                        </div>
+                                                    </div>
+                                                    <div className='wishlist-product__title-item'>
+                                                        <Link>
+                                                            <h3>{item.product.name} {item.product.capacity} {item.color}</h3>
+                                                        </Link>
+                                                    </div>
+                                                </td>
+                                                <td className='wishlist-product__value-pice' data-label="Price:">
+                                                    <p>
+                                                        <span className="wishlist-product__inital_price">${item.product.inital_price}</span>
+                                                        <span className="wishlist-product__selling_price">${item.product.selling_price}</span></p>
+                                                </td>
+
+                                                <td className='wishlist-product__value-time-add-wishlist' data-label="Subtotal:"><span></span>{item.dateAdded}</td>
+                                                <td>
+                                                    <div className="wishlist-product__box-btn">
+                                                        <Link to={`/product/${item.product.name}`}>
+                                                            <div className="wishlist-product__btn-add-cart">
+                                                                <button type="button">
+                                                                    <span className="wishlist-product__btn-add-cart-content">
+                                                                        show more
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </Link>
+                                                        <div className="wishlist-product__btn-remove-item"
+                                                        onClick={() => removeItem(item.product.id)}>
+                                                            <button type="button">
+                                                                <span className="wishlist-product__btn-remove-icon">
+                                                                    <i class="bi bi-x-circle"></i>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
                     </div>
                     :
                     <div className="box-empty">

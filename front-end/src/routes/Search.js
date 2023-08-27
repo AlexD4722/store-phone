@@ -54,6 +54,10 @@ function Search() {
         layout.style.display = "none";
         menuExtend.style.transform = "translateX(-100%)";
     }
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
     useEffect(() => {
         const rangeInput = document.querySelectorAll(
             ".side-part-filter__price-ranger input"
@@ -250,10 +254,6 @@ function Search() {
             //     break;
             default:
                 break;
-        }
-        function topFunction() {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
         topFunction();
     }, [params.keyword]);
@@ -543,7 +543,7 @@ function Search() {
         // setPhones(filteredProducts)
     };
     const [currentPage, setCurrentPage] = useState(1);
-    const recordsPerPage = 5;
+    const recordsPerPage = 8;
     const lastIndex = currentPage * recordsPerPage;
     const firstIndex = lastIndex - recordsPerPage;
     const records = Phones.slice(firstIndex, lastIndex);
@@ -553,6 +553,7 @@ function Search() {
         setCurrentPage(id)
         console.log(id)
         console.log(firstIndex)
+        topFunction();
     }
     const prePage = () => {
         if (currentPage !== 1) {
@@ -562,6 +563,7 @@ function Search() {
         }
         console.log(currentPage)
         console.log(firstIndex)
+        topFunction();
     }
     const nextPage = () => {
         if (currentPage !== npage) {
@@ -569,6 +571,7 @@ function Search() {
                 setCurrentPage(currentPage + 1)
             }
         }
+        topFunction();
     }
 
     return (

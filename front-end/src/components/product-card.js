@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import APIrequest, { UPDATE_USER } from "../API/callAPI";
 import { useCartContext, useWishlistContext } from "../store/hooks";
 import "../styles/product-card.scss";
@@ -48,15 +48,45 @@ function Product(props) {
             dispatchCart(action);
         }
     };
+    const item = {
+        product: props.product,
+        date: ""
+    }
+    useEffect(() => {
+        if (!wishlist.filter(product => {
+            return product.product.id === item.product.id
+        }).length) {
+            setWishCheck(false)
+        } else {
+            setWishCheck(true)
+        }
+    }, [])
     const messageErrol = sessionStorage.getItem("messageErrol");
     const handleWishlist = () => {
+        const date = new Date();
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng trong JavaScript bắt đầu từ 0
+        const year = date.getFullYear();
+    
+        const timeNow = `${day}/${month}/${year}`;
+        const item = {
+            product: props.product,
+            dateAdded: timeNow,
+        }
         let loginStatus = sessionStorage.getItem("user");
         let loginData = JSON.parse(loginStatus);
         if (loginData && loginData.login === "OK") {
             setButtonAddToWishlish(!buttonAddToWishlish);
-            if (!wishlist.includes(props.product)) {
-                loginData.user.wishlist = [...wishlist, props.product];
+            if (!wishlist.filter(product => {
+                return product.product.id === item.product.id
+            }).length) {
+                loginData.user.wishlist = [...wishlist, item];
                 setWishCheck(true)
+            } else {
+                loginData.user.wishlist = wishlist.filter(product => {
+                    return product.product.id !== item.product.id
+                });
+                setWishCheck(false)
             }
             let data = loginData.user;
             APIrequest(UPDATE_USER, data).then((response) => {
@@ -65,8 +95,14 @@ function Product(props) {
                     response.data.result === "Success"
                 ) {
                     setWishlist((prev) => {
-                        if (!prev.includes(props.product)) {
-                            return [...prev, props.product];
+                        if (!prev.filter(product => {
+                            return product.product.id === item.product.id
+                        }).length) {
+                            prev = [...prev, item];
+                        } else {
+                            prev = wishlist.filter(product => {
+                                return product.product.id != item.product.id
+                            });
                         }
                         return prev;
                     });
@@ -76,12 +112,16 @@ function Product(props) {
                     alert("Insert item to wishlist failed");
                 }
             });
+            const messeage = true;
+            // The product has been added to the wishlist
+            props.onDataToParent(messeage);
+            
         } else {
-            const dataErrol = "Please login to add items to your wishlist";
-            props.onDataToParent(dataErrol);
+            // const messeage = "Please login to add items to your wishlist";
+            const messeage = false
+            props.onDataToParent(messeage);
         }
     };
-
     return (
         <div className="product-card">
             <div className="product-card__img-wrap">
