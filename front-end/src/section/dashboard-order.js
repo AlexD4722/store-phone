@@ -16,12 +16,6 @@ function DashboardOrderTab() {
                 <Tab eventKey="check" title="Check order information">
                     <OrderCheck />
                 </Tab>
-                <Tab eventKey="edit" title="Edit order">
-                    <OrderEdit />
-                </Tab>
-                <Tab eventKey="remove" title="Remove order">
-                    <OrderRemove />
-                </Tab>
             </Tabs>
         </Tab.Pane>
     );

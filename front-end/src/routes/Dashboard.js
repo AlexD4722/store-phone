@@ -4,8 +4,20 @@ import DashboardInfoTab from "../section/dashboard-info.js";
 import DashboardProductTab from "../section/dashboard-product.js";
 import DashboardOrderTab from "../section/dashboard-order.js";
 import DashboardSettingTab from "../section/dashboard-setting.js";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import AccountData from "../components/account-data.js";
 
 function Dashboard() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userStatus = JSON.parse(sessionStorage.getItem("user"));
+        if (!userStatus || userStatus.login != "OK") {
+            navigate("404notfound");
+        }
+    }, [navigate]);
+
     return (
         <>
             <Tab.Container defaultActiveKey="#info" mountOnEnter unmountOnExit>
@@ -38,7 +50,9 @@ function Dashboard() {
                             <DashboardSettingTab />
                         </Tab.Content>
                     </Col>
-                    <Col sm={2}>Một cái gì đó linh tinh bên này nữa</Col>
+                    <Col sm={2}>
+                        <AccountData />
+                    </Col>
                 </Row>
             </Tab.Container>
         </>

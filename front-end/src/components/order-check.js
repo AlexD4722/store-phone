@@ -54,8 +54,6 @@ function OrderCheck() {
         });
     };
 
-    console.log(orders);
-
     const toggle = (target) => {
         setDisable((prev) => {
             return {
@@ -134,25 +132,31 @@ function OrderCheck() {
             </Form>
             {orders.length > 0 &&
                 orders.map((receipt) => (
-                    <Table striped bordered hover key={receipt.id}>
-                        <thead>
-                            <tr>
-                                <th>Product ID</th>
-                                <th>Quantity</th>
-                                <th>Color</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {receipt.lines.length > 0 &&
-                                receipt.lines.map((line) => (
-                                    <tr key={line.id}>
-                                        <td>{line.product_id}</td>
-                                        <td>{line.quantity}</td>
-                                        <td>{line.color}</td>
-                                    </tr>
-                                ))}
-                        </tbody>
-                    </Table>
+                    <div>
+                        <div>
+                            Receipt ID: {receipt.id} Date: {receipt.date}{" "}
+                            Customer ID: {receipt.customer_id}
+                        </div>
+                        <Table striped bordered hover key={receipt.id}>
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Quantity</th>
+                                    <th>Color</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {receipt.lines.length > 0 &&
+                                    receipt.lines.map((line) => (
+                                        <tr key={line.id}>
+                                            <td>{line.product_id}</td>
+                                            <td>{line.quantity}</td>
+                                            <td>{line.color}</td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </Table>
+                    </div>
                 ))}
         </>
     );
