@@ -4,7 +4,6 @@ import {
     AccountContext,
     CartContext,
     WishListContext,
-    ListProductContext,
 } from "./Context";
 
 export function useSearchContext() {
@@ -30,8 +29,3 @@ export function useCartContext() {
 
     return store;
 }
-export function useDetailProductContext() {
-    const store = useContext(ListProductContext);
-    return store;
-}
-

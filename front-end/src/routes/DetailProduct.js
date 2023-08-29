@@ -6,16 +6,10 @@ import "../styles/showMessage.scss";
 import Carousel from "react-bootstrap/Carousel";
 
 import { useEffect, useState } from "react";
-import APIrequest, {
-    GET_ALL_PRODUCTS,
-    SEARCH_ITEM_EXACTLY,
-    UPDATE_USER,
-    testAPI,
-} from "../API/callAPI";
+import APIrequest, { SEARCH_ITEM_EXACTLY, UPDATE_USER } from "../API/callAPI";
 import { useNavigate, useParams } from "react-router";
-import { useCartContext, useDetailProductContext, useSearchContext, useWishlistContext } from "../store/hooks";
+import { useCartContext, useWishlistContext } from "../store/hooks";
 import { Link } from "react-router-dom";
-
 
 function DetailProduct({ match }) {
     const params = useParams();
@@ -51,9 +45,14 @@ function DetailProduct({ match }) {
                 let found = false;
                 let userCart = userObject.user.cart;
                 userCart.forEach((value) => {
-                    if (value.product.id === idChooseItem && value.color === selectedOptionColor) {
+                    if (
+                        value.product.id === idChooseItem &&
+                        value.color === selectedOptionColor
+                    ) {
                         value.quantity += valueQuantity;
-                        value.totalPrice = parseFloat(priceSelling) * parseFloat(valueQuantity);
+                        value.totalPrice =
+                            parseFloat(priceSelling) *
+                            parseFloat(valueQuantity);
                         found = true;
                     }
                 });
@@ -64,10 +63,12 @@ function DetailProduct({ match }) {
                                 product: item,
                                 quantity: valueQuantity,
                                 color: selectedOptionColor,
-                                totalPrice: parseFloat(priceSelling) * parseFloat(valueQuantity)
+                                totalPrice:
+                                    parseFloat(priceSelling) *
+                                    parseFloat(valueQuantity),
                             });
                         }
-                    })
+                    });
                 }
                 userObject.user.cart = userCart;
                 sessionStorage.setItem("user", JSON.stringify(userObject));
@@ -82,17 +83,18 @@ function DetailProduct({ match }) {
                         product: item,
                         quantity: valueQuantity,
                         color: selectedOptionColor,
-                        totalPrice: parseFloat(priceSelling) * parseFloat(valueQuantity)
+                        totalPrice:
+                            parseFloat(priceSelling) *
+                            parseFloat(valueQuantity),
                     };
                     let action = { type: "add", payload };
                     dispatchCart(action);
                 }
-            })
+            });
         }
         displayMessage();
     };
 
-    //////////////////////////////////////
     useEffect(() => {
         let newData = {
             search: params.nameProduct,
@@ -118,13 +120,13 @@ function DetailProduct({ match }) {
                     let listCapacity = [];
                     if (ListPhones[0].capacity) {
                         setSelectedOptionCapacity(ListPhones[0].capacity);
-                        setIdChooseItem(ListPhones[0].id)
+                        setIdChooseItem(ListPhones[0].id);
                         ListPhones.map((phone) => {
                             listCapacity.push(phone.capacity);
                             setValueCapacity(listCapacity);
                         });
-                    }else{
-                        setIdChooseItem(ListPhones[0].id)
+                    } else {
+                        setIdChooseItem(ListPhones[0].id);
                     }
                     if (!ListPhones.length) {
                         navigate("../productNotFound");
@@ -163,13 +165,16 @@ function DetailProduct({ match }) {
     };
     const handleChoseOptionCapacity = (event) => {
         setSelectedOptionCapacity(event.target.value);
-        console.log("event ----", event.target.value)
+        console.log("event ----", event.target.value);
         for (let index = 0; index < product.length; index++) {
-            console.log("product[index].capacity[0] ----", product[index].capacity)
+            console.log(
+                "product[index].capacity[0] ----",
+                product[index].capacity
+            );
             if (product[index].capacity === event.target.value) {
                 setPriceSelling(product[index].selling_price);
                 setPriceInitall(product[index].inital_price);
-                setIdChooseItem(product[index].id)
+                setIdChooseItem(product[index].id);
             }
         }
     };
@@ -326,7 +331,10 @@ function DetailProduct({ match }) {
                                             ></div>
                                         </div>
                                         <div className="detail-product__btn-add-cart">
-                                            <button type="button" onClick={handleCart}>
+                                            <button
+                                                type="button"
+                                                onClick={handleCart}
+                                            >
                                                 <span className="detail-product__btn-add-cart-content">
                                                     Add to cart
                                                 </span>
@@ -381,21 +389,29 @@ function DetailProduct({ match }) {
                     </div>
                 </div>
             </div>
-            {
-                showMessage ?
-                    <div className="showMessage showMessage--add-cart">
-                        <div className="showMessage__box">
-                            <p className="showMessage__content">“{product[0].name} {selectedOptionCapacity} {selectedOptionColor}” has been added to your cart.</p>
-                            <div className="showMessage__close" onClick={() => closeMessage}>
-                                <i className="bi bi-x"></i>
-                            </div>
-                            <Link to="/cart" className="showMessage__link">
-                                <div className="showMessage__view-more"><p>View more</p></div>
-                            </Link>
+            {showMessage ? (
+                <div className="showMessage showMessage--add-cart">
+                    <div className="showMessage__box">
+                        <p className="showMessage__content">
+                            “{product[0].name} {selectedOptionCapacity}{" "}
+                            {selectedOptionColor}” has been added to your cart.
+                        </p>
+                        <div
+                            className="showMessage__close"
+                            onClick={() => closeMessage}
+                        >
+                            <i className="bi bi-x"></i>
                         </div>
+                        <Link to="/cart" className="showMessage__link">
+                            <div className="showMessage__view-more">
+                                <p>View more</p>
+                            </div>
+                        </Link>
                     </div>
-                    : ""
-            }
+                </div>
+            ) : (
+                ""
+            )}
         </div>
     );
 }

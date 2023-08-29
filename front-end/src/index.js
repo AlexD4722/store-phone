@@ -8,7 +8,6 @@ import {
     AccountProvider,
     WishlistProvider,
     CartProvider,
-    ProviderProduct,
 } from "./store/";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -17,9 +16,7 @@ root.render(
         <CartProvider>
             <WishlistProvider>
                 <SearchProvider>
-                    <ProviderProduct>
-                        <App />
-                    </ProviderProduct>
+                    <App />
                 </SearchProvider>
             </WishlistProvider>
         </CartProvider>
