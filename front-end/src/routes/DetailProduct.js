@@ -175,7 +175,7 @@ function DetailProduct({ match }) {
     };
     return (
         <div className="xo-container">
-            <h3>This is product detail</h3>
+            {/* <h3>This is product detail</h3> */}
             <div className="detail-product">
                 <div className="detail-product__main-box">
                     <Row xs={1} sm={2}>
