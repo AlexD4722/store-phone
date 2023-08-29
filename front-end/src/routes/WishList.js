@@ -59,7 +59,6 @@ function WishList() {
                             <tbody>
                                 {
                                     wishlist && wishlist.map((item, index) => {
-                                        console.log(item.product, "||||||||||||||")
                                         return (
                                             <tr className='wishlist-product__row-item' key={index}>
                                                 <td className='wishlist-product__value-product' data-label="Product:">
