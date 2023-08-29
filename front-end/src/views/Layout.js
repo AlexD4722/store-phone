@@ -3,13 +3,16 @@ import SiteMenu from "../components/site-menu";
 import Footer from "../section/footer-page";
 import NavBottom from "../components/mobile-bottom-menu";
 import { Outlet } from "react-router";
+import '../styles/index.scss';
 
-function Layout({children}) {
+function Layout({ children }) {
     return (
         <div>
             <Headers />
             <SiteMenu />
-            <Outlet/>
+            <div className="outlet">
+                <Outlet />
+            </div>
             <NavBottom />
             <Footer />
         </div>
