@@ -7,6 +7,7 @@ import '../styles/footer-page.scss'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SearchEmail from '../components/search-email';
+import BrandItem from '../components/brand-item';
 function Footer() {
     return (
         <section className="section-footer">
@@ -28,6 +29,7 @@ function Footer() {
                     </div>
                 </div>
             </div>
+            <BrandItem />
             <footer className='footer-widgets'>
                 <div className='xo-container'>
                     <Row xs={2} sm={2} md={4} lg={4}>
