@@ -34,5 +34,6 @@ define("INSERT_RECEIPT_LINE", 315);
 define("GET_RECEIPT", 316);
 define("VALIDATE_NAME_USER", 317);
 define("INSERT_GUEST", 318);
+define("GET_GEST", 319);
 
 ?>

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useCartContext } from "../store";
+import { useCartContext, useWishlistContext } from "../store";
 import { Col, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/checkout.scss';
-import APIrequest, { INSERT_GUEST, VALIDATE_NAME_USER, testAPI } from "../API/callAPI";
+import APIrequest, { GET_GEST, GET_RECEIPT, INSERT_GUEST, INSERT_RECEIPT, INSERT_RECEIPT_LINE, UPDATE_USER, VALIDATE_NAME_USER, testAPI } from "../API/callAPI";
 function CheckOut() {
     const [cart, dispatchCart] = useCartContext();
+    const [wishlist, setWishlist] = useWishlistContext();
     const [formData, setFormData] = useState({
         userName: '',
         email: '',
@@ -19,7 +20,20 @@ function CheckOut() {
         phone: "",
         address: "",
     });
+    const createCodeId = () => {
+        const number = '0123456789';
+        const string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const charactersRandom = number + string;
 
+        let codeRandom = '';
+
+        for (let i = 0; i < 10; i++) {
+            const indexRandom = Math.floor(Math.random() * charactersRandom.length);
+            codeRandom += charactersRandom[indexRandom];
+        }
+
+        return codeRandom;
+    };
     const handleChange = event => {
         const { name, value } = event.target;
         setFormData({
@@ -167,21 +181,67 @@ function CheckOut() {
         if (validateForm()) {
             setSubmit(true);
             const data = {
-                guest:{
+                guest: {
                     name: formData.userName,
                     password: "",
-                    email:formData.email,
+                    email: formData.email,
                     phone: formData.phone,
                     address: formData.address,
-                    user_type:"guest",
+                    user_type: "guest",
                     wishlist: "",
-                    cart: ""
+                    cart: cart
                 }
             }
+            let idGuest = null;
+            let guestObject = JSON.parse(sessionStorage.getItem("guest"));
             APIrequest(INSERT_GUEST, data).then((obj) => {
-                console.log(obj.data,"+++++++++++++++++");
+                if (obj.data.result === "Success") {
+
+                    APIrequest(GET_GEST, data).then((obj) => {
+                        idGuest = obj.data.guestArray[0].id;
+                        
+                        sessionStorage.setItem("guest", JSON.stringify(obj.data.guestArray[0]));
+                        const listIdReceipt = []
+                        APIrequest(GET_RECEIPT, "").then((obj) => {
+                            obj.data.productArray.map((item) => {
+                                listIdReceipt.push(parseInt(item.id));
+                            })
+                        });
+                        const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+                        let codeRandom = createCodeId();
+                        while (listIdReceipt.includes(codeRandom)) {
+                            codeRandom = createCodeId();
+                        }
+                        // // console.log(codeRandom, "+++++++++++++++++++++++++++++++++++++=");
+                        // // const newTime = new Date().toLocaleString()
+                        const dataReceipt = {
+                            receipt: {
+                                // date: newTime,
+                                id: codeRandom,
+                                customer_id: obj.data.guestArray[0].id,
+                                status: 1,
+                            }
+                        }
+                        APIrequest(INSERT_RECEIPT, dataReceipt)
+                        cart.map((item) => {
+                            const data = {
+                                product_id: item.product.id,
+                                color: item.color,
+                                quantity: item.quantity,
+                                receipt_id: codeRandom
+                            }
+                            APIrequest(INSERT_RECEIPT_LINE, data)
+                        })
+                        sessionStorage.setItem("user", JSON.stringify(guestObject));
+                        APIrequest(UPDATE_USER, guestObject);
+                        dispatchCart(guestObject.cart)
+                        setWishlist([...wishlist])
+                    });
+                }
             });
-            // navigate('/OrderReceived');
+            console.log("guestObject-------", guestObject);
+
+            navigate('/OrderReceived');
         } else {
             console.log('Form is invalid');
             setSubmit(false);

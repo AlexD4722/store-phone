@@ -64,7 +64,7 @@ function Cart() {
                 quantity: item.quantity,
                 receipt_id: codeRandom
             }
-            testAPI(INSERT_RECEIPT_LINE, data)
+            APIrequest(INSERT_RECEIPT_LINE, data)
         })
         userObject.user.cart = [];
         sessionStorage.setItem("user", JSON.stringify(userObject));

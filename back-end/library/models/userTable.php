@@ -48,6 +48,51 @@ class UserTable extends Database
         return $result;
     }
     //hàm __construct dùng để kết nối với CSDL
+
+
+    public function getGuest($username = '', $password = '', $user_type = '', $email = '', $id = 0)
+    {
+        $sql = "SELECT * FROM user WHERE user_type = 'guest'";
+        $params = [];
+        if ($username) {
+            $sql .= " AND username = ?";
+            array_push($params, $username);
+        }
+        // if ($password) {
+        //     $sql .= " AND password = MD5(?)";
+        //     array_push($params, $password);
+        // }
+        // if ($user_type) {
+        //     $sql .= " AND user_type = ?";
+        //     array_push($params, $user_type);
+        // }
+        // if ($email) {
+        //     $sql .= " AND email = ?";
+        //     array_push($params, $email);
+        // }
+        // if ($id != 0) {
+        //     $sql .= " AND id = ?";
+        //     array_push($params, $id);
+        // }
+        if (count($params)) {
+            $result = $this->SQLexec($sql, $params);
+        } else {
+            $result = $this->SQLexec($sql);
+        }
+        if ($result) {
+            $data = $this->pdo_stm->fetchAll();
+            $arr = [];
+            foreach ($data as $row) {
+                $one = new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
+                $one->id = $row["id"];
+                array_push($arr, $one);
+            }
+            $this->data = $arr;
+        }
+        return $result;
+    }
+
+
     public function getUserReceipt($id = "", $username = '', $password = '', $user_type = '', $email = '')
     {
         $sql = "SELECT * FROM user WHERE TRUE";

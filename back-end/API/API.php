@@ -103,6 +103,9 @@ switch ($action) {
     case INSERT_GUEST:
         require("../controller/insert_guest.php");
         break;
+    case GET_GEST:
+        require("../controller/get_guest.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

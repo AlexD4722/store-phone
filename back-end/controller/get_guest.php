@@ -9,11 +9,11 @@ require_once("../library/models/userTable.php");
 
 $UT = new UserTable();
 $data = json_decode($_POST["data"]);
-$guest = new User($data->guest->name, $data->guest->password, $data->guest->email, $data->guest->phone, $data->guest->address, $data->guest->user_type, $data->guest->wishlist, $data->guest->cart);
-$result = $UT->insertUser($guest);        
+$result = $UT->getGuest($data->guest->name);
 if ($result) {
     $return = new APIresponse("Success");
     $return->data->result = "Success";
+    $return->data->guestArray = $UT->data;
 } else {
     $return = new APIresponse("Failed");
 }

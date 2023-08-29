@@ -13,6 +13,7 @@ function OrderReceived() {
     const [totalPriceOrder, setTotalPriceOrder] = useState();
     useEffect(() => {
         let userObject = JSON.parse(sessionStorage.getItem("user"));
+        let guestObject = JSON.parse(sessionStorage.getItem("guest"));
         const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
         let localCartUsing = true;
         if (userObject) {
@@ -20,6 +21,18 @@ function OrderReceived() {
             if (userObject.login === "OK") {
                 const newData = {
                     userId: userObject.user.id,
+                };
+                setIdUser(newData);
+                APIrequest(GET_USER_Receipt, newData).then((obj) => {
+                    setDataUser(obj.data.userArray);
+                });
+            }
+        }
+        if (guestObject) {
+            localCartUsing = false;
+            if (guestObject.login === "OK") {
+                const newData = {
+                    userId: guestObject.guest.id,
                 };
                 setIdUser(newData);
                 APIrequest(GET_USER_Receipt, newData).then((obj) => {
