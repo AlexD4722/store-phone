@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 29, 2023 lúc 10:07 AM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.0.28
+-- Thời gian đã tạo: Th8 29, 2023 lúc 11:16 AM
+-- Phiên bản máy phục vụ: 10.4.27-MariaDB
+-- Phiên bản PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -46,7 +46,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `description`, `inital_price`, `selling_price`, `product_line`, `images`, `quantity`, `color`, `capacity`, `status`) VALUES
-(29, 'Iphone 14', '[\"- Screen : 6.1 inch, Super Retina XDR, 2532 x 1170 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\"Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"Internal memory : 128GB\"]', 825, 810, 'Iphone 14', 'Iphone14', 5, '[\"Red\",\"Black\",\"Violet\",\"Blue\",\"Gold\"]', '128GB', 1),
+(29, 'Iphone 14', '[\"- Screen : 6.1 inch, Super Retina XDR, 2532 x 1170 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\"Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"Internal memory : 128GB\"]', 825, 810, 'Iphone 14', 'Array', 5, '[\"Red\",\"Black\",\"Violet\",\"Blue\",\"Gold\"]', '128GB', 0),
 (30, 'Iphone 14', '[\"- Screen : 6.1 inch, Super Retina XDR, 2532 x 1170 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\"Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"Internal memory : 256GB\"]', 965, 940, 'Iphone 14', 'Iphone14', 5, '[\"Red\",\"Black\",\"Violet\",\"Blue\",\"Gold\"]', '256GB', 1),
 (31, 'Iphone 14', '[\"- Screen : 6.1 inch, Super Retina XDR, 2532 x 1170 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\"Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"Internal memory : 512GB\"]', 1138, 1050, 'Iphone 14', 'Iphone14', 5, '[\"Red\",\"Black\",\"Violet\",\"Blue\",\"Gold\"]', '512GB', 1),
 (32, 'Iphone 14 Plus', '[\"- Screen : 6.7 inch, Super Retina XDR, 2778 x 1284 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\"Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"Internal memory : 128GB\"]', 930, 900, 'Iphone 14 Plus', 'Iphone14Plus', 5, '[\"Red\",\"Black\",\"Violet\",\"Blue\",\"Gold\"]', '128GB', 1),
@@ -153,13 +153,6 @@ CREATE TABLE `receipt` (
   `status` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `receipt`
---
-
-INSERT INTO `receipt` (`id`, `date`, `customer_id`, `status`) VALUES
-('NzCf1EjN0A', '2023-08-29 07:34:32', 4, '1');
-
 -- --------------------------------------------------------
 
 --
@@ -174,13 +167,6 @@ CREATE TABLE `receipt_line` (
   `receipt_id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `receipt_line`
---
-
-INSERT INTO `receipt_line` (`id`, `product_id`, `color`, `quantity`, `receipt_id`) VALUES
-(23, 29, 'Red', 5, 'NzCf1EjN0A');
-
 -- --------------------------------------------------------
 
 --
@@ -191,6 +177,8 @@ CREATE TABLE `temporary_user` (
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `phone` int(11) NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `validation_code` varchar(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -217,7 +205,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `user_type`, `email`, `wishlist`, `cart`, `phone`, `address`) VALUES
-(4, 'lamtran', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'lamtran@yahoo.com', '[]', '[{\"product\":{\"id\":\"63\",\"name\":\"Iphone 13\",\"description\":[\"- Screen : 6.1 inch, OLED, Super Retina XDR, 2532 x 1170 Pixels\",\"- Rear camera : 12.0 MP + 12.0 MP\",\" - Camera Selfie : 12.0 MP\",\"CPU : Apple A15 Bionic\",\"- Internal memory : 256GB\"],\"inital_price\":\"730\",\"selling_price\":\"720\",\"quantity\":\"6\",\"images\":[\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/Iphone13\\/Iphone13 (1)-Green.jpg\",\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/Iphone13\\/Iphone13 (2)-Red.jpg\",\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/Iphone13\\/Iphone13 (3)-Black.jpg\",\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/Iphone13\\/Iphone13 (4)-Pink.jpg\",\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/Iphone13\\/Iphone13 (5)-White.jpg\",\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/Iphone13\\/Iphone13 (6)-Blue.jpg\"],\"color\":[\"Red\",\"Pink\",\"Green\",\"White\",\"Blue\",\"Black\"],\"capacity\":\"128GB\",\"status\":\"1\"},\"quantity\":1,\"color\":\"Red\",\"totalPrice\":720}]', '', '');
+(4, 'lamtran', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'lamtran@yahoo.com', '[{\"product\":{\"id\":47,\"name\":\"IPad Gen 9\",\"description\":[\"- Screen : 10.2 inch, IPS LCD, Liquid Retina HD, 2160 x 1620 Pixels\",\"- Rear camera : 8.0 MP\",\"Camera Selfie : 12.0 MP\",\"CPU : Apple A13 Bionic\",\"Internal memory : 64GB\"],\"inital_price\":321,\"selling_price\":315,\"quantity\":2,\"images\":[\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/iPadGen9\\/iPadGen9 (1)-White.jpg\",\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/iPadGen9\\/iPadGen9 (1).jpg\",\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/iPadGen9\\/iPadGen9 (2).jpg\",\"http:\\/\\/localhost:2203\\/learning\\/store-phone\\/back-end\\/imgProduct\\/iPadGen9\\/iPadGen9 (2)_Grey.jpg\"],\"color\":[\"Grey\",\"White\"],\"capacity\":\"64GB\",\"status\":1},\"dateAdded\":\"29\\/08\\/2023\"}]', '[]', '', '');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -277,13 +265,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT cho bảng `receipt_line`
 --
 ALTER TABLE `receipt_line`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

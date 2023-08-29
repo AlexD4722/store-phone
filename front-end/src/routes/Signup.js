@@ -103,7 +103,7 @@ function Signup() {
                 }
             });
         },
-        [email, name, pass, reenter]
+        [email, name, pass, reenter, address, phone, navigate]
     );
 
     return (
