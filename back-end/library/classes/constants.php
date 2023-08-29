@@ -32,5 +32,7 @@ define("EDIT_PRODUCT", 313);
 define("REMOVE_PRODUCT", 314);
 define("INSERT_RECEIPT_LINE", 315);
 define("GET_RECEIPT", 316);
+define("VALIDATE_NAME_USER", 317);
+define("INSERT_GUEST", 318);
 
 ?>

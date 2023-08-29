@@ -11,6 +11,7 @@ import ProductFlex from "../components/product-card2";
 import React, { useState, useEffect } from 'react';
 import APIrequest, * as API from "../API/callAPI";
 import { Link, useParams } from "react-router-dom";
+import BrandItem from "../components/brand-item";
 
 function Home() {
     const [messeage, setMesseage] = useState();
@@ -183,6 +184,7 @@ function Home() {
                     </div>
                     : ""
             }
+              <BrandItem />
         </>
     );
 }

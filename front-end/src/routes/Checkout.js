@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
-import { useCartContext } from "../store/hooks";
+import { useCartContext } from "../store";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/checkout.scss';
+import APIrequest, { INSERT_GUEST, VALIDATE_NAME_USER, testAPI } from "../API/callAPI";
 function CheckOut() {
+    const [cart, dispatchCart] = useCartContext();
     const [formData, setFormData] = useState({
         userName: '',
+        email: '',
         phone: '',
         address: ''
     });
+    const [submit, setSubmit] = useState(false)
     const [errors, setErrors] = useState({
         userName: "",
+        email: "",
         phone: "",
         address: "",
     });
@@ -38,6 +43,16 @@ function CheckOut() {
                 }
             });
         }
+        APIrequest(VALIDATE_NAME_USER, formData).then((obj) => {
+            if (obj.data.error) {
+                setErrors((prev) => {
+                    return {
+                        ...prev,
+                        userName: 'Username existed',
+                    }
+                });
+            }
+        })
     }
 
     const validatePhone = () => {
@@ -54,6 +69,38 @@ function CheckOut() {
                 return {
                     ...prev,
                     phone: 'Invalid phone format',
+                }
+            });
+        } else {
+            setErrors((prev) => {
+                return {
+                    ...prev,
+                    phone: '',
+                }
+            });
+        }
+    }
+    const validateEmail = () => {
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!formData.email) {
+            setErrors((prev) => {
+                return {
+                    ...prev,
+                    email: 'Email is required',
+                }
+            });
+        } else if (!(emailRegex).test(formData.email)) {
+            setErrors((prev) => {
+                return {
+                    ...prev,
+                    email: 'Invalid email format',
+                }
+            });
+        } else {
+            setErrors((prev) => {
+                return {
+                    ...prev,
+                    email: '',
                 }
             });
         }
@@ -90,6 +137,10 @@ function CheckOut() {
             newErrors.userName = 'Username is required';
             isValid = false;
         }
+        if (!formData.email) {
+            newErrors.email = 'Email is required';
+            isValid = false;
+        }
 
         // Validate phone
         let phoneNumberRegex = /^0\d{9}$/;
@@ -110,17 +161,30 @@ function CheckOut() {
         setErrors(newErrors);
         return isValid;
     };
-
+    const navigate = useNavigate();
     const handleSubmit = event => {
         event.preventDefault();
-        if (validateUserName()) {
-            console.log()
-        }
         if (validateForm()) {
-            // Do something with the valid data
-            console.log('Form is valid:', formData);
+            setSubmit(true);
+            const data = {
+                guest:{
+                    name: formData.userName,
+                    password: "",
+                    email:formData.email,
+                    phone: formData.phone,
+                    address: formData.address,
+                    user_type:"guest",
+                    wishlist: "",
+                    cart: ""
+                }
+            }
+            APIrequest(INSERT_GUEST, data).then((obj) => {
+                console.log(obj.data,"+++++++++++++++++");
+            });
+            // navigate('/OrderReceived');
         } else {
             console.log('Form is invalid');
+            setSubmit(false);
         }
     };
     useEffect(() => {
@@ -130,8 +194,8 @@ function CheckOut() {
         }
         topFunction();
     }, []);
+    console.log("+++++++++--------", cart);
 
-    const cart = useCartContext()[0];
     return (
         <>
             {
@@ -162,6 +226,20 @@ function CheckOut() {
                                         <div className="checkout__fill-box">
                                             <label>
                                                 <div className="checkout__title-fill">
+                                                    <h3>Email</h3>
+                                                </div>
+                                                <input
+                                                    onChange={handleChange}
+                                                    onBlur={validateEmail}
+                                                    name="email"
+                                                    value={formData.email}
+                                                    type="email" className="checkout__input-fill" />
+                                            </label>
+                                            {errors.email && <span className="checkout__messenger-error">{errors.email}</span>}
+                                        </div>
+                                        <div className="checkout__fill-box">
+                                            <label>
+                                                <div className="checkout__title-fill">
                                                     <h3>phone number</h3>
                                                 </div>
                                                 <input
@@ -188,7 +266,7 @@ function CheckOut() {
                                             {errors.address && <span className="checkout__messenger-error">{errors.address}</span>}
                                         </div>
                                     </div>
-                                    <Link to="/OrderReceived">
+                                    {
                                         <div className="checkout__box-btn-footer">
                                             <button type="submit" className="checkout__btn-checkout">
                                                 <span className="checkout__btn-checkout-content">
@@ -196,13 +274,13 @@ function CheckOut() {
                                                 </span>
                                             </button>
                                         </div>
-                                    </Link>
+                                    }
                                 </form>
                             </div>
                         </div>
                     </div>
                     :
-                    <h1>Errol</h1>
+                    <h1>Errol 404</h1>
             }
         </>
     );

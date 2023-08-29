@@ -97,6 +97,12 @@ switch ($action) {
     case GET_RECEIPT:
         require("../controller/get_receipt.php");
         break;
+    case VALIDATE_NAME_USER:
+        require("../controller/validate_name_user.php");
+        break;
+    case INSERT_GUEST:
+        require("../controller/insert_guest.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

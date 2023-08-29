@@ -529,7 +529,7 @@ function Search() {
             SortPriceEnd: parseInt(maxPrice),
         };
         setData(newData);
-        APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
+        testAPI(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
         });
 

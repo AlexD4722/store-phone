@@ -11,12 +11,11 @@ import BrandItem from '../components/brand-item';
 function Footer() {
     return (
         <section className="section-footer">
-            <BrandItem />
             <div className='section-footer__pattern'>
                 <div className='section-footer__img'>
                     <img src={Pattern} alt="Pattern" />
                 </div>
-                <div className='xo-container'>
+                <div className='xo-container'>  
                     <div className="section-footer__pattern-wrapper">
                         <div className='section-footer__site-newsletter-text'>
                             <h3 className="section-footer__entry-title">Sign Up For Newsletters</h3>
