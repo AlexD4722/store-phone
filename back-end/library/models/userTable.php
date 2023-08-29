@@ -68,7 +68,6 @@ class UserTable extends Database
         //     $sql .= " AND email = ?";
         //     array_push($params, $email);
         // }
-        $params = [];
         if ($id) {
             $sql .= " AND id = ?";
             array_push($params, $id);
@@ -82,8 +81,9 @@ class UserTable extends Database
         $this->data = [];
         if (count($data) > 0) {
             foreach ($data as $row) {
-                array_push($this->data, new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"])));
-                $this->data->id = $row["id"];
+                $one = new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
+                $one->id = $row["id"];
+                array_push($this->data, $one);
             }
         }
         return $result;

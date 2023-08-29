@@ -5,17 +5,71 @@ import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import '../styles/cart-page.scss';
 import '../styles/box-empty.scss'
+import APIrequest, { GET_RECEIPT, INSERT_RECEIPT, INSERT_RECEIPT_LINE, UPDATE_USER, testAPI } from "../API/callAPI";
 
 function Cart() {
     const [checkUser, setCheckUser] = useState(false);
-    const cart = useCartContext()[0];
-    console.log("cart>>>>>>>>", cart)
+    const [cart, dispatchCart] = useCartContext();
+    // console.log("cart>>>>>>>>", cart)
     useEffect(() => {
         let userObject = JSON.parse(sessionStorage.getItem("user"));
         if (userObject) {
             setCheckUser(true)
         }
     }, [])
+    const createCodeId = () => {
+        const number = '0123456789';
+        const string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const charactersRandom = number + string;
+        
+        let codeRandom = '';
+        
+        for (let i = 0; i < 10; i++) {
+          const indexRandom = Math.floor(Math.random() * charactersRandom.length);
+          codeRandom += charactersRandom[indexRandom];
+        }
+        
+        return codeRandom;
+    };
+    // console.log("_______________________",createCodeId());
+    const handleClickSubOrder = () => {
+        let userObject = JSON.parse(sessionStorage.getItem("user"));
+        const listIdReceipt = []
+        APIrequest(GET_RECEIPT, "").then((obj) => {
+            obj.data.productArray.map((item)=>{
+                listIdReceipt.push(parseInt(item.id));
+            })
+        });
+        // const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+        let codeRandom = createCodeId();
+        while (listIdReceipt.includes(codeRandom)) {
+            codeRandom = createCodeId();
+        }
+        console.log(codeRandom,"+++++++++++++++++++++++++++++++++++++=");
+        // const newTime = new Date().toLocaleString()
+        const dataReceipt = {
+            receipt: {
+                // date: newTime,
+                id: codeRandom,
+                customer_id: userObject.user.id,
+                status: 1,
+            }
+        }
+        APIrequest(INSERT_RECEIPT, dataReceipt)
+        cart.map((item) => {
+            const data = {
+                product_id: item.product.id,
+                color: item.color,
+                quantity: item.quantity,
+                receipt_id: codeRandom
+            }
+            testAPI(INSERT_RECEIPT_LINE, data)
+        })
+        userObject.user.cart = [];
+        sessionStorage.setItem("user", JSON.stringify(userObject));
+        APIrequest(UPDATE_USER, userObject.user);
+        dispatchCart(userObject)
+    }
     return (
         <>
             {
@@ -42,8 +96,8 @@ function Cart() {
                         }
                         {
                             checkUser ?
-                                <Link to="/OrderReceived">
-                                    <div className="cart-page__box-btn-footer">
+                                <Link to="/OrderReceived" onClick={() => handleClickSubOrder()}>
+                                    <div className="cart-page__box-btn-footer" >
                                         <button type="button" className="cart-page__btn-checkout">
                                             <span className="cart-page__btn-checkout-content">
                                                 display bill

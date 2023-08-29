@@ -5,10 +5,9 @@ class Receipt
     public $date;
     public $customer_id;
     public $status;
-    public $lines = [];
-    public function __construct($date, $cid, $stt)
+    public function __construct($id, $cid, $stt)
     {
-        $this->date = $date;
+        $this->id = $id;
         $this->customer_id = $cid;
         $this->status = $stt;
     }

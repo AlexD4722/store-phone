@@ -24,6 +24,8 @@ export const SEARCH_ITEM_EXACTLY = 311;
 export const GET_USER_Receipt = 312;
 export const EDIT_PRODUCT = 313;
 export const REMOVE_PRODUCT = 314;
+export const INSERT_RECEIPT_LINE = 315;
+export const GET_RECEIPT = 316;
 
 async function APIrequest(action, data) {
     let sendData = new FormData();

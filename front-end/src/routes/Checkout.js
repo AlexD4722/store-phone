@@ -132,7 +132,6 @@ function CheckOut() {
     }, []);
 
     const cart = useCartContext()[0];
-    console.log(cart, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.")
     return (
         <>
             {

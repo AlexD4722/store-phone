@@ -35,30 +35,30 @@ class ReceiptTable extends Database
             $result = $this->SQLexec($sql);
         }
         $data = $this->pdo_stm->fetchAll();
-        $arr = [];
+        $this->data = [];
         foreach ($data as $row) {
-            $one = new Receipt($row["date"], $row["customer_id"], $row["status"]);
+            $one = new Receipt($row["customer_id"], $row["status"]);
             $one->id = $row["id"];
-            array_push($arr, $one);
+            $one->date = $row["date"];
+            array_push($this->data, $one);
         }
-        $this->data = $arr;
         return $result;
     }
     // Hàm lấy dữ liệu từ bảng receipt theo id, date, customer_id, status. Trả về true nếu thành công, trả về false nếu thất bại. Dữ liệu trả vào thuộc tính $data
     // Tham số là id, date, customer_id, status của receipt cần tìm.
     public function addReceipt(Receipt $re)
     {
-        $sql = 'INSERT INTO receipt VALUES(NULL, ?, ?, ?)';
-        $params = [$re->date, $re->customer_id, $re->status];
+        $sql = 'INSERT INTO receipt VALUES(?, NULL, ?, ?)';
+        $params = [$re->id, $re->customer_id, $re->status];
         $result = $this->SQLexec($sql, $params);
-        if ($result) {
-            foreach ($re as $line) {
-                $lineAddResult = $this->addReceiptLine($line);
-                if (!$lineAddResult) {
-                    $result = false;
-                }
-            }
-        }
+        // if ($result) {
+        //     foreach ($re as $line) {
+        //         $lineAddResult = $this->addReceiptLine($line);
+        //         if (!$lineAddResult) {
+        //             $result = false;
+        //         }
+        //     }
+        // }
         return $result;
     }
     // Hàm thêm 1 receipt vào database. Trả về true nếu thành công, trả về false nếu thất bại.
@@ -120,7 +120,7 @@ class ReceiptTable extends Database
     public function addReceiptLine(ReceiptLine $rl)
     {
         $sql = 'INSERT INTO receipt_line VALUES(NULL, ?, ?, ?, ?)';
-        $params = [$rl->product_id, $rl->quantity, $rl->color, $rl->order_id];
+        $params = [$rl->product_id, $rl->color, $rl->quantity, $rl->order_id];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }

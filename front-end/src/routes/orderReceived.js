@@ -43,7 +43,7 @@ function OrderReceived() {
         // }
         // console.log(">>>>>>>>>>>>>dataUser", dataUser)
         // console.log(">>>>>>>>>>>>>TotalPriceOrder", totalPriceOrder)
-
+    console.log("dataUser>>>>>>>>>>>", dataUser);
     return (
         <>
         {
@@ -52,22 +52,22 @@ function OrderReceived() {
                 <div className="order-received">
                     <h2 className="order-received__text-success">Thank you. Your order has been received.</h2>
                 </div>
-                <ul class="order-received__overview">
-                    <li class="order-received__overview">
+                <ul className="order-received__overview">
+                    <li className="order-received__overview">
                         <p>Order Id:<strong>{dataUser[0].id}</strong></p>
                     </li>
 
-                    <li class="order-received__overview">
+                    <li className="order-received__overview">
                         <p>Date:<strong>August 25, 2023</strong></p>
                     </li>
 
-                    <li class="order-received__overview">
+                    <li className="order-received__overview">
                         <p>Email:<strong>{dataUser[0].email}</strong></p>
                     </li>
-                    <li class="order-received__overview">
+                    <li className="order-received__overview">
                         <p>Phone:<strong>{dataUser[0].phone}</strong></p>
                     </li>
-                    <li class="order-received__overview">
+                    <li className="order-received__overview">
                         <p>Total:<strong>$635.99</strong></p>
                     </li>
                 </ul>

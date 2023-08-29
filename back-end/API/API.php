@@ -91,6 +91,12 @@ switch ($action) {
     case SEARCH_RECEIPT:
         require("../controller/search_receipt.php");
         break;
+    case INSERT_RECEIPT_LINE:
+        require("../controller/insert_receipt_line.php");
+        break;
+    case GET_RECEIPT:
+        require("../controller/get_receipt.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);
