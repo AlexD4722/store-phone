@@ -123,7 +123,6 @@ function Search() {
         setMaxPrice(rangeInput[1].value);
     }, [minPrice, maxPrice]);
     useEffect(() => {
-        // let newData = [...data, params.keyword];
         let newData = {
             ...data,
             Categories: [params.keyword],
