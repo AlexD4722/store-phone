@@ -67,7 +67,7 @@ function Product(props) {
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng trong JavaScript bắt đầu từ 0
         const year = date.getFullYear();
-    
+
         const timeNow = `${day}/${month}/${year}`;
         const item = {
             product: props.product,
@@ -115,7 +115,7 @@ function Product(props) {
             const messeage = true;
             // The product has been added to the wishlist
             props.onDataToParent(messeage);
-            
+
         } else {
             // const messeage = "Please login to add items to your wishlist";
             const messeage = false
@@ -124,19 +124,25 @@ function Product(props) {
     };
     return (
         <div className="product-card">
-            <div className="product-card__img-wrap">
-                <div className="product-card__img-default">
-                    <img
-                        src={props.product && props.product.images[0]}
-                        alt=""
-                    />
-                </div>
-                <div className="product-card__img-sub">
-                    <img
-                        src={props.product && props.product.images[1]}
-                        alt=""
-                    />
-                </div>
+            {/* <Link to={`/product/${props.product.name}`}>
+            </Link> */}
+            <div>
+                <Link to={`/product/${props.product.name}`}>
+                    <div className="product-card__img-wrap">
+                        <div className="product-card__img-default">
+                            <img
+                                src={props.product && props.product.images[0]}
+                                alt=""
+                            />
+                        </div>
+                        <div className="product-card__img-sub">
+                            <img
+                                src={props.product && props.product.images[1]}
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </Link>
                 <button
                     type="button"
                     className={`product-card__box-wishlist ${buttonAddToWishlish ? "product-card__box-wishlist--status" : ""}`}
