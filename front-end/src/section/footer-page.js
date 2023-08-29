@@ -11,6 +11,7 @@ import BrandItem from '../components/brand-item';
 function Footer() {
     return (
         <section className="section-footer">
+            <BrandItem />
             <div className='section-footer__pattern'>
                 <div className='section-footer__img'>
                     <img src={Pattern} alt="Pattern" />
@@ -29,7 +30,6 @@ function Footer() {
                     </div>
                 </div>
             </div>
-            <BrandItem />
             <footer className='footer-widgets'>
                 <div className='xo-container'>
                     <Row xs={2} sm={2} md={4} lg={4}>

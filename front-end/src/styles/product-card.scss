@@ -55,6 +55,9 @@
   line-height: 1.4;
   margin-bottom: 0.75rem;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .product-card__product-rating {
   margin-bottom: 0.625rem;
@@ -185,8 +188,8 @@
   color: red;
   border-color: #ffd8d8;
 }
-.product-card__box-wishlist{
-  .bi-heart-fill{
+.product-card__box-wishlist {
+  .bi-heart-fill {
     color: $color-bs-danger;
     font-size: 15px;
   }
