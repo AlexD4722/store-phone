@@ -3,6 +3,7 @@ import '../styles/table-product.scss';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useCartContext } from '../store';
+import APIrequest, { UPDATE_USER } from '../API/callAPI';
 function TableProduct(props) {
     const [valueQuantity, setValueQuantity] = useState(1);
     const [cart, setCart] = useState([]);

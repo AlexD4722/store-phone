@@ -72,7 +72,7 @@ function DetailProduct({ match }) {
                 userObject.user.cart = userCart;
                 sessionStorage.setItem("user", JSON.stringify(userObject));
                 APIrequest(UPDATE_USER, userObject.user);
-                // setWishlist([...wishlist]);
+                setWishlist([...wishlist]);
             }
         }
         if (localCartUsing) {

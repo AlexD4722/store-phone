@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCartContext } from "../store/hooks";
+import { useCartContext, useWishlistContext } from "../store/hooks";
 import TableProduct from "../components/tableProduct";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ import APIrequest, { GET_RECEIPT, INSERT_RECEIPT, INSERT_RECEIPT_LINE, UPDATE_US
 function Cart() {
     const [checkUser, setCheckUser] = useState(false);
     const [cart, dispatchCart] = useCartContext();
+    const [wishlist, setWishlist] = useWishlistContext();
     // console.log("cart>>>>>>>>", cart)
     useEffect(() => {
         let userObject = JSON.parse(sessionStorage.getItem("user"));
@@ -69,6 +70,7 @@ function Cart() {
         sessionStorage.setItem("user", JSON.stringify(userObject));
         APIrequest(UPDATE_USER, userObject.user);
         dispatchCart(userObject)
+        setWishlist([...wishlist])
     }
     return (
         <>
