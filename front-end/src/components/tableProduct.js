@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import '../styles/table-product.scss';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useCartContext } from '../store';
-import APIrequest, { UPDATE_USER } from '../API/callAPI';
+import { useCartContext, useWishlistContext } from '../store';
+import APIrequest, { UPDATE_USER, testAPI } from '../API/callAPI';
 function TableProduct(props) {
     const [valueQuantity, setValueQuantity] = useState(1);
     const [cart, setCart] = useState([]);
     const [carts, dispatch] = useCartContext();
+    const [wishlist, setWishlist] = useWishlistContext();
     useEffect(() => {
         if (props.items) {
             setCart(props.items);
@@ -131,8 +132,10 @@ function TableProduct(props) {
         return cart.reduce((total, product) => total + product.totalPrice, 0);
     };
     const handleRemoveItem = (productId, colorID) => {
+        let userObject = JSON.parse(sessionStorage.getItem("user"));
+        let lists = null;
         setCart(prevProducts => {
-            const lists = prevProducts.filter(item => (item.product.id !== productId) ||     (item.color !== colorID));
+            lists = prevProducts.filter(item => (item.product.id !== productId) ||     (item.color !== colorID));
             const localUser = localStorage.getItem("user");
             const sessionUser = JSON.parse(sessionStorage.getItem("user"));
             sessionStorage.setItem("cart", JSON.stringify(lists));
@@ -148,6 +151,9 @@ function TableProduct(props) {
             return lists;
         }
         );
+        userObject.user.cart = lists;
+        testAPI(UPDATE_USER, userObject.user);
+        setWishlist([...wishlist]);
     };
     console.log("cart>>>>>>>>>>", cart)
     return (
