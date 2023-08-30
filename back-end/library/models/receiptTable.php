@@ -45,6 +45,24 @@ class ReceiptTable extends Database
     }
     // Hàm lấy dữ liệu từ bảng receipt theo id, date, customer_id, status. Trả về true nếu thành công, trả về false nếu thất bại. Dữ liệu trả vào thuộc tính $data
     // Tham số là id, date, customer_id, status của receipt cần tìm.
+
+    public function getRecentReceipt(int $number)
+    {
+        $sql = 'SELECT * FROM `receipt`
+                ORDER BY `date` DESC 
+                LIMIT ' . $number;
+        $result = $this->SQLexec($sql);
+        $data = $this->pdo_stm->fetchAll();
+        $this->data = [];
+        foreach ($data as $row) {
+            $one = new Receipt($row["id"], $row["customer_id"], $row["status"]);
+            $one->date = $row["date"];
+            array_push($this->data, $one);
+        }
+        return $result;
+    }
+    // Hàm lấy dữ liệu từ bảng receipt theo date. Trả về true nếu thành công, trả về false nếu thất bại. Dữ liệu trả vào thuộc tính $data
+    // Tham số là số receipt cần tìm.
     public function addReceipt(Receipt $re)
     {
         $sql = 'INSERT INTO receipt VALUES(?, DEFAULT, ?, ?)';

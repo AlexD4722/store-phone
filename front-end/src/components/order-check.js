@@ -19,6 +19,12 @@ function OrderCheck() {
     const handleSearch = (e) => {
         e.preventDefault();
 
+        if (disable.oid && disable.cid && disable.date && disable.status) {
+            setResult("Search key required");
+            setOrders([]);
+            return;
+        }
+
         const data = {
             order_id: oid,
             customer_id: cid,
@@ -40,7 +46,6 @@ function OrderCheck() {
         if (data.status === 2) {
             data.status = "";
         }
-        console.log(data);
         APIrequest(SEARCH_RECEIPT, data).then((response) => {
             if (response.result === "Success") {
                 if (response.data.result === "Success") {
