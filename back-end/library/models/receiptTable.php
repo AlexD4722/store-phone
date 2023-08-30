@@ -18,7 +18,7 @@ class ReceiptTable extends Database
             array_push($params, $id);
         }
         if ($date != '') {
-            $sql .= ' AND date = ?';
+            $sql .= ' AND DATE(date) = ?';
             array_push($params, $date);
         }
         if ($cid != '') {

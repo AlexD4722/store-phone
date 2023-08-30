@@ -40,15 +40,18 @@ function OrderCheck() {
         if (data.status === 2) {
             data.status = "";
         }
+        console.log(data);
         APIrequest(SEARCH_RECEIPT, data).then((response) => {
             if (response.result === "Success") {
                 if (response.data.result === "Success") {
                     setOrders(response.data.receipt_array);
                     setResult("");
                 } else {
+                    setOrders([]);
                     setResult("No receipt found");
                 }
             } else {
+                setOrders([]);
                 setResult("Can't connect to database");
             }
         });

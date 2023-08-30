@@ -13,10 +13,7 @@ $PT = new ProductTable();
 $data = json_decode($_POST["data"]);
 $receipt_id = $data->order_id;
 $customer_id = $data->customer_id;
-$date = strtotime($data->date);
-if (!$date){
-    $date = "";
-}
+$date = $data->date;
 $status = $data->status;
 
 $result = $RT->getReceipt($receipt_id, $date, $customer_id, $status);
