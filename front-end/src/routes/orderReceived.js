@@ -10,7 +10,6 @@ function OrderReceived() {
     const cart = useCartContext()[0];
     const [dataUser, setDataUser] = useState({});
     const [idUser, setIdUser] = useState();
-    const [totalPriceOrder, setTotalPriceOrder] = useState();
     const [listItem, setListItem] = useState();
     const [receipt, setReceipt] = useState();
     const [totalPrice, setTotalPrice] = useState();

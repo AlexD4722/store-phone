@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { useSearchContext } from "../store";
 import { useEffect, useState } from "react";
-import APIrequest, { FIlTER_PRODUCT, testAPI } from "../API/callAPI";
+import APIrequest, { FIlTER_PRODUCT, SEARCH_PRODUCTS_BY_NAME, testAPI } from "../API/callAPI";
 
 // import React, { useEffect, useState } from 'react';
 import "../styles/sort-product.scss";
@@ -256,7 +256,6 @@ function Search() {
         }
         topFunction();
     }, [params.keyword]);
-
     const handleCheckboxChange = (event) => {
         setIsChecked((prev) => {
             return {
@@ -569,7 +568,19 @@ function Search() {
         }
         topFunction();
     }
+    let listSelect = ['phone', 'tablet','SmartWatch','Accessories','Apple','Samsung','Xiaomi']
+    useEffect(()=>{
+        listSelect.includes(params.keyword)
+        let newData = {
+            nameProduct: params.keyword,
+        }
+        if(!listSelect.includes(params.keyword)){
+            APIrequest(SEARCH_PRODUCTS_BY_NAME, newData).then((obj) => {
+                setPhones(obj.data.productArray);
+            });
+        }
 
+    },[params.keyword])
     return (
         <>
             <div className="xo-container">
