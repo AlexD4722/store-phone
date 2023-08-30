@@ -529,7 +529,7 @@ function Search() {
             SortPriceEnd: parseInt(maxPrice),
         };
         setData(newData);
-        testAPI(FIlTER_PRODUCT, newData).then((obj) => {
+        APIrequest(FIlTER_PRODUCT, newData).then((obj) => {
             setPhones(obj.data.productArray);
         });
 
@@ -541,6 +541,7 @@ function Search() {
         // )
         // setPhones(filteredProducts)
     };
+    const [endIndex, setEndIndex] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 8;
     const lastIndex = currentPage * recordsPerPage;
@@ -550,8 +551,6 @@ function Search() {
     const numbers = [...Array(npage + 1).keys()].slice(1);
     const changePage = (id) => {
         setCurrentPage(id)
-        console.log(id)
-        console.log(firstIndex)
         topFunction();
     }
     const prePage = () => {
@@ -560,8 +559,6 @@ function Search() {
                 setCurrentPage(currentPage - 1)
             }
         }
-        console.log(currentPage)
-        console.log(firstIndex)
         topFunction();
     }
     const nextPage = () => {
@@ -584,7 +581,13 @@ function Search() {
                             className="header-sort__result-count-wrapper"
                         >
                             <div className="header-sort__result-count">
-                                <p>Showing 1–16 of 66 results</p>
+                                <p>There are all {Phones.length} results</p>
+                                {/* {
+                                    (recordsPerPage <= 8) ? 
+                                    <p>Showing 1 – {Phones.length} of {Phones.length} results</p>
+                                    :
+                                    <p>Showing 1 – {recordsPerPage} of {Phones.length} results</p>
+                                } */}
                             </div>
                         </Col>
                         <Col
