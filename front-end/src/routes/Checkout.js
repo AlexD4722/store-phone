@@ -234,21 +234,25 @@ function CheckOut() {
                                 }
                             )
                         })
-                        testAPI(INSERT_RECEIPT_LINE, dataReceipt)
+                        APIrequest(INSERT_RECEIPT_LINE, dataReceipt)
                         // sessionStorage.setItem("user", JSON.stringify(guestObject));
                         const guestObject = JSON.parse(sessionStorage.getItem("guest"));
                         guestObject.cart = [];
                         console.log(guestObject,"guestObject----");
                         APIrequest(UPDATE_USER, guestObject);
-                        dispatchCart(guestObject)
+                        const action = {
+                            type: "replace",
+                            payload: guestObject.cart,
+                        };
+                        dispatchCart(action);
                         setWishlist([...wishlist])
                         sessionStorage.removeItem("cart");
-                        sessionStorage.removeItem("guest");
+                        // sessionStorage.removeItem("guest");
                     });
                 }
             });
 
-            // navigate('/OrderReceived');
+            navigate('/OrderReceived');
         } else {
             console.log('Form is invalid');
             setSubmit(false);

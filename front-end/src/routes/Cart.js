@@ -76,7 +76,11 @@ function Cart() {
         userObject.user.cart = [];
         sessionStorage.setItem("user", JSON.stringify(userObject));
         APIrequest(UPDATE_USER, userObject.user);
-        dispatchCart(userObject);
+        const action = {
+            type: "replace",
+            payload: sessionStorage.user.cart,
+        };
+        dispatchCart(action);
         setWishlist([...wishlist]);
     };
     return (

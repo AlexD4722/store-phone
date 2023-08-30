@@ -53,8 +53,9 @@ function OrderReceived() {
         const newData = {
             idReceipt: idReceiptSession
         }
-        APIrequest(GET_ORDER_RECEIVED, newData).then((obj) => {
-            console.log(obj.data, "-------");
+        APIrequest(GET_ORDER_RECEIVED, newData)
+        .then((obj) => {
+            console.log(obj, "---------------------------------");
             setListItem(obj.data.array_item);
             // setListItem(obj.data.APIrequest)
         });
@@ -82,29 +83,29 @@ function OrderReceived() {
                     <ul className="order-received__overview">
                         <li className="order-received__overview">
                             <p>
-                                Order Id:<strong>{receipt.id}</strong>
+                                Order Id:<strong>{receipt && receipt.id}</strong>
                             </p>
                         </li>
 
                         <li className="order-received__overview">
                             <p>
-                                Date:<strong>{receipt.date}</strong>
+                                Date:<strong>{receipt && receipt.date}</strong>
                             </p>
                         </li>
 
                         <li className="order-received__overview">
                             <p>
-                                Email:<strong>{dataUser[0].email}</strong>
+                                Email:<strong>{dataUser && dataUser[0].email}</strong>
                             </p>
                         </li>
                         <li className="order-received__overview">
                             <p>
-                                Phone:<strong>{dataUser[0].phone}</strong>
+                                Phone:<strong>{dataUser && dataUser[0].phone}</strong>
                             </p>
                         </li>
                         <li className="order-received__overview">
                             <p>
-                                Total:<strong>{dataUser.total}</strong>
+                                Total:<strong>{dataUser && dataUser.total}</strong>
                             </p>
                         </li>
                     </ul>

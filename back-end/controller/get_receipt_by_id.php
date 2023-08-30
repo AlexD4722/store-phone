@@ -7,7 +7,7 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")) {
 }
 $RT = new ReceiptTable();
 $data = json_decode($_POST["data"]);
-$cid = $data->idReceipt;
+$id = $data->idReceipt;
 
 $result = $RT->getReceipt($id);
 if ($result) {

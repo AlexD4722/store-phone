@@ -9,13 +9,10 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")) {
 }
 
 $RT = new ReceiptTable();
-$RC = new ReceiptTable();
-$PT = new ProductTable();
 $data = json_decode($_POST["data"]);
 $receipt_id = $data->idReceipt;
-$status = $data->status;
 
-$RC->getReceipt($receipt_id);
+$result = $RT->getReceiptLine("",$receipt_id);
 if ($result) {
     $return = new APIresponse("Success");
     $return->data->receipt_line_array = $RT->data;
@@ -23,12 +20,16 @@ if ($result) {
         $return->data->result = "Success";
         $return->data->array_item= [];
         foreach ($return->data->receipt_line_array as $receipt) {
-            $PT->getProductById($receipt->product_id);
-            $item = new stdClass();
-            $item->phone = $PT->data;
-            $item->color = $receipt->color;
-            $item->quantity = $receipt->quantity;
-            array_push($return->data->array_item, $item);
+            // $PT->getProductById($receipt->product_id);
+            $PT = new productTable();
+            $rs =  $PT->getProductById($receipt->product_id);
+            if($rs){
+                $item = new stdClass();
+                $item->phone = $PT->data;
+                $item->color = $receipt->color;
+                $item->quantity = $receipt->quantity;
+                array_push($return->data->array_item, $item);
+            }
         }
     }
 } else {
