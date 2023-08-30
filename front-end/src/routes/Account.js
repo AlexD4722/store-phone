@@ -30,6 +30,8 @@ function Account() {
         navigate("admin-dashboard")
     },[account])
 
+    console.log(account)
+
     return (
         <>
             Account Page

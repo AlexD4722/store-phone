@@ -6,7 +6,6 @@ import DashboardOrderTab from "../section/dashboard-order.js";
 import DashboardSettingTab from "../section/dashboard-setting.js";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AccountData from "../components/account-data.js";
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -41,7 +40,7 @@ function Dashboard() {
                             </ListGroup.Item>
                         </ListGroup>
                     </Col>
-                    <Col sm={8}>
+                    <Col sm={10}>
                         <Tab.Content>
                             <DashboardInfoTab />
                             <DashboardUserTab />
@@ -49,9 +48,6 @@ function Dashboard() {
                             <DashboardOrderTab />
                             <DashboardSettingTab />
                         </Tab.Content>
-                    </Col>
-                    <Col sm={2}>
-                        <AccountData />
                     </Col>
                 </Row>
             </Tab.Container>

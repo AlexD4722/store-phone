@@ -10,16 +10,8 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")){
 
 $RT = new ReceiptTable();
 $PT = new ProductTable();
-$data = json_decode($_POST["data"]);
-$receipt_id = $data->order_id;
-$customer_id = $data->customer_id;
-$date = strtotime($data->date);
-if (!$date){
-    $date = "";
-}
-$status = $data->status;
 
-$result = $RT->getReceipt($receipt_id, $date, $customer_id, $status);
+$result = $RT->getRecentReceipt(3);
 if ($result){
     $return = new APIresponse("Success");
     $return->data->receipt_array = $RT->data;
