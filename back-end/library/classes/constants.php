@@ -16,6 +16,7 @@ define("REMOVE_USER", 109);
 define("INSERT_RECEIPT", 201);
 define("DONE_RECEIPT", 202);
 define("SEARCH_RECEIPT", 203);
+define("GET_LASTEST_ORDERS", 204);
 define("GET_ALL_PRODUCTS", 301);
 define("GET_RECEIPTS_BY_CID", 302);
 define("GET_5_PRODUCTS_BY_NAME", 303);

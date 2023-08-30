@@ -37,7 +37,7 @@ function OrderCheck() {
         if (disable.status) {
             data.status = "";
         }
-        if (data.status == 2) {
+        if (data.status === 2) {
             data.status = "";
         }
         APIrequest(SEARCH_RECEIPT, data).then((response) => {
@@ -134,13 +134,13 @@ function OrderCheck() {
                 orders.map((receipt) => (
                     <div>
                         <div>
-                            Receipt ID: {receipt.id} Date: {receipt.date}{" "}
+                            Receipt ID: {receipt.id} Date: {receipt.date}
                             Customer ID: {receipt.customer_id}
                         </div>
                         <Table striped bordered hover key={receipt.id}>
                             <thead>
                                 <tr>
-                                    <th>Product ID</th>
+                                    <th>Product Name</th>
                                     <th>Quantity</th>
                                     <th>Color</th>
                                 </tr>

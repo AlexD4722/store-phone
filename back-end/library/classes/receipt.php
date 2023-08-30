@@ -4,6 +4,7 @@ class Receipt
     public $id;
     public $date;
     public $customer_id;
+    public $lines = [];
     public $status;
     public function __construct($id, $cid, $stt)
     {

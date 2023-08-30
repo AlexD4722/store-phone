@@ -54,14 +54,20 @@ function ProductCheck() {
                     </thead>
                     <tbody>
                         {products.map((product) => {
-                            return (<tr>
-                                <td>{product.id}</td>
-                                <td>{product.name}</td>
-                                <td>{product.inital_price}</td>
-                                <td>{product.selling_price}</td>
-                                <td>{product.quantity}</td>
-                                <td>{product.color.map(item => item + " ")}</td>
-                            </tr>)
+                            return (
+                                <tr>
+                                    <td>{product.id}</td>
+                                    <td>{product.name} {product.capacity}</td>
+                                    <td>{product.inital_price}</td>
+                                    <td>{product.selling_price}</td>
+                                    <td>{product.quantity}</td>
+                                    <td>
+                                        {product.color.map(
+                                            (item) => item + " "
+                                        )}
+                                    </td>
+                                </tr>
+                            );
                         })}
                     </tbody>
                 </Table>

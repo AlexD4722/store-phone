@@ -106,6 +106,9 @@ switch ($action) {
     case GET_GEST:
         require("../controller/get_guest.php");
         break;
+    case GET_LASTEST_ORDERS:
+        require("../controller/get_lastest_orders.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

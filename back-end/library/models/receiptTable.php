@@ -15,7 +15,7 @@ class ReceiptTable extends Database
         $params = [];
         if ($id != '') {
             $sql .= ' AND id = ?';
-            array_push($params, (int) $id);
+            array_push($params, $id);
         }
         if ($date != '') {
             $sql .= ' AND date = ?';
@@ -37,8 +37,7 @@ class ReceiptTable extends Database
         $data = $this->pdo_stm->fetchAll();
         $this->data = [];
         foreach ($data as $row) {
-            $one = new Receipt($row["customer_id"], $row["status"]);
-            $one->id = $row["id"];
+            $one = new Receipt($row["id"], $row["customer_id"], $row["status"]);
             $one->date = $row["date"];
             array_push($this->data, $one);
         }
@@ -48,11 +47,11 @@ class ReceiptTable extends Database
     // Tham số là id, date, customer_id, status của receipt cần tìm.
     public function addReceipt(Receipt $re)
     {
-        $sql = 'INSERT INTO receipt VALUES(?, NULL, ?, ?)';
+        $sql = 'INSERT INTO receipt VALUES(?, DEFAULT, ?, ?)';
         $params = [$re->id, $re->customer_id, $re->status];
         $result = $this->SQLexec($sql, $params);
         // if ($result) {
-        //     foreach ($re as $line) {
+        //     foreach ($re->lines as $line) {
         //         $lineAddResult = $this->addReceiptLine($line);
         //         if (!$lineAddResult) {
         //             $result = false;

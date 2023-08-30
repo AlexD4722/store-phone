@@ -10,6 +10,7 @@ export const REMOVE_USER = 109;
 export const INSERT_RECEIPT = 201;
 export const DONE_RECEIPT = 202;
 export const SEARCH_RECEIPT = 203;
+export const GET_LASTEST_ORDERS = 204;
 export const GET_ALL_PRODUCTS = 301;
 export const GET_RECEIPTS_BY_CID = 302;
 export const GET_5_PRODUCTS_BY_NAME = 303;
