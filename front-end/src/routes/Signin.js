@@ -1,4 +1,4 @@
-import Logo from "../components/logo.js";
+import LogoShop from "../assets/imgs/logo-dark.png";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import APIrequest, { USER_LOGIN, UPDATE_USER } from "../API/callAPI.js";
 import { Link, useNavigate } from "react-router-dom";
@@ -59,6 +59,9 @@ function Signin() {
                     <Col sm={3}></Col>
                     <Col sm={6}>
                         <h2 className="text-center mt-5 mb-5">
+                            <div className="mb-4">
+                                <img src={LogoShop} alt="" />
+                            </div>
                             <strong>Good to see you again</strong>
                         </h2>
                         <div className="section-account-form">
