@@ -30,7 +30,7 @@ function EmailValidation() {
             APIrequest(VALIDATE_CODE, data).then((response) => {
                 if (response.result === "Success") {
                     if (response.data.result === "Success") {
-                        navigate("success");
+                        navigate("/signup/success");
                     } else {
                         setResult("Validation code is not correct!");
                     }

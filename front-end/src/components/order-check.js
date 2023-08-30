@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Form, Button, Table } from "react-bootstrap";
+import { Form, Button, Table, Accordion } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import APIrequest, { SEARCH_RECEIPT } from "../API/callAPI";
 
 function OrderCheck() {
@@ -138,34 +139,47 @@ function OrderCheck() {
                 {result && <div className="text-danger">{result}</div>}
                 <Button type="submit">Search</Button>
             </Form>
-            {orders.length > 0 &&
-                orders.map((receipt) => (
-                    <div>
-                        <div>
-                            Receipt ID: {receipt.id} Date: {receipt.date}
-                            Customer ID: {receipt.customer_id}
-                        </div>
-                        <Table striped bordered hover key={receipt.id}>
-                            <thead>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>Quantity</th>
-                                    <th>Color</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {receipt.lines.length > 0 &&
-                                    receipt.lines.map((line) => (
-                                        <tr key={line.id}>
-                                            <td>{line.product_id}</td>
-                                            <td>{line.quantity}</td>
-                                            <td>{line.color}</td>
+            <Accordion>
+                {orders.length > 0 &&
+                    orders.map((receipt, index) => (
+                        <Accordion.Item key={receipt.id} eventKey={index}>
+                            <Accordion.Header>
+                                Receipt ID: {receipt.id} Date: {receipt.date}{" "}
+                                Customer ID: {receipt.customer_id}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <Table striped bordered hover key={receipt.id}>
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
+                                            <th>Color</th>
                                         </tr>
-                                    ))}
-                            </tbody>
-                        </Table>
-                    </div>
-                ))}
+                                    </thead>
+                                    <tbody>
+                                        {receipt.lines.length > 0 &&
+                                            receipt.lines.map((line) => (
+                                                <tr key={line.id}>
+                                                    <td>
+                                                        <Link
+                                                            to={
+                                                                "../../product/" +
+                                                                line.product_id
+                                                            }
+                                                        >
+                                                            {line.product_id}
+                                                        </Link>
+                                                    </td>
+                                                    <td>{line.quantity}</td>
+                                                    <td>{line.color}</td>
+                                                </tr>
+                                            ))}
+                                    </tbody>
+                                </Table>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    ))}
+            </Accordion>
         </>
     );
 }

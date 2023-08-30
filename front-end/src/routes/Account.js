@@ -1,11 +1,11 @@
-import { Button } from "react-bootstrap";
+import { Button, Container, Row, Col, Badge, Card } from "react-bootstrap";
 import {
     useAccountContext,
     useCartContext,
     useWishlistContext,
 } from "../store";
-import { useCallback, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useCallback } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 function Account() {
     const [account, setAccount] = useAccountContext();
@@ -26,23 +26,58 @@ function Account() {
         navigate("..");
     }, []);
 
-    const goToDashboard = useCallback(()=>{
-        navigate("admin-dashboard")
-    },[account])
-
     console.log(account)
-
     return (
         <>
-            Account Page
-            <br />
-            {account.user_type === "admin" && (
-                <Button onClick={goToDashboard}>Admin Dashboard</Button>
-            )}
-            <br />
-            {Object.keys(account).length > 0 && (
-                <Button onClick={handleSignOut}>Sign out</Button>
-            )}
+            <Container>
+                <Row>
+                    <Col sm={3}></Col>
+                    <Col sm={6}>
+                        <h1 className="text-center">
+                            Account Information
+                        </h1>
+                        {Object.keys(account).length > 0 && (
+                            <>
+                                <Card className="text-center">
+                                    <Card.Body>
+                                        <Card.Title>
+                                            <Badge pill bg="secondary">
+                                                {account.username}
+                                            </Badge>
+                                        </Card.Title>
+                                        <Card.Text>
+                                            User type: {account.user_type}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Email: {account.email}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Address: {account.address}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Phone number: {account.phone}
+                                        </Card.Text>
+                                        {account.user_type === "admin" && (
+                                            <Link
+                                                to="admin-dashboard"
+                                                className="d-flex justify-content-center text-primary"
+                                            >
+                                                Go to Admin Dashboard
+                                            </Link>
+                                        )}
+                                        {Object.keys(account).length > 0 && (
+                                            <Button onClick={handleSignOut}>
+                                                Sign out
+                                            </Button>
+                                        )}
+                                    </Card.Body>
+                                </Card>
+                            </>
+                        )}
+                    </Col>
+                    <Col sm={3}></Col>
+                </Row>
+            </Container>
         </>
     );
 }

@@ -20,10 +20,10 @@ function Signin() {
             setReport("");
             if (response.result === "Success") {
                 if (response.data.result === "Success") {
-                    let user = response.data.user;  
+                    let user = response.data.user;
                     setWishlist(user.wishlist);
                     let cart = JSON.parse(sessionStorage.getItem("cart"));
-                    if (!cart){
+                    if (!cart) {
                         cart = [];
                     }
                     if (user.cart.length >= 0) {
@@ -58,10 +58,7 @@ function Signin() {
                 <Row>
                     <Col sm={3}></Col>
                     <Col sm={6}>
-                        <div className="d-flex justify-content-center mb-5 mt-5">
-                            <Logo />
-                        </div>
-                        <h2 className="d-flex justify-content-center mb-5">
+                        <h2 className="text-center mt-5 mb-5">
                             <strong>Good to see you again</strong>
                         </h2>
                         <div className="section-account-form">
@@ -95,15 +92,27 @@ function Signin() {
                                         label="Remember me"
                                     />
                                 </Form.Group>
-                                <Button
-                                    variant="primary"
-                                    className="ma"
-                                    onClick={handleSubmit}
-                                >
-                                    Sign In
-                                </Button>
-                                or <Link to="../signup">Sign up</Link>
-                                <div>{report}</div>
+                                <div className="text-center">
+                                    <div>
+                                        <Button
+                                            variant="primary"
+                                            className="ma"
+                                            onClick={handleSubmit}
+                                        >
+                                            Sign In
+                                        </Button>
+                                    </div>
+                                    <div>or</div>
+                                    <div>
+                                        <Link
+                                            to="../signup"
+                                            className="text-primary"
+                                        >
+                                            Sign up
+                                        </Link>
+                                    </div>
+                                    <div>{report}</div>
+                                </div>
                             </Form>
                         </div>
                     </Col>
