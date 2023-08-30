@@ -581,7 +581,7 @@ function Search() {
                             className="header-sort__result-count-wrapper"
                         >
                             <div className="header-sort__result-count">
-                                <p>There are all {Phones.length} results</p>
+                                <p>Showing total {Phones.length} results</p>
                                 {/* {
                                     (recordsPerPage <= 8) ? 
                                     <p>Showing 1 – {Phones.length} of {Phones.length} results</p>
