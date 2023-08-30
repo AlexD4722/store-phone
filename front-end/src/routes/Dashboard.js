@@ -6,6 +6,7 @@ import DashboardOrderTab from "../section/dashboard-order.js";
 import DashboardSettingTab from "../section/dashboard-setting.js";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/dashboard.scss";
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -20,9 +21,9 @@ function Dashboard() {
     return (
         <>
             <Tab.Container defaultActiveKey="#info" mountOnEnter unmountOnExit>
-                <Row>
-                    <Col sm={2}>
-                        <ListGroup>
+                <Row className="dashboard-all">
+                    <Col sm={2} className="bg-info">
+                        <ListGroup className="text-center dashboard-listgroup m-2">
                             <ListGroup.Item action href="#info">
                                 INFO
                             </ListGroup.Item>
@@ -40,7 +41,7 @@ function Dashboard() {
                             </ListGroup.Item>
                         </ListGroup>
                     </Col>
-                    <Col sm={10}>
+                    <Col sm={10} className="bg-light">
                         <Tab.Content>
                             <DashboardInfoTab />
                             <DashboardUserTab />

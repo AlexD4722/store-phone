@@ -21,6 +21,7 @@ import {
     DetailProduct,
     EmailValidation,
     Dashboard,
+    SignUpSuccess
 } from "../routes";
 import CheckOut from "../routes/Checkout";
 import OrderReceived from "../routes/orderReceived";
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
             {
                 path: "/signup/email-validation",
                 element: <EmailValidation />,
+            },
+            {
+                path: "/signup/success",
+                element: <SignUpSuccess />,
             },
             {
                 path: "*",
