@@ -28,6 +28,7 @@ if ($result) {
                 $item->phone = $PT->data;
                 $item->color = $receipt->color;
                 $item->quantity = $receipt->quantity;
+                $item->total = (int)$receipt->quantity * (int)$PT->data->selling_price;
                 array_push($return->data->array_item, $item);
             }
         }

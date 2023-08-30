@@ -13,16 +13,19 @@ function OrderReceived() {
     const [totalPriceOrder, setTotalPriceOrder] = useState();
     const [listItem, setListItem] = useState();
     const [receipt, setReceipt] = useState();
-    let idReceiptSession = JSON.parse(sessionStorage.getItem("idReceipt"));
+    const [totalPrice, setTotalPrice] = useState();
     useEffect(() => {
+        let idReceiptSession = JSON.parse(sessionStorage.getItem("idReceipt"))
         console.log(idReceiptSession,"-----------------------");
         const userObject = JSON.parse(sessionStorage.getItem("user"));
         const guestObject = JSON.parse(sessionStorage.getItem("guest"));
-        const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
         let localCartUsing = true;
         if (userObject) {
             localCartUsing = false;
             if (userObject.login === "OK") {
+                if(guestObject){
+                    sessionStorage.removeItem("guest");
+                }
                 const newData = {
                     userId: userObject.user.id,
                 };
@@ -32,13 +35,16 @@ function OrderReceived() {
                 });
             }
         }
-        if (guestObject) {
+        
+        if (guestObject && idReceiptSession) {
             const newData = {
                 userId: guestObject.id,
             };
             setIdUser(newData);
             APIrequest(GET_USER_Receipt, newData).then((obj) => {
+                console.log(idReceiptSession,"idReceiptSession-----");
                 setDataUser(obj.data.userArray);
+                console.log(obj.data.userArray,"obj.data.userArray-----");
             });
         }
         // if (localCartUsing) {
@@ -50,27 +56,32 @@ function OrderReceived() {
         //         setDataUser(obj.data.userArray);
         //     });
         // }
-        const newData = {
-            idReceipt: idReceiptSession
+        let newData = {}
+        if(idUser){
+            newData = {
+                idReceipt: idReceiptSession,
+                customer_id: idUser.userId
+            }
         }
-        APIrequest(GET_ORDER_RECEIVED, newData)
-        .then((obj) => {
-            console.log(obj, "---------------------------------");
-            setListItem(obj.data.array_item);
-            // setListItem(obj.data.APIrequest)
-        });
-        APIrequest(GET_RECEIPT_BY_ID, newData).then((obj) => {
-            setReceipt(obj.data.receiptArray[0])
-            // setListItem(obj.data.APIrequest)
-        });
-        console.log("newdata=========",newData);
-    }, [idReceiptSession]);
+        console.log(newData,"++++++++++++++++++++++++++++++++++++++");
+        if(idReceiptSession && newData){
+            console.log(newData,"++++++++++");
+            APIrequest(GET_ORDER_RECEIVED, newData)
+            .then((obj) => {
+                setListItem(obj.data.array_item);
+                console.log(obj.data.array_item,"+++");
+                setTotalPrice(obj.data.array_item.reduce((total, product) => total + product.total, 0));
+                // setListItem(obj.data.APIrequest)
+            });
+            APIrequest(GET_RECEIPT_BY_ID, newData).then((obj) => {
+                setReceipt(obj.data.receiptArray[0])
+                // setListItem(obj.data.APIrequest)
+            });
+        }
+        
+    }, [cart]);
     // console.log("datauser++++", dataUser);
     // console.log(receipt, "receipt==============++++++++++++++++++++++++++");
-    // console.log(listItem,"listItem==============++++++++++++++++++++++++++");
-    const calculateTotalPrice = () => {
-        return cart.reduce((total, product) => total + product.totalPrice, 0);
-    };
     return (
         <>
             {dataUser && dataUser[0] ? (
@@ -105,7 +116,7 @@ function OrderReceived() {
                         </li>
                         <li className="order-received__overview">
                             <p>
-                                Total:<strong>{dataUser && dataUser.total}</strong>
+                                Total:<strong>${totalPrice}</strong>
                             </p>
                         </li>
                     </ul>
@@ -114,7 +125,7 @@ function OrderReceived() {
                             ORDER DETAILS
                         </h3>
                     </div>
-                    {/* <table className="table-product">
+                    <table className="table-product">
                         <thead>
                             <tr>
                                 <th className="table-product__colum-product">
@@ -132,8 +143,8 @@ function OrderReceived() {
                             </tr>
                         </thead>
                         <tbody>
-                            {cart &&
-                                cart.map((item, index) => {
+                            {listItem &&
+                                listItem.map((item, index) => {
                                     return (
                                         <tr
                                             className="table-product__row-item"
@@ -147,8 +158,7 @@ function OrderReceived() {
                                                     <div className="table-product__img-detail">
                                                         <img
                                                             src={
-                                                                item.product
-                                                                    .images[0]
+                                                                item.phone.images[0]
                                                             }
                                                             alt="images product"
                                                         />
@@ -157,10 +167,9 @@ function OrderReceived() {
                                                 <div className="table-product__title-item">
                                                     <Link>
                                                         <h3>
-                                                            {item.product.name}{" "}
+                                                            {item.phone.name}{" "}
                                                             {
-                                                                item.product
-                                                                    .capacity
+                                                                item.phone.capacity
                                                             }{" "}
                                                             {item.color}
                                                         </h3>
@@ -173,7 +182,7 @@ function OrderReceived() {
                                             >
                                                 <p>
                                                     <span>$</span>
-                                                    {item.product.selling_price}
+                                                    {item.phone.selling_price}
                                                 </p>
                                             </td>
                                             <td
@@ -181,7 +190,7 @@ function OrderReceived() {
                                                 data-label="Quantity:"
                                             >
                                                 <div className="table-product__info-quantity-detail">
-                                                    <div>100</div>
+                                                    <div> {item.quantity}</div>
                                                 </div>
                                             </td>
                                             <td
@@ -189,13 +198,13 @@ function OrderReceived() {
                                                 data-label="Subtotal:"
                                             >
                                                 <span>$</span>
-                                                {item.totalPrice}
+                                                {item.total}
                                             </td>
                                         </tr>
                                     );
                                 })}
                         </tbody>
-                    </table> */}
+                    </table>
                 </div>
             ) : (
                 " NO DATA USER"

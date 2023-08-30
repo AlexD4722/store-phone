@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useCartContext, useWishlistContext } from "../store/hooks";
 import TableProduct from "../components/tableProduct";
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/cart-page.scss";
 import "../styles/box-empty.scss";
 import APIrequest, {
@@ -13,6 +13,7 @@ import APIrequest, {
 } from "../API/callAPI";
 
 function Cart() {
+    const navigate = useNavigate();
     const [checkUser, setCheckUser] = useState(false);
     const [cart, dispatchCart] = useCartContext();
     const [wishlist, setWishlist] = useWishlistContext();
@@ -54,6 +55,7 @@ function Cart() {
             codeRandom = createCodeId();
         }
         console.log(codeRandom, "+++++++++++++++++++++++++++++++++++++=");
+        sessionStorage.setItem("idReceipt", JSON.stringify(codeRandom));
         // const newTime = new Date().toLocaleString()
         const dataReceipt = {
             receipt: {
@@ -62,17 +64,29 @@ function Cart() {
                 customer_id: userObject.user.id,
                 status: 1,
             },
+            receiptLine: []
         };
-        APIrequest(INSERT_RECEIPT, dataReceipt);
-        cart.map((item) => {
-            const data = {
-                product_id: item.product.id,
-                color: item.color,
-                quantity: item.quantity,
-                receipt_id: codeRandom,
-            };
-            APIrequest(INSERT_RECEIPT_LINE, data);
-        });
+        // APIrequest(INSERT_RECEIPT, dataReceipt);
+        cart.forEach((item) => {
+            dataReceipt.receiptLine.push(
+                {
+                    product_id: item.product.id,
+                    color: item.color,
+                    quantity: item.quantity,
+                    receipt_id: codeRandom
+                }
+            )
+        })
+        APIrequest(INSERT_RECEIPT_LINE, dataReceipt)
+        // cart.map((item) => {
+        //     const data = {
+        //         product_id: item.product.id,
+        //         color: item.color,
+        //         quantity: item.quantity,
+        //         receipt_id: codeRandom,
+        //     };
+        //     APIrequest(INSERT_RECEIPT_LINE, data);
+        // });
         userObject.user.cart = [];
         sessionStorage.setItem("user", JSON.stringify(userObject));
         APIrequest(UPDATE_USER, userObject.user);
@@ -82,6 +96,7 @@ function Cart() {
         };
         dispatchCart(action);
         setWishlist([...wishlist]);
+        navigate('/OrderReceived');
     };
     return (
         <>
@@ -109,21 +124,16 @@ function Cart() {
                         ""
                     )}
                     {checkUser ? (
-                        <Link
-                            to="/OrderReceived"
-                            onClick={() => handleClickSubOrder()}
-                        >
-                            <div className="cart-page__box-btn-footer">
-                                <button
-                                    type="button"
-                                    className="cart-page__btn-checkout"
-                                >
-                                    <span className="cart-page__btn-checkout-content">
-                                        display bill
-                                    </span>
-                                </button>
-                            </div>
-                        </Link>
+                        <div className="cart-page__box-btn-footer" onClick={() => handleClickSubOrder()}>
+                            <button
+                                type="button"
+                                className="cart-page__btn-checkout"
+                            >
+                                <span className="cart-page__btn-checkout-content">
+                                    display bill
+                                </span>
+                            </button>
+                        </div>
                     ) : (
                         ""
                     )}
