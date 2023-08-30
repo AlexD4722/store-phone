@@ -20,9 +20,9 @@ function Cart() {
     useEffect(() => {
         let userObject = JSON.parse(sessionStorage.getItem("user"));
         if (userObject) {
-            setCheckUser(true);
+            setCheckUser(true)
         }
-    }, []);
+    }, [])
     const createCodeId = () => {
         const number = "0123456789";
         const string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

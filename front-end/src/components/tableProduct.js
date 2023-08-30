@@ -163,9 +163,11 @@ function TableProduct(props) {
             dispatch(action);
             return lists;
         });
-        userObject.user.cart = lists;
-        testAPI(UPDATE_USER, userObject.user);
-        setWishlist([...wishlist]);
+        if(userObject){
+            userObject.user.cart = lists;
+            testAPI(UPDATE_USER, userObject.user);
+            setWishlist([...wishlist]);
+        }
     };
 
     return (

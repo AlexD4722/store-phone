@@ -109,6 +109,13 @@ switch ($action) {
     case GET_LASTEST_ORDERS:
         require("../controller/get_lastest_orders.php");
         break;
+    case GET_ORDER_RECEIVED:
+        require("../controller/getOrderReceived.php");
+        break;
+    case GET_RECEIPT_BY_ID:
+        require("../controller/get_receipt_by_id.php");
+        break;
+
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

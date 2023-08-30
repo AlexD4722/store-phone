@@ -145,6 +145,40 @@ class ReceiptTable extends Database
     }
     // Hàm xóa 1 OL trong database. Trả về true nếu thành công, trả về false nếu thất bại.
     // Tham số là id.
+public function getReceiptDetail($id = '', $date = '', $cid = '', $stt = '')
+    {
+        $sql = 'SELECT * FROM receipt WHERE TRUE';
+        $params = [];
+        if ($id != '') {
+            $sql .= ' AND id = ?';
+            array_push($params, (int) $id);
+        }
+        if ($date != '') {
+            $sql .= ' AND date = ?';
+            array_push($params, $date);
+        }
+        if ($cid != '') {
+            $sql .= ' AND customer_id = ?';
+            array_push($params, (int) $cid);
+        }
+        if ($stt != '') {
+            $sql .= ' AND status = ?';
+            array_push($params, $stt);
+        }
+        if (count($params) > 0) {
+            $result = $this->SQLexec($sql, $params);
+        } else {
+            $result = $this->SQLexec($sql);
+        }
+        $data = $this->pdo_stm->fetchAll();
+        $this->data = [];
+        foreach ($data as $row) {
+            $one = new Receipt($row["id"], $row["customer_id"], $row["status"]);
+            $one->date = $row["date"];
+            array_push($this->data, $one);
+        }
+        return $result;
+    }
 }
 
 ?>

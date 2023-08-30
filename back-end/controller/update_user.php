@@ -22,5 +22,5 @@ if (count($UT->data) === 1){
     $return = new APIresponse("Failed: Not found user");
 }
 
-echo json_encode($return);
+echo json_encode($data);
 ?>

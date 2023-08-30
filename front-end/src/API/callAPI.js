@@ -30,7 +30,8 @@ export const GET_RECEIPT = 316;
 export const VALIDATE_NAME_USER = 317;
 export const INSERT_GUEST = 318;
 export const GET_GEST = 319;
-
+export const GET_ORDER_RECEIVED = 320;
+export const GET_RECEIPT_BY_ID = 321;
 async function APIrequest(action, data) {
     let sendData = new FormData();
     sendData.append("action", action);

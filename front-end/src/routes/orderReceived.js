@@ -4,16 +4,20 @@ import { Link } from "react-router-dom";
 import "../styles/cart-page.scss";
 import "../styles/box-empty.scss";
 import "../styles/order-received.scss";
-import APIrequest, { GET_USER_Receipt } from "../API/callAPI";
+import APIrequest, { GET_ORDER_RECEIVED, GET_RECEIPT_BY_ID, GET_USER_Receipt, testAPI } from "../API/callAPI";
 
 function OrderReceived() {
     const cart = useCartContext()[0];
     const [dataUser, setDataUser] = useState({});
     const [idUser, setIdUser] = useState();
     const [totalPriceOrder, setTotalPriceOrder] = useState();
+    const [listItem, setListItem] = useState();
+    const [receipt, setReceipt] = useState();
+    let idReceiptSession = JSON.parse(sessionStorage.getItem("idReceipt"));
     useEffect(() => {
-        let userObject = JSON.parse(sessionStorage.getItem("user"));
-        let guestObject = JSON.parse(sessionStorage.getItem("guest"));
+        console.log(idReceiptSession,"-----------------------");
+        const userObject = JSON.parse(sessionStorage.getItem("user"));
+        const guestObject = JSON.parse(sessionStorage.getItem("guest"));
         const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
         let localCartUsing = true;
         if (userObject) {
@@ -29,28 +33,43 @@ function OrderReceived() {
             }
         }
         if (guestObject) {
-            localCartUsing = false;
-            if (guestObject.login === "OK") {
-                const newData = {
-                    userId: guestObject.guest.id,
-                };
-                setIdUser(newData);
-                APIrequest(GET_USER_Receipt, newData).then((obj) => {
-                    setDataUser(obj.data.userArray);
-                });
-            }
-        }
-        if (localCartUsing) {
             const newData = {
-                userId: sessionCart.id,
+                userId: guestObject.id,
             };
             setIdUser(newData);
             APIrequest(GET_USER_Receipt, newData).then((obj) => {
                 setDataUser(obj.data.userArray);
             });
         }
-    }, []);
-
+        // if (localCartUsing) {
+        //     const newData = {
+        //         userId: sessionCart.id,
+        //     };
+        //     setIdUser(newData);
+        //     APIrequest(GET_USER_Receipt, newData).then((obj) => {
+        //         setDataUser(obj.data.userArray);
+        //     });
+        // }
+        const newData = {
+            idReceipt: idReceiptSession
+        }
+        APIrequest(GET_ORDER_RECEIVED, newData).then((obj) => {
+            console.log(obj.data, "-------");
+            setListItem(obj.data.array_item);
+            // setListItem(obj.data.APIrequest)
+        });
+        APIrequest(GET_RECEIPT_BY_ID, newData).then((obj) => {
+            setReceipt(obj.data.receiptArray[0])
+            // setListItem(obj.data.APIrequest)
+        });
+        console.log("newdata=========",newData);
+    }, [idReceiptSession]);
+    // console.log("datauser++++", dataUser);
+    // console.log(receipt, "receipt==============++++++++++++++++++++++++++");
+    // console.log(listItem,"listItem==============++++++++++++++++++++++++++");
+    const calculateTotalPrice = () => {
+        return cart.reduce((total, product) => total + product.totalPrice, 0);
+    };
     return (
         <>
             {dataUser && dataUser[0] ? (
@@ -63,13 +82,13 @@ function OrderReceived() {
                     <ul className="order-received__overview">
                         <li className="order-received__overview">
                             <p>
-                                Order Id:<strong>{dataUser[0].id}</strong>
+                                Order Id:<strong>{receipt.id}</strong>
                             </p>
                         </li>
 
                         <li className="order-received__overview">
                             <p>
-                                Date:<strong>August 25, 2023</strong>
+                                Date:<strong>{receipt.date}</strong>
                             </p>
                         </li>
 
@@ -85,7 +104,7 @@ function OrderReceived() {
                         </li>
                         <li className="order-received__overview">
                             <p>
-                                Total:<strong>$635.99</strong>
+                                Total:<strong>{dataUser.total}</strong>
                             </p>
                         </li>
                     </ul>
@@ -94,7 +113,7 @@ function OrderReceived() {
                             ORDER DETAILS
                         </h3>
                     </div>
-                    <table className="table-product">
+                    {/* <table className="table-product">
                         <thead>
                             <tr>
                                 <th className="table-product__colum-product">
@@ -175,7 +194,7 @@ function OrderReceived() {
                                     );
                                 })}
                         </tbody>
-                    </table>
+                    </table> */}
                 </div>
             ) : (
                 " NO DATA USER"
