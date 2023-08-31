@@ -23,7 +23,14 @@ function OrderReceived() {
             window.location.reload();
         }
     }, []);
+    useEffect(() => {
+        const hasReloaded = localStorage.getItem('hasReloaded');
 
+        if (!hasReloaded) {
+            localStorage.setItem('hasReloaded', 'true');
+            window.location.reload();
+        }
+    }, []);
     useEffect(() => {
         console.log(idReceiptSession, "-----------------------");
         const userObject = JSON.parse(sessionStorage.getItem("user"));
@@ -61,26 +68,26 @@ function OrderReceived() {
         }
         // if (localCartUsing) {
         //     const newData = {
-        //         userId: sessionCart.id,
-        //     };
-        //     setIdUser(newData);
+            //         userId: sessionCart.id,
+            //     };
+            //     setIdUser(newData);
         //     APIrequest(GET_USER_Receipt, newData).then((obj) => {
-        //         setDataUser(obj.data.userArray);
-        //     });
-        // }
-        let newData = {}
-        if (getId) {
-            newData = {
+            //         setDataUser(obj.data.userArray);
+            //     });
+            // }
+            let newData = {}
+            if (getId) {
+                newData = {
                 idReceipt: idReceiptSession,
                 customer_id: getId
             }
         }
         // console.log(newData,"++++++++++++++++++++++++++++++++++++++");
-
+        
         if (idReceiptSession && Object.keys(newData).length) {
             console.log(newData, "newData++++++++++");
             APIrequest(GET_ORDER_RECEIVED, newData)
-                .then((obj) => {
+            .then((obj) => {
                     if (obj.data.array_item && obj.data.array_item.length) {
                         setListItem(obj.data.array_item);
                         console.log(obj.data.array_item, "+++");
@@ -88,12 +95,12 @@ function OrderReceived() {
                         // setListItem(obj.data.APIrequest)
                     }
                 });
-            APIrequest(GET_RECEIPT_BY_ID, newData).then((obj) => {
-                setReceipt(obj.data.receiptArray[0])
-                // setListItem(obj.data.APIrequest)
+                APIrequest(GET_RECEIPT_BY_ID, newData).then((obj) => {
+                    setReceipt(obj.data.receiptArray[0])
+                    // setListItem(obj.data.APIrequest)
             });
         }
-
+        
     }, [cart, idReceiptSession]);
     // console.log("datauser++++", dataUser);
     // console.log(receipt, "receipt==============++++++++++++++++++++++++++");
