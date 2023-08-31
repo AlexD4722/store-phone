@@ -77,16 +77,21 @@ function Product(props) {
         let loginData = JSON.parse(loginStatus);
         if (loginData && loginData.login === "OK") {
             setButtonAddToWishlish(!buttonAddToWishlish);
+            let messeage = null;
             if (!wishlist.filter(product => {
                 return product.product.id === item.product.id
             }).length) {
                 loginData.user.wishlist = [...wishlist, item];
                 setWishCheck(true)
+                messeage = true;
+                props.onDataToParent(messeage);
             } else {
                 loginData.user.wishlist = wishlist.filter(product => {
                     return product.product.id !== item.product.id
                 });
                 setWishCheck(false)
+                messeage = false;
+                props.onDataToParent(messeage);
             }
             let data = loginData.user;
             APIrequest(UPDATE_USER, data).then((response) => {
@@ -112,13 +117,11 @@ function Product(props) {
                     alert("Insert item to wishlist failed");
                 }
             });
-            const messeage = true;
             // The product has been added to the wishlist
-            props.onDataToParent(messeage);
 
         } else {
             // const messeage = "Please login to add items to your wishlist";
-            const messeage = false
+            const messeage = -1;
             props.onDataToParent(messeage);
         }
     };

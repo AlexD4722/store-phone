@@ -20,19 +20,27 @@ function Home() {
     const handleDataFromChild = (messeage) => {
         // setMesseage(messeage);
 
-        if (messeage) {
+        if (messeage && messeage !== -1) {
             setErrolWishlist(true);
             setMesseage("The product has been added to the wishlist");
             setStyleMesseage("showMessage--success")
             setTimeout(() => {
                 setErrolWishlist(false);
-            }, 100000)
-        } else {
+            }, 3000)
+        } else if( messeage === -1 ) {
             setErrolWishlist(true);
+            // setStyleMesseage("")
             setMesseage("Insert item to wishlist failed");
             setTimeout(() => {
                 setErrolWishlist(false);
-            }, 10000000)
+            }, 3000)
+        }else if( messeage === false ) {
+            setErrolWishlist(true);
+            setStyleMesseage("")
+            setMesseage("Item removed from wishlist");
+            setTimeout(() => {
+                setErrolWishlist(false);
+            }, 3000)
         }
     };
 
