@@ -2,10 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
     Accordion,
-    Col,
-    Container,
-    ProgressBar,
-    Row,
     Tab,
     Table,
 } from "react-bootstrap";
@@ -29,16 +25,6 @@ function DashboardInfoTab() {
 
     return (
         <Tab.Pane eventKey="#info">
-            <Container>
-                <Row>
-                    <Col xs={4}>
-                        Sales target of the month
-                        <ProgressBar now={65} label={"65%"} />
-                    </Col>
-                    <Col xs={4}>b</Col>
-                    <Col xs={4}>c</Col>
-                </Row>
-            </Container>
             <div>Recent orders</div>
             <Accordion>
                 {orders.length > 0 &&
@@ -61,7 +47,16 @@ function DashboardInfoTab() {
                                         {receipt.lines.length > 0 &&
                                             receipt.lines.map((line) => (
                                                 <tr key={line.id}>
-                                                    <td><Link to={"../../product/" + line.product_id}>{line.product_id}</Link></td>
+                                                    <td>
+                                                        <Link
+                                                            to={
+                                                                "../../product/" +
+                                                                line.product_id
+                                                            }
+                                                        >
+                                                            {line.product_id}
+                                                        </Link>
+                                                    </td>
                                                     <td>{line.quantity}</td>
                                                     <td>{line.color}</td>
                                                 </tr>

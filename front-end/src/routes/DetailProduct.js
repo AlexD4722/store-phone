@@ -178,6 +178,7 @@ function DetailProduct({ match }) {
             }
         }
     };
+
     return (
         <div className="xo-container">
             {/* <h3>This is product detail</h3> */}
