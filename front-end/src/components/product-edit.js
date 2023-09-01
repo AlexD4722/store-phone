@@ -31,7 +31,7 @@ function ProductEdit() {
             if (response.result === "Success") {
                 const item = response.data.productArray[0];
                 setName(item.name);
-                setInitalPrice(item.inital_price);
+                setInitalPrice(item.initial_price);
                 setSellingPrice(item.selling_price);
                 let textArr = item.images[0].split("/");
                 let imageFolder = textArr[textArr.length - 2];

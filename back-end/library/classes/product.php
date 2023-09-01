@@ -4,22 +4,22 @@ class Product
     public $id;
     public $name;
     public $description;
-    public $inital_price;
+    public $initial_price;
     public $selling_price;
     public ProductLine $product_line;
     public $quantity;
+    public $id_product_line;
     public $images;
     public $color;
     public $capacity;
     public $status;
-
-    public function __construct($id, $name, $desc, $init, $sell, $qty, $dir, $color, $capacity, $status)
+    public function __construct ($name, $desc, $init, $sell, $id_product_line, $qty, $dir, $color, $capacity, $status)
     {
-        $this->id = $id;
         $this->name = $name;
         $this->description = $desc;
-        $this->inital_price = $init;
+        $this->initial_price = $init;
         $this->selling_price = $sell;
+        $this->id_product_line = $id_product_line;
         $this->quantity = $qty;
         $this->images = $dir;
         $this->color = $color;
@@ -28,15 +28,15 @@ class Product
     }
 }
 
+
 class ProductLine
 {
-    public $name;
+    public $id;
     public $brand;
     public $product_type;
     public $status = 1;
-    public function __construct($name, $brand, $type)
+    public function __construct($brand, $type)
     {
-        $this->name = $name;
         $this->brand = $brand;
         $this->product_type = $type;
     }

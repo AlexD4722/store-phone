@@ -24,7 +24,7 @@ class ProductTable extends Database
             array_push($params, $desc);
         }
         if ($product_line) {
-            $sql .= " AND product_line = ?";
+            $sql .= " AND id_product_line = ?";
             array_push($params, $product_line);
         }
         if ($limit > 0) {
@@ -48,7 +48,9 @@ class ProductTable extends Database
                     }
                 }
                 if ($row['status'] == "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], json_decode($row['description']), $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, json_decode($row['color']), $row['capacity'], $row['status']));
+                    $obj = new Product($row['name'], json_decode($row['description']), $row['initial_price'], $row['selling_price'], $row['id_product_line'], $row['quantity'], $arrayFiles, $row['color'], $row['capacity'], $row['status']);
+                    $obj->id = $row['id'];
+                    array_push($this->data, $obj);
                 }
             }
         }
@@ -83,7 +85,9 @@ class ProductTable extends Database
                     }
                 }
                 if ($row['status'] == "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], json_decode($row['description']), $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, json_decode($row['color']), $row['capacity'], $row['status']));
+                    $obj = new Product($row['name'], json_decode($row['description']), $row['initial_price'], $row['selling_price'], $row['id_product_line'], $row['quantity'], $arrayFiles, $row['color'], $row['capacity'], $row['status']);
+                    $obj->id = $row['id'];
+                    array_push($this->data, $obj);
                 }
             }
         }
@@ -117,7 +121,9 @@ class ProductTable extends Database
                     }
                 }
                 if ($row['status'] == "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], json_decode($row['description']), $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, json_decode($row['color']), $row['capacity'], $row['status']));
+                    $obj = new Product($row['name'], json_decode($row['description']), $row['initial_price'], $row['selling_price'], $row['id_product_line'], $row['quantity'], $arrayFiles, $row['color'], $row['capacity'], $row['status']);
+                    $obj->id = $row['id'];
+                    array_push($this->data, $obj);
                 }
             }
         }
@@ -134,14 +140,14 @@ class ProductTable extends Database
             $this->getProductLineList($data["product_line"]);
             $productLine = $this->data[0];
             $arrayFiles = [];
-                $files = scandir($this->LinkServer . $data["images"]);
-                for ($i = 0; $i < count($files); $i++) {
-                    if ($files[$i] != "." && $files[$i] != "..") {
-                        $files[$i] = "http://localhost:2203/learning/store-phone/back-end/imgProduct/" . $data["images"] . "/" . $files[$i];
-                        array_push($arrayFiles, $files[$i]);
-                    }
+            $files = scandir($this->LinkServer . $data["images"]);
+            for ($i = 0; $i < count($files); $i++) {
+                if ($files[$i] != "." && $files[$i] != "..") {
+                    $files[$i] = "http://localhost:2203/learning/store-phone/back-end/imgProduct/" . $data["images"] . "/" . $files[$i];
+                    array_push($arrayFiles, $files[$i]);
                 }
-            $product = new Product($data['id'], $data['name'], json_decode($data['description']), $data['inital_price'], $data['selling_price'], $data['quantity'], $arrayFiles, json_decode($data['color']), $data['capacity'], $data['status']);
+            }
+            $product = new Product($data['id'], $data['name'], json_decode($data['description']), $data['initial_price'], $data['selling_price'], $data['id_product_line'], $data['quantity'], $arrayFiles, $data['color'], $data['capacity'], $data['status']);
             $product->product_line = $productLine;
             $this->data = $product;
         }
@@ -150,17 +156,17 @@ class ProductTable extends Database
 
     function addProduct(Product $p)
     {
-        $sql = "INSERT INTO `product`(`id`, `name`, `description`, `inital_price`, `selling_price`, `product_line`, `images`, `quantity`, `color`, `capacity`, `status`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO `product`(`id`, `name`, `description`, `initial_price`, `selling_price`, `id_product_line`, `images`, `quantity`, `color`, `capacity`, `status`) VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         $data = [
-            $p->id,
             $p->name,
             json_encode($p->description),
-            $p->inital_price,
+            $p->initial_price,
             $p->selling_price,
-            $p->product_line->name,
+            $p->id_product_line,
             $p->images,
             $p->quantity,
-            json_encode($p->color),
+            $p->color,
             $p->capacity,
             $p->status
         ];
@@ -183,17 +189,17 @@ class ProductTable extends Database
     // return: boolean
     function editProduct($id, Product $p)
     {
-        $sql = "UPDATE `product` SET `name`= ?,`description`= ?,`inital_price`= ?,`selling_price`= ?,`product_line`= ?,`images`= ?,`quantity`= ?, `color` = ?, `capacity` = ?, `status` = ? WHERE `id` = ?";
+        $sql = "UPDATE `product` SET `name`= ?,`description`= ?,`initial_price`= ?,`selling_price`= ?,`product_line`= ?,`images`= ?,`quantity`= ?, `color` = ?, `capacity` = ?, `status` = ? WHERE `id` = ?";
 
         $data = [
             $p->name,
             json_encode($p->description),
-            $p->inital_price,
+            $p->initial_price,
             $p->selling_price,
-            $p->product_line->name,
+            $p->product_line->id,
             $p->images,
             $p->quantity,
-            json_encode($p->color),
+            $p->color,
             $p->capacity,
             $p->status,
             $id
@@ -202,25 +208,23 @@ class ProductTable extends Database
         return $result;
     }
     // function editProduct() is used to update a data from the list Product 
-    // parameters: $id, $name, $description, $inital_price, selling_price, $product_line, $images, $quantity, id_old
+    // parameters: $id, $name, $description, $initial_price, selling_price, $product_line, $images, $quantity, id_old
     // return: boolean
-    function getProductLineList($name = '')
+    function getProductLineList()
     {
         $sql = "SELECT * FROM product_line WHERE TRUE";
-        $params = [];
-        if ($name) {
-            $sql .= " AND `name` like '%$name%' ";
-            array_push($params, $name);
-        }
-        $this->data = [];
         $result = $this->SQLexec($sql);
         if ($result == false) {
             return false;
         } else {
             $data = $this->pdo_stm->fetchAll();
+            $this->data = [];
             if (count($data) > 0) {
                 foreach ($data as $row) {
-                    array_push($this->data, new ProductLine($row['name'], $row['brand'], $row['product_type']));
+                    $obj = new ProductLine($row['brand'], $row['product_type']);
+                    $obj->id = $row['id'];
+                    $obj->status = $row['status'];
+                    array_push($this->data, $obj);
                 }
             }
             return true;
@@ -232,9 +236,9 @@ class ProductTable extends Database
 
     function addProductLine(ProductLine $pl)
     {
-        $sql = "INSERT INTO `product_line`(`name`, `brand`, `product_type`, `status`) VALUES ( ?, ?, ?, 1)";
+        $sql = "INSERT INTO `product_line`(`id`, `brand`, `product_type`, `status`) VALUES ( ?, ?, ?, 1)";
         $data = [
-            $pl->name,
+            $pl->id,
             $pl->brand,
             $pl->product_type
         ];
@@ -245,10 +249,10 @@ class ProductTable extends Database
     // parameters: object type ProductLine
     // return: boolean
 
-    function removeProductLine($name)
+    function removeProductLine($id)
     {
-        $sql = "DELETE FROM `product_line` WHERE `name`=? ";
-        $data = [$name];
+        $sql = "DELETE FROM `product_line` WHERE `id`=? ";
+        $data = [$id];
         $result = $this->SQLexec($sql, $data);
         return $result;
     }
@@ -257,16 +261,16 @@ class ProductTable extends Database
     // return: boolean
 
     function editProductLine(
-        $old_name,
+        $old_id,
         ProductLine $pl
     ) {
-        $sql = "UPDATE `product_line` SET `name`=?,`brand`=?,`product_type`=? WHERE `name` = ?";
+        $sql = "UPDATE `product_line` SET `id`=?,`brand`=?,`product_type`=? WHERE `id` = ?";
 
         $data = [
-            $pl->name,
+            $pl->id,
             $pl->brand,
             $pl->product_type,
-            $old_name,
+            $old_id,
         ];
         $result = $this->SQLexec($sql, $data);
         return $result;
@@ -330,7 +334,9 @@ class ProductTable extends Database
                     }
                 }
                 if ($row['status'] == "1") {
-                    array_push($this->data, new Product($row['id'], $row['name'], $row['description'], $row['inital_price'], $row['selling_price'], $row['quantity'], $arrayFiles, $row['color'], $row['capacity'], $row['status']));
+                    $obj = new Product($row['name'], json_decode($row['description']), $row['initial_price'], $row['selling_price'], $row['id_product_line'], $row['quantity'], $arrayFiles, $row['color'], $row['capacity'], $row['status']);
+                    $obj->id = $row['id'];
+                    array_push($this->data, $obj);
                 }
             }
         }

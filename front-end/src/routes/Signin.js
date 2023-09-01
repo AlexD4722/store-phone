@@ -1,6 +1,6 @@
 import LogoShop from "../assets/imgs/logo-dark.png";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import APIrequest, { USER_LOGIN, UPDATE_USER } from "../API/callAPI.js";
+import APIrequest, { USER_LOGIN, UPDATE_USER, testAPI } from "../API/callAPI.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useAccountContext, useWishlistContext } from "../store";
 import { useCallback, useState } from "react";

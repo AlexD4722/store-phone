@@ -7,7 +7,7 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")) {
 }
 $PT = new ProductTable();
 $data = json_decode($_POST["data"]);
-$product_line = new ProductLine($data->name, $data->brand, $data->type);
+$product_line = new ProductLine($data->brand, $data->type);
 $result = $PT->addProductLine($product_line);
 
 if ($result) {

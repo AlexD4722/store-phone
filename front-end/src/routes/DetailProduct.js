@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 function DetailProduct({ match }) {
     const params = useParams();
     const [showMessage, setShowMessage] = useState(false);
-    const [priceInitall, setPriceInitall] = useState();
+    const [priceInitial, setPriceInitial] = useState();
     const [priceSelling, setPriceSelling] = useState();
     const [dataRequest, setDataRequest] = useState();
     const [product, SetProduct] = useState([]);
@@ -22,6 +22,7 @@ function DetailProduct({ match }) {
     const [valueColor, setValueColor] = useState([]);
     const [valueCapacity, setValueCapacity] = useState([]);
     const [idChooseItem, setIdChooseItem] = useState();
+    const [listItems, setListItems] = useState();
     const [selectedOptionColor, setSelectedOptionColor] = useState();
     const [selectedOptionCapacity, setSelectedOptionCapacity] = useState();
     const [wishlist, setWishlist] = useWishlistContext();
@@ -103,33 +104,39 @@ function DetailProduct({ match }) {
         if (newData) {
             APIrequest(SEARCH_ITEM_EXACTLY, newData).then((response) => {
                 if (response.result === "Success") {
-                    let ListPhones = response.data.productArray;
+                    const ListPhones = response.data.productArray;
+                    setListItems(response.data.productArray);
                     if (ListPhones.length !== 0) {
-                        setPriceInitall(
-                            ListPhones[0] && ListPhones[0].inital_price
+                        setPriceInitial(
+                            ListPhones[0] && ListPhones[0].initial_price
                         );
                         setPriceSelling(
                             ListPhones[0] && ListPhones[0].selling_price
                         );
                     }
                     SetProduct(ListPhones);
-                    if (ListPhones[0].color) {
-                        setValueColor(ListPhones[0].color);
-                        setSelectedOptionColor(ListPhones[0].color[0]);
-                    }
+                    let checkAttribute = false;
+                    let listColor = [];
                     let listCapacity = [];
-                    if (ListPhones[0].capacity) {
-                        setSelectedOptionCapacity(ListPhones[0].capacity);
-                        setIdChooseItem(ListPhones[0].id);
-                        ListPhones.map((phone) => {
-                            listCapacity.push(phone.capacity);
-                            setValueCapacity(listCapacity);
+                    if (ListPhones) {
+                        setSelectedOptionColor(ListPhones[0].color);
+                        ListPhones.forEach((phone) => {
+                            if (phone.color) {
+                                listColor.push(phone.color);
+                            }
                         });
-                    } else {
-                        setIdChooseItem(ListPhones[0].id);
-                    }
-                    if (!ListPhones.length) {
-                        navigate("../productNotFound");
+                        const listColors = [...new Set(listColor)];
+                        setValueColor(listColors);
+                        const items = ListPhones.filter((product) => {
+                            return product.color === ListPhones[0].color
+                        })
+                        items.forEach((phone) => {
+                            if (phone.capacity) {
+                                listCapacity.push(phone.capacity);
+                            }
+                        });
+                        setValueCapacity([...new Set(listCapacity)]);
+                        setSelectedOptionCapacity(items[0].capacity)
                     }
                 }
             });
@@ -140,7 +147,8 @@ function DetailProduct({ match }) {
         }
         topFunction();
     }, [params]);
-
+    console.log("valueColor-----", valueColor);
+    console.log("valueCapacity-----", valueCapacity);
     const handleChangeQuantity = (event) => {
         const inputValue = event.target.value;
         if (inputValue < 0) {
@@ -173,12 +181,22 @@ function DetailProduct({ match }) {
             );
             if (product[index].capacity === event.target.value) {
                 setPriceSelling(product[index].selling_price);
-                setPriceInitall(product[index].inital_price);
+                setPriceInitial(product[index].initial_price);
                 setIdChooseItem(product[index].id);
             }
         }
     };
-
+    let filteredProducts = {}
+    if (listItems) {
+        const filteredProducts = listItems.filter((product) => {
+            if (selectedOptionColor && selectedOptionCapacity) {
+                return product.color === selectedOptionColor && product.capacity === selectedOptionCapacity;
+            }
+        });
+        console.log(filteredProducts, "filteredProducts----------");
+    }
+    console.log("selectedOptionColor----", selectedOptionColor);
+    console.log("selectedOptionCapacity", selectedOptionCapacity);
     return (
         <div className="xo-container">
             {/* <h3>This is product detail</h3> */}
@@ -232,45 +250,50 @@ function DetailProduct({ match }) {
                                         ${priceSelling}
                                     </p>
                                     <p className="detail-product__price-old">
-                                        ${priceInitall}
+                                        ${priceInitial}
                                     </p>
                                 </div>
-                                <div className="detail-product__box-option detail-product__box-option--color">
-                                    <p>
-                                        Color:{" "}
-                                        <span className="detail-product__name-option">
-                                            {selectedOptionColor}
-                                        </span>
-                                    </p>
-                                    <div className="detail-product__box-list-option">
-                                        {valueColor &&
-                                            valueColor.map(
-                                                (colorItem, index) => {
-                                                    return (
-                                                        <label key={index}>
-                                                            <input
-                                                                type="radio"
-                                                                name="color"
-                                                                value={
-                                                                    colorItem
-                                                                }
-                                                                onChange={
-                                                                    handleChoseOptionColor
-                                                                }
-                                                                checked={
-                                                                    selectedOptionColor ===
-                                                                    colorItem
-                                                                }
-                                                            />
-                                                            <span>
-                                                                {colorItem}
-                                                            </span>
-                                                        </label>
-                                                    );
+                                {
+                                    valueColor.length !== 0 && (
+                                        <div className="detail-product__box-option detail-product__box-option--color">
+                                            <p>
+                                                Color:{" "}
+                                                <span className="detail-product__name-option">
+                                                    {selectedOptionColor}
+                                                </span>
+                                            </p>
+                                            <div className="detail-product__box-list-option">
+                                                {
+                                                    valueColor.map(
+                                                        (colorItem, index) => {
+                                                            return (
+                                                                <label key={index}>
+                                                                    <input
+                                                                        type="radio"
+                                                                        name="color"
+                                                                        value={
+                                                                            colorItem
+                                                                        }
+                                                                        onChange={
+                                                                            handleChoseOptionColor
+                                                                        }
+                                                                        checked={
+                                                                            selectedOptionColor ===
+                                                                            colorItem
+                                                                        }
+                                                                    />
+                                                                    <span>
+                                                                        {colorItem}
+                                                                    </span>
+                                                                </label>
+                                                            );
+                                                        }
+                                                    )
                                                 }
-                                            )}
-                                    </div>
-                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                }
                                 {valueCapacity.length !== 0 && (
                                     <div className="detail-product__box-option detail-product__box-option--capacity">
                                         <p>
@@ -280,7 +303,7 @@ function DetailProduct({ match }) {
                                             </span>
                                         </p>
                                         <div className="detail-product__box-list-option">
-                                            {valueCapacity &&
+                                            {valueCapacity.length &&
                                                 valueCapacity.map(
                                                     (capacityItem, index) => {
                                                         return (

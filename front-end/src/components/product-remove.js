@@ -87,7 +87,7 @@ function ProductRemove() {
                             <tr>
                                 <td>{product.id}</td>
                                 <td>{product.name}</td>
-                                <td>{product.inital_price}</td>
+                                <td>{product.initial_price}</td>
                                 <td>{product.selling_price}</td>
                                 <td>{product.quantity}</td>
                                 <td>

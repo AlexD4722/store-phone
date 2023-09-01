@@ -2,26 +2,28 @@ import { Form, Button } from "react-bootstrap";
 import APIrequest, {
     GET_ALL_PRODUCT_LINE,
     ADD_NEW_PRODUCT,
+    testAPI,
 } from "../API/callAPI.js";
 import { useEffect, useState } from "react";
 
 function ProductAdd() {
     const [name, setName] = useState("");
-    const [initalPrice, setInitalPrice] = useState("");
+    const [initialPrice, setInitialPrice] = useState("");
     const [sellingPrice, setSellingPrice] = useState("");
     const [images, setImages] = useState("");
     const [quantity, setQuantity] = useState("");
-    const [productLine, setProductLine] = useState("");
     const [description, setDescription] = useState(["..."]);
     const [color, setColor] = useState(["Red"]);
     const [capacity, setCapacity] = useState("");
     const [productLines, setProductLines] = useState([]);
+    const [idProductLine, setIdProductLine] = useState([]);
     const [result, setResult] = useState("");
 
     useEffect(() => {
         APIrequest(GET_ALL_PRODUCT_LINE, {}).then((obj) => {
             if (obj.result === "Success" && obj.data.result === "Found") {
                 setProductLines(obj.data.linesArr);
+                console.log("----------------",obj.data.linesArr);
             }
         });
     }, []);
@@ -30,11 +32,11 @@ function ProductAdd() {
         e.preventDefault();
         const data = {
             name,
-            initalPrice,
+            initialPrice,
             sellingPrice,
             images,
             quantity,
-            productLine,
+            idProductLine,
             description,
             color,
             capacity,
@@ -50,7 +52,9 @@ function ProductAdd() {
             }
         });
     };
-
+    if(idProductLine){
+        console.log("----------------idProductLines",idProductLine);
+    }
     return (
         <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group className="mb-3">
@@ -64,13 +68,13 @@ function ProductAdd() {
                 />
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Label>Inital Price</Form.Label>
+                <Form.Label>Initial Price</Form.Label>
                 <Form.Control
                     required
                     type="text"
-                    placeholder="Enter Inital Price"
-                    value={initalPrice}
-                    onChange={(e) => setInitalPrice(e.target.value)}
+                    placeholder="Enter Initial Price"
+                    value={initialPrice}
+                    onChange={(e) => setInitialPrice(e.target.value)}
                 />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicSelling Price">
@@ -106,19 +110,27 @@ function ProductAdd() {
             <Form.Label>
                 Product Line
             </Form.Label>
-            <Form.Select onChange={(e) => setProductLine(e.target.value)}>
+            <Form.Select onChange={(e) => setIdProductLine(e.target.value)}>
                 <option>Choose a product line</option>
                 {productLines.map((value, index) => {
                     return (
-                        <option value={value.name} key={index}>
-                            {value.name}
+                        <option value={value.id} key={index}>
+                            {value.brand}
                         </option>
                     );
                 })}
             </Form.Select>
             <Form.Group className="mb-3">
                 <Form.Label>Color</Form.Label>
-                {color.map((value, index) => {
+                <Form.Control
+                    type="text"
+                    placeholder="Enter color"
+                    value={color}
+                    onChange={(e) =>
+                        setColor(e.target.value)
+                    }
+                />
+                {/* {color.map((value, index) => {
                     return (
                         <Form.Control
                             type="text"
@@ -134,8 +146,8 @@ function ProductAdd() {
                             }
                         />
                     );
-                })}
-                <Button
+                })} */}
+                {/* <Button
                     onClick={() => {
                         setColor((prev) => {
                             return [...prev, "Red"];
@@ -143,7 +155,7 @@ function ProductAdd() {
                     }}
                 >
                     Add
-                </Button>
+                </Button> */}
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>Capacity</Form.Label>

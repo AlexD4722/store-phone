@@ -103,11 +103,11 @@ function WishList() {
                                                 data-label="Price:"
                                             >
                                                 <p>
-                                                    <span className="wishlist-product__inital_price">
+                                                    <span className="wishlist-product__initial_price">
                                                         $
                                                         {
                                                             item.product
-                                                                .inital_price
+                                                                .initial_price
                                                         }
                                                     </span>
                                                     <span className="wishlist-product__selling_price">

@@ -66,7 +66,7 @@ function ProductFlex(props) {
                                 ${props.product.selling_price}
                             </span>
                             <span className="product-flex__price-old">
-                                ${props.product.inital_price}
+                                ${props.product.initial_price}
                             </span>
                         </div>
                         <ul>

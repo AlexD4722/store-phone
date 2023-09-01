@@ -67,7 +67,7 @@ function FormSearch() {
                                                     <div className="recommend-product__info-product">
                                                         <h2 className="recommend-product__name-product">{value.name} {value.capacity}</h2>
                                                         <div className="recommend-product__price-item">
-                                                            <p className="recommend-product__price-initall">${value.inital_price}</p>
+                                                            <p className="recommend-product__price-initall">${value.initial_price}</p>
                                                             <p className="recommend-product__price-selling">${value.selling_price}</p>
                                                         </div>
                                                     </div>

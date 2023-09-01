@@ -16,7 +16,7 @@ $id = $data->id;
 $result = $RT->getReceiptLine("", "", $id);
 if ($result) {
     if (count($RT->data) > 0) {
-        $product = new Product($data->id, $data->name, $data->description, $data->inital_price, $data->selling_price, $data->quantity, $data->images, $data->color, $data->capacity, 0);
+        $product = new Product($data->id, $data->name, $data->description, $data->initial_price, $data->selling_price, $data->quantity, $data->images, $data->color, $data->capacity, 0);
         $product->product_line = new ProductLine($data->product_line->name, $data->product_line->brand, $data->product_line->product_type);
         $PT->editProduct($id, $product);
         $return = new APIresponse("Success");

@@ -58,7 +58,7 @@ function ProductCheck() {
                                 <tr>
                                     <td>{product.id}</td>
                                     <td>{product.name} {product.capacity}</td>
-                                    <td>{product.inital_price}</td>
+                                    <td>{product.initial_price}</td>
                                     <td>{product.selling_price}</td>
                                     <td>{product.quantity}</td>
                                     <td>

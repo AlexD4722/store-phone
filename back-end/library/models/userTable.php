@@ -8,7 +8,7 @@ class UserTable extends Database
     }
     public function getUser($username = '', $password = '', $user_type = '', $email = '', $id = 0)
     {
-        $sql = "SELECT * FROM user WHERE TRUE";
+        $sql = "SELECT * FROM account WHERE TRUE";
         $params = [];
         if ($username) {
             $sql .= " AND username = ?";
@@ -39,7 +39,7 @@ class UserTable extends Database
             $data = $this->pdo_stm->fetchAll();
             $arr = [];
             foreach ($data as $row) {
-                $one = new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
+                $one = new User($row["username"], $row["password"], $row["email"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
                 $one->id = $row["id"];
                 array_push($arr, $one);
             }
@@ -52,7 +52,7 @@ class UserTable extends Database
 
     public function getGuest($username = '', $password = '', $user_type = '', $email = '', $id = 0)
     {
-        $sql = "SELECT * FROM user WHERE user_type = 'guest'";
+        $sql = "SELECT * FROM account WHERE user_type = 'guest'";
         $params = [];
         if ($username) {
             $sql .= " AND username = ?";
@@ -83,7 +83,7 @@ class UserTable extends Database
             $data = $this->pdo_stm->fetchAll();
             $arr = [];
             foreach ($data as $row) {
-                $one = new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
+                $one = new User($row["username"], $row["password"], $row["email"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
                 $one->id = $row["id"];
                 array_push($arr, $one);
             }
@@ -95,7 +95,7 @@ class UserTable extends Database
 
     public function getUserReceipt($id = "", $username = '', $password = '', $user_type = '', $email = '')
     {
-        $sql = "SELECT * FROM user WHERE TRUE";
+        $sql = "SELECT * FROM account WHERE TRUE";
         $params = [];
         // if ($username) {
         //     $sql .= " AND username = ?";
@@ -126,7 +126,7 @@ class UserTable extends Database
         $this->data = [];
         if (count($data) > 0) {
             foreach ($data as $row) {
-                $one = new User($row["username"], $row["password"], $row["email"], $row["phone"], $row["address"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
+                $one = new User($row["username"], $row["password"], $row["email"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
                 $one->id = $row["id"];
                 array_push($this->data, $one);
             }
@@ -137,8 +137,8 @@ class UserTable extends Database
     //Dữ liệu trả về dạng mảng các object User.
     public function insertUser(User $user)
     {
-        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?, ?, ?, ?, ?)";
-        $params = [$user->username, $user->password, $user->user_type, $user->email, json_encode($user->wishlist), json_encode($user->cart), $user->phone, $user->address];
+        $sql = "INSERT INTO user VALUES(NULL,?,MD5(?), ?, ?, ?, ?)";
+        $params = [$user->username, $user->password, $user->user_type, $user->email, json_encode($user->wishlist), json_encode($user->cart)];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
@@ -146,7 +146,7 @@ class UserTable extends Database
 
     public function deleteUser($id)
     {
-        $sql = "DELETE FROM user WHERE id=?";
+        $sql = "DELETE FROM account WHERE id=?";
         $params = [$id];
         $result = $this->SQLexec($sql, $params);
         return $result;
@@ -155,8 +155,8 @@ class UserTable extends Database
 
     public function editUser($id, User $user)
     {
-        $sql = "UPDATE user SET username = ?, email = ?, phone = ?, address = ?, cart = ?, wishlist = ?, user_type = ? WHERE id=?";
-        $params = [$user->username, $user->email, $user->phone, $user->address, json_encode($user->cart), json_encode($user->wishlist), $user->user_type, $id];
+        $sql = "UPDATE account SET username = ?, email = ?, cart = ?, wishlist = ?, user_type = ? WHERE id=?";
+        $params = [$user->username, $user->email, json_encode($user->cart), json_encode($user->wishlist), $user->user_type, $id];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
@@ -164,7 +164,7 @@ class UserTable extends Database
 
     public function editUserPassword($id, $pass)
     {
-        $sql = "UPDATE user SET password = ? WHERE id = ?";
+        $sql = "UPDATE account SET password = ? WHERE id = ?";
         $params = [$pass, $id];
         $result = $this->SQLexec($sql, $params);
         return $result;
@@ -172,7 +172,7 @@ class UserTable extends Database
     // hàm edit user password
     public function checkUser($username)
     {
-        $sql = "SELECT * FROM user WHERE username = ?";
+        $sql = "SELECT * FROM account WHERE username = ?";
         $params = [$username];
         $result = $this->SQLexec($sql, $params);
         $this->data = $this->pdo_stm->fetchAll();

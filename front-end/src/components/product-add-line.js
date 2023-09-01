@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import APIrequest, { ADD_NEW_PRODUCT_LINE } from "../API/callAPI";
 
 function ProductAddLine() {
-    const [name, setName] = useState("");
+    // const [idProductLine, setIdProductLine] = useState("");
     const [brand, setBrand] = useState("");
     const [type, setType] = useState("");
     const [result, setResult] = useState("");
@@ -11,7 +11,7 @@ function ProductAddLine() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
-            name,
+            // idProductLine,
             brand,
             type,
         };
@@ -29,16 +29,16 @@ function ProductAddLine() {
 
     return (
         <Form onSubmit={(e) => handleSubmit(e)}>
-            <Form.Group className="mb-3">
+            {/* <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                     required
                     type="text"
                     placeholder="Enter Username"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={idProductLine}
+                    onChange={(e) => setIdProductLine(e.target.value)}
                 />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group className="mb-3">
                 <Form.Label>Brand</Form.Label>
                 <Form.Control
