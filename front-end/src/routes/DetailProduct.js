@@ -170,21 +170,35 @@ function DetailProduct({ match }) {
     };
     const handleChoseOptionColor = (event) => {
         setSelectedOptionColor(event.target.value);
+        const items = listItems.filter((product) => {
+            return product.color === event.target.value
+        })
+        let listCapacity = []
+        items.forEach((phone) => {
+            if (phone.capacity) {
+                listCapacity.push(phone.capacity);
+            }
+        });
+        listCapacity = [...new Set(listCapacity)]
+        setValueCapacity(listCapacity);
+        setSelectedOptionCapacity(listCapacity[0]);
+
     };
     const handleChoseOptionCapacity = (event) => {
         setSelectedOptionCapacity(event.target.value);
-        console.log("event ----", event.target.value);
-        for (let index = 0; index < product.length; index++) {
-            console.log(
-                "product[index].capacity[0] ----",
-                product[index].capacity
-            );
-            if (product[index].capacity === event.target.value) {
-                setPriceSelling(product[index].selling_price);
-                setPriceInitial(product[index].initial_price);
-                setIdChooseItem(product[index].id);
+        const items = listItems.filter((product) => {
+            return product.capacity === event.target.value
+        })
+        let listColor = []
+        items.forEach((phone) => {
+            if (phone.capacity) {
+                listColor.push(phone.capacity);
             }
-        }
+        });
+        let listColors = [...new Set(listColor)]
+        setValueColor(listColors);
+        setSelectedOptionColor(listColor[0]);
+
     };
     let filteredProducts = {}
     if (listItems) {
