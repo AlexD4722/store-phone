@@ -95,7 +95,6 @@ function DetailProduct({ match }) {
         }
         displayMessage();
     };
-
     useEffect(() => {
         let newData = {
             search: params.nameProduct,
@@ -147,8 +146,6 @@ function DetailProduct({ match }) {
         }
         topFunction();
     }, [params]);
-    console.log("valueColor-----", valueColor);
-    console.log("valueCapacity-----", valueCapacity);
     const handleChangeQuantity = (event) => {
         const inputValue = event.target.value;
         if (inputValue < 0) {
@@ -168,6 +165,7 @@ function DetailProduct({ match }) {
             setValueQuantity((prevValue) => prevValue - 1);
         }
     };
+    let filteredProducts = null
     const handleChoseOptionColor = (event) => {
         setSelectedOptionColor(event.target.value);
         const items = listItems.filter((product) => {
@@ -183,34 +181,54 @@ function DetailProduct({ match }) {
         setValueCapacity(listCapacity);
         setSelectedOptionCapacity(listCapacity[0]);
 
+        // if (listItems) {
+        //     const filteredProducts = listItems.filter((product) => {
+        //         return product.color === event.target.value && product.capacity === selectedOptionCapacity;
+        //     });
+        //     console.log(filteredProducts, "filteredProducts---");
+        //     if (filteredProducts.length) {
+        //         console.log(filteredProducts, "-------------------------");
+        //         setPriceInitial(filteredProducts[0].initial_price);
+        //         setPriceSelling(filteredProducts[0].selling_price);
+        //         setIdChooseItem(filteredProducts[0].id);
+        //     }
+
+        // }
+
     };
     const handleChoseOptionCapacity = (event) => {
         setSelectedOptionCapacity(event.target.value);
-        const items = listItems.filter((product) => {
-            return product.capacity === event.target.value
-        })
-        let listColor = []
-        items.forEach((phone) => {
-            if (phone.capacity) {
-                listColor.push(phone.capacity);
-            }
-        });
-        let listColors = [...new Set(listColor)]
-        setValueColor(listColors);
-        setSelectedOptionColor(listColor[0]);
-
+        // if (listItems) {
+        //     const filteredProducts = listItems.filter((product) => {
+        //         return product.color === selectedOptionColor && product.capacity === event.target.value;
+        //     });
+        //     if (filteredProducts.length) {
+        //         console.log(filteredProducts, "-------------------------");
+        //         setPriceInitial(filteredProducts[0].initial_price);
+        //         setPriceSelling(filteredProducts[0].selling_price);
+        //         setIdChooseItem(filteredProducts[0].id);
+        //     }
+        // }
     };
-    let filteredProducts = {}
-    if (listItems) {
-        const filteredProducts = listItems.filter((product) => {
-            if (selectedOptionColor && selectedOptionCapacity) {
+    useEffect(()=>{
+        if (listItems) {
+            const filteredProducts = listItems.filter((product) => {
                 return product.color === selectedOptionColor && product.capacity === selectedOptionCapacity;
+            });
+            console.log(filteredProducts, "filteredProducts---");
+            if (filteredProducts.length) {
+                console.log(filteredProducts, "-------------------------");
+                if(priceSelling){
+                    console.log(filteredProducts[0].initial_price, "-------------------------");
+                    setPriceSelling(filteredProducts[0].selling_price)
+                }
+                setPriceInitial(filteredProducts[0].initial_price);
+                setPriceSelling(filteredProducts[0].selling_price);
+                setIdChooseItem(filteredProducts[0].id);
             }
-        });
-        console.log(filteredProducts, "filteredProducts----------");
-    }
-    console.log("selectedOptionColor----", selectedOptionColor);
-    console.log("selectedOptionCapacity", selectedOptionCapacity);
+    
+        }
+    },[selectedOptionColor, selectedOptionCapacity])
     return (
         <div className="xo-container">
             {/* <h3>This is product detail</h3> */}

@@ -166,6 +166,7 @@
   }
 }
 .detail-product__btn-dash-quantity {
+  cursor: pointer;
   &::after {
     content: "";
     display: block;
@@ -176,6 +177,7 @@
   }
 }
 .detail-product__btn-plus-quantity {
+  cursor: pointer;
   &::after {
     content: "";
     display: block;
