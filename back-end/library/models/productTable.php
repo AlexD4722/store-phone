@@ -288,7 +288,7 @@ class ProductTable extends Database
         $upDown = ''
     ) {
         $params = [];
-        $sql = "SELECT * FROM product JOIN product_line on product.product_line = product_line.name WHERE TRUE";
+        $sql = "SELECT * FROM product JOIN product_line on product.id_product_line = product_line.id WHERE TRUE";
         $n = count($filter_type->Categories);
         if ($filter_type->Categories[0]) {
             $sql .= " AND`product_type` like ?";

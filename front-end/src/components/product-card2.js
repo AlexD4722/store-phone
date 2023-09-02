@@ -47,7 +47,7 @@ function ProductFlex(props) {
                     </div>
                     <div className="product-flex__content">
                         <h3 className="product-flex__product-title">
-                            {props.product.name}
+                            {props.product.name} {props.product.color} {props.product.capacity}
                         </h3>
                         <div className="product-flex__product-rating">
                             <div className="product-flex__box-start-rating">

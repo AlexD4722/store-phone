@@ -158,7 +158,7 @@ function Product(props) {
                 <div className="product-card__content-wrapper">
                     <Link to={`/product/${props.product.name}`}>
                         <h3 className="product-card__product-title">
-                            {props.product.name} {props.product.capacity}
+                            {props.product.name} {props.product.color} {props.product.capacity}
                         </h3>
                     </Link>
                     <div className="product-card__product-rating">

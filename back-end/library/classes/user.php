@@ -8,8 +8,11 @@ class User
     public $user_type;
     public $wishlist;
     public $cart;
+    public $verification_code;
+    public $is_verified;
+    public  $created_at;
 
-    public function __construct($username, $password, $email, $user_type = "", $wishlist = [], $cart = [])
+    public function __construct($username, $password, $user_type = "", $email, $wishlist = [], $cart = [], $verification_code, $is_verified)
     {   
         $this->username = $username;
         $this->password = $password;
@@ -17,6 +20,8 @@ class User
         $this->user_type = $user_type;
         $this->wishlist = $wishlist;
         $this->cart = $cart;
+        $this->verification_code = $verification_code;
+        $this->is_verified = $is_verified;
     }
 }
 

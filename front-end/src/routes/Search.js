@@ -581,6 +581,7 @@ function Search() {
         }
 
     },[params.keyword])
+    console.log("data--------", data);
     return (
         <>
             <div className="xo-container">

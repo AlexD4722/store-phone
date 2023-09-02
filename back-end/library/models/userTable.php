@@ -39,8 +39,9 @@ class UserTable extends Database
             $data = $this->pdo_stm->fetchAll();
             $arr = [];
             foreach ($data as $row) {
-                $one = new User($row["username"], $row["password"], $row["email"], $row["user_type"], json_decode($row["wishlist"]), json_decode($row["cart"]));
+                $one = new User($row["username"], $row["password"], $row["user_type"],  $row["email"], json_decode($row["wishlist"]), json_decode($row["cart"]), $row["verification_code"], $row["is_verified"]);
                 $one->id = $row["id"];
+                $one->created_at = $row["created_at"];
                 array_push($arr, $one);
             }
             $this->data = $arr;
