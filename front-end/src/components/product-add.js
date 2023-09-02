@@ -115,7 +115,7 @@ function ProductAdd() {
                 {productLines.map((value, index) => {
                     return (
                         <option value={value.id} key={index}>
-                            {value.brand}
+                            {value.brand} -  {value.product_type}
                         </option>
                     );
                 })}

@@ -136,6 +136,7 @@ class ProductTable extends Database
         $params = [$id];
         $result = $this->SQLexec($sql, $params);
         $data = $this->pdo_stm->fetch();
+        $this->data = [];
         if ($data) {
             $this->getProductLineList($data["product_line"]);
             $productLine = $this->data[0];
@@ -147,7 +148,7 @@ class ProductTable extends Database
                     array_push($arrayFiles, $files[$i]);
                 }
             }
-            $product = new Product($data['id'], $data['name'], json_decode($data['description']), $data['initial_price'], $data['selling_price'], $data['id_product_line'], $data['quantity'], $arrayFiles, $data['color'], $data['capacity'], $data['status']);
+            $product = new Product($data['id'], $data['name'], json_decode($data['description']), $data['initial_price'], $data['selling_price'], $data['id_product_line'], $arrayFiles, $data['color'], $data['capacity'], $data['status']);
             $product->product_line = $productLine;
             $this->data = $product;
         }
@@ -295,7 +296,7 @@ class ProductTable extends Database
             array_push($params, $filter_type->Categories[0]);
         }
         for ($i = 1; $i < $n; $i++) {
-            if ($filter_type->Categories[1]) {
+            if ($filter_type->Categories[$i]) {
                 $sql .= " OR `product_type` like ?";
                 array_push($params, $filter_type->Categories[$i]);
             }
@@ -306,7 +307,7 @@ class ProductTable extends Database
             array_push($params, $filter_type->Brand[0]);
         }
         for ($i = 1; $i < $m; $i++) {
-            if ($filter_type->Brand[1]) {
+            if ($filter_type->Brand[$i]) {
                 $sql .= " OR `brand` like ?";
                 array_push($params, $filter_type->Brand[$i]);
             }

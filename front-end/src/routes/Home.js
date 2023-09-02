@@ -153,13 +153,13 @@ function Home() {
                                 <Col xs={12} sm={12} md={9}>
                                     <Row xs={1} sm={1} md={2} lg={2}>
                                         {
-                                            PhonesFlex.map((phoneflex) => {
+                                            PhonesFlex.map((phoneFlex, index) => {
                                                 return (
-                                                    <Col key={phoneflex.id}>
-                                                        <Link to={`/product/${phoneflex.name}`}>
+                                                    <Col key={phoneFlex.id}>
+                                                        <Link to={`/product/${phoneFlex.name}`}>
                                                             <ProductFlex
-                                                                key={phoneflex.id}
-                                                                product={phoneflex}
+                                                                key={phoneFlex.id}
+                                                                product={phoneFlex}
                                                             />
                                                         </Link>
                                                     </Col>

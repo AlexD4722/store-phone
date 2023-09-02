@@ -264,24 +264,24 @@ function Search() {
             };
         });
     };
-    const arrayinput = Object.keys(isChecked);
+    const arrayInput = Object.keys(isChecked);
     useEffect(() => {
         let newData = {
             ...data,
             Categories: [...data.Categories],
             Brand: [...data.Brand],
         };
-        for (let index = 0; index < arrayinput.length; index++) {
-            switch (arrayinput[index]) {
+        for (let index = 0; index < arrayInput.length; index++) {
+            switch (arrayInput[index]) {
                 case "inputPhone":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.Categories.includes("phone")
                     ) {
                         newData.Categories.push("phone");
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.Categories.includes("phone")
                     ) {
                         newData.Categories.splice(
@@ -293,13 +293,13 @@ function Search() {
                     break;
                 case "inputTablet":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.Categories.includes("tablet")
                     ) {
                         newData.Categories.push("tablet");
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.Categories.includes("tablet")
                     ) {
                         newData.Categories.splice(
@@ -311,13 +311,13 @@ function Search() {
                     break;
                 case "inputSmartWatch":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.Categories.includes("SmartWatch")
                     ) {
                         newData.Categories.push("SmartWatch");
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.Categories.includes("SmartWatch")
                     ) {
                         newData.Categories.splice(
@@ -329,13 +329,13 @@ function Search() {
                     break;
                 case "inputAccessory":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.Categories.includes("Accessories")
                     ) {
                         newData.Categories.push("Accessories");
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.Categories.includes("Accessories")
                     ) {
                         newData.Categories.splice(
@@ -347,13 +347,13 @@ function Search() {
                     break;
                 case "inputApple":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.Brand.includes("Apple")
                     ) {
                         newData.Brand.push("Apple");
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.Brand.includes("Apple")
                     ) {
                         newData.Brand.splice(newData.Brand.indexOf("Apple"), 1);
@@ -362,13 +362,13 @@ function Search() {
                     break;
                 case "inputSamsung":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.Brand.includes("Samsung")
                     ) {
                         newData.Brand.push("Samsung");
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.Brand.includes("Samsung")
                     ) {
                         newData.Brand.splice(
@@ -380,13 +380,13 @@ function Search() {
                     break;
                 case "inputXiaomi":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.Brand.includes("Xiaomi")
                     ) {
                         newData.Brand.push("Xiaomi");
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.Brand.includes("Xiaomi")
                     ) {
                         newData.Brand.splice(
@@ -398,13 +398,13 @@ function Search() {
                     break;
                 case "inputPriceIncrease":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.SortOption.includes({ selling_price: "ASC" })
                     ) {
                         newData.SortOption.push({ selling_price: "ASC" });
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.SortOption.includes({ selling_price: "ASC" })
                     ) {
                         newData.SortOption.splice(
@@ -418,13 +418,13 @@ function Search() {
                     break;
                 case "inputPriceDecrease":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.SortOption.includes({ selling_price: "DESC" })
                     ) {
                         newData.SortOption.push({ selling_price: "DESC" });
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.SortOption.includes({ selling_price: "DESC" })
                     ) {
                         newData.SortOption.splice(
@@ -438,13 +438,13 @@ function Search() {
                     break;
                 case "inputNameAz":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.SortOption.includes({ name: "ASC" })
                     ) {
                         newData.SortOption.push({ name: "ASC" });
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.SortOption.includes({ name: "ASC" })
                     ) {
                         newData.SortOption.splice(
@@ -456,13 +456,13 @@ function Search() {
                     break;
                 case "inputNameZa":
                     if (
-                        isChecked[arrayinput[index]] &&
+                        isChecked[arrayInput[index]] &&
                         !newData.SortOption.includes({ name: "DESC" })
                     ) {
                         newData.SortOption.push({ name: "DESC" });
                         setData(newData);
                     } else if (
-                        !isChecked[arrayinput[index]] &&
+                        !isChecked[arrayInput[index]] &&
                         newData.SortOption.includes({ name: "DESC" })
                     ) {
                         newData.SortOption.splice(
@@ -929,10 +929,10 @@ function Search() {
                     <Col xs={12} sm={12} md={9} lg={9} className="product-filter">
                         <div className="messageResponse"></div>
                         <Row xs={1} sm={2} md={3} lg={4}>
-                            {records && records.map((phone) => {
+                            {records && records.map((phone, index) => {
                                 return (
-                                    <Col key={phone.id}>
-                                        <Product product={phone} />
+                                    <Col key={index}>
+                                        <Product product={phone}  />
                                     </Col>
                                 );
                             })}
