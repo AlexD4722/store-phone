@@ -3,14 +3,12 @@ class Receipt
 {
     public $id;
     public $date;
-    public $customer_id;
-    public $lines = [];
+    public $id_buyer;
     public $status;
-    public function __construct($id, $cid, $stt)
+    public function __construct($id_buyer, $status)
     {
-        $this->id = $id;
-        $this->customer_id = $cid;
-        $this->status = $stt;
+        $this->id_buyer = $id_buyer;
+        $this->status = $status;
     }
 
     public function addLine(ReceiptLine $rl)
@@ -45,15 +43,13 @@ class ReceiptLine
     public $id;
     public $product_id;
     public $quantity;
-    public $color;
-    public $order_id;
+    public $receipt_id;
 
-    public function __construct($product_id, $quantity, $color, $order_id)
+    public function __construct($product_id, $quantity, $receipt_id)
     {
         $this->product_id = $product_id;
         $this->quantity = $quantity;
-        $this->color = $color;
-        $this->order_id = $order_id;
+        $this->receipt_id = $receipt_id;
     }
 }
 ?>

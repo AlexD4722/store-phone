@@ -115,6 +115,14 @@ switch ($action) {
     case GET_RECEIPT_BY_ID:
         require("../controller/get_receipt_by_id.php");
         break;
+    case GET_BUYER:
+        require("../controller/get_buyer.php");
+        break;
+    case INSERT_ORDER_RECEIPT:
+        require("../controller/insert_order_receipt.php");
+        break;
+
+
 
     default:
         $return = new APIresponse("Action invalid");

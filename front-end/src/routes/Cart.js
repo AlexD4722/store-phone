@@ -42,61 +42,61 @@ function Cart() {
     };
     // console.log("_______________________",createCodeId());
     const handleClickSubOrder = () => {
-        let userObject = JSON.parse(sessionStorage.getItem("user"));
-        const listIdReceipt = [];
-        APIrequest(GET_RECEIPT, "").then((obj) => {
-            obj.data.productArray.map((item) => {
-                listIdReceipt.push(parseInt(item.id));
-            });
-        });
-        // const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
-        let codeRandom = createCodeId();
-        while (listIdReceipt.includes(codeRandom)) {
-            codeRandom = createCodeId();
-        }
-        console.log(codeRandom, "+++++++++++++++++++++++++++++++++++++=");
-        sessionStorage.setItem("idReceipt", JSON.stringify(codeRandom));
-        // const newTime = new Date().toLocaleString()
-        const dataReceipt = {
-            receipt: {
-                // date: newTime,
-                id: codeRandom,
-                customer_id: userObject.user.id,
-                status: 1,
-            },
-            receiptLine: []
-        };
-        // APIrequest(INSERT_RECEIPT, dataReceipt);
-        cart.forEach((item) => {
-            dataReceipt.receiptLine.push(
-                {
-                    product_id: item.product.id,
-                    color: item.color,
-                    quantity: item.quantity,
-                    receipt_id: codeRandom
-                }
-            )
-        })
-        APIrequest(INSERT_RECEIPT_LINE, dataReceipt)
-        // cart.map((item) => {
-        //     const data = {
-        //         product_id: item.product.id,
-        //         color: item.color,
-        //         quantity: item.quantity,
-        //         receipt_id: codeRandom,
-        //     };
-        //     APIrequest(INSERT_RECEIPT_LINE, data);
+        // let userObject = JSON.parse(sessionStorage.getItem("user"));
+        // const listIdReceipt = [];
+        // APIrequest(GET_BUYER, "").then((obj) => {
+        //     obj.data.productArray.map((item) => {
+        //         listIdReceipt.push(parseInt(item.id));
+        //     });
         // });
-        userObject.user.cart = [];
-        sessionStorage.setItem("user", JSON.stringify(userObject));
-        APIrequest(UPDATE_USER, userObject.user);
-        const action = {
-            type: "replace",
-            payload: sessionStorage.user.cart,
-        };
-        dispatchCart(action);
-        setWishlist([...wishlist]);
-        navigate('/OrderReceived');
+        // // const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+        // let codeRandom = createCodeId();
+        // while (listIdReceipt.includes(codeRandom)) {
+        //     codeRandom = createCodeId();
+        // }
+        // console.log(codeRandom, "+++++++++++++++++++++++++++++++++++++=");
+        // sessionStorage.setItem("idReceipt", JSON.stringify(codeRandom));
+        // // const newTime = new Date().toLocaleString()
+        // const dataReceipt = {
+        //     receipt: {
+        //         // date: newTime,
+        //         id: codeRandom,
+        //         customer_id: userObject.user.id,
+        //         status: 1,
+        //     },
+        //     receiptLine: []
+        // };
+        // // APIrequest(INSERT_RECEIPT, dataReceipt);
+        // cart.forEach((item) => {
+        //     dataReceipt.receiptLine.push(
+        //         {
+        //             product_id: item.product.id,
+        //             color: item.color,
+        //             quantity: item.quantity,
+        //             receipt_id: codeRandom
+        //         }
+        //     )
+        // })
+        // APIrequest(INSERT_RECEIPT_LINE, dataReceipt)
+        // // cart.map((item) => {
+        // //     const data = {
+        // //         product_id: item.product.id,
+        // //         color: item.color,
+        // //         quantity: item.quantity,
+        // //         receipt_id: codeRandom,
+        // //     };
+        // //     APIrequest(INSERT_RECEIPT_LINE, data);
+        // // });
+        // userObject.user.cart = [];
+        // sessionStorage.setItem("user", JSON.stringify(userObject));
+        // APIrequest(UPDATE_USER, userObject.user);
+        // const action = {
+        //     type: "replace",
+        //     payload: sessionStorage.user.cart,
+        // };
+        // dispatchCart(action);
+        // setWishlist([...wishlist]);
+        // navigate('/OrderReceived');
     };
     return (
         <>

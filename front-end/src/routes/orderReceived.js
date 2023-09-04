@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../styles/cart-page.scss";
 import "../styles/box-empty.scss";
 import "../styles/order-received.scss";
-import APIrequest, { GET_ORDER_RECEIVED, GET_RECEIPT_BY_ID, GET_USER_Receipt, testAPI } from "../API/callAPI";
+import APIrequest, { GET_BUYER, GET_ORDER_RECEIVED, GET_RECEIPT, GET_RECEIPT_BY_ID, GET_USER_Receipt, INSERT_ORDER_RECEIPT, testAPI } from "../API/callAPI";
 
 function OrderReceived() {
     const cart = useCartContext()[0];
@@ -15,6 +15,22 @@ function OrderReceived() {
     const [totalPrice, setTotalPrice] = useState();
     let idReceiptSession = JSON.parse(sessionStorage.getItem("idReceipt"))
     const [reloadCount, setReloadCount] = useState(0);
+    const createCodeId = () => {
+        const number = "0123456789";
+        const string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const charactersRandom = number + string;
+
+        let codeRandom = "";
+
+        for (let i = 0; i < 10; i++) {
+            const indexRandom = Math.floor(
+                Math.random() * charactersRandom.length
+            );
+            codeRandom += charactersRandom[indexRandom];
+        }
+
+        return codeRandom;
+    };
     useEffect(() => {
         const hasReloaded = localStorage.getItem('hasReloaded');
 
@@ -48,9 +64,66 @@ function OrderReceived() {
             setTotalPrice(cart.reduce((total, product) => total + product.totalPrice, 0));
         }
     }, [cart]);
-    useEffect(()=>{
-        
-    })
+    const handelAccept = () => {
+        const listIdReceipt = [];
+        APIrequest(GET_BUYER, {}).then((obj) => {
+            if(obj.data.productArray){
+                obj.data.productArray.map((item) => {
+                    listIdReceipt.push(parseInt(item.id));
+                });
+            }
+        });
+        // const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+        let codeRandom = createCodeId();
+        while (listIdReceipt.includes(codeRandom)) {
+            codeRandom = createCodeId();
+        }
+        const dataRequest = {
+            buyer:{
+                id: codeRandom,
+                id_account: 4,
+                name: dataUser.name,
+                phone: dataUser.phone,
+                address: dataUser.address
+            },
+            receipt: {
+                status: 1
+            },
+            receipt_line: {
+                items: cart
+            }
+        }
+        if(codeRandom){
+            testAPI(INSERT_ORDER_RECEIPT, dataRequest);
+        }
+    }
+    // useEffect(()=>{
+    //     const listIdReceipt = [];
+    //     APIrequest(GET_RECEIPT, "").then((obj) => {
+    //         obj.data.productArray.map((item) => {
+    //             listIdReceipt.push(parseInt(item.id));
+    //         });
+    //     });
+    //     // const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
+    //     let codeRandom = createCodeId();
+    //     while (listIdReceipt.includes(codeRandom)) {
+    //         codeRandom = createCodeId();
+    //     }
+    //     const dataRequest = {
+    //         buyer:{
+    //             id_account: "",
+    //             name: "",
+    //             phone: "",
+    //             address: ""
+    //         },
+    //         receipt: {
+    //             status: 1
+    //         },
+    //         receipt_line: {
+    //             items: cart
+    //         }
+    //     }
+    // })
 
 
     // console.log(cart,"cart++++++==============");
@@ -172,7 +245,6 @@ function OrderReceived() {
                                 })}
                         </tbody>
                         </table>
-                        <Link to="/">
                         <div className="order-received__box-btn-footer">
                             <button
                                 type="button"
@@ -185,13 +257,13 @@ function OrderReceived() {
                             <button
                                 type="button"
                                 className="order-received__btn"
+                                onClick={handelAccept}
                             >
                                 <span className="order-received__btn-content">
                                 accept
                                 </span>
                             </button>
                         </div>
-                    </Link>
                     </div>
                 </div>
             ) : (
