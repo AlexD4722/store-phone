@@ -51,8 +51,8 @@ class BuyerTable extends Database
 
     public function insertBuyer(Buyer $buyer)
     {
-        $sql = "INSERT INTO `buyer_list`(`id`, `id_account`, `name`, `phone`, `address`) VALUES ('?','?','?','?','?')";
-        $params = [$buyer->id, 4, $buyer->name, $buyer->phone, $buyer->address];
+        $sql = "INSERT INTO `buyer_list`(`id`, `id_account`, `name`, `phone`, `address`) VALUES (?, ?, ?, ?, ?)";
+        $params = [$buyer->id, $buyer->id_account, $buyer->name, $buyer->phone, $buyer->address];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
