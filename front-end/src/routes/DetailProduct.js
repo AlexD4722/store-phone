@@ -212,21 +212,54 @@ function DetailProduct({ match }) {
     };
     useEffect(()=>{
         if (listItems) {
-            const filteredProducts = listItems.filter((product) => {
-                return product.color === selectedOptionColor && product.capacity === selectedOptionCapacity;
-            });
-            console.log(filteredProducts, "filteredProducts---");
-            if (filteredProducts.length) {
-                console.log(filteredProducts, "-------------------------");
-                if(priceSelling){
-                    console.log(filteredProducts[0].initial_price, "-------------------------");
-                    setPriceSelling(filteredProducts[0].selling_price)
+            if(valueColor.length && valueCapacity.length){
+                const filteredProducts = listItems.filter((product) => {
+                    return( product.color === selectedOptionColor && product.capacity === selectedOptionCapacity);
+                });
+                console.log(filteredProducts, "filteredProducts---");
+                if (filteredProducts.length) {
+                    console.log(filteredProducts, "-------------------------");
+                    if(priceSelling){
+                        console.log(filteredProducts[0].initial_price, "-------------------------");
+                        setPriceSelling(filteredProducts[0].selling_price)
+                    }
+                    setPriceInitial(filteredProducts[0].initial_price);
+                    setPriceSelling(filteredProducts[0].selling_price);
+                    setIdChooseItem(filteredProducts[0].id);
                 }
-                setPriceInitial(filteredProducts[0].initial_price);
-                setPriceSelling(filteredProducts[0].selling_price);
-                setIdChooseItem(filteredProducts[0].id);
             }
-    
+            if((valueColor.length && !valueCapacity.length)){
+                const filteredProducts = listItems.filter((product) => {
+                    return( product.color === selectedOptionColor || product.capacity === selectedOptionCapacity);
+                });
+                console.log(filteredProducts, "filteredProducts---");
+                if (filteredProducts.length) {
+                    console.log(filteredProducts, "-------------------------");
+                    if(priceSelling){
+                        console.log(filteredProducts[0].initial_price, "-------------------------");
+                        setPriceSelling(filteredProducts[0].selling_price)
+                    }
+                    setPriceInitial(filteredProducts[0].initial_price);
+                    setPriceSelling(filteredProducts[0].selling_price);
+                    setIdChooseItem(filteredProducts[0].id);
+                }
+            }
+            if(!valueColor.length && valueCapacity.length){
+                const filteredProducts = listItems.filter((product) => {
+                    return(  product.capacity === selectedOptionCapacity);
+                });
+                console.log(filteredProducts, "filteredProducts---");
+                if (filteredProducts.length) {
+                    console.log(filteredProducts, "-------------------------");
+                    if(priceSelling){
+                        console.log(filteredProducts[0].initial_price, "-------------------------");
+                        setPriceSelling(filteredProducts[0].selling_price)
+                    }
+                    setPriceInitial(filteredProducts[0].initial_price);
+                    setPriceSelling(filteredProducts[0].selling_price);
+                    setIdChooseItem(filteredProducts[0].id);
+                }
+            }
         }
     },[selectedOptionColor, selectedOptionCapacity])
     return (

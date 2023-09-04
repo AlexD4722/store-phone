@@ -9,14 +9,12 @@ function CheckOut() {
     const [wishlist, setWishlist] = useWishlistContext();
     const [formData, setFormData] = useState({
         userName: '',
-        email: '',
         phone: '',
         address: ''
     });
     const [submit, setSubmit] = useState(false)
     const [errors, setErrors] = useState({
         userName: "",
-        email: "",
         phone: "",
         address: "",
     });
@@ -57,16 +55,16 @@ function CheckOut() {
                 }
             });
         }
-        APIrequest(VALIDATE_NAME_USER, formData).then((obj) => {
-            if (obj.data.error) {
-                setErrors((prev) => {
-                    return {
-                        ...prev,
-                        userName: 'Username existed',
-                    }
-                });
-            }
-        })
+        // APIrequest(VALIDATE_NAME_USER, formData).then((obj) => {
+        //     if (obj.data.error) {
+        //         setErrors((prev) => {
+        //             return {
+        //                 ...prev,
+        //                 userName: 'Username existed',
+        //             }
+        //         });
+        //     }
+        // })
     }
 
     const validatePhone = () => {
@@ -151,10 +149,10 @@ function CheckOut() {
             newErrors.userName = 'Username is required';
             isValid = false;
         }
-        if (!formData.email) {
-            newErrors.email = 'Email is required';
-            isValid = false;
-        }
+        // if (!formData.email) {
+        //     newErrors.email = 'Email is required';
+        //     isValid = false;
+        // }
 
         // Validate phone
         let phoneNumberRegex = /^0\d{9}$/;
@@ -184,7 +182,6 @@ function CheckOut() {
                 guest: {
                     name: formData.userName,
                     password: "",
-                    email: formData.email,
                     phone: formData.phone,
                     address: formData.address,
                     user_type: "guest",
@@ -294,7 +291,7 @@ function CheckOut() {
                                             </label>
                                             {errors.userName && <p className="checkout__messenger-error">{errors.userName}</p>}
                                         </div>
-                                        <div className="checkout__fill-box">
+                                        {/* <div className="checkout__fill-box">
                                             <label>
                                                 <div className="checkout__title-fill">
                                                     <h3>Email</h3>
@@ -307,7 +304,7 @@ function CheckOut() {
                                                     type="email" className="checkout__input-fill" />
                                             </label>
                                             {errors.email && <span className="checkout__messenger-error">{errors.email}</span>}
-                                        </div>
+                                        </div> */}
                                         <div className="checkout__fill-box">
                                             <label>
                                                 <div className="checkout__title-fill">
