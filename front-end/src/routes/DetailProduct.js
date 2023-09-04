@@ -63,7 +63,6 @@ function DetailProduct({ match }) {
                             userCart.push({
                                 product: item,
                                 quantity: valueQuantity,
-                                color: selectedOptionColor,
                                 totalPrice:
                                     parseFloat(priceSelling) *
                                     parseFloat(valueQuantity),
@@ -83,7 +82,6 @@ function DetailProduct({ match }) {
                     let payload = {
                         product: item,
                         quantity: valueQuantity,
-                        color: selectedOptionColor,
                         totalPrice:
                             parseFloat(priceSelling) *
                             parseFloat(valueQuantity),

@@ -272,3 +272,34 @@
     }
   }
 }
+.order-received__box-btn-footer {
+  margin: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
+.order-received__btn {
+  display: inline-flex;
+  height: 2.1rem;
+  border: none;
+}
+.order-received__btn-content--cancel{
+  background-color: $color-bs-red !important;
+}
+.order-received__btn-content {
+  padding-left: 1.3625rem;
+  padding-right: 1.3625rem;
+  font-family: $font-primary;
+  text-transform: capitalize;
+  font-size: 0.775rem;
+  letter-spacing: -0.03px;
+  font-weight: 600;
+  text-decoration: none;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  background-color: $color-primary;
+  color: #fff;
+  border-radius: 4px;
+}

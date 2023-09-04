@@ -178,76 +178,26 @@ function CheckOut() {
         event.preventDefault();
         if (validateForm()) {
             setSubmit(true);
-            const data = {
-                guest: {
-                    name: formData.userName,
-                    password: "",
-                    phone: formData.phone,
-                    address: formData.address,
-                    user_type: "guest",
-                    wishlist: "",
-                    cart: cart
-                }
+            const dataCheckout = {
+                name: formData.userName,
+                phone: formData.phone,
+                address: formData.address,
             }
-            let idGuest = null;
-            let guestObject = JSON.parse(sessionStorage.getItem("guest"));
-            let idReceipt = JSON.parse(sessionStorage.getItem("idReceipt"));
-            APIrequest(INSERT_GUEST, data).then((obj) => {
-                if (obj.data.result === "Success") {
-                    APIrequest(GET_GEST, data).then((obj) => {
-                        idGuest = obj.data.guestArray[0].id;
-                        sessionStorage.setItem("guest", JSON.stringify(obj.data.guestArray[0]));
-                        const listIdReceipt = []
-                        APIrequest(GET_RECEIPT, {})
-                        .then((obj) => {
-                            obj.data.productArray.map((item) => {
-                                listIdReceipt.push(parseInt(item.id));
-                            })
-                        });
-                        const sessionCart = JSON.parse(sessionStorage.getItem("cart"));
-                        let codeRandom = createCodeId();
-                        while (listIdReceipt.includes(codeRandom)) {
-                            codeRandom = createCodeId();
-                        }
-                        sessionStorage.setItem("idReceipt", JSON.stringify(codeRandom));
-                        // // console.log(codeRandom, "+++++++++++++++++++++++++++++++++++++=");
-                        // // const newTime = new Date().toLocaleString()
-                        const dataReceipt = {
-                            receipt: {
-                                // date: newTime,
-                                id: codeRandom,
-                                customer_id: obj.data.guestArray[0].id,
-                                status: 1,
-                            },
-                            receiptLine: []
-                        }
-                        cart.forEach((item) => {
-                            dataReceipt.receiptLine.push(
-                                {
-                                    product_id: item.product.id,
-                                    color: item.color,
-                                    quantity: item.quantity,
-                                    receipt_id: codeRandom
-                                }
-                            )
-                        })
-                        APIrequest(INSERT_RECEIPT_LINE, dataReceipt)
-                        // sessionStorage.setItem("user", JSON.stringify(guestObject));
-                        const guestObject = JSON.parse(sessionStorage.getItem("guest"));
-                        guestObject.cart = [];
-                        console.log(guestObject,"guestObject----");
-                        APIrequest(UPDATE_USER, guestObject);
-                        const action = {
-                            type: "replace",
-                            payload: guestObject.cart,
-                        };
-                        dispatchCart(action);
-                        setWishlist([...wishlist])
-                        sessionStorage.removeItem("cart");
-                        // sessionStorage.removeItem("guest");
-                    });
-                }
-            });
+            sessionStorage.setItem("guest", JSON.stringify(dataCheckout));
+            // let guestObject = JSON.parse(sessionStorage.getItem("guest"));
+            // let idReceipt = JSON.parse(sessionStorage.getItem("idReceipt"));
+            // let userObject = JSON.parse(sessionStorage.getItem("user"));
+            // let localCartUsing = true;
+            
+            // if (userObject) {
+            //     if (userObject.login === "OK") {
+            //         localCartUsing = false;
+            //         sessionStorage.setItem("guest", JSON.stringify(dataCheckout));
+            //     }
+            // }
+            // if (localCartUsing) {
+            //     sessionStorage.setItem("guest", JSON.stringify(dataCheckout));
+            // }
 
             navigate('/OrderReceived');
         } else {
