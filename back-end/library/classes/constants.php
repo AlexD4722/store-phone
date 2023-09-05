@@ -40,4 +40,5 @@ define("GET_ORDER_RECEIVED", 320);
 define("GET_RECEIPT_BY_ID", 321);
 define("GET_BUYER", 322);
 define("INSERT_ORDER_RECEIPT", 323);
+define("GET_RECEIPTS_BY_ID_USER", 324);
 ?>

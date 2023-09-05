@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 04, 2023 lúc 07:39 PM
+-- Thời gian đã tạo: Th9 05, 2023 lúc 08:44 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -40,7 +40,23 @@ CREATE TABLE `buyer_list` (
 --
 
 INSERT INTO `buyer_list` (`id`, `id_account`, `name`, `phone`, `address`) VALUES
-('dasdasd', 4, 'alexd', '01234567456', 'demo');
+('0AFKxnX8MQ', 5, 'AlexD55555', '0912646280', 'tho tang'),
+('9gwjUcKnlE', 5, 'john cena', '0987318235', 'Tho tang City'),
+('DBoHVaktgZ', 10, 'dasdas', '0912646280', 'dasdas'),
+('dzVmkeBVAJ', 10, 'check', '0192319231', 'Thi trang tho tang'),
+('f61kXWKSm3', 5, 'AlexD55555', '0912646280', 'tho tang'),
+('GHWSMRn9t3', 10, 'AlexD', '0123456789', 'dasdasdas'),
+('k0kWSy3KgF', 10, 'asdasd', '0123123832', 'dasdsa'),
+('KHT5eXkScl', 5, 'testcheck', '0912391238', 'Thotangctvtvp'),
+('LTq4vu7rB3', 5, 'dasdas', '0912846280', 'dasd'),
+('ovnsZS1ZYA', 10, 'tuanvinh', '0912646280', 'dasdsa'),
+('RqQ1keVBzm', 10, 'AlexDDDDDDD', '0123456789', 'thotangcitytest'),
+('SplBstiOEx', 10, 'AlexD', '0123456789', 'dasdsa'),
+('tnpQvJY8Wu', 10, 'tuanvinh', '0123456789', 'test2'),
+('UfHnHA9T9a', 10, 'AlexD', '0912646280', 'test'),
+('VDSndt6Xtq', 10, 'nguyen tuan vinh', '0912646280', 'thotang vt vp'),
+('xq2CjdLGa4', 5, 'text12345', '0912391239', 'test'),
+('xxEmzvaz2Z', 10, 'tuanvinh', '0912646280', 'dasdsa');
 
 --
 -- Chỉ mục cho các bảng đã đổ

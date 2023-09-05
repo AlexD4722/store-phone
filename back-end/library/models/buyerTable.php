@@ -6,7 +6,7 @@ class BuyerTable extends Database
     {
         parent::__construct(DatabaseServerName, Database, Username, Password);
     }
-    public function getBuyer($id = '', $id_account = '', $name = '', $phone = '', $address = "")
+    public function getBuyer($id = '', $id_account = "", $name = '', $phone = '', $address = "")
     {
         $sql = "SELECT * FROM buyer_list WHERE TRUE";
         $params = [];

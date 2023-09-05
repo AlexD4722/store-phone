@@ -15,6 +15,7 @@
   }
   tr {
     border-bottom: 1px solid $color-form-border;
+    cursor: pointer;
   }
 }
 @media screen and (max-width: 600px) {
@@ -249,7 +250,23 @@
     text-decoration: underline;
     transition: 0.3s;
     &:hover {
-      color: $color-bs-danger;
+      color: $color-bs-danger;  
     }
   }
+}
+.table-product__value-status-content, .table-product__value-item--id-recipient{
+  text-decoration: underline;
+  font-weight: 600;
+  text-transform: uppercase;
+
+}
+.table-product__value-status-content--pending, .table-product__value-status-content--canceled{
+  color: $color-bs-danger;
+
+}
+.table-product__value-status-content--complete, .table-product__value-status-content--being-transported{
+  color: $color-bs-success;
+}
+.table-product__value-item--id-recipient{
+
 }

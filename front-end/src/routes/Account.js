@@ -6,6 +6,7 @@ import {
 } from "../store";
 import { useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import '../styles/account.scss'
 
 function Account() {
     const [account, setAccount] = useAccountContext();
@@ -70,9 +71,14 @@ function Account() {
                                                 Sign out
                                             </Button>
                                         )}
-                                        <div>
+                                        <div className="account-btn">
                                             <Link to={"/searchReceipt"}>
                                                 <Button>Search for orders</Button>
+                                            </Link>
+                                        </div>
+                                        <div  className="account-btn">
+                                            <Link to={"/orders"}>
+                                                <Button>your orders</Button>
                                             </Link>
                                         </div>
                                     </Card.Body>

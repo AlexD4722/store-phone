@@ -34,6 +34,7 @@ export const GET_ORDER_RECEIVED = 320;
 export const GET_RECEIPT_BY_ID = 321;
 export const GET_BUYER = 322;
 export const INSERT_ORDER_RECEIPT = 323;
+export const GET_RECEIPTS_BY_ID_USER = 324;
 async function APIrequest(action, data) {
     let sendData = new FormData();
     sendData.append("action", action);

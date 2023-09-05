@@ -26,6 +26,7 @@ import {
 import CheckOut from "../routes/Checkout";
 import OrderReceived from "../routes/orderReceived";
 import SearchReceipt from "../routes/SearchReceipt";
+import Orders from "../routes/Orders";
 
 const router = createBrowserRouter([
     {
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
             {
                 path: "/searchReceipt",
                 element: <SearchReceipt />,
+            },
+            {
+                path: "/orders",
+                element: <Orders />,
             },
             {
                 path: "*",

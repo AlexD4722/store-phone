@@ -20,11 +20,11 @@ $result = $BT->getBuyer($idRecipient);
 if ($result) {
     $return = new APIresponse("Success");
     $return->data->buyerList = $BT->data;
-    $return->data->$resultReceipt= $RT->data;
     $rsGetRe =  $RT->getReceipt("", "", $data->idRecipient);
     if($rsGetRe){
         $return->data->receipt = $RT->data;
-        $resultReceiptLine = $RT2->getReceiptLine("", $idRecipient);
+        $id_receipt = $RT->data[0]->id;
+        $resultReceiptLine = $RT2->getReceiptLine("", $id_receipt);
         if($resultReceiptLine){
             $return->data->receiptLine = $RT2->data;
         }
