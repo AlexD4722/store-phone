@@ -25,6 +25,7 @@ import {
 } from "../routes";
 import CheckOut from "../routes/Checkout";
 import OrderReceived from "../routes/orderReceived";
+import SearchReceipt from "../routes/SearchReceipt";
 
 const router = createBrowserRouter([
     {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
             {
                 path: "/signup/success",
                 element: <SignUpSuccess />,
+            },
+            {
+                path: "/searchReceipt",
+                element: <SearchReceipt />,
             },
             {
                 path: "*",

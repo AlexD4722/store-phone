@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { useCartContext } from "../store/hooks";
-import { Link } from "react-router-dom";
+import { useCartContext, useWishlistContext } from "../store/hooks";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/cart-page.scss";
 import "../styles/box-empty.scss";
 import "../styles/order-received.scss";
-import APIrequest, { GET_BUYER, GET_ORDER_RECEIVED, GET_RECEIPT, GET_RECEIPT_BY_ID, GET_USER_Receipt, INSERT_ORDER_RECEIPT, testAPI } from "../API/callAPI";
+import APIrequest, { GET_BUYER, GET_ORDER_RECEIVED, GET_RECEIPT, GET_RECEIPT_BY_ID, GET_USER_Receipt, INSERT_ORDER_RECEIPT, UPDATE_USER, testAPI } from "../API/callAPI";
 
 function OrderReceived() {
-    const cart = useCartContext()[0];
+    const navigate = useNavigate();
+    const [cart, dispatchCart] = useCartContext();
+    const [wishlist, setWishlist] = useWishlistContext();
     const [dataUser, setDataUser] = useState([]);
     const [idUser, setIdUser] = useState();
     const [listItem, setListItem] = useState();
+    const [messenger, setMessenger] = useState("");
     const [receipt, setReceipt] = useState();
     const [totalPrice, setTotalPrice] = useState();
     let idReceiptSession = JSON.parse(sessionStorage.getItem("idReceipt"))
@@ -50,15 +53,17 @@ function OrderReceived() {
     useEffect(() => {
         const userObject = JSON.parse(sessionStorage.getItem("user"));
         const guestObject = JSON.parse(sessionStorage.getItem("guest"));
-        let getId = null
-        if (userObject) {
-            if (userObject.login === "OK") {
-                setDataUser(userObject);
-            }
-        }
-        if (guestObject) {
-            setDataUser(guestObject);
-        }
+        let buyerObject = JSON.parse(sessionStorage.getItem("buyer"));
+        // let getId = null
+        // if (userObject) {
+        //     if (userObject.login === "OK") {
+        //         setDataUser(userObject.user);
+        //     }
+        // }
+        // if (guestObject) {
+        //     setDataUser(guestObject);
+        // }
+        setDataUser(buyerObject);
         let newData = {}
         if(cart){
             setTotalPrice(cart.reduce((total, product) => total + product.totalPrice, 0));
@@ -78,24 +83,89 @@ function OrderReceived() {
         while (listIdReceipt.includes(codeRandom)) {
             codeRandom = createCodeId();
         }
-        const dataRequest = {
-            buyer:{
-                id: codeRandom,
-                id_account: 4,
-                name: dataUser.name,
-                phone: dataUser.phone,
-                address: dataUser.address
-            },
-            receipt: {
-                status: 1
-            },
-            receipt_line: {
-                items: cart
+        const userObject = JSON.parse(sessionStorage.getItem("user"));
+        const guestObject = JSON.parse(sessionStorage.getItem("guest"));
+        if (userObject) {
+            if (userObject.login === "OK") {
+                const dataRequest = {
+                    buyer:{
+                        id: codeRandom,
+                        id_account: userObject.user.id,
+                        name: dataUser.name,
+                        phone: dataUser.phone,
+                        address: dataUser.address
+                    },
+                    receipt: {
+                        id_buyer: codeRandom,
+                        status: "0"
+                    },
+                    receipt_line: {
+                        items: cart
+                    }
+                }
+                if(codeRandom){
+                    APIrequest(INSERT_ORDER_RECEIPT, dataRequest).then((response) => {
+                        if (response.data.result === "Success") {
+                            setMessenger("order-received__success");
+                        }
+                    })
+                };
             }
         }
-        if(codeRandom){
-            testAPI(INSERT_ORDER_RECEIPT, dataRequest);
+        else{
+            const dataRequest = {
+                buyer:{
+                    id: codeRandom,
+                    id_account: 5,
+                    name: dataUser.name,
+                    phone: dataUser.phone,
+                    address: dataUser.address
+                },
+                receipt: {
+                    id_buyer: codeRandom,
+                    status: "0"
+                },
+                receipt_line: {
+                    items: cart
+                }
+            }
+            if(codeRandom){
+                APIrequest(INSERT_ORDER_RECEIPT, dataRequest).then((response) => {
+                    if (response.data.result === "Success") {
+                        setMessenger("order-received__success");
+                    }
+                })
+            };
         }
+        
+
+    }
+    const HandleMoveLinkSearch = ()=>{
+        setMessenger("");
+        const userObject = JSON.parse(sessionStorage.getItem("user"));
+        // sessionStorage.setItem("user", JSON.stringify(userObject));
+        if(userObject){
+            userObject.user.cart = [];
+            console.log("userObject----",userObject);
+            sessionStorage.setItem("user", JSON.stringify(userObject));
+            userObject.user.cart = [];
+            APIrequest(UPDATE_USER, userObject.user);
+            sessionStorage.setItem("cart", JSON.stringify([]));
+            const action = {
+                type: "replace",
+                payload:  sessionStorage.user.cart,
+            };
+            dispatchCart(action);
+            setWishlist([...wishlist]);
+        }
+        sessionStorage.setItem("cart", JSON.stringify([]));
+        const action = {
+            type: "replace",
+            payload:"",
+        };
+        dispatchCart(action);
+        setWishlist([...wishlist]);
+        navigate('/');
     }
     // useEffect(()=>{
     //     const listIdReceipt = [];
@@ -205,7 +275,7 @@ function OrderReceived() {
                                                     </div>
                                                 </div>
                                                 <div className="table-product__title-item">
-                                                    <Link>
+                                                    <Link to="/">
                                                         <h3>
                                                             {item.product.name}{" "}
                                                             {
@@ -263,6 +333,18 @@ function OrderReceived() {
                                 accept
                                 </span>
                             </button>
+                        </div>
+                        <div className={`order-received__box-messenger ${messenger}`}>
+                            <div className="order-received__messenger-content">
+                                <p>Please wait to be contacted to confirm your order.</p>
+                                <p>Thank you!</p>
+                                <div onClick={()=> HandleMoveLinkSearch()} className="order-received__link-search-order">
+                                    <p> Search your order</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`order-received__layout ${messenger}`}>
+                            
                         </div>
                     </div>
                 </div>

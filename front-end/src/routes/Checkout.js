@@ -183,21 +183,20 @@ function CheckOut() {
                 phone: formData.phone,
                 address: formData.address,
             }
-            sessionStorage.setItem("guest", JSON.stringify(dataCheckout));
-            // let guestObject = JSON.parse(sessionStorage.getItem("guest"));
+            let buyerObject = JSON.parse(sessionStorage.getItem("buyer"));
+            let userObject = JSON.parse(sessionStorage.getItem("user"));
             // let idReceipt = JSON.parse(sessionStorage.getItem("idReceipt"));
-            // let userObject = JSON.parse(sessionStorage.getItem("user"));
             // let localCartUsing = true;
             
             // if (userObject) {
             //     if (userObject.login === "OK") {
-            //         localCartUsing = false;
-            //         sessionStorage.setItem("guest", JSON.stringify(dataCheckout));
+            //         sessionStorage.setItem("user", JSON.stringify(dataCheckout));
             //     }
             // }
-            // if (localCartUsing) {
-            //     sessionStorage.setItem("guest", JSON.stringify(dataCheckout));
-            // }
+            sessionStorage.setItem("buyer", JSON.stringify(dataCheckout));
+            if (buyerObject) {
+                sessionStorage.setItem("buyer", JSON.stringify(dataCheckout));
+            }
 
             navigate('/OrderReceived');
         } else {

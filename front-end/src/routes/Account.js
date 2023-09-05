@@ -70,6 +70,11 @@ function Account() {
                                                 Sign out
                                             </Button>
                                         )}
+                                        <div>
+                                            <Link to={"/searchReceipt"}>
+                                                <Button>Search for orders</Button>
+                                            </Link>
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </>

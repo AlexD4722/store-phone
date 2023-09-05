@@ -107,7 +107,7 @@ function Cart() {
                             <TableProduct items={cart} />
                         </Col>
                     </Row>
-                    {!checkUser ? (
+                    {/* {!checkUser ? (
                         <Link to="/checkOut">
                             <div className="cart-page__box-btn-footer">
                                 <button
@@ -136,7 +136,19 @@ function Cart() {
                         </div>
                     ) : (
                         ""
-                    )}
+                    )} */}
+                    <Link to="/checkOut">
+                        <div className="cart-page__box-btn-footer">
+                            <button
+                                type="button"
+                                className="cart-page__btn-checkout"
+                            >
+                                <span className="cart-page__btn-checkout-content">
+                                    checkout
+                                </span>
+                            </button>
+                        </div>
+                    </Link>
                 </div>
             ) : (
                 <div className="box-empty">

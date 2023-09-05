@@ -120,7 +120,7 @@ switch ($action) {
         break;
     case INSERT_ORDER_RECEIPT:
         require("../controller/insert_order_receipt.php");
-        break;
+        break;  
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

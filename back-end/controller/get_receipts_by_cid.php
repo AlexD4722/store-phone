@@ -1,11 +1,14 @@
 <?php
 require_once("../library/classes/receipt.php");
+require_once("../library/classes/user.php");
 require_once("../library/models/receiptTable.php");
+require_once("../library/models/userTable.php");
 
 if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")) {
     die("<h1>404 not found</h1>");
 }
 $RT = new ReceiptTable();
+$UT = new UserTable();
 $data = json_decode($_POST["data"]);
 $cid = $data->customer_id;
 

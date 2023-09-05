@@ -9,7 +9,7 @@ class ReceiptTable extends Database
         parent::__construct(DatabaseServerName, Database, Username, Password);
     }
 
-    public function getReceipt($id = '', $date = '', $cid = '', $stt = '')
+    public function getReceipt($id = '', $date = '', $id_buyer = '', $stt = '')
     {
         $sql = 'SELECT * FROM receipt WHERE TRUE';
         $params = [];
@@ -21,12 +21,12 @@ class ReceiptTable extends Database
             $sql .= ' AND DATE(date) = ?';
             array_push($params, $date);
         }
-        if ($cid != '') {
-            $sql .= ' AND customer_id = ?';
-            array_push($params, (int) $cid);
+        if ($id_buyer != '') {
+            $sql .= ' AND id_buyer = ?';
+            array_push($params, $id_buyer);
         }
         if ($stt != '') {
-            $sql .= ' AND status = ?';
+            $sql .= ' AND `status` = ?';
             array_push($params, $stt);
         }
         if (count($params) > 0) {
@@ -37,8 +37,9 @@ class ReceiptTable extends Database
         $data = $this->pdo_stm->fetchAll();
         $this->data = [];
         foreach ($data as $row) {
-            $one = new Receipt($row["id"], $row["customer_id"], $row["status"]);
+            $one = new Receipt($row["id_buyer"], $row["status"]);
             $one->date = $row["date"];
+            $one->id = $row["id"];
             array_push($this->data, $one);
         }
         return $result;
@@ -65,17 +66,9 @@ class ReceiptTable extends Database
     // Tham số là số receipt cần tìm.
     public function addReceipt(Receipt $re)
     {
-        $sql = 'INSERT INTO receipt VALUES(?, DEFAULT, ?, ?)';
-        $params = [$re->id, $re->customer_id, $re->status];
+        $sql = 'INSERT INTO receipt VALUES(null, null, ?, ?)';
+        $params = [$re->id_buyer, $re->status];
         $result = $this->SQLexec($sql, $params);
-        // if ($result) {
-        //     foreach ($re->lines as $line) {
-        //         $lineAddResult = $this->addReceiptLine($line);
-        //         if (!$lineAddResult) {
-        //             $result = false;
-        //         }
-        //     }
-        // }
         return $result;
     }
     // Hàm thêm 1 receipt vào database. Trả về true nếu thành công, trả về false nếu thất bại.
@@ -136,8 +129,8 @@ class ReceiptTable extends Database
 
     public function addReceiptLine(ReceiptLine $rl)
     {
-        $sql = 'INSERT INTO receipt_line VALUES(NULL, ?, ?, ?, ?)';
-        $params = [$rl->product_id, $rl->color, $rl->quantity, $rl->order_id];
+        $sql = 'INSERT INTO receipt_line VALUES(NULL, ?, ?, ?)';
+        $params = [$rl->product_id, $rl->quantity, $rl->receipt_id];
         $result = $this->SQLexec($sql, $params);
         return $result;
     }
