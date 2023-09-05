@@ -57,6 +57,7 @@ class BuyerTable extends Database
         return $result;
     }
 
+
     // public function deleteUser($id)
     // {
     //     $sql = "DELETE FROM account WHERE id=?";

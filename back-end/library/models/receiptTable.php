@@ -117,7 +117,7 @@ class ReceiptTable extends Database
         $data = $this->pdo_stm->fetchAll();
         $arr = [];
         foreach ($data as $row) {
-            $one = new ReceiptLine($row["product_id"], $row["quantity"], $row["color"], $row["receipt_id"]);
+            $one = new ReceiptLine($row["product_id"], $row["quantity"], $row["receipt_id"]);
             $one->id = $row["id"];
             array_push($arr, $one);
         }

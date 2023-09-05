@@ -7,7 +7,7 @@ import {
 import { useCallback, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import '../styles/form-search.scss';
-import APIrequest, { GET_RECEIPTS_BY_CID } from "../API/callAPI";
+import APIrequest, { GET_RECEIPTS_BY_CID, testAPI } from "../API/callAPI";
 
 function SearchReceipt() {
     const [keyword, setKeyword] = useState([]);
@@ -17,12 +17,10 @@ function SearchReceipt() {
     }
     const handleButton = ()=>{
         const dataRequest = {
-            idReceipt: keyword
+            idRecipient: keyword
         }
-        APIrequest(GET_RECEIPTS_BY_CID, dataRequest).then((obj) => {
-            if(obj.data.productArray){
-                
-            }
+        testAPI(GET_RECEIPTS_BY_CID, dataRequest).then((obj) => {
+            
         });
     }
 
@@ -38,7 +36,7 @@ function SearchReceipt() {
                                     onChange={(event) => handleChangeKey(event)}
                                     value={keyword}
                                     type="text"
-                                    placeholder="Enter the order id..."
+                                    placeholder="Enter the order recipient's id..."
                                 />
                             </div>
 
