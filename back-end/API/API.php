@@ -124,6 +124,9 @@ switch ($action) {
     case GET_RECEIPTS_BY_ID_USER:
         require("../controller/get_receipts_by_id_user.php");
         break;
+    case CANCEL_RECEIPT:
+        require("../controller/cancel_receipt.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

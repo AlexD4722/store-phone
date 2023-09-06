@@ -132,14 +132,12 @@ class ProductTable extends Database
 
     function getProductById($id)
     {
-        $sql = "SELECT * FROM product WHERE id=?";
+        $sql = "SELECT * FROM product WHERE `id`= ? ";
         $params = [$id];
         $result = $this->SQLexec($sql, $params);
         $data = $this->pdo_stm->fetch();
         $this->data = [];
         if ($data) {
-            $this->getProductLineList($data["product_line"]);
-            $productLine = $this->data[0];
             $arrayFiles = [];
             $files = scandir($this->LinkServer . $data["images"]);
             for ($i = 0; $i < count($files); $i++) {
@@ -148,8 +146,7 @@ class ProductTable extends Database
                     array_push($arrayFiles, $files[$i]);
                 }
             }
-            $product = new Product($data['id'], $data['name'], json_decode($data['description']), $data['initial_price'], $data['selling_price'], $data['id_product_line'], $arrayFiles, $data['color'], $data['capacity'], $data['status']);
-            $product->product_line = $productLine;
+            $product = new Product($data['name'], json_decode($data['description']), $data['initial_price'], $data['selling_price'], $data['id_product_line'],$data['quantity'], $arrayFiles , $data['color'], $data['capacity'], $data['status']);
             $this->data = $product;
         }
         return $result;

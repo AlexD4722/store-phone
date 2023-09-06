@@ -147,6 +147,24 @@ class ReceiptTable extends Database
     }
     // Hàm sửa 1 OL trong database. Trả về true nếu thành công, trả về false nếu thất bại.
     // Tham số là id, product_id, quantity, order_id.
+
+
+
+    public function updateStatusReceipt($idReceipt, $status)
+    {
+        $sql = 'UPDATE `receipt` SET `status` = ? WHERE `receipt`.`id` = ?;';
+        $params = [$status, $idReceipt];
+        $result = $this->SQLexec($sql, $params);
+        return $result;
+    }
+
+
+
+
+
+
+
+
     public function removeReceiptLine($id)
     {
         $sql = 'DELETE FROM receipt_line WHERE id=?';
@@ -156,7 +174,7 @@ class ReceiptTable extends Database
     }
     // Hàm xóa 1 OL trong database. Trả về true nếu thành công, trả về false nếu thất bại.
     // Tham số là id.
-public function getReceiptDetail($id = '', $date = '', $cid = '', $stt = '')
+    public function getReceiptDetail($id = '', $date = '', $cid = '', $stt = '')
     {
         $sql = 'SELECT * FROM receipt WHERE TRUE';
         $params = [];

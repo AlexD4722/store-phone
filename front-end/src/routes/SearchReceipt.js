@@ -11,12 +11,13 @@ import APIrequest, { GET_RECEIPTS_BY_CID, testAPI } from "../API/callAPI";
 import '../styles/table-product.scss';
 
 function SearchReceipt() {
+    const navigate = useNavigate();
     const [keyword, setKeyword] = useState([]);
     const [dataReceipt, setDataReceipt] = useState([]);
     const [dataOrders, setOrders] = useState([]);
     const handleChangeKey = (event) => {
         console.log(event.target.value, "--------------------");
-        setKeyword(event.target.value);
+        setKeyword(event.target.value.trim());
     }
     const handleButton = () => {
         const dataRequest = {
@@ -40,6 +41,9 @@ function SearchReceipt() {
                 })
             }
         });
+    }
+    const handleShowDetail = (id, event)=>{
+        navigate(`/orderDetail/${id}`)
     }
     console.log(dataReceipt, "dataReceipt------------------------");
     return (
@@ -103,6 +107,7 @@ function SearchReceipt() {
                                     <tbody>
                                         <tr
                                             className="table-product__row-item"
+                                            onClick={(event)=> handleShowDetail(keyword, event)}
                                         >
                                             <td
                                                 className="table-product__value-item table-product__value-item--id-recipient"

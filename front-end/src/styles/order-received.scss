@@ -280,6 +280,7 @@
   gap: 1rem;
 }
 .order-received__btn {
+  border-radius: 6rem;
   display: inline-flex;
   height: 2.1rem;
   border: none;
@@ -316,6 +317,7 @@
   max-width: 500px;
   text-transform: capitalize;
   display: none;
+  transition: 0.3s;
 }
 .order-received__layout {
   display: none;
@@ -342,4 +344,10 @@
 }
 .order-received__success{
   display: block;
+}
+.order-received__box-option-btn{
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1.5rem;
 }

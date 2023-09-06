@@ -11,6 +11,7 @@ import APIrequest, { GET_RECEIPTS_BY_CID, GET_RECEIPTS_BY_ID_USER, testAPI } fro
 import '../styles/table-product.scss';
 
 function Orders() {
+    const navigate = useNavigate();
     const [keyword, setKeyword] = useState([]);
     const [dataReceipt, setDataReceipt] = useState([]);
     const [dataOrders, setOrders] = useState([]);
@@ -37,6 +38,11 @@ function Orders() {
             })
             setDataReceipt(items)
         });
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+        topFunction();
         // if(items.length){
         //     console.log(items,"=================================================");
         // }
@@ -44,6 +50,9 @@ function Orders() {
     }, [])
     if (dataReceipt) {
         console.log(dataReceipt, "++++++++++++++++++++=================================================");
+    }
+    const handleShowDetail = (id, event)=>{
+        navigate(`/orderDetail/${id}`)
     }
     return (
         <>
@@ -83,6 +92,7 @@ function Orders() {
                                     return (
                                         <tr
                                             className="table-product__row-item"
+                                            onClick={(event)=> handleShowDetail(icon.id, event)}
                                         >
                                             <td
                                                 className="table-product__value-item table-product__value-item--id-recipient"
@@ -147,37 +157,6 @@ function Orders() {
                             }
                         </tbody>
                     </table>
-                    {/* <div className="order-received__box-btn-footer">
-                        <button
-                            type="button"
-                            className="order-received__btn"
-                        >
-                            <span className="order-received__btn-content order-received__btn-content--cancel">
-                                Cancel
-                            </span>
-                        </button>
-                        <button
-                            type="button"
-                            className="order-received__btn"
-                            onClick={handelAccept}
-                        >
-                            <span className="order-received__btn-content">
-                                accept
-                            </span>
-                        </button>
-                    </div>
-                    <div className={`order-received__box-messenger ${messenger}`}>
-                        <div className="order-received__messenger-content">
-                            Please wait to be contacted to confirm your order.</p>
-                            <p>Thank you!</p>
-                            <div onClick={() => HandleMoveLinkSearch()} className="order-received__link-search-order">
-                                <p> Search your order</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={`order-received__layout ${messenger}`}>
-
-                    </div> */}
                 </div>
             </div>
         </>

@@ -66,6 +66,11 @@ function SiteMenu() {
                             <Link to="contact">Contact</Link>
                         </div>
                     </li>
+                    <li className="site-menu__item">
+                        <div className="site-menu__name-item">
+                            <Link to="/searchReceipt">Search Receipt</Link>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
