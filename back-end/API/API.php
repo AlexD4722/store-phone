@@ -127,6 +127,9 @@ switch ($action) {
     case CANCEL_RECEIPT:
         require("../controller/cancel_receipt.php");
         break;
+    case REMOVE_USER:
+        require("../controller/remove_user.php");
+        break;
     default:
         $return = new APIresponse("Action invalid");
         echo json_encode($return);

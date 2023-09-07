@@ -8,9 +8,19 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")) {
 }
 $PT = new ProductTable();
 $data = json_decode($_POST["data"]);
-// $product_line_name = $data->productLine;
-// $PT->getProductLineList($product_line_name);
-$product = new Product($data->name, $data->description, $data->initialPrice, $data->sellingPrice, $data->idProductLine, $data->quantity, $data->images, $data->color, $data->capacity, 1);
+
+$folder = str_replace(' ','',$data->name);
+$n = $_POST["filenumber"];
+mkdir("../imgProduct/$folder/");
+for ($i = 0; $i < $n; $i++) {
+    if (isset($_FILES['file_' . $i]) && $_FILES['file_' . $i]["error"] == 0) { 
+            $filename = $_FILES['file_' . $i]["name"];
+            $temptFile = $_FILES['file_' . $i]["tmp_name"];
+            move_uploaded_file($temptFile, "../imgProduct/$folder/$filename");       
+    }
+}
+
+$product = new Product($data->name, $data->desc, $data->inital, $data->selling, $data->lineID, $data->quantity, $folder, $data->color, $data->capacity, 1);
 $result = $PT->addProduct($product);
 if ($result) {
     $return = new APIresponse("Success");

@@ -8,9 +8,9 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")) {
 }
 $PT = new ProductTable();
 $data = json_decode($_POST["data"]);
-$id = $data->id;
-$product = new Product($id, $data->product->name, $data->product->description, $data->product->initalPrice, $data->product->sellingPrice, $data->product->quantity, $data->product->images, $data->product->color, $data->product->capacity, $data->product->status);
-$product->product_line = new ProductLine($data->product->productLine->name, $data->product->productLine->brand, $data->product->productLine->product_type);
+$id = $data->product->id;
+$product = new Product($data->product->name, $data->product->description, $data->product->initial_price, $data->product->selling_price, $data->product->id_product_line, $data->product->quantity, $data->product->images, $data->product->color, $data->product->capacity, $data->product->status);
+$product->id = $id;
 
 $result = $PT->editProduct($id, $product);
 if ($result) {

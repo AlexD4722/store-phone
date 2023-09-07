@@ -14,6 +14,7 @@ if ($result) {
     if (count($UT->data) === 1) {
         $return->data->result = "Success";
         $return->data->user = $UT->data[0];
+        $return->data->user->password = "///***///";
     } else {
         $return = new APIresponse("Failed: Not found user");
     }
