@@ -50,13 +50,14 @@ class ReceiptTable extends Database
     public function getRecentReceipt(int $number)
     {
         $sql = 'SELECT * FROM `receipt`
-                ORDER BY `date` DESC 
+                ORDER BY `date` ASC 
                 LIMIT ' . $number;
         $result = $this->SQLexec($sql);
         $data = $this->pdo_stm->fetchAll();
         $this->data = [];
         foreach ($data as $row) {
-            $one = new Receipt($row["id"], $row["customer_id"], $row["status"]);
+            $one = new Receipt($row["id_buyer"], $row["status"]);
+            $one->id = $row["id"];
             $one->date = $row["date"];
             array_push($this->data, $one);
         }

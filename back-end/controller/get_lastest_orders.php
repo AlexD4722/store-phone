@@ -11,19 +11,25 @@ if (!isset($auth) || ($auth != "TRESPASSING NOT ALLOWED")){
 $RT = new ReceiptTable();
 $PT = new ProductTable();
 
-$result = $RT->getRecentReceipt(3);
+$result = $RT->getRecentReceipt(10);
 if ($result){
     $return = new APIresponse("Success");
-    $return->data->receipt_array = $RT->data;
-    if (count($return->data->receipt_array) > 0){
+    $receipt_array = $RT->data;
+    if (count($receipt_array) > 0){
         $return->data->result = "Success";
-        foreach ($return->data->receipt_array as $receipt){
+        $return->data->receipt_array = [];
+        foreach ($receipt_array as $receipt){
             $RT->getReceiptLine("", $receipt->id);
             $receipt->addLinesArray($RT->data);
+            $total_price = 0;
             foreach ($receipt->lines as $line){
                 $PT->getProductById($line->product_id);
-                $line->product_id = $PT->data->name;
+                $total_price += $PT->data->selling_price;
             }
+            $newReceipt = new stdClass();
+            $newReceipt->receipt = $receipt;
+            $newReceipt->total = $total_price;
+            array_push($return->data->receipt_array, $newReceipt);
         }
     }
 } else {

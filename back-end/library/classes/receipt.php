@@ -5,6 +5,7 @@ class Receipt
     public $date;
     public $id_buyer;
     public $status;
+    public $lines = [];
     public function __construct($id_buyer, $status)
     {
         $this->id_buyer = $id_buyer;
@@ -13,29 +14,20 @@ class Receipt
 
     public function addLine(ReceiptLine $rl)
     {
-        if ($rl->order_id === $this->id) {
-            array_push($this->lines, $rl);
-        } else {
-            return false;
-        }
-        return true;
+        array_push($this->lines, $rl);    
     }
     public function addLinesArray(array $arr)
     {
         $fail = [];
         $length = count($arr);
         for ($i = 0; $i < $length; $i++) {
-            $result = $this->addLine($arr[$i]);
-            if (!$result) {
-                array_push($fail, $i);
-            }
+            $this->addLine($arr[$i]);   
         }
         if (count($fail) > 0) {
             return $fail;
         }
         return true;
     }
-
 }
 
 class ReceiptLine
