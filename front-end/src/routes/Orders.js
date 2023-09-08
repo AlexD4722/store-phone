@@ -136,17 +136,17 @@ function Orders() {
                                                 }
                                                 {
                                                     icon && icon.status == 1 ?
-                                                        <p className="table-product__value-status-content table-product__value-status-content--being-transported">being transported</p>
+                                                        <p className="table-product__value-status-content table-product__value-status-content--being-transported">Being transported</p>
                                                         : ""
                                                 }
                                                 {
                                                     icon && icon.status == -1 ?
-                                                        <p className="table-product__value-status-content table-product__value-status-content--canceled">canceled</p>
+                                                        <p className="table-product__value-status-content table-product__value-status-content--canceled">Canceled</p>
                                                         : ""
                                                 }
                                                 {
                                                     icon && icon.status == 2 ?
-                                                        <p className="table-product__value-status-content table-product__value-status-content--complete">complete</p>
+                                                        <p className="table-product__value-status-content table-product__value-status-content--complete">Completed</p>
                                                         : ""
                                                 }
                                             </td>
