@@ -49,11 +49,11 @@ function Account() {
                     </div>
                     <div>
                         {account.user_type === "admin" && (
-                            <Link
-                                to="admin-dashboard"
+                            <a
+                                href='../admin/'
                             >
                                <p className="account-page__link"> Go to Admin Dashboard</p>
-                            </Link>
+                            </a>
                         )}
                     </div>
                     <div>

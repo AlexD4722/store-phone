@@ -36,14 +36,20 @@ export const GET_BUYER = 322;
 export const INSERT_ORDER_RECEIPT = 323;
 export const GET_RECEIPTS_BY_ID_USER = 324;
 export const CANCEL_RECEIPT = 325;
+const host = window.location.hostname;
+const port = window.location.port;
+
 async function APIrequest(action, data) {
     let sendData = new FormData();
     sendData.append("action", action);
     let jsonString = JSON.stringify(data);
     sendData.append("data", jsonString);
-
+    let home = "";
+    if (port) {
+        home = host + ":" + port;
+    } else home = host;
     let result = await fetch(
-        "http://localhost:2203/learning/store-phone/back-end/API/API.php",
+        "http://"+ home + "/back-end/API/API.php",
         {
             method: "post",
             body: sendData,
@@ -52,7 +58,6 @@ async function APIrequest(action, data) {
         // console.log(response.text());
         return response.json();
     });
-
     return result;
 }
 
